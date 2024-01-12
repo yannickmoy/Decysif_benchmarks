@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_111_33_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 141024,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_97_36_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 124884,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_124_36_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 93133,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_95_36_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 106705,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_96_36_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 698778,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_96_36_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 116282,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/perm.ads_38_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 270993,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.ads_14_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 284705,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_78_36_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 68700,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_95_36_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 98678,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/pair_insertion_sort/z3/pair_insertion_sort.adb_109_33_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 2459964,
+      "time": 0.32
+    }
+  ]
+}

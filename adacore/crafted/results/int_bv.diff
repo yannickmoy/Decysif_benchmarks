@@ -1,0 +1,32 @@
+cvc5 proved 0 out of 8 VCs
+  unproved gnat_runtime_concat_definition.smt2 (proved by ['z3'])
+  unproved gnat_runtime_double_shift.smt2
+  unproved gnat_runtime_lemma_hi_lo.smt2
+  unproved gnat_runtime_mult_commutation.smt2 (proved by ['z3'])
+  unproved gnat_runtime_mult_decomposition.smt2
+  unproved gnat_runtime_scaled_divide32.smt2 (proved by ['z3'])
+  unproved spark_add_no_wraparound.smt2 (proved by ['colibri'])
+  unproved spark_mul_no_wraparound.smt2
+z3 proved 3 out of 8 VCs
+  unproved gnat_runtime_double_shift.smt2
+  unproved gnat_runtime_lemma_hi_lo.smt2
+  unproved gnat_runtime_mult_decomposition.smt2
+  unproved spark_add_no_wraparound.smt2 (proved by ['colibri'])
+  unproved spark_mul_no_wraparound.smt2
+altergo proved 0 out of 8 VCs
+  unproved gnat_runtime_concat_definition.smt2 (proved by ['z3'])
+  unproved gnat_runtime_double_shift.smt2
+  unproved gnat_runtime_lemma_hi_lo.smt2
+  unproved gnat_runtime_mult_commutation.smt2 (proved by ['z3'])
+  unproved gnat_runtime_mult_decomposition.smt2
+  unproved gnat_runtime_scaled_divide32.smt2 (proved by ['z3'])
+  unproved spark_add_no_wraparound.smt2 (proved by ['colibri'])
+  unproved spark_mul_no_wraparound.smt2
+colibri proved 1 out of 8 VCs
+  unproved gnat_runtime_concat_definition.smt2 (proved by ['z3'])
+  unproved gnat_runtime_double_shift.smt2
+  unproved gnat_runtime_lemma_hi_lo.smt2
+  unproved gnat_runtime_mult_commutation.smt2 (proved by ['z3'])
+  unproved gnat_runtime_mult_decomposition.smt2
+  unproved gnat_runtime_scaled_divide32.smt2 (proved by ['z3'])
+  unproved spark_mul_no_wraparound.smt2

@@ -1,0 +1,353 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function length(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function to_rep(x: natural) : int = naturalqtint(x)
+
+logic of_rep : int -> natural
+
+axiom inversion_axiom :
+  (forall x:natural [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:natural [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__frame_condition__cell__value : natural;
+rec__frame_condition__cell__max_left : natural;
+rec__frame_condition__cell__max_right : natural }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic frame_condition__cell__value__first__bit : int
+
+logic frame_condition__cell__value__last__bit : int
+
+logic frame_condition__cell__value__position : int
+
+axiom frame_condition__cell__value__first__bit_axiom :
+  (0 <= frame_condition__cell__value__first__bit)
+
+axiom frame_condition__cell__value__last__bit_axiom :
+  (frame_condition__cell__value__first__bit <  frame_condition__cell__value__last__bit)
+
+axiom frame_condition__cell__value__position_axiom :
+  (0 <= frame_condition__cell__value__position)
+
+logic frame_condition__cell__max_left__first__bit : int
+
+logic frame_condition__cell__max_left__last__bit : int
+
+logic frame_condition__cell__max_left__position : int
+
+axiom frame_condition__cell__max_left__first__bit_axiom :
+  (0 <= frame_condition__cell__max_left__first__bit)
+
+axiom frame_condition__cell__max_left__last__bit_axiom :
+  (frame_condition__cell__max_left__first__bit <  frame_condition__cell__max_left__last__bit)
+
+axiom frame_condition__cell__max_left__position_axiom :
+  (0 <= frame_condition__cell__max_left__position)
+
+logic frame_condition__cell__max_right__first__bit : int
+
+logic frame_condition__cell__max_right__last__bit : int
+
+logic frame_condition__cell__max_right__position : int
+
+axiom frame_condition__cell__max_right__first__bit_axiom :
+  (0 <= frame_condition__cell__max_right__first__bit)
+
+axiom frame_condition__cell__max_right__last__bit_axiom :
+  (frame_condition__cell__max_right__first__bit <  frame_condition__cell__max_right__last__bit)
+
+axiom frame_condition__cell__max_right__position_axiom :
+  (0 <= frame_condition__cell__max_right__position)
+
+logic dummy : us_rep
+
+logic a__first : integer
+
+logic a__last : integer
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,us_rep) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,us_rep) farray = (a).elts
+
+function of_array(a: (int,us_rep) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+ (* "frame_condition.ads", line 10, characters 0-0 *)
+goal defqtvc :
+  (forall a:(int,us_rep) farray. forall k:int. forall max:int.
+  (dynamic_property(1, 2147483647, to_rep1(a__first), to_rep1(a__last)) ->
+  (forall o:int. ((to_rep1(a__last) = o) ->
+  (forall o1:int. ((to_rep1(a__first) = o1) -> (in_range2(k) ->
+  (in_range1(max) ->
+  (forall o2:int. ((to_rep1(a__last) = o2) ->
+  (forall o3:int. ((to_rep1(a__first) = o3) ->
+  (forall o4:int. ((to_rep1(a__last) = o4) ->
+  (forall o5:int. ((to_rep1(a__first) = o5) ->
+  (forall spark__branch:bool. ((spark__branch = (if (length(o5,
+  o4) = 0) then true else false)) -> ((not (spark__branch = true)) ->
+  (forall o6:int. ((to_rep1(a__last) = o6) ->
+  (forall o7:int. ((to_rep1(a__first) = o7) ->
+  (forall o8:int. ((to_rep1(a__first) = o8) -> (in_range2(o8) ->
+  (forall k1:int. ((k1 = o8) ->
+  (forall max1:int. ((max1 = 0) ->
+  (forall a1:(int,us_rep) farray. forall k2:int. forall max2:int.
+  ((exists o9:int. ((to_rep1(a__last) = o9) and
+   (exists o10:int. ((to_rep1(a__first) = o10) and
+   (exists spark__branch1:bool. exists max3:int.
+   ((exists o11:int. ((to_rep1(a__last) = o11) and
+    (exists o12:int. ((to_rep1(a__first) = o12) and (((o12 <= k1) and
+    (k1 <= o11)) and
+    (exists o13:int.
+    ((to_rep((((a[k1])).us_split_fields1).rec__frame_condition__cell__value) = o13) and
+    ((spark__branch1 = (if (max1 <  o13) then true else false)) and
+    (if (spark__branch1 = true) then (exists o14:int.
+                                     ((to_rep1(a__last) = o14) and
+                                     (exists o15:int.
+                                     ((to_rep1(a__first) = o15) and
+                                     (((o15 <= k1) and (k1 <= o14)) and
+                                     (exists o16:int.
+                                     ((to_rep((((a[k1])).us_split_fields1).rec__frame_condition__cell__value) = o16) and
+                                     (max3 = o16)))))))) else (max3 = max1)))))))))) and
+   (exists o11:int. ((to_rep1(a__last) = o11) and
+   (exists o12:int. ((to_rep1(a__first) = o12) and
+   (exists o13:int. ((to_rep1(a__last) = o13) and
+   (exists o14:int. ((to_rep1(a__first) = o14) and (let usq_ =
+   ((a[k1])).us_split_fields1 : us_split_fields in
+   (exists o15:natural. ((to_rep(o15) = max3) and (((o12 <= k1) and
+   (k1 <= o11)) and
+   (exists a2:(int,us_rep) farray. ((a2 = to_array({ elts = (a[k1 <- {
+   us_split_fields1 = { rec__frame_condition__cell__value =
+   (usq_).rec__frame_condition__cell__value;
+   rec__frame_condition__cell__max_left = o15;
+   rec__frame_condition__cell__max_right =
+   (usq_).rec__frame_condition__cell__max_right } }]); rt = (of_array(a, o12,
+   o11)).rt })) and
+   (exists o16:int. ((to_rep1(a__last) = o16) and
+   (exists o17:int. ((to_rep1(a__first) = o17) and
+   (exists o18:int. ((to_rep1(a__last) = o18) and
+   (exists o19:int. ((to_rep1(a__last) = o19) and
+   (exists o20:int. ((to_rep1(a__first) = o20) and
+   (exists o21:int. ((to_rep1(a__first) = o21) and
+   (exists k3:int. ((((to_rep1(a__first) <= k3) and
+   (k3 <= to_rep1(a__last))) and
+   ((forall i:int. (((to_rep1(a__first) <= i) and (i <= k3)) ->
+    (to_rep((((a1[i])).us_split_fields1).rec__frame_condition__cell__value) <= max2))) and
+   (forall i:int. (((to_rep1(a__first) <= i) and (i <= k3)) ->
+   (forall j:int. (((i <= j) and (j <= k3)) ->
+   (to_rep((((a1[i])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a1[j])).us_split_fields1).rec__frame_condition__cell__max_left)))))))) and
+   (((in_range2(k3) and in_range1(max2)) and
+   (forall temp___377:int. (((to_rep1(a__first) <= temp___377) and
+   (temp___377 <= to_rep1(a__last))) ->
+   (((((a1[temp___377])).us_split_fields1).rec__frame_condition__cell__value = (((a[temp___377])).us_split_fields1).rec__frame_condition__cell__value) and
+   ((((a1[temp___377])).us_split_fields1).rec__frame_condition__cell__max_right = (((a[temp___377])).us_split_fields1).rec__frame_condition__cell__max_right))))) and
+   (exists o22:int. ((to_rep1(a__last) = o22) and
+   (exists o23:int. ((to_rep1(a__first) = o23) and
+   (exists o24:int. ((to_rep1(a__last) = o24) and ((k3 = o24) and
+   (k2 = k3))))))))))))))))))))))))))))))))))))))))))) ->
+  (forall o9:int. ((to_rep1(a__last) = o9) ->
+  (forall o10:int. ((to_rep1(a__first) = o10) ->
+  (forall o11:int. ((to_rep1(a__last) = o11) -> (in_range2(o11) ->
+  (forall k3:int. ((k3 = o11) ->
+  (forall max3:int. ((max3 = 0) ->
+  (forall o12:int. ((to_rep1(a__last) = o12) ->
+  (forall o13:int. ((to_rep1(a__first) = o13) ->
+  (forall spark__branch1:bool. forall max4:int.
+  ((exists o14:int. ((to_rep1(a__last) = o14) and
+   (exists o15:int. ((to_rep1(a__first) = o15) and (((o15 <= k3) and
+   (k3 <= o14)) and
+   (exists o16:int.
+   ((to_rep((((a1[k3])).us_split_fields1).rec__frame_condition__cell__value) = o16) and
+   ((spark__branch1 = (if (max3 <  o16) then true else false)) and
+   (if (spark__branch1 = true) then (exists o17:int.
+                                    ((to_rep1(a__last) = o17) and
+                                    (exists o18:int.
+                                    ((to_rep1(a__first) = o18) and
+                                    (((o18 <= k3) and (k3 <= o17)) and
+                                    (exists o19:int.
+                                    ((to_rep((((a1[k3])).us_split_fields1).rec__frame_condition__cell__value) = o19) and
+                                    (max4 = o19)))))))) else (max4 = max3)))))))))) ->
+  (forall o14:int. ((to_rep1(a__last) = o14) ->
+  (forall o15:int. ((to_rep1(a__first) = o15) ->
+  (forall o16:int. ((to_rep1(a__last) = o16) ->
+  (forall o17:int. ((to_rep1(a__first) = o17) -> (let usq_ =
+  ((a1[k3])).us_split_fields1 : us_split_fields in
+  (forall o18:natural. ((to_rep(o18) = max4) -> (((o15 <= k3) and
+  (k3 <= o14)) ->
+  (forall a2:(int,us_rep) farray. ((a2 = to_array({ elts = (a1[k3 <- {
+  us_split_fields1 = { rec__frame_condition__cell__value =
+  (usq_).rec__frame_condition__cell__value;
+  rec__frame_condition__cell__max_left =
+  (usq_).rec__frame_condition__cell__max_left;
+  rec__frame_condition__cell__max_right = o18 } }]); rt = (of_array(a1, o15,
+  o14)).rt })) ->
+  (forall o19:int. ((to_rep1(a__last) = o19) ->
+  (forall o20:int. ((to_rep1(a__first) = o20) ->
+  (forall o21:int. ((to_rep1(a__last) = o21) ->
+  (forall o22:int. ((to_rep1(a__last) = o22) ->
+  (forall o23:int. ((to_rep1(a__first) = o23) ->
+  (forall o24:int. ((to_rep1(a__first) = o24) ->
+  (forall a3:(int,us_rep) farray. forall k4:int. forall max5:int.
+  ((((to_rep1(a__first) <= k4) and (k4 <= to_rep1(a__last))) and
+  ((forall i:int. (((k4 <= i) and (i <= to_rep1(a__last))) ->
+   (to_rep((((a3[i])).us_split_fields1).rec__frame_condition__cell__value) <= max5))) and
+  (forall i:int. (((k4 <= i) and (i <= to_rep1(a__last))) ->
+  (forall j:int. (((i <= j) and (j <= to_rep1(a__last))) ->
+  (to_rep((((a3[j])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a3[i])).us_split_fields1).rec__frame_condition__cell__max_right)))))))) ->
+  (((in_range2(k4) and in_range1(max5)) and
+  (forall temp___420:int. (((to_rep1(a__first) <= temp___420) and
+  (temp___420 <= to_rep1(a__last))) ->
+  (((((a3[temp___420])).us_split_fields1).rec__frame_condition__cell__value = (((a1[temp___420])).us_split_fields1).rec__frame_condition__cell__value) and
+  ((((a3[temp___420])).us_split_fields1).rec__frame_condition__cell__max_left = (((a1[temp___420])).us_split_fields1).rec__frame_condition__cell__max_left))))) ->
+  (forall o25:int. ((to_rep1(a__last) = o25) ->
+  (forall o26:int. ((to_rep1(a__first) = o26) ->
+  (forall o27:int. ((to_rep1(a__first) = o27) -> ((not (k4 = o27)) ->
+  (let o28 = (k4 - 1) : int in (in_range2(o28) ->
+  (forall k5:int. ((k5 = o28) ->
+  (forall max6:int.
+  ((exists o29:int. ((to_rep1(a__last) = o29) and
+   (exists o30:int. ((to_rep1(a__first) = o30) and (((o30 <= k5) and
+   (k5 <= o29)) and
+   (exists o31:int.
+   ((to_rep((((a3[k5])).us_split_fields1).rec__frame_condition__cell__value) = o31) and
+   (exists spark__branch2:bool.
+   ((spark__branch2 = (if (max5 <  o31) then true else false)) and
+   (if (spark__branch2 = true) then (exists o32:int.
+                                    ((to_rep1(a__last) = o32) and
+                                    (exists o33:int.
+                                    ((to_rep1(a__first) = o33) and
+                                    (((o33 <= k5) and (k5 <= o32)) and
+                                    (exists o34:int.
+                                    ((to_rep((((a3[k5])).us_split_fields1).rec__frame_condition__cell__value) = o34) and
+                                    (max6 = o34)))))))) else (max6 = max5))))))))))) ->
+  (forall o29:int. ((to_rep1(a__last) = o29) ->
+  (forall o30:int. ((to_rep1(a__first) = o30) ->
+  (forall o31:int. ((to_rep1(a__last) = o31) ->
+  (forall o32:int. ((to_rep1(a__first) = o32) -> (let usq_1 =
+  ((a3[k5])).us_split_fields1 : us_split_fields in
+  (forall o33:natural. ((to_rep(o33) = max6) -> (((o30 <= k5) and
+  (k5 <= o29)) ->
+  (forall a4:(int,us_rep) farray. ((a4 = to_array({ elts = (a3[k5 <- {
+  us_split_fields1 = { rec__frame_condition__cell__value =
+  (usq_1).rec__frame_condition__cell__value;
+  rec__frame_condition__cell__max_left =
+  (usq_1).rec__frame_condition__cell__max_left;
+  rec__frame_condition__cell__max_right = o33 } }]); rt = (of_array(a3, o30,
+  o29)).rt })) ->
+  (forall o34:int. ((to_rep1(a__last) = o34) ->
+  (forall o35:int. ((to_rep1(a__first) = o35) ->
+  (forall o36:int. ((to_rep1(a__last) = o36) ->
+  (forall o37:int. ((to_rep1(a__last) = o37) ->
+  (forall o38:int. ((to_rep1(a__first) = o38) ->
+  (forall o39:int. ((to_rep1(a__first) = o39) ->
+  (((to_rep1(a__first) <= k5) and (k5 <= to_rep1(a__last))) ->
+  ((forall i:int. (((k5 <= i) and (i <= to_rep1(a__last))) ->
+   (to_rep((((a4[i])).us_split_fields1).rec__frame_condition__cell__value) <= max6))) ->
+  (forall i:int. (((k5 <= i) and (i <= to_rep1(a__last))) ->
+  (forall j:int. (((i <= j) and (j <= to_rep1(a__last))) ->
+  (to_rep((((a4[j])).us_split_fields1).rec__frame_condition__cell__value) <= to_rep((((a4[i])).us_split_fields1).rec__frame_condition__cell__max_right)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

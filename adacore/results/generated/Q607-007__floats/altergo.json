@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_76_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_105_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_47_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_13_17_range_check_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_6_17_range_check_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_15_12_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_163_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_18_17_range_check_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q607-007__floats/altergo/normalize.adb_9_17_range_check_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

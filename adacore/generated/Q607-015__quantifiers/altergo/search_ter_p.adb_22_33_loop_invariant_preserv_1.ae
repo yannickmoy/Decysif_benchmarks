@@ -1,0 +1,256 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function bool_eq(a: (int,integer) farray, a__first: int, a__last: int,
+  b: (int,integer) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))))))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+function equal_subrange(param__a: us_t, param__j: int,
+  param__b: us_t) : bool = (let temp___172 = (let temp___170 =
+  ((param__j - 1) + length(param__b)) : int in of_array(to_array(param__a),
+  param__j, temp___170)) : us_t in bool_eq(to_array(temp___172),
+  first(temp___172), last(temp___172), to_array(param__b), first(param__b),
+  last(param__b)))
+
+logic has_sub_range_in_prefix : us_t, int, us_t -> bool
+
+logic has_sub_range : us_t, us_t -> bool
+
+logic a : us_t
+
+logic b : us_t
+
+type us_split_fields = { rec__types__option__exists : bool;
+rec__types__option__value : integer }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic types__option__exists__first__bit : int
+
+logic types__option__exists__last__bit : int
+
+logic types__option__exists__position : int
+
+axiom types__option__exists__first__bit_axiom :
+  (0 <= types__option__exists__first__bit)
+
+axiom types__option__exists__last__bit_axiom :
+  (types__option__exists__first__bit <  types__option__exists__last__bit)
+
+axiom types__option__exists__position_axiom :
+  (0 <= types__option__exists__position)
+
+logic types__option__value__first__bit : int
+
+logic types__option__value__last__bit : int
+
+logic types__option__value__position : int
+
+axiom types__option__value__first__bit_axiom :
+  (0 <= types__option__value__first__bit)
+
+axiom types__option__value__last__bit_axiom :
+  (types__option__value__first__bit <  types__option__value__last__bit)
+
+axiom types__option__value__position_axiom :
+  (0 <= types__option__value__position)
+
+logic dummy : us_rep
+
+predicate dynamic_invariant(temp___expr_180: us_t, temp___is_init_176: bool,
+  temp___skip_constant_177: bool, temp___do_toplevel_178: bool,
+  temp___do_typ_inv_179: bool) = ((not (temp___skip_constant_177 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_180),
+  last(temp___expr_180)))
+
+axiom has_sub_range_in_prefix__post_axiom : true
+
+axiom has_sub_range_in_prefix__def_axiom :
+  (forall param__a:us_t. forall param__b:us_t.
+  (forall param__last:int [has_sub_range_in_prefix(param__a, param__last,
+  param__b)]. ((has_sub_range_in_prefix(param__a, param__last,
+  param__b) = true) <->
+  (exists j:int. (((first(param__a) <= j) and (j <= param__last)) and
+  (equal_subrange(param__a, j, param__b) = true))))))
+
+axiom has_sub_range__post_axiom : true
+
+axiom has_sub_range__def_axiom :
+  (forall param__a:us_t. forall param__b:us_t [has_sub_range(param__a,
+  param__b)]. ((has_sub_range(param__a, param__b) = true) <->
+  (has_sub_range_in_prefix(param__a,
+  ((last(param__a) + 1) - length(param__b)), param__b) = true)))
+
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 1)
+
+ (* "search_ter_p.ads", line 32, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(a, true, false, true, true) ->
+  (dynamic_invariant(b, true, false, true, true) ->
+  (((last(a) <  2147483647) and (first(b) <= last(b))) ->
+  (forall temp___233:bool. ((if (length(b) <= length(a)) then (let o = b
+  : us_t in (let o1 = a : us_t in ((temp___233 = has_sub_range(o1, o)) and
+  ((temp___233 = true) <-> (has_sub_range_in_prefix(o1,
+  ((last(o1) + 1) - length(o)), o) = true))))) else (temp___233 = false)) ->
+  (forall result____split_fields:us_split_fields.
+  ((result____split_fields = { rec__types__option__exists = of_int(0);
+  rec__types__option__value = rliteral }) ->
+  (forall o:bool.
+  ((if (length(a) <  length(b)) then (o = true) else (o = (if (length(b) = 0) then true else false))) ->
+  (forall spark__branch:bool. ((spark__branch = o) ->
+  ((not (spark__branch = true)) -> (let temp___235 = first(a) : int in
+  (let o1 = length(b) : int in (in_range(o1) -> (let o2 = (last(a) + 1)
+  : int in (in_range(o2) -> (let o3 = (o2 - o1) : int in (in_range(o3) ->
+  (forall i:int. ((i = temp___235) ->
+  ((andb((if (temp___235 <= i) then true else false),
+  (if (i <= o3) then true else false)) = true) -> (let o4 = b : us_t in
+  (let o5 = a : us_t in (let o6 = equal_subrange(o5, i, o4) : bool in
+  (((o6 = true) <-> ((let temp___184 = (let temp___182 =
+  ((i - 1) + length(o4)) : int in of_array(to_array(o5), i, temp___182))
+  : us_t in bool_eq(to_array(temp___184), first(temp___184),
+  last(temp___184), to_array(o4), first(o4), last(o4))) = true)) ->
+  (forall spark__branch1:bool. ((spark__branch1 = o6) ->
+  ((not (spark__branch1 = true)) -> (let o7 = b : us_t in (let o8 = a
+  : us_t in (((has_sub_range_in_prefix(o8, i, o7) = true) <->
+  (exists j:int. (((first(o8) <= j) and (j <= i)) and (equal_subrange(o8, j,
+  o7) = true)))) ->
+  (forall result____split_fields1:us_split_fields. forall i1:int.
+  (((not (has_sub_range_in_prefix(a, i1, b) = true)) and
+  (not ((result____split_fields1).rec__types__option__exists = true))) ->
+  ((andb((if (result____split_fields1 = result____split_fields) then true else false),
+  (if ((first(a) <= i1) and
+  (i1 <= ((last(a) + 1) - length(b)))) then true else false)) = true) ->
+  ((not (i1 = o3)) ->
+  (forall i2:int. ((i2 = (i1 + 1)) -> (let o9 = b : us_t in (let o10 = a
+  : us_t in (let o11 = equal_subrange(o10, i2, o9) : bool in
+  (((o11 = true) <-> ((let temp___184 = (let temp___182 =
+  ((i2 - 1) + length(o9)) : int in of_array(to_array(o10), i2, temp___182))
+  : us_t in bool_eq(to_array(temp___184), first(temp___184),
+  last(temp___184), to_array(o9), first(o9), last(o9))) = true)) ->
+  (forall spark__branch2:bool. ((spark__branch2 = o11) ->
+  ((not (spark__branch2 = true)) -> (let o12 = b : us_t in (let o13 = a
+  : us_t in (((has_sub_range_in_prefix(o13, i2, o12) = true) <->
+  (exists j:int. (((first(o13) <= j) and (j <= i2)) and (equal_subrange(o13,
+  j, o12) = true)))) -> ((i1 <  i2) -> (not (has_sub_range_in_prefix(a, i2,
+  b) = true)))))))))))))))))))))))))))))))))))))))))))))))))))

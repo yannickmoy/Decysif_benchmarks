@@ -1,0 +1,598 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type element
+
+logic elementqtint : element -> int
+
+axiom elementqtaxiom :
+  (forall i:element. ((0 <= elementqtint(i)) and
+  (elementqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function to_rep(x: element) : int = elementqtint(x)
+
+logic of_rep : int -> element
+
+axiom inversion_axiom :
+  (forall x:element [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:element [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic concat_singleton_right : (int,element) farray, int, int,
+  element -> (int,element) farray
+
+axiom concat_singleton_right_def :
+  (forall a:(int,element) farray.
+  (forall b:element.
+  (forall a_first:int. forall a_last:int [concat_singleton_right(a, a_first,
+  a_last, b)]. (((a_last <  (a_last + 1)) -> ((concat_singleton_right(a,
+  a_first, a_last, b)[(a_last + 1)]) = b)) and
+  (forall i:int [(concat_singleton_right(a, a_first, a_last, b)[i])| (a[i])].
+  (((a_first <= i) and (i <= a_last)) -> ((concat_singleton_right(a, a_first,
+  a_last, b)[i]) = (a[i]))))))))
+
+logic singleton : element, int -> (int,element) farray
+
+axiom singleton_def :
+  (forall v:element.
+  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
+
+function bool_eq(a: (int,element) farray, a__first: int, a__last: int,
+  b: (int,element) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,element) farray. forall b:(int,element) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))))))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type less_than_max
+
+logic less_than_maxqtint : less_than_max -> int
+
+axiom less_than_maxqtaxiom :
+  (forall i:less_than_max. ((0 <= less_than_maxqtint(i)) and
+  (less_than_maxqtint(i) <= 100)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 100))
+
+function to_rep1(x: less_than_max) : int = less_than_maxqtint(x)
+
+logic of_rep1 : int -> less_than_max
+
+axiom inversion_axiom1 :
+  (forall x:less_than_max [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:less_than_max [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_ext_type
+
+logic null__ext__ : us_ext_type
+
+type us_split_fields = { rec__stacks__stack_root__content :
+(int,element) farray; rec__stacks__stack_root__length : less_than_max;
+rec__ext__ : us_ext_type }
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic stacks__stack_root__content__first__bit : int
+
+logic stacks__stack_root__content__last__bit : int
+
+logic stacks__stack_root__content__position : int
+
+axiom stacks__stack_root__content__first__bit_axiom :
+  (0 <= stacks__stack_root__content__first__bit)
+
+axiom stacks__stack_root__content__last__bit_axiom :
+  (stacks__stack_root__content__first__bit <  stacks__stack_root__content__last__bit)
+
+axiom stacks__stack_root__content__position_axiom :
+  (0 <= stacks__stack_root__content__position)
+
+logic stacks__stack_root__length__first__bit : int
+
+logic stacks__stack_root__length__last__bit : int
+
+logic stacks__stack_root__length__position : int
+
+axiom stacks__stack_root__length__first__bit_axiom :
+  (0 <= stacks__stack_root__length__first__bit)
+
+axiom stacks__stack_root__length__last__bit_axiom :
+  (stacks__stack_root__length__first__bit <  stacks__stack_root__length__last__bit)
+
+axiom stacks__stack_root__length__position_axiom :
+  (0 <= stacks__stack_root__length__position)
+
+logic dummy : us_rep
+
+logic s__attr__tag : int
+
+predicate dynamic_invariant(temp___expr_202: us_rep,
+  temp___is_init_198: bool, temp___skip_constant_199: bool,
+  temp___do_toplevel_200: bool, temp___do_typ_inv_201: bool) = true
+
+logic is_empty : us_rep -> bool
+
+logic size : us_rep -> int
+
+logic size__function_guard : int, us_rep -> prop
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep2(x: integer) : int = integerqtint(x)
+
+logic of_rep2 : int -> integer
+
+axiom inversion_axiom2 :
+  (forall x:integer [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:integer [to_rep2(x)]. in_range2(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range2(f) -> (in_range2(l) ->
+  ((to_rep2((mk(f, l)).rec__first) = f) and (to_rep2((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,element) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,element) farray = (a).elts
+
+function of_array(a: (int,element) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep2(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep2(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic get_model : int, us_rep -> us_t
+
+logic get_model__function_guard : us_t, int, us_rep -> prop
+
+type t2b
+
+logic t2bqtint : t2b -> int
+
+axiom t2bqtaxiom :
+  (forall i:t2b. ((1 <= t2bqtint(i)) and (t2bqtint(i) <= 5)))
+
+logic reset__specific_post : int, us_split_fields, int,
+  us_split_fields -> prop
+
+axiom stacks__stack_root__compat_axiom :
+  (forall param__s__split_fields:us_split_fields.
+  forall param__s__split_fields___old:us_split_fields.
+  (forall param__s__attr__tag:int [reset__specific_post(1,
+  param__s__split_fields, param__s__attr__tag,
+  param__s__split_fields___old)]. (reset__specific_post(1,
+  param__s__split_fields, param__s__attr__tag,
+  param__s__split_fields___old) -> (is_empty({ us_split_fields1 =
+  param__s__split_fields; attr__tag = param__s__attr__tag }) = true))))
+
+logic get_model1 : us_rep -> us_t
+
+logic get_model__function_guard1 : us_t, us_rep -> prop
+
+predicate dynamic_invariant1(temp___expr_239: us_t, temp___is_init_235: bool,
+  temp___skip_constant_236: bool, temp___do_toplevel_237: bool,
+  temp___do_typ_inv_238: bool) = ((not (temp___skip_constant_236 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_239),
+  last(temp___expr_239)))
+
+axiom stacks__stack_root__compat_axiom1 :
+  (forall param__s:us_rep [get_model(1, param__s)].
+  (get_model__function_guard(get_model(1, param__s), 1, param__s) ->
+  (get_model__function_guard1(get_model1(param__s), param__s) and
+  (get_model1(param__s) = get_model(1, param__s)))))
+
+function length1(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+logic push__specific_post : int, us_split_fields, int, int,
+  us_split_fields -> prop
+
+axiom stacks__stack_root__compat_axiom2 :
+  (forall param__s__split_fields:us_split_fields.
+  forall param__s__split_fields___old:us_split_fields.
+  (forall param__s__attr__tag:int. forall param__e:int
+  [push__specific_post(1, param__s__split_fields, param__s__attr__tag,
+  param__e, param__s__split_fields___old)]. (push__specific_post(1,
+  param__s__split_fields, param__s__attr__tag, param__e,
+  param__s__split_fields___old) ->
+  ((forall temp___291:us_rep.
+   get_model__function_guard1(get_model1(temp___291), temp___291)) and
+  (let temp___old_285 = (let temp___291 = { us_split_fields1 =
+  param__s__split_fields___old; attr__tag = param__s__attr__tag } : us_rep in
+  get_model1(temp___291)) : us_t in
+  ((forall temp___284:us_rep.
+   get_model__function_guard1(get_model1(temp___284), temp___284)) and
+  ((let temp___289 =
+  (if (length(temp___old_285) = 0) then of_array(singleton(of_rep(param__e),
+  1), 1, 1) else of_array(concat_singleton_right(to_array(temp___old_285),
+  first(temp___old_285), last(temp___old_285), of_rep(param__e)),
+  first(temp___old_285),
+  ((first(temp___old_285) + (length1(first(temp___old_285),
+  last(temp___old_285)) + 1)) - 1))) : us_t in (let temp___287 =
+  (let temp___284 = { us_split_fields1 = param__s__split_fields; attr__tag =
+  param__s__attr__tag } : us_rep in get_model1(temp___284)) : us_t in
+  bool_eq(to_array(temp___287), first(temp___287), last(temp___287),
+  to_array(temp___289), first(temp___289), last(temp___289)))) = true)))))))
+
+logic pop__specific_post : int, us_split_fields, int, int, us_split_fields,
+  int -> prop
+
+axiom stacks__stack_root__compat_axiom3 :
+  (forall param__s__split_fields:us_split_fields.
+  forall param__s__split_fields___old:us_split_fields.
+  (forall param__s__attr__tag:int. forall param__e:int.
+  forall param__e___old:int [pop__specific_post(1, param__s__split_fields,
+  param__s__attr__tag, param__e, param__s__split_fields___old,
+  param__e___old)]. (pop__specific_post(1, param__s__split_fields,
+  param__s__attr__tag, param__e, param__s__split_fields___old,
+  param__e___old) ->
+  ((forall temp___367:us_rep.
+   get_model__function_guard1(get_model1(temp___367), temp___367)) and
+  ((forall temp___365:us_rep.
+   get_model__function_guard1(get_model1(temp___365), temp___365)) and
+  ((forall temp___361:us_rep.
+   get_model__function_guard1(get_model1(temp___361), temp___361)) and
+  (((forall temp___365:us_rep.
+    get_model__function_guard1(get_model1(temp___365), temp___365)) and
+  ((forall temp___363:us_rep.
+   get_model__function_guard1(get_model1(temp___363), temp___363)) and
+  ((forall temp___361:us_rep.
+   get_model__function_guard1(get_model1(temp___361), temp___361)) and
+  ((forall temp___347:us_rep.
+   get_model__function_guard1(get_model1(temp___347), temp___347)) and
+  ((let temp___356 = (let temp___352 = (last((let temp___365 = {
+  us_split_fields1 = param__s__split_fields___old; attr__tag =
+  param__s__attr__tag } : us_rep in get_model1(temp___365))) - 1) : int in
+  (let temp___350 = first((let temp___363 = { us_split_fields1 =
+  param__s__split_fields___old; attr__tag = param__s__attr__tag } : us_rep in
+  get_model1(temp___363))) : int in of_array(to_array((let temp___361 = {
+  us_split_fields1 = param__s__split_fields___old; attr__tag =
+  param__s__attr__tag } : us_rep in get_model1(temp___361))), temp___350,
+  temp___352))) : us_t in (let temp___354 = (let temp___347 = {
+  us_split_fields1 = param__s__split_fields; attr__tag = param__s__attr__tag
+  } : us_rep in get_model1(temp___347)) : us_t in
+  bool_eq(to_array(temp___354), first(temp___354), last(temp___354),
+  to_array(temp___356), first(temp___356),
+  last(temp___356)))) = true))))) and ((not (is_empty({ us_split_fields1 =
+  param__s__split_fields___old; attr__tag = param__s__attr__tag
+  }) = true)) ->
+  ((forall temp___367:us_rep.
+   get_model__function_guard1(get_model1(temp___367), temp___367)) and
+  ((forall temp___369:us_rep.
+   get_model__function_guard1(get_model1(temp___369), temp___369)) and
+  ((forall temp___369:us_rep.
+   get_model__function_guard1(get_model1(temp___369), temp___369)) and
+  (param__e = to_rep((to_array((let temp___367 = { us_split_fields1 =
+  param__s__split_fields___old; attr__tag = param__s__attr__tag } : us_rep in
+  get_model1(temp___367)))[(let temp___370qtunused = (let temp___369 = {
+  us_split_fields1 = param__s__split_fields___old; attr__tag =
+  param__s__attr__tag } : us_rep in get_model1(temp___369)) : us_t in
+  last((let temp___369 = { us_split_fields1 = param__s__split_fields___old;
+  attr__tag = param__s__attr__tag } : us_rep in
+  get_model1(temp___369))))]))))))))))))))
+
+logic temp_____aggregate_def_411 : int, int, int, int,
+  int -> (int,element) farray
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size2 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+axiom size__post_axiom :
+  (forall param__s:us_rep [size(param__s)]. (dynamic_invariant(param__s,
+  true, false, true, true) -> (let result = size(param__s) : int in
+  (size__function_guard(result, param__s) -> in_range1(result)))))
+
+axiom size__def_axiom :
+  (forall param__s:us_rep [size(param__s)].
+  (size(param__s) = to_rep1(((param__s).us_split_fields1).rec__stacks__stack_root__length)))
+
+axiom is_empty__post_axiom : true
+
+axiom is_empty__def_axiom :
+  (forall param__s:us_rep [is_empty(param__s)].
+  (size__function_guard(size(param__s), param__s) and
+  ((is_empty(param__s) = true) <-> ((let temp___227qtunused = param__s
+  : us_rep in size(param__s)) = 0))))
+
+axiom get_model__post_axiom :
+  (forall param__s:us_rep [get_model1(param__s)].
+  (dynamic_invariant(param__s, true, false, true, true) -> (let result =
+  get_model1(param__s) : us_t in (get_model__function_guard1(result,
+  param__s) -> (((in_range1(first(result)) and in_range1(last(result))) and
+  (size__function_guard(size(param__s), param__s) and
+  (length(result) = (let temp___257qtunused = param__s : us_rep in
+  size(param__s))))) and dynamic_invariant1(result, true, false, true,
+  true))))))
+
+axiom get_model__post__dispatch_axiom :
+  (forall attr__tag1:int.
+  (forall param__s:us_rep [get_model(attr__tag1, param__s)].
+  (dynamic_invariant(param__s, true, false, true, true) -> (let result =
+  get_model(attr__tag1, param__s) : us_t in
+  (get_model__function_guard(result, attr__tag1, param__s) ->
+  (((in_range1(first(result)) and in_range1(last(result))) and
+  (size__function_guard(size(param__s), param__s) and
+  (length(result) = (let temp___253qtunused = param__s : us_rep in
+  size(param__s))))) and dynamic_invariant1(result, true, false, true,
+  true)))))))
+
+logic rliteral : element
+
+axiom rliteral_axiom : (elementqtint(rliteral) = 1)
+
+logic rliteral1 : element
+
+axiom rliteral_axiom1 : (elementqtint(rliteral1) = 2)
+
+logic rliteral2 : element
+
+axiom rliteral_axiom2 : (elementqtint(rliteral2) = 3)
+
+logic rliteral3 : element
+
+axiom rliteral_axiom3 : (elementqtint(rliteral3) = 4)
+
+logic rliteral4 : element
+
+axiom rliteral_axiom4 : (elementqtint(rliteral4) = 5)
+
+axiom def_axiom :
+  (forall temp___406:int. forall temp___407:int. forall temp___408:int.
+  forall temp___409:int. forall temp___410:int. (let temp___412 =
+  temp_____aggregate_def_411(temp___406, temp___407, temp___408, temp___409,
+  temp___410) : (int,element) farray in ((((temp___412[1]) = rliteral) and
+  ((temp___412[2]) = rliteral1)) and ((((temp___412[3]) = rliteral2) and
+  ((temp___412[4]) = rliteral3)) and ((temp___412[5]) = rliteral4)))))
+
+ (* "test_stack.adb", line 2, characters 0-0 *)
+goal defqtvc :
+  (forall s__split_fields:us_split_fields. forall e:int. (dynamic_invariant({
+  us_split_fields1 = s__split_fields; attr__tag = s__attr__tag }, true,
+  false, true, true) -> (in_range(e) -> (let o = s__attr__tag : int in
+  (forall s__split_fields1:us_split_fields. ((((is_empty({ us_split_fields1 =
+  s__split_fields1; attr__tag = o }) = true) and dynamic_invariant({
+  us_split_fields1 = s__split_fields1; attr__tag = o }, true, true, true,
+  true)) and reset__specific_post(o, s__split_fields1, o,
+  s__split_fields)) ->
+  (forall i:int. ((i = 1) -> (let o1 = s__attr__tag : int in
+  (forall s__split_fields2:us_split_fields.
+  ((forall o2:int. forall temp___266:us_rep.
+   get_model__function_guard(get_model(o2, temp___266), o2, temp___266)) ->
+  ((forall o2:int. forall temp___263:us_rep.
+   get_model__function_guard(get_model(o2, temp___263), o2, temp___263)) ->
+  (((((let temp___271 = (let temp___267 = (let temp___266 = {
+  us_split_fields1 = s__split_fields1; attr__tag = o1 } : us_rep in
+  get_model(o1, temp___266)) : us_t in
+  (if (length(temp___267) = 0) then of_array(singleton(of_rep(i), 1), 1,
+  1) else of_array(concat_singleton_right(to_array(temp___267),
+  first(temp___267), last(temp___267), of_rep(i)), first(temp___267),
+  ((first(temp___267) + (length1(first(temp___267),
+  last(temp___267)) + 1)) - 1)))) : us_t in (let temp___269 =
+  (let temp___263 = { us_split_fields1 = s__split_fields2; attr__tag = o1 }
+  : us_rep in get_model(o1, temp___263)) : us_t in
+  bool_eq(to_array(temp___269), first(temp___269), last(temp___269),
+  to_array(temp___271), first(temp___271), last(temp___271)))) = true) and
+  dynamic_invariant({ us_split_fields1 = s__split_fields2; attr__tag = o1 },
+  true, true, true, true)) and push__specific_post(o1, s__split_fields2, o1,
+  i, s__split_fields1)) ->
+  (forall i1:int. ((i1 = 2) -> (let o2 = s__attr__tag : int in
+  (forall s__split_fields3:us_split_fields.
+  ((forall o3:int. forall temp___266:us_rep.
+   get_model__function_guard(get_model(o3, temp___266), o3, temp___266)) ->
+  ((forall o3:int. forall temp___263:us_rep.
+   get_model__function_guard(get_model(o3, temp___263), o3, temp___263)) ->
+  (((((let temp___271 = (let temp___267 = (let temp___266 = {
+  us_split_fields1 = s__split_fields2; attr__tag = o2 } : us_rep in
+  get_model(o2, temp___266)) : us_t in
+  (if (length(temp___267) = 0) then of_array(singleton(of_rep(i1), 1), 1,
+  1) else of_array(concat_singleton_right(to_array(temp___267),
+  first(temp___267), last(temp___267), of_rep(i1)), first(temp___267),
+  ((first(temp___267) + (length1(first(temp___267),
+  last(temp___267)) + 1)) - 1)))) : us_t in (let temp___269 =
+  (let temp___263 = { us_split_fields1 = s__split_fields3; attr__tag = o2 }
+  : us_rep in get_model(o2, temp___263)) : us_t in
+  bool_eq(to_array(temp___269), first(temp___269), last(temp___269),
+  to_array(temp___271), first(temp___271), last(temp___271)))) = true) and
+  dynamic_invariant({ us_split_fields1 = s__split_fields3; attr__tag = o2 },
+  true, true, true, true)) and push__specific_post(o2, s__split_fields3, o2,
+  i1, s__split_fields2)) ->
+  (forall i2:int. ((i2 = 3) -> (let o3 = s__attr__tag : int in
+  (forall s__split_fields4:us_split_fields.
+  ((forall o4:int. forall temp___266:us_rep.
+   get_model__function_guard(get_model(o4, temp___266), o4, temp___266)) ->
+  ((forall o4:int. forall temp___263:us_rep.
+   get_model__function_guard(get_model(o4, temp___263), o4, temp___263)) ->
+  (((((let temp___271 = (let temp___267 = (let temp___266 = {
+  us_split_fields1 = s__split_fields3; attr__tag = o3 } : us_rep in
+  get_model(o3, temp___266)) : us_t in
+  (if (length(temp___267) = 0) then of_array(singleton(of_rep(i2), 1), 1,
+  1) else of_array(concat_singleton_right(to_array(temp___267),
+  first(temp___267), last(temp___267), of_rep(i2)), first(temp___267),
+  ((first(temp___267) + (length1(first(temp___267),
+  last(temp___267)) + 1)) - 1)))) : us_t in (let temp___269 =
+  (let temp___263 = { us_split_fields1 = s__split_fields4; attr__tag = o3 }
+  : us_rep in get_model(o3, temp___263)) : us_t in
+  bool_eq(to_array(temp___269), first(temp___269), last(temp___269),
+  to_array(temp___271), first(temp___271), last(temp___271)))) = true) and
+  dynamic_invariant({ us_split_fields1 = s__split_fields4; attr__tag = o3 },
+  true, true, true, true)) and push__specific_post(o3, s__split_fields4, o3,
+  i2, s__split_fields3)) ->
+  (forall i3:int. ((i3 = 4) -> (let o4 = s__attr__tag : int in
+  (forall s__split_fields5:us_split_fields.
+  ((forall o5:int. forall temp___266:us_rep.
+   get_model__function_guard(get_model(o5, temp___266), o5, temp___266)) ->
+  ((forall o5:int. forall temp___263:us_rep.
+   get_model__function_guard(get_model(o5, temp___263), o5, temp___263)) ->
+  (((((let temp___271 = (let temp___267 = (let temp___266 = {
+  us_split_fields1 = s__split_fields4; attr__tag = o4 } : us_rep in
+  get_model(o4, temp___266)) : us_t in
+  (if (length(temp___267) = 0) then of_array(singleton(of_rep(i3), 1), 1,
+  1) else of_array(concat_singleton_right(to_array(temp___267),
+  first(temp___267), last(temp___267), of_rep(i3)), first(temp___267),
+  ((first(temp___267) + (length1(first(temp___267),
+  last(temp___267)) + 1)) - 1)))) : us_t in (let temp___269 =
+  (let temp___263 = { us_split_fields1 = s__split_fields5; attr__tag = o4 }
+  : us_rep in get_model(o4, temp___263)) : us_t in
+  bool_eq(to_array(temp___269), first(temp___269), last(temp___269),
+  to_array(temp___271), first(temp___271), last(temp___271)))) = true) and
+  dynamic_invariant({ us_split_fields1 = s__split_fields5; attr__tag = o4 },
+  true, true, true, true)) and push__specific_post(o4, s__split_fields5, o4,
+  i3, s__split_fields4)) ->
+  (forall i4:int. ((i4 = 5) -> (let o5 = s__attr__tag : int in
+  (forall s__split_fields6:us_split_fields.
+  ((forall o6:int. forall temp___266:us_rep.
+   get_model__function_guard(get_model(o6, temp___266), o6, temp___266)) ->
+  ((forall o6:int. forall temp___263:us_rep.
+   get_model__function_guard(get_model(o6, temp___263), o6, temp___263)) ->
+  (((((let temp___271 = (let temp___267 = (let temp___266 = {
+  us_split_fields1 = s__split_fields5; attr__tag = o5 } : us_rep in
+  get_model(o5, temp___266)) : us_t in
+  (if (length(temp___267) = 0) then of_array(singleton(of_rep(i4), 1), 1,
+  1) else of_array(concat_singleton_right(to_array(temp___267),
+  first(temp___267), last(temp___267), of_rep(i4)), first(temp___267),
+  ((first(temp___267) + (length1(first(temp___267),
+  last(temp___267)) + 1)) - 1)))) : us_t in (let temp___269 =
+  (let temp___263 = { us_split_fields1 = s__split_fields6; attr__tag = o5 }
+  : us_rep in get_model(o5, temp___263)) : us_t in
+  bool_eq(to_array(temp___269), first(temp___269), last(temp___269),
+  to_array(temp___271), first(temp___271), last(temp___271)))) = true) and
+  dynamic_invariant({ us_split_fields1 = s__split_fields6; attr__tag = o5 },
+  true, true, true, true)) and push__specific_post(o5, s__split_fields6, o5,
+  i4, s__split_fields5)) ->
+  ((forall temp___421:us_rep. forall temp___420:int.
+   get_model__function_guard(get_model(temp___420, temp___421), temp___420,
+   temp___421)) ->
+  ((let temp___428 = (let temp___421 = { us_split_fields1 = s__split_fields6;
+  attr__tag = s__attr__tag } : us_rep in (let temp___420 = s__attr__tag
+  : int in get_model(temp___420, temp___421))) : us_t in
+  bool_eq(to_array(temp___428), first(temp___428), last(temp___428),
+  temp_____aggregate_def_411(1, 2, 3, 4, 5), 1, 5)) = true)))))))))))))))))))))))))))))))))))))))))))

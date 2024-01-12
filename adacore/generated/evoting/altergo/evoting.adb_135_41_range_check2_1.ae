@@ -1,0 +1,396 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type us_image
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic from_string : us_t -> us_image
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type character__init_wrapper = { rec__value : character; us_attr__init : bool
+}
+
+logic dummy : character__init_wrapper
+
+axiom dummy__def : ((dummy).us_attr__init = false)
+
+logic slide : (int,character__init_wrapper) farray, int,
+  int -> (int,character__init_wrapper) farray
+
+axiom slide_eq :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic convert : (int,character__init_wrapper) farray -> (int,character) farray
+
+axiom convert__def :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall temp___106:int.
+  (to_rep(of_rep(to_rep(((a[temp___106])).rec__value))) = to_rep((convert(a)[temp___106])))))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic program_phase : int
+
+logic candidates : (int,(int,character) farray) farray
+
+logic last_candidate : int
+
+logic line_length : us_private, us_private, us_private, us_private,
+  us_private, us_private, us_private -> int
+
+logic page_length : us_private, us_private, us_private, us_private,
+  us_private, us_private, us_private -> int
+
+function length(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2))
+
+type candidate_number_t
+
+logic candidate_number_tqtint : candidate_number_t -> int
+
+axiom candidate_number_tqtaxiom :
+  (forall i:candidate_number_t. ((0 <= candidate_number_tqtint(i)) and
+  (candidate_number_tqtint(i) <= 20)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 20))
+
+logic attr__ATTRIBUTE_VALUE : us_image -> int
+
+type tcandidate_name_tP1
+
+logic tcandidate_name_tP1qtint : tcandidate_name_tP1 -> int
+
+axiom tcandidate_name_tP1qtaxiom :
+  (forall i:tcandidate_name_tP1. ((1 <= tcandidate_name_tP1qtint(i)) and
+  (tcandidate_name_tP1qtint(i) <= 70)))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+predicate dynamic_invariant(temp___expr_257: (int,(int,character) farray) farray,
+  temp___is_init_253: bool, temp___skip_constant_254: bool,
+  temp___do_toplevel_255: bool, temp___do_typ_inv_256: bool) = true
+
+type tTbufSP1
+
+logic tTbufSP1qtint : tTbufSP1 -> int
+
+axiom tTbufSP1qtaxiom :
+  (forall i:tTbufSP1. ((1 <= tTbufSP1qtint(i)) and (tTbufSP1qtint(i) <= 10)))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom4 : (0 <= component__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+type count
+
+logic countqtint : count -> int
+
+axiom countqtaxiom :
+  (forall i:count. ((0 <= countqtint(i)) and (countqtint(i) <= 2147483647)))
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
+
+axiom line_length__post_axiom :
+  (forall Ada___ada__text_io__file_system___file_system___:us_private.
+  forall Ada___ada__text_io__standard_in___standard_in___:us_private.
+  forall Ada___ada__text_io__standard_out___standard_out___:us_private.
+  forall Ada___ada__text_io__standard_err___standard_err___:us_private.
+  forall Ada___ada__text_io__current_in___current_in___:us_private.
+  forall Ada___ada__text_io__current_out___current_out___:us_private.
+  forall Ada___ada__text_io__current_err___current_err___:us_private
+  [line_length(Ada___ada__text_io__file_system___file_system___,
+  Ada___ada__text_io__standard_in___standard_in___,
+  Ada___ada__text_io__standard_out___standard_out___,
+  Ada___ada__text_io__standard_err___standard_err___,
+  Ada___ada__text_io__current_in___current_in___,
+  Ada___ada__text_io__current_out___current_out___,
+  Ada___ada__text_io__current_err___current_err___)].
+  in_range6(line_length(Ada___ada__text_io__file_system___file_system___,
+  Ada___ada__text_io__standard_in___standard_in___,
+  Ada___ada__text_io__standard_out___standard_out___,
+  Ada___ada__text_io__standard_err___standard_err___,
+  Ada___ada__text_io__current_in___current_in___,
+  Ada___ada__text_io__current_out___current_out___,
+  Ada___ada__text_io__current_err___current_err___)))
+
+axiom page_length__post_axiom :
+  (forall Ada___ada__text_io__file_system___file_system___:us_private.
+  forall Ada___ada__text_io__standard_in___standard_in___:us_private.
+  forall Ada___ada__text_io__standard_out___standard_out___:us_private.
+  forall Ada___ada__text_io__standard_err___standard_err___:us_private.
+  forall Ada___ada__text_io__current_in___current_in___:us_private.
+  forall Ada___ada__text_io__current_out___current_out___:us_private.
+  forall Ada___ada__text_io__current_err___current_err___:us_private
+  [page_length(Ada___ada__text_io__file_system___file_system___,
+  Ada___ada__text_io__standard_in___standard_in___,
+  Ada___ada__text_io__standard_out___standard_out___,
+  Ada___ada__text_io__standard_err___standard_err___,
+  Ada___ada__text_io__current_in___current_in___,
+  Ada___ada__text_io__current_out___current_out___,
+  Ada___ada__text_io__current_err___current_err___)].
+  in_range6(page_length(Ada___ada__text_io__file_system___file_system___,
+  Ada___ada__text_io__standard_in___standard_in___,
+  Ada___ada__text_io__standard_out___standard_out___,
+  Ada___ada__text_io__standard_err___standard_err___,
+  Ada___ada__text_io__current_in___current_in___,
+  Ada___ada__text_io__current_out___current_out___,
+  Ada___ada__text_io__current_err___current_err___)))
+
+ (* "evoting.ads", line 77, characters 0-0 *)
+goal defqtvc :
+  (forall chosen_vote:int. forall last:int. forall choice:int.
+  (in_range4(program_phase) -> (dynamic_invariant(candidates, true, false,
+  true, true) -> (in_range5(last_candidate) -> (in_range5(chosen_vote) ->
+  ((program_phase = 1) -> (in_range3(last) -> (in_range5(choice) ->
+  (forall file_system:us_private. forall standard_in:us_private.
+  forall standard_out:us_private. forall standard_err:us_private.
+  forall current_in:us_private. forall current_out:us_private.
+  forall current_err:us_private. forall chosen_vote1:int. forall last1:int.
+  forall choice1:int. (((in_range3(last1) and in_range5(choice1)) and
+  (chosen_vote1 = chosen_vote)) ->
+  (forall file_system1:us_private. forall standard_in1:us_private.
+  forall standard_out1:us_private. forall standard_err1:us_private.
+  forall current_in1:us_private. forall current_out1:us_private.
+  forall current_err1:us_private. (((line_length(file_system, standard_in,
+  standard_out, standard_err, current_in, current_out,
+  current_err) = line_length(file_system1, standard_in1, standard_out1,
+  standard_err1, current_in1, current_out1, current_err1)) and
+  (page_length(file_system, standard_in, standard_out, standard_err,
+  current_in, current_out, current_err) = page_length(file_system1,
+  standard_in1, standard_out1, standard_err1, current_in1, current_out1,
+  current_err1))) ->
+  (forall file_system2:us_private. forall standard_in2:us_private.
+  forall standard_out2:us_private. forall standard_err2:us_private.
+  forall current_in2:us_private. forall current_out2:us_private.
+  forall current_err2:us_private.
+  (forall file_system3:us_private. forall standard_in3:us_private.
+  forall standard_out3:us_private. forall standard_err3:us_private.
+  forall current_in3:us_private. forall current_out3:us_private.
+  forall current_err3:us_private. (((line_length(file_system2, standard_in2,
+  standard_out2, standard_err2, current_in2, current_out2,
+  current_err2) = line_length(file_system3, standard_in3, standard_out3,
+  standard_err3, current_in3, current_out3, current_err3)) and
+  (page_length(file_system2, standard_in2, standard_out2, standard_err2,
+  current_in2, current_out2, current_err2) = page_length(file_system3,
+  standard_in3, standard_out3, standard_err3, current_in3, current_out3,
+  current_err3))) ->
+  (forall file_system4:us_private. forall standard_in4:us_private.
+  forall standard_out4:us_private. forall standard_err4:us_private.
+  forall current_in4:us_private. forall current_out4:us_private.
+  forall current_err4:us_private. (((line_length(file_system3, standard_in3,
+  standard_out3, standard_err3, current_in3, current_out3,
+  current_err3) = line_length(file_system4, standard_in4, standard_out4,
+  standard_err4, current_in4, current_out4, current_err4)) and
+  (page_length(file_system3, standard_in3, standard_out3, standard_err3,
+  current_in3, current_out3, current_err3) = page_length(file_system4,
+  standard_in4, standard_out4, standard_err4, current_in4, current_out4,
+  current_err4))) ->
+  (forall file_system5:us_private. forall standard_in5:us_private.
+  forall standard_out5:us_private. forall standard_err5:us_private.
+  forall current_in5:us_private. forall current_out5:us_private.
+  forall current_err5:us_private. (((line_length(file_system4, standard_in4,
+  standard_out4, standard_err4, current_in4, current_out4,
+  current_err4) = line_length(file_system5, standard_in5, standard_out5,
+  standard_err5, current_in5, current_out5, current_err5)) and
+  (page_length(file_system4, standard_in4, standard_out4, standard_err4,
+  current_in4, current_out4, current_err4) = page_length(file_system5,
+  standard_in5, standard_out5, standard_err5, current_in5, current_out5,
+  current_err5))) ->
+  (forall o:integer. ((to_rep1(o) = 10) ->
+  (forall o1:integer. ((to_rep1(o1) = 1) ->
+  (forall file_system6:us_private. forall standard_in6:us_private.
+  forall standard_out6:us_private. forall standard_err6:us_private.
+  forall current_in6:us_private. forall current_out6:us_private.
+  forall current_err6:us_private.
+  forall param__item:(int,character__init_wrapper) farray.
+  forall param__last:int. ((((((line_length(file_system5, standard_in5,
+  standard_out5, standard_err5, current_in5, current_out5,
+  current_err5) = line_length(file_system6, standard_in6, standard_out6,
+  standard_err6, current_in6, current_out6, current_err6)) and
+  (page_length(file_system5, standard_in5, standard_out5, standard_err5,
+  current_in5, current_out5, current_err5) = page_length(file_system6,
+  standard_in6, standard_out6, standard_err6, current_in6, current_out6,
+  current_err6))) and (if (0 <  length(to_rep1(o1),
+  to_rep1(o))) then (((to_rep1(o1) - 1) <= param__last) and
+  (param__last <= to_rep1(o))) else (param__last = (to_rep1(o1) - 1)))) and
+  (forall i:int. (((to_rep1(o1) <= i) and (i <= param__last)) ->
+  (((param__item[i])).us_attr__init = true)))) and in_range3(param__last)) ->
+  (forall buf:(int,character__init_wrapper) farray.
+  ((buf = slide(param__item, 1, 1)) ->
+  (forall last2:int. ((last2 = param__last) -> (((1 <= last2) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= last2) and (last2 <= 10)))) ->
+  ((forall temp___562:int. (((1 <= temp___562) and (temp___562 <= last2)) ->
+   (((buf[temp___562])).us_attr__init = true))) ->
+  (dynamic_property(1, 2147483647, 1, last2) ->
+  (attr__ATTRIBUTE_VALUE(from_string(of_array(convert(buf), 1,
+  last2))) <= 20)))))))))))))))))))))))))))))))))

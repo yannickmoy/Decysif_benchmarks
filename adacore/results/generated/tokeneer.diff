@@ -1,0 +1,92 @@
+cvc5 proved 26 out of 47 VCs
+  unproved audittypes.ads_78_16_predicate_check2_1.smt2
+  unproved audittypes.ads_78_16_predicate_check_1.smt2
+  unproved bio.adb_84_15_predicate_check2_1.smt2
+  unproved bio.adb_84_15_predicate_check_2.smt2
+  unproved certtypes.ads_63_21_predicate_check2_1.smt2
+  unproved certtypes.ads_63_21_predicate_check_1.smt2
+  unproved configdata.ads_40_17_predicate_check2_1.smt2
+  unproved configdata.ads_40_17_predicate_check_1.smt2
+  unproved configdata.ads_49_21_predicate_check2_1.smt2
+  unproved configdata.ads_49_21_predicate_check_2.smt2
+  unproved doorapi.adb_57_28_precondition_1.smt2
+  unproved doorapi.adb_63_32_precondition_1.smt2
+  unproved enrolment.adb_242_30_overflow_check2_1.smt2
+  unproved iandatypes.ads_36_12_predicate_check2_1.smt2
+  unproved keystore-interfac.ads_96_20_predicate_check2_1.smt2
+  unproved keystore-interfac.ads_96_20_predicate_check_1.smt2
+  unproved privtypes.ads_44_14_predicate_check2_1.smt2
+  unproved privtypes.ads_44_14_predicate_check_1.smt2
+  unproved stats.ads_30_18_predicate_check2_1.smt2
+  unproved tokenreader-interfac.ads_84_21_predicate_check2_1.smt2
+  unproved tokenreader-interfac.ads_84_21_predicate_check_1.smt2
+z3 proved 26 out of 47 VCs
+  unproved audittypes.ads_78_16_predicate_check2_1.smt2
+  unproved audittypes.ads_78_16_predicate_check_1.smt2
+  unproved bio.adb_84_15_predicate_check2_1.smt2
+  unproved bio.adb_84_15_predicate_check_2.smt2
+  unproved certtypes.ads_63_21_predicate_check2_1.smt2
+  unproved certtypes.ads_63_21_predicate_check_1.smt2
+  unproved configdata.ads_40_17_predicate_check2_1.smt2
+  unproved configdata.ads_40_17_predicate_check_1.smt2
+  unproved configdata.ads_49_21_predicate_check2_1.smt2
+  unproved configdata.ads_49_21_predicate_check_2.smt2
+  unproved doorapi.adb_57_28_precondition_1.smt2
+  unproved doorapi.adb_63_32_precondition_1.smt2
+  unproved enrolment.adb_242_30_overflow_check2_1.smt2
+  unproved iandatypes.ads_36_12_predicate_check2_1.smt2
+  unproved keystore-interfac.ads_96_20_predicate_check2_1.smt2
+  unproved keystore-interfac.ads_96_20_predicate_check_1.smt2
+  unproved privtypes.ads_44_14_predicate_check2_1.smt2
+  unproved privtypes.ads_44_14_predicate_check_1.smt2
+  unproved stats.ads_30_18_predicate_check2_1.smt2
+  unproved tokenreader-interfac.ads_84_21_predicate_check2_1.smt2
+  unproved tokenreader-interfac.ads_84_21_predicate_check_1.smt2
+altergo proved 0 out of 47 VCs
+  unproved audittypes.ads_78_16_predicate_check2_1.ae
+  unproved audittypes.ads_78_16_predicate_check_1.ae
+  unproved bio.adb_84_15_predicate_check2_1.ae
+  unproved bio.adb_84_15_predicate_check_2.ae
+  unproved certtypes.ads_63_21_predicate_check2_1.ae
+  unproved certtypes.ads_63_21_predicate_check_1.ae
+  unproved configdata.adb_366_35_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved configdata.ads_40_17_predicate_check2_1.ae
+  unproved configdata.ads_40_17_predicate_check_1.ae
+  unproved configdata.ads_49_21_predicate_check2_1.ae
+  unproved configdata.ads_49_21_predicate_check_2.ae
+  unproved configuration.adb_104_64_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_105_62_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_106_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_106_62_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_107_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_107_62_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_108_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_108_55_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_109_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_109_12_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_109_72_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_110_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_110_12_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_110_71_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_111_12_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_111_12_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_116_26_range_check3_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_116_26_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved configuration.adb_118_41_length_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved display.adb_129_35_display.adb_191_32_loop_invariant_init2_1.ae (proved by ['cvc5', 'z3'])
+  unproved display.adb_129_35_display.adb_287_57_loop_invariant_init2_1.ae (proved by ['cvc5', 'z3'])
+  unproved display.adb_144_35_display.adb_191_32_loop_invariant_init2_1.ae (proved by ['cvc5', 'z3'])
+  unproved display.adb_144_35_display.adb_287_57_loop_invariant_init2_1.ae (proved by ['cvc5', 'z3'])
+  unproved doorapi.adb_57_28_precondition_1.ae
+  unproved doorapi.adb_63_32_precondition_1.ae
+  unproved enrolment.adb_124_25_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved enrolment.adb_124_25_postcondition_1.ae (proved by ['cvc5', 'z3'])
+  unproved enrolment.adb_242_30_overflow_check2_1.ae
+  unproved iandatypes.ads_36_12_predicate_check2_1.ae
+  unproved keystore-interfac.ads_96_20_predicate_check2_1.ae
+  unproved keystore-interfac.ads_96_20_predicate_check_1.ae
+  unproved privtypes.ads_44_14_predicate_check2_1.ae
+  unproved privtypes.ads_44_14_predicate_check_1.ae
+  unproved stats.ads_30_18_predicate_check2_1.ae
+  unproved tokenreader-interfac.ads_84_21_predicate_check2_1.ae
+  unproved tokenreader-interfac.ads_84_21_predicate_check_1.ae

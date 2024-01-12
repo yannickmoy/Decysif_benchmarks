@@ -1,0 +1,369 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type status
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 1))
+
+logic to_rep : status -> int
+
+logic of_rep : int -> status
+
+axiom inversion_axiom :
+  (forall x:status [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:status [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function bool_eq(a: (int,status) farray, a__first: int, a__last: int,
+  b: (int,status) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,status) farray. forall b:(int,status) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))))))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic mem : us_rep, int -> bool
+
+logic mem__function_guard : bool, us_rep, int -> prop
+
+type resource
+
+logic resourceqtint : resource -> int
+
+axiom resourceqtaxiom :
+  (forall i:resource. ((0 <= resourceqtint(i)) and (resourceqtint(i) <= 3)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 3))
+
+logic is_empty : us_rep -> bool
+
+logic is_empty__function_guard : bool, us_rep -> prop
+
+logic is_add : us_rep, int, us_rep -> bool
+
+logic is_add__function_guard : bool, us_rep, int, us_rep -> prop
+
+type us_split_fields = { rec__allocator__m__t__available : us_rep;
+rec__allocator__m__t__allocated : us_rep }
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic allocator__m__t__available__first__bit : int
+
+logic allocator__m__t__available__last__bit : int
+
+logic allocator__m__t__available__position : int
+
+axiom allocator__m__t__available__first__bit_axiom :
+  (0 <= allocator__m__t__available__first__bit)
+
+axiom allocator__m__t__available__last__bit_axiom :
+  (allocator__m__t__available__first__bit <  allocator__m__t__available__last__bit)
+
+axiom allocator__m__t__available__position_axiom :
+  (0 <= allocator__m__t__available__position)
+
+logic allocator__m__t__allocated__first__bit : int
+
+logic allocator__m__t__allocated__last__bit : int
+
+logic allocator__m__t__allocated__position : int
+
+axiom allocator__m__t__allocated__first__bit_axiom :
+  (0 <= allocator__m__t__allocated__first__bit)
+
+axiom allocator__m__t__allocated__last__bit_axiom :
+  (allocator__m__t__allocated__first__bit <  allocator__m__t__allocated__last__bit)
+
+axiom allocator__m__t__allocated__position_axiom :
+  (0 <= allocator__m__t__allocated__position)
+
+logic dummy1 : us_rep1
+
+logic oeq : us_rep1, us_rep1 -> bool
+
+logic oeq1 : us_rep, us_rep -> bool
+
+logic oeq__function_guard : bool, us_rep, us_rep -> prop
+
+logic model : (int,status) farray -> us_rep1
+
+logic model__function_guard : us_rep1, (int,status) farray -> prop
+
+logic is_valid : us_rep1, (int,status) farray -> bool
+
+type valid_resource
+
+logic valid_resourceqtint : valid_resource -> int
+
+axiom valid_resourceqtaxiom :
+  (forall i:valid_resource. ((1 <= valid_resourceqtint(i)) and
+  (valid_resourceqtint(i) <= 3)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 3))
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+axiom mem__post_axiom :
+  (forall param__s:us_rep.
+  (forall param__e:int [mem(param__s, param__e)]. (in_range1(param__e) ->
+  (let result = mem(param__s, param__e) : bool in
+  (mem__function_guard(result, param__s, param__e) -> ((param__e = 0) ->
+  (not (result = true))))))))
+
+axiom oeq__post_axiom :
+  (forall param__s1:us_rep. forall param__s2:us_rep [oeq1(param__s1,
+  param__s2)]. (let result = oeq1(param__s1, param__s2) : bool in
+  (oeq__function_guard(result, param__s1, param__s2) ->
+  ((forall e:int. mem__function_guard(mem(param__s1, e), param__s1, e)) and
+  ((forall e:int. mem__function_guard(mem(param__s2, e), param__s2, e)) and
+  ((forall e:int. mem__function_guard(mem(param__s2, e), param__s2, e)) and
+  ((forall e:int. mem__function_guard(mem(param__s1, e), param__s1, e)) and
+  ((result = true) <->
+  ((forall e:int. ((in_range1(e) and (mem(param__s1, e) = true)) ->
+   ((let temp___257qtunused = param__s2 : us_rep in mem(param__s2,
+   e)) = true))) and
+  (forall e:int. ((in_range1(e) and (mem(param__s2, e) = true)) ->
+  ((let temp___262qtunused = param__s1 : us_rep in mem(param__s1,
+  e)) = true))))))))))))
+
+axiom is_add__post_axiom :
+  (forall param__s:us_rep. forall param__result__:us_rep.
+  (forall param__e:int [is_add(param__s, param__e, param__result__)].
+  (in_range1(param__e) -> (let result = is_add(param__s, param__e,
+  param__result__) : bool in (is_add__function_guard(result, param__s,
+  param__e, param__result__) -> (mem__function_guard(mem(param__result__,
+  param__e), param__result__, param__e) and
+  (mem__function_guard(mem(param__s, param__e), param__s, param__e) and
+  ((forall f:int. mem__function_guard(mem(param__result__, f),
+   param__result__, f)) and
+  ((forall f:int. mem__function_guard(mem(param__s, f), param__s, f)) and
+  ((forall e:int. mem__function_guard(mem(param__s, e), param__s, e)) and
+  ((forall e:int. mem__function_guard(mem(param__result__, e),
+   param__result__, e)) and
+  ((result = true) <-> (((((not (param__e = 0)) and
+  ((let temp___284qtunused = param__result__ : us_rep in mem(param__result__,
+  param__e)) = true)) and (not ((let temp___286qtunused = param__s
+  : us_rep in mem(param__s, param__e)) = true))) and
+  (forall f:int. ((in_range1(f) and (mem(param__result__, f) = true)) ->
+  (((let temp___291qtunused = param__s : us_rep in mem(param__s,
+  f)) = true) or (f = param__e))))) and
+  (forall e:int. ((in_range1(e) and (mem(param__s, e) = true)) ->
+  ((let temp___296qtunused = param__result__ : us_rep in mem(param__result__,
+  e)) = true))))))))))))))))
+
+axiom oeq__post_axiom1 : true
+
+axiom oeq__def_axiom :
+  (forall param__x:us_rep1. forall param__y:us_rep1 [oeq(param__x,
+  param__y)].
+  ((forall temp___412:us_rep. forall temp___411:us_rep.
+   oeq__function_guard(oeq1(temp___411, temp___412), temp___411, temp___412)) and
+  ((forall temp___415:us_rep. forall temp___414:us_rep.
+   oeq__function_guard(oeq1(temp___414, temp___415), temp___414, temp___415)) and
+  ((oeq(param__x, param__y) = true) <-> (((let temp___412 =
+  ((param__y).us_split_fields1).rec__allocator__m__t__available : us_rep in
+  (let temp___411 =
+  ((param__x).us_split_fields1).rec__allocator__m__t__available : us_rep in
+  oeq1(temp___411, temp___412))) = true) and ((let temp___415 =
+  ((param__y).us_split_fields1).rec__allocator__m__t__allocated : us_rep in
+  (let temp___414 =
+  ((param__x).us_split_fields1).rec__allocator__m__t__allocated : us_rep in
+  oeq1(temp___414, temp___415))) = true))))))
+
+axiom is_valid__post_axiom : true
+
+axiom is_valid__def_axiom :
+  (forall param__m:us_rep1.
+  (forall Allocator__data___data___:(int,status) farray [is_valid(param__m,
+  Allocator__data___data___)].
+  ((forall temp___436:us_rep. forall e:int.
+   mem__function_guard(mem(temp___436, e), temp___436, e)) and
+  ((forall temp___439:us_rep. forall e:int.
+   mem__function_guard(mem(temp___439, e), temp___439, e)) and
+  ((forall r:int. forall temp___444:us_rep.
+   mem__function_guard(mem(temp___444, r), temp___444, r)) and
+  ((forall r:int. forall temp___447:us_rep.
+   mem__function_guard(mem(temp___447, r), temp___447, r)) and
+  ((forall r:int. forall temp___450:us_rep.
+   mem__function_guard(mem(temp___450, r), temp___450, r)) and
+  ((forall r:int. forall temp___453:us_rep.
+   mem__function_guard(mem(temp___453, r), temp___453, r)) and
+  ((is_valid(param__m, Allocator__data___data___) = true) <->
+  (((forall e:int. ((in_range1(e) and
+    (mem(((param__m).us_split_fields1).rec__allocator__m__t__available,
+    e) = true)) -> in_range2(e))) and
+  (forall e:int. ((in_range1(e) and
+  (mem(((param__m).us_split_fields1).rec__allocator__m__t__allocated,
+  e) = true)) -> in_range2(e)))) and
+  (forall r:int. (((1 <= r) and (r <= 3)) ->
+  (if (to_rep((Allocator__data___data___[r])) = 0) then (((let temp___445qtunused =
+  r : int in (let temp___444 =
+  ((param__m).us_split_fields1).rec__allocator__m__t__available : us_rep in
+  mem(temp___444, r))) = true) and (not ((let temp___448qtunused = r : int in
+  (let temp___447 =
+  ((param__m).us_split_fields1).rec__allocator__m__t__allocated : us_rep in
+  mem(temp___447, r))) = true))) else ((not ((let temp___451qtunused = r
+  : int in (let temp___450 =
+  ((param__m).us_split_fields1).rec__allocator__m__t__available : us_rep in
+  mem(temp___450, r))) = true)) and ((let temp___454qtunused = r : int in
+  (let temp___453 =
+  ((param__m).us_split_fields1).rec__allocator__m__t__allocated : us_rep in
+  mem(temp___453, r))) = true)))))))))))))))
+
+axiom model__post_axiom :
+  (forall Allocator__data___data___:(int,status) farray
+  [model(Allocator__data___data___)]. (let result =
+  model(Allocator__data___data___) : us_rep1 in
+  (model__function_guard(result, Allocator__data___data___) ->
+  (is_valid(result, Allocator__data___data___) = true))))
+
+ (* "allocator.ads", line 49, characters 0-0 *)
+goal defqtvc :
+  (forall data:(int,status) farray. forall res:int. (in_range1(res) ->
+  (let o = model(data) : us_rep1 in ((model__function_guard(o, data) and
+  (is_valid(o, data) = true)) -> (let o1 =
+  ((o).us_split_fields1).rec__allocator__m__t__available : us_rep in
+  (let temp___596 = is_empty(o1) : bool in
+  ((forall o2:us_rep. forall e:int. mem__function_guard(mem(o2, e), o2, e)) ->
+  ((is_empty__function_guard(temp___596, o1) and ((temp___596 = true) <->
+  (forall e:int. (not (in_range1(e) and (mem(o1, e) = true)))))) ->
+  (model__function_guard(model(data), data) -> (let temp___result_621 =
+  model(data) : us_rep1 in (model__function_guard(temp___result_621, data) ->
+  (let temp___result_620 = model(data) : us_rep1 in
+  (model__function_guard(temp___result_620, data) ->
+  (forall data1:(int,status) farray. forall res1:int.
+  (((exists r:int. ((r = 1) and ((andb((if (1 <= r) then true else false),
+    (if (r <= 3) then true else false)) = true) and
+    (exists o2:int. ((to_rep((data[r])) = o2) and
+    (exists spark__branch:bool.
+    ((spark__branch = (if (o2 = 0) then true else false)) and
+    (if (spark__branch = true) then (exists o3:status. ((to_rep(o3) = 1) and
+                                    ((data1 = (data[r <- o3])) and
+                                    (res1 = r)))) else (exists data2:(int,status) farray.
+                                                       exists res2:int.
+                                                       exists r1:int.
+                                                       (((bool_eq(data2, 1,
+                                                       3, data, 1,
+                                                       3) = true) and
+                                                       (forall rr:int.
+                                                       (((1 <= rr) and
+                                                       (rr <= r1)) ->
+                                                       (to_rep((data2[rr])) = 1)))) and
+                                                       ((andb((if ((data2 = data) and
+                                                       (res2 = res)) then true else false),
+                                                       (if ((1 <= r1) and
+                                                       (r1 <= 3)) then true else false)) = true) and
+                                                       ((not (r1 = 3)) and
+                                                       (exists r2:int.
+                                                       ((r2 = (r1 + 1)) and
+                                                       (exists o3:int.
+                                                       ((to_rep((data2[r2])) = o3) and
+                                                       (exists spark__branch1:bool.
+                                                       ((spark__branch1 = (if (o3 = 0) then true else false)) and
+                                                       ((spark__branch1 = true) and
+                                                       (exists o4:status.
+                                                       ((to_rep(o4) = 1) and
+                                                       ((data1 = (data2[r2 <- o4])) and
+                                                       (res1 = r2))))))))))))))))))))))) or
+  (exists res2:int.
+  ((exists r:int. ((r = 1) and (if (andb((if (1 <= r) then true else false),
+   (if (r <= 3) then true else false)) = true) then (exists o2:int.
+                                                    ((to_rep((data[r])) = o2) and
+                                                    (exists spark__branch:bool.
+                                                    ((spark__branch = (if (o2 = 0) then true else false)) and
+                                                    ((not (spark__branch = true)) and
+                                                    (exists r1:int.
+                                                    (((bool_eq(data1, 1, 3,
+                                                    data, 1, 3) = true) and
+                                                    (forall rr:int.
+                                                    (((1 <= rr) and
+                                                    (rr <= r1)) ->
+                                                    (to_rep((data1[rr])) = 1)))) and
+                                                    ((andb((if ((data1 = data) and
+                                                    (res2 = res)) then true else false),
+                                                    (if ((1 <= r1) and
+                                                    (r1 <= 3)) then true else false)) = true) and
+                                                    (r1 = 3))))))))) else ((data1 = data) and
+   (res2 = res))))) and
+  (res1 = 0)))) -> (model__function_guard(model(data1), data1) ->
+  (((temp___596 = true) -> ((res1 = 0) and (oeq(model(data1),
+  temp___result_620) = true))) -> ((not (temp___596 = true)) ->
+  (model__function_guard(model(data1), data1) ->
+  ((forall temp___old_610:us_rep. forall temp___614:us_rep.
+   is_add__function_guard(is_add(temp___614, res1, temp___old_610),
+   temp___614, res1, temp___old_610)) ->
+  ((let temp___614 =
+  ((model(data1)).us_split_fields1).rec__allocator__m__t__available
+  : us_rep in is_add(temp___614, res1,
+  ((temp___result_621).us_split_fields1).rec__allocator__m__t__available)) = true)))))))))))))))))))))

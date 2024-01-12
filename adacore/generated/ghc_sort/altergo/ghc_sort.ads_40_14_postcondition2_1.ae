@@ -1,0 +1,369 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic s1 : us_t
+
+logic s2 : us_t
+
+logic r__first : integer
+
+logic r__last : integer
+
+predicate dynamic_invariant(temp___expr_189: us_t, temp___is_init_185: bool,
+  temp___skip_constant_186: bool, temp___do_toplevel_187: bool,
+  temp___do_typ_inv_188: bool) = (((not (temp___skip_constant_186 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_189),
+  last(temp___expr_189))) and ((temp___is_init_185 = true) ->
+  ((temp___do_toplevel_187 = true) -> (first(temp___expr_189) = 1))))
+
+predicate dynamic_invariant1(temp___expr_268: us_t, temp___is_init_264: bool,
+  temp___skip_constant_265: bool, temp___do_toplevel_266: bool,
+  temp___do_typ_inv_267: bool) = (((not (temp___skip_constant_265 = true)) ->
+  ((dynamic_property(1, (length(s1) + length(s2)), first(temp___expr_268),
+  last(temp___expr_268)) and (first(temp___expr_268) = 1)) and
+  (last(temp___expr_268) = (length(s1) + length(s2))))) and
+  ((temp___is_init_264 = true) -> (first(temp___expr_268) = 1)))
+
+predicate default_initial_assumption(temp___expr_271: us_t,
+  temp___skip_top_level_272: bool) = ((first(temp___expr_271) = 1) and
+  (last(temp___expr_271) = (length(s1) + length(s2))))
+
+logic temp_____aggregate_def_617 : int, int, int -> us_t
+
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 0)
+
+ (* "ghc_sort.ads", line 36, characters 0-0 *)
+goal defqtvc :
+  (forall r:(int,integer) farray. (dynamic_invariant(s1, true, false, true,
+  true) -> (dynamic_invariant(s2, true, false, true, true) ->
+  ((((length(s1) <  (2147483647 - length(s2))) and
+  (forall l:int. (((2 <= l) and (l <= last(s1))) ->
+  (to_rep((to_array(s1)[(l - 1)])) <= to_rep((to_array(s1)[l])))))) and
+  (forall l:int. (((2 <= l) and (l <= last(s2))) ->
+  (to_rep((to_array(s2)[(l - 1)])) <= to_rep((to_array(s2)[l])))))) ->
+  (forall j1:int. ((j1 = 1) -> (in_range1(j1) ->
+  (forall j2:int. ((j2 = 1) -> (in_range1(j2) ->
+  (forall j:int. ((j = 1) -> (in_range1(j) ->
+  (default_initial_assumption(of_array(r, to_rep(r__first), to_rep(r__last)),
+  false) -> (dynamic_invariant1(of_array(r, to_rep(r__first),
+  to_rep(r__last)), false, false, true, true) -> (let o =
+  (length(s1) + length(s2)) : int in
+  (forall temp___621:us_t. (((((first(temp___621) = 1) and
+  (last(temp___621) = o)) and
+  (forall temp___620:int [(to_array(temp___621)[temp___620])].
+  (((first(temp___621) <= temp___620) and
+  (temp___620 <= last(temp___621))) ->
+  ((to_array(temp___621)[temp___620]) = rliteral)))) and
+  (temp___621 = temp_____aggregate_def_617(0, 1, o))) ->
+  ((first(temp___621) = 1) ->
+  ((last(temp___621) = (length(s1) + length(s2))) ->
+  ((first(temp___621) = 1) -> ((first(temp___621) = 1) ->
+  ((if (first(temp___621) <= last(temp___621)) then ((1 <= (length(s1) + length(s2))) and
+  ((last(temp___621) - first(temp___621)) = ((length(s1) + length(s2)) - 1))) else ((length(s1) + length(s2)) <  1)) ->
+  (forall o1:int. ((to_rep(r__last) = o1) ->
+  (forall o2:int. ((to_rep(r__first) = o2) ->
+  ((if (first(temp___621) <= last(temp___621)) then ((o2 <= o1) and
+  ((last(temp___621) - first(temp___621)) = (o1 - o2))) else (o1 <  o2)) ->
+  (forall r1:(int,integer) farray. ((r1 = to_array(temp___621)) ->
+  (forall j11:int. forall j21:int. forall j3:int.
+  forall r2:(int,integer) farray.
+  ((exists o3:bool. ((if (andb((if (first(s1) <= j1) then true else false),
+   (if (j1 <= last(s1)) then true else false)) = true) then (o3 = andb((if (first(s2) <= j2) then true else false),
+   (if (j2 <= last(s2)) then true else false))) else (o3 = false)) and
+   (if (o3 = true) then (exists o4:int. ((to_rep(r__last) = o4) and
+                        (exists o5:int. ((to_rep(r__first) = o5) and
+                        (in_range((j1 + j2)) and
+                        (exists j12:int. exists j22:int. exists j4:int.
+                        exists r3:(int,integer) farray.
+                        (((j4 = ((j12 + j22) - 1)) and (((1 <  j4) ->
+                        (to_rep((r3[(j4 - 1)])) <= to_rep((to_array(s1)[j12])))) and
+                        (((1 <  j4) ->
+                        (to_rep((r3[(j4 - 1)])) <= to_rep((to_array(s2)[j22])))) and
+                        (forall l:int. (((2 <= l) and (l <= (j4 - 1))) ->
+                        (to_rep((r3[(l - 1)])) <= to_rep((r3[l])))))))) and
+                        ((andb((if (((in_range1(j12) and in_range1(j22)) and
+                        in_range1(j4)) and dynamic_invariant1(of_array(r3,
+                        to_rep(r__first), to_rep(r__last)), false, true,
+                        true, true)) then true else false),
+                        (if (((first(s1) <= j12) and (j12 <= last(s1))) and
+                        ((first(s2) <= j22) and
+                        (j22 <= last(s2)))) then true else false)) = true) and
+                        ((((first(s2) <= j22) and (j22 <= last(s2))) and
+                        (exists o6:int.
+                        ((to_rep((to_array(s2)[j22])) = o6) and
+                        (((first(s1) <= j12) and (j12 <= last(s1))) and
+                        (exists o7:int.
+                        ((to_rep((to_array(s1)[j12])) = o7) and
+                        (exists spark__branch:bool.
+                        ((spark__branch = (if (o7 <  o6) then true else false)) and
+                        (if (spark__branch = true) then ((exists o8:int.
+                                                         ((to_rep(r__last) = o8) and
+                                                         (exists o9:int.
+                                                         ((to_rep(r__first) = o9) and
+                                                         (((first(s1) <= j12) and
+                                                         (j12 <= last(s1))) and
+                                                         (exists o10:int.
+                                                         ((to_rep((to_array(s1)[j12])) = o10) and
+                                                         (exists o11:integer.
+                                                         ((to_rep(o11) = o10) and
+                                                         (((o9 <= j4) and
+                                                         (j4 <= o8)) and
+                                                         (let temp___632 = {
+                                                         elts =
+                                                         (r3[j4 <- o11]);
+                                                         rt = (of_array(r3,
+                                                         o9, o8)).rt }
+                                                         : us_t in
+                                                         ((first(temp___632) = 1) and
+                                                         ((r2 = to_array(temp___632)) and
+                                                         (let o12 = (j12 + 1)
+                                                         : int in
+                                                         (in_range(o12) and
+                                                         (j11 = o12)))))))))))))))) and
+                        (j21 = j22)) else ((exists o8:int.
+                                           ((to_rep(r__last) = o8) and
+                                           (exists o9:int.
+                                           ((to_rep(r__first) = o9) and
+                                           (((first(s2) <= j22) and
+                                           (j22 <= last(s2))) and
+                                           (exists o10:int.
+                                           ((to_rep((to_array(s2)[j22])) = o10) and
+                                           (exists o11:integer.
+                                           ((to_rep(o11) = o10) and
+                                           (((o9 <= j4) and (j4 <= o8)) and
+                                           (let temp___638 = { elts =
+                                           (r3[j4 <- o11]); rt =
+                                           (of_array(r3, o9, o8)).rt }
+                                           : us_t in
+                                           ((first(temp___638) = 1) and
+                                           ((r2 = to_array(temp___638)) and
+                                           (let o12 = (j22 + 1) : int in
+                                           (in_range(o12) and
+                                           (j21 = o12)))))))))))))))) and
+                        (j11 = j12))))))))))) and (let o6 = (j4 + 1) : int in
+                        (in_range(o6) and ((j3 = o6) and
+                        (exists o7:bool.
+                        ((if (andb((if (first(s1) <= j11) then true else false),
+                        (if (j11 <= last(s1)) then true else false)) = true) then (o7 = andb((if (first(s2) <= j21) then true else false),
+                        (if (j21 <= last(s2)) then true else false))) else (o7 = false)) and
+                        (not (o7 = true)))))))))))))))) else ((((j11 = j1) and
+   (j21 = j2)) and (j3 = j)) and (r2 = r1))))) ->
+  (forall j12:int. forall j4:int. forall r3:(int,integer) farray.
+  ((if (andb((if (first(s1) <= j11) then true else false),
+  (if (j11 <= last(s1)) then true else false)) = true) then (exists o3:int.
+                                                            ((to_rep(r__last) = o3) and
+                                                            (exists o4:int.
+                                                            ((to_rep(r__first) = o4) and
+                                                            (in_range((j11 + j21)) and
+                                                            (exists j13:int.
+                                                            exists j5:int.
+                                                            exists r4:(int,integer) farray.
+                                                            (((j5 = ((j13 + j21) - 1)) and
+                                                            ((forall l:int.
+                                                             (((2 <= l) and
+                                                             (l <= (j5 - 1))) ->
+                                                             (to_rep((r4[(l - 1)])) <= to_rep((r4[l]))))) and
+                                                            ((1 <  j5) ->
+                                                            (to_rep((r4[(j5 - 1)])) <= to_rep((to_array(s1)[j13])))))) and
+                                                            ((andb((if ((in_range1(j13) and
+                                                            in_range1(j5)) and
+                                                            dynamic_invariant1(of_array(r4,
+                                                            to_rep(r__first),
+                                                            to_rep(r__last)),
+                                                            false, true,
+                                                            true,
+                                                            true)) then true else false),
+                                                            (if ((first(s1) <= j13) and
+                                                            (j13 <= last(s1))) then true else false)) = true) and
+                                                            (exists o5:int.
+                                                            ((to_rep(r__last) = o5) and
+                                                            (exists o6:int.
+                                                            ((to_rep(r__first) = o6) and
+                                                            (((first(s1) <= j13) and
+                                                            (j13 <= last(s1))) and
+                                                            (exists o7:int.
+                                                            ((to_rep((to_array(s1)[j13])) = o7) and
+                                                            (exists o8:integer.
+                                                            ((to_rep(o8) = o7) and
+                                                            (((o6 <= j5) and
+                                                            (j5 <= o5)) and
+                                                            (let temp___667 =
+                                                            { elts =
+                                                            (r4[j5 <- o8]);
+                                                            rt =
+                                                            (of_array(r4, o6,
+                                                            o5)).rt }
+                                                            : us_t in
+                                                            ((first(temp___667) = 1) and
+                                                            ((r3 = to_array(temp___667)) and
+                                                            (let o9 =
+                                                            (j5 + 1) : int in
+                                                            (in_range(o9) and
+                                                            ((j4 = o9) and
+                                                            (let o10 =
+                                                            (j13 + 1)
+                                                            : int in
+                                                            (in_range(o10) and
+                                                            ((j12 = o10) and
+                                                            (not (andb((if (first(s1) <= j12) then true else false),
+                                                            (if (j12 <= last(s1)) then true else false)) = true))))))))))))))))))))))))))))) else (((j12 = j11) and
+  (j4 = j3)) and (r3 = r2))) ->
+  (forall r4:(int,integer) farray.
+  ((if (andb((if (first(s2) <= j21) then true else false),
+  (if (j21 <= last(s2)) then true else false)) = true) then (exists o3:int.
+                                                            ((to_rep(r__last) = o3) and
+                                                            (exists o4:int.
+                                                            ((to_rep(r__first) = o4) and
+                                                            (in_range((j12 + j21)) and
+                                                            (exists j22:int.
+                                                            exists j5:int.
+                                                            exists r5:(int,integer) farray.
+                                                            (((j5 = ((j12 + j22) - 1)) and
+                                                            ((forall l:int.
+                                                             (((2 <= l) and
+                                                             (l <= (j5 - 1))) ->
+                                                             (to_rep((r5[(l - 1)])) <= to_rep((r5[l]))))) and
+                                                            ((1 <  j5) ->
+                                                            (to_rep((r5[(j5 - 1)])) <= to_rep((to_array(s2)[j22])))))) and
+                                                            ((andb((if ((in_range1(j22) and
+                                                            in_range1(j5)) and
+                                                            dynamic_invariant1(of_array(r5,
+                                                            to_rep(r__first),
+                                                            to_rep(r__last)),
+                                                            false, true,
+                                                            true,
+                                                            true)) then true else false),
+                                                            (if ((first(s2) <= j22) and
+                                                            (j22 <= last(s2))) then true else false)) = true) and
+                                                            (exists o5:int.
+                                                            ((to_rep(r__last) = o5) and
+                                                            (exists o6:int.
+                                                            ((to_rep(r__first) = o6) and
+                                                            (((first(s2) <= j22) and
+                                                            (j22 <= last(s2))) and
+                                                            (exists o7:int.
+                                                            ((to_rep((to_array(s2)[j22])) = o7) and
+                                                            (exists o8:integer.
+                                                            ((to_rep(o8) = o7) and
+                                                            (((o6 <= j5) and
+                                                            (j5 <= o5)) and
+                                                            (let temp___691 =
+                                                            { elts =
+                                                            (r5[j5 <- o8]);
+                                                            rt =
+                                                            (of_array(r5, o6,
+                                                            o5)).rt }
+                                                            : us_t in
+                                                            ((first(temp___691) = 1) and
+                                                            ((r4 = to_array(temp___691)) and
+                                                            (let o9 =
+                                                            (j5 + 1) : int in
+                                                            (in_range(o9) and
+                                                            (exists j6:int.
+                                                            ((j6 = o9) and
+                                                            (let o10 =
+                                                            (j22 + 1)
+                                                            : int in
+                                                            (in_range(o10) and
+                                                            (exists j23:int.
+                                                            ((j23 = o10) and
+                                                            (not (andb((if (first(s2) <= j23) then true else false),
+                                                            (if (j23 <= last(s2)) then true else false)) = true))))))))))))))))))))))))))))))) else (r4 = r3)) ->
+  (forall o3:int. ((to_rep(r__last) = o3) ->
+  (forall o4:int. ((to_rep(r__first) = o4) ->
+  (forall ghc_sort__merge__result:us_t.
+  ((ghc_sort__merge__result = of_array(r4, o4, o3)) ->
+  (forall l:int. (((2 <= l) and (l <= last(ghc_sort__merge__result))) ->
+  (to_rep((to_array(ghc_sort__merge__result)[(l - 1)])) <= to_rep((to_array(ghc_sort__merge__result)[l])))))))))))))))))))))))))))))))))))))))))))))))

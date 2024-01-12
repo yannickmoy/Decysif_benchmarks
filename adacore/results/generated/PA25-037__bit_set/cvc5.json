@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.adb_12_21_overflow_check_1.smt2",
+      "status": "error",
+      "steps": 10734,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.ads_23_10_postcondition2_1.smt2",
+      "status": "error",
+      "steps": 12252,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.adb_12_21_index_check2_1.smt2",
+      "status": "error",
+      "steps": 10806,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.ads_23_10_postcondition_1.smt2",
+      "status": "error",
+      "steps": 12262,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.adb_12_21_overflow_check2_1.smt2",
+      "status": "error",
+      "steps": 10734,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.adb_12_34_range_check2_1.smt2",
+      "status": "error",
+      "steps": 10670,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/PA25-037__bit_set/cvc5/test.adb_12_21_index_check_1.smt2",
+      "status": "error",
+      "steps": 10797,
+      "time": 0.03
+    }
+  ]
+}

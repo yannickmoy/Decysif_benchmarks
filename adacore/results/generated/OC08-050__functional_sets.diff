@@ -1,0 +1,12 @@
+cvc5 proved 9 out of 9 VCs
+z3 proved 0 out of 9 VCs
+  unproved allocator.adb_40_16_loop_invariant_init2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_init4_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_preserv2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_preserv4_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_preserv5_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_preserv6_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.adb_40_16_loop_invariant_preserv7_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.ads_62_16_contract_case2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved allocator.ads_62_16_contract_case_1.smt2 (proved by ['cvc5', 'altergo'])
+altergo proved 9 out of 9 VCs

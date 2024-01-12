@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.adb_72_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 53651,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.adb_206_33_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 243708,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.ads_40_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 199528,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.adb_97_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 79443,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.adb_191_33_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 718883,
+      "time": 0.18
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.ads_54_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 1539550,
+      "time": 0.47
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.adb_24_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 11266991,
+      "time": 1.05
+    },
+    {
+      "filename": "generated/ghc_sort/z3/ghc_sort.ads_8_14_postcondition9_1.smt2",
+      "status": "unsat",
+      "steps": 45911792,
+      "time": 4.09
+    }
+  ]
+}

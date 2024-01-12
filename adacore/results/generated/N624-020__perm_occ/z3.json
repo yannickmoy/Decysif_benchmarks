@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "filename": "generated/N624-020__perm_occ/z3/sort.ads_9_16_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 67685,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/N624-020__perm_occ/z3/sort.adb_106_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 67828,
+      "time": 0.03
+    }
+  ]
+}

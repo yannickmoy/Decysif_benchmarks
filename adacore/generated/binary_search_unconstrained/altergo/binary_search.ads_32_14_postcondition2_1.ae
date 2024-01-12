@@ -1,0 +1,345 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+logic div : int, int -> int
+
+logic mod : int, int -> int
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (x = ((y * div(x,
+  y)) + mod(x, y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> ((0 <= div(x,
+  y)) and (div(x, y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (((-abs_int(y)) <  mod(x,
+  y)) and (mod(x, y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> (0 <= div(x, y))))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) -> (0 <= mod(x,
+  y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) -> (mod(x,
+  y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (abs_int((div(x,
+  y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (div(x, 1) = x))
+
+axiom Mod_1 : (forall x:int. (mod(x, 1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (div(x, y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (mod(x, y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [div(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (div(((x * y) + z),
+  x) = (y + div(z, x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [mod(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (mod(((x * y) + z), x) = mod(z,
+  x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type topt_indexB
+
+logic topt_indexBqtint : topt_indexB -> int
+
+axiom topt_indexBqtaxiom :
+  (forall i:topt_indexB. (((- 2147483648) <= topt_indexBqtint(i)) and
+  (topt_indexBqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep1(x: topt_indexB) : int = topt_indexBqtint(x)
+
+logic of_rep1 : int -> topt_indexB
+
+axiom inversion_axiom1 :
+  (forall x:topt_indexB [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:topt_indexB [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((1 <= indexqtint(i)) and (indexqtint(i) <= 2147483646)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483646))
+
+type t = { rec__first : topt_indexB; rec__last : topt_indexB
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range1(low) and (in_range1(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic bool_gt : int, int -> bool
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+function empty(param__a: us_t) : bool = bool_gt(first(param__a),
+  last(param__a))
+
+function sorted(param__a: us_t) : bool =
+  (if (forall i1:int. (((first(param__a) <= i1) and
+      (i1 <= last(param__a))) ->
+      (forall i2:int. (((i1 <= i2) and (i2 <= last(param__a))) ->
+      (to_rep((to_array(param__a)[i1])) <= to_rep((to_array(param__a)[i2]))))))) then true else false)
+
+logic a : us_t
+
+logic i : int
+
+predicate dynamic_invariant(temp___expr_190: us_t, temp___is_init_186: bool,
+  temp___skip_constant_187: bool, temp___do_toplevel_188: bool,
+  temp___do_typ_inv_189: bool) = ((not (temp___skip_constant_187 = true)) ->
+  dynamic_property(1, 2147483646, first(temp___expr_190),
+  last(temp___expr_190)))
+
+axiom cmod_cases :
+  (forall n:int. forall d:int [mod(n, d)]. (((0 <= n) -> ((0 <  d) -> (mod(n,
+  d) = (n % d)))) and (((n <= 0) -> ((0 <  d) -> (mod(n,
+  d) = (-((-n) % d))))) and (((0 <= n) -> ((d <  0) -> (mod(n,
+  d) = (n % (-d))))) and ((n <= 0) -> ((d <  0) -> (mod(n,
+  d) = (-((-n) % (-d))))))))))
+
+ (* "binary_search.ads", line 30, characters 0-0 *)
+goal defqtvc :
+  (forall left:int. forall right:int. forall med:int.
+  forall binary_search__search__result:int. (dynamic_invariant(a, true,
+  false, true, true) -> (in_range(i) -> ((sorted(a) = true) ->
+  (forall binary_search__search__result1:int. ((in_range2(left) and
+  (in_range2(right) and (in_range2(med) and (let o = a : us_t in (let o1 =
+  empty(o) : bool in (((o1 = true) <-> (last(o) <  first(o))) and
+  (exists spark__branch:bool. ((spark__branch = o1) and
+  (if (spark__branch = true) then (binary_search__search__result1 = 0) else (let o2 =
+  first(a) : int in (in_range2(o2) and
+  (exists left1:int. ((left1 = o2) and (let o3 = last(a) : int in
+  (in_range2(o3) and
+  (exists right1:int. ((right1 = o3) and (((first(a) <= left1) and
+  (left1 <= last(a))) and
+  (exists o4:int. ((to_rep((to_array(a)[left1])) = o4) and
+  (exists spark__branch1:bool.
+  ((spark__branch1 = andb((if (left1 = right1) then true else false),
+  (if (o4 = i) then true else false))) and
+  (if (spark__branch1 = true) then (binary_search__search__result1 = left1) else (((first(a) <= right1) and
+  (right1 <= last(a))) and
+  (exists o5:int. ((to_rep((to_array(a)[right1])) = o5) and
+  (((first(a) <= left1) and (left1 <= last(a))) and
+  (exists o6:int. ((to_rep((to_array(a)[left1])) = o6) and
+  (exists spark__branch2:bool.
+  ((spark__branch2 = orb((if (i <  o6) then true else false),
+  (if (o5 <  i) then true else false))) and
+  (if (spark__branch2 = true) then (binary_search__search__result1 = 0) else (((left1 <= right1) and
+  (exists left2:int. exists right2:int. exists med1:int.
+  (((((first(a) <= left2) and (left2 <= last(a))) and
+  ((first(a) <= right2) and (right2 <= last(a)))) and
+  ((forall index1:int. (((first(a) <= index1) and (index1 <= (left2 - 1))) ->
+   (to_rep((to_array(a)[index1])) <  i))) and
+  (forall index1:int. (((first(a) <= index1) and (index1 <= last(a))) ->
+  ((right2 <  index1) -> (i <  to_rep((to_array(a)[index1])))))))) and
+  ((andb((if ((in_range2(right2) and in_range2(med1)) and
+  in_range2(left2)) then true else false),
+  (if (left2 <= right2) then true else false)) = true) and (let o7 =
+  (left2 + div((right2 - left2), 2)) : int in (in_range1(o7) and
+  (in_range2(o7) and
+  (exists med2:int. ((med2 = o7) and
+  ((forall i1:int. (((first(a) <= i1) and (i1 <= last(a))) ->
+   (forall i2:int. (((i1 <= i2) and (i2 <= last(a))) ->
+   (to_rep((to_array(a)[i1])) <= to_rep((to_array(a)[i2]))))))) and
+  (((first(a) <= med2) and (med2 <= last(a))) and
+  (exists o8:int. ((to_rep((to_array(a)[med2])) = o8) and
+  (exists spark__branch3:bool.
+  ((spark__branch3 = (if (o8 <  i) then true else false)) and
+  ((not (spark__branch3 = true)) and (((first(a) <= med2) and
+  (med2 <= last(a))) and
+  (exists o9:int. ((to_rep((to_array(a)[med2])) = o9) and
+  (exists spark__branch4:bool.
+  ((spark__branch4 = (if (i <  o9) then true else false)) and
+  ((not (spark__branch4 = true)) and
+  (binary_search__search__result1 = med2))))))))))))))))))))))) or
+  (exists binary_search__search__result2:int.
+  ((if (left1 <= right1) then (exists left2:int. exists right2:int.
+                              exists med1:int. (((((first(a) <= left2) and
+                              (left2 <= last(a))) and
+                              ((first(a) <= right2) and
+                              (right2 <= last(a)))) and
+                              ((forall index1:int. (((first(a) <= index1) and
+                               (index1 <= (left2 - 1))) ->
+                               (to_rep((to_array(a)[index1])) <  i))) and
+                              (forall index1:int. (((first(a) <= index1) and
+                              (index1 <= last(a))) -> ((right2 <  index1) ->
+                              (i <  to_rep((to_array(a)[index1])))))))) and
+                              ((andb((if ((in_range2(right2) and
+                              in_range2(med1)) and
+                              in_range2(left2)) then true else false),
+                              (if (left2 <= right2) then true else false)) = true) and
+                              (let o7 = (left2 + div((right2 - left2), 2))
+                              : int in (in_range1(o7) and (in_range2(o7) and
+                              (exists med2:int. ((med2 = o7) and
+                              ((forall i1:int. (((first(a) <= i1) and
+                               (i1 <= last(a))) ->
+                               (forall i2:int. (((i1 <= i2) and
+                               (i2 <= last(a))) ->
+                               (to_rep((to_array(a)[i1])) <= to_rep((to_array(a)[i2]))))))) and
+                              (exists left3:int. exists right3:int.
+                              ((((first(a) <= med2) and
+                              (med2 <= last(a))) and
+                              (exists o8:int.
+                              ((to_rep((to_array(a)[med2])) = o8) and
+                              (exists spark__branch3:bool.
+                              ((spark__branch3 = (if (o8 <  i) then true else false)) and
+                              (if (spark__branch3 = true) then ((let o9 =
+                              (med2 + 1) : int in (in_range1(o9) and
+                              (in_range2(o9) and ((left3 = o9) and
+                              (forall i1:int. (((first(a) <= i1) and
+                              (i1 <= med2)) ->
+                              (to_rep((to_array(a)[i1])) <= to_rep((to_array(a)[med2]))))))))) and
+                              (right3 = right2)) else ((((first(a) <= med2) and
+                              (med2 <= last(a))) and
+                              (exists o9:int.
+                              ((to_rep((to_array(a)[med2])) = o9) and
+                              (exists spark__branch4:bool.
+                              ((spark__branch4 = (if (i <  o9) then true else false)) and
+                              ((spark__branch4 = true) and (let o10 =
+                              (med2 - 1) : int in (in_range2(o10) and
+                              ((right3 = o10) and (((first(a) <= med2) and
+                              (med2 <= last(a))) and
+                              (forall i2:int. (((med2 <= i2) and
+                              (i2 <= last(a))) ->
+                              (to_rep((to_array(a)[med2])) <= to_rep((to_array(a)[i2]))))))))))))))) and
+                              (left3 = left2)))))))) and
+                              (not (left3 <= right3))))))))))))) else (binary_search__search__result2 = binary_search__search__result)) and
+  (binary_search__search__result1 = 0)))))))))))))))))))))))))))))))))))) ->
+  ((not ((first(a) <= binary_search__search__result1) and
+  (binary_search__search__result1 <= last(a)))) ->
+  (forall index1:int. (((first(a) <= index1) and (index1 <= last(a))) ->
+  (not (to_rep((to_array(a)[index1])) = i)))))))))))

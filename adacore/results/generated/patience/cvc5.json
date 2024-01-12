@@ -1,0 +1,166 @@
+{
+  "results": [
+    {
+      "filename": "generated/patience/cvc5/patience.adb_72_8_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 18374,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert15_1.smt2",
+      "status": "unsat",
+      "steps": 26490,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.ads_125_18_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 20393,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 25880,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert11_1.smt2",
+      "status": "unsat",
+      "steps": 25598,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert_1.smt2",
+      "status": "unsat",
+      "steps": 25574,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.ads_125_18_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 20408,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert16_1.smt2",
+      "status": "unsat",
+      "steps": 28197,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert14_1.smt2",
+      "status": "unsat",
+      "steps": 26687,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_83_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 29504,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_83_22_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 73411,
+      "time": 0.68
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_83_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 83723,
+      "time": 0.94
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert13_1.smt2",
+      "status": "unsat",
+      "steps": 26822,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert12_1.smt2",
+      "status": "unsat",
+      "steps": 24815,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 31444,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.ads_125_18_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 30019,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert5_1.smt2",
+      "status": "unsat",
+      "steps": 35673,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_72_8_assert_1.smt2",
+      "status": "unsat",
+      "steps": 17685,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_72_8_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 18067,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_36_15_assert7_1.smt2",
+      "status": "timeout",
+      "steps": 356515,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_80_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 29095,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 34379,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert7_1.smt2",
+      "status": "timeout",
+      "steps": 341225,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert6_1.smt2",
+      "status": "timeout",
+      "steps": 382659,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert8_1.smt2",
+      "status": "timeout",
+      "steps": 364527,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_92_10_assert9_1.smt2",
+      "status": "timeout",
+      "steps": 490241,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/patience/cvc5/patience.adb_36_15_assert6_1.smt2",
+      "status": "timeout",
+      "steps": 298115,
+      "time": 9.85
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+logic div : int, int -> int
+
+logic mod : int, int -> int
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (x = ((y * div(x,
+  y)) + mod(x, y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> ((0 <= div(x,
+  y)) and (div(x, y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (((-abs_int(y)) <  mod(x,
+  y)) and (mod(x, y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> (0 <= div(x, y))))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) -> (0 <= mod(x,
+  y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) -> (mod(x,
+  y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (abs_int((div(x,
+  y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (div(x, 1) = x))
+
+axiom Mod_1 : (forall x:int. (mod(x, 1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (div(x, y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (mod(x, y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [div(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (div(((x * y) + z),
+  x) = (y + div(z, x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [mod(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (mod(((x * y) + z), x) = mod(z,
+  x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+function mod1(x: int, y: int) : int =
+  (if (0 <= y) then (x % y) else (-((-x) % y)))
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_ge : int, int -> bool
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+function is_prime(param__value: int) : bool = andb(bool_ge(param__value, 2),
+  (if (forall v:int. (((2 <= v) and (v <= (param__value - 1))) ->
+      (not (mod1(param__value, v) = 0)))) then true else false))
+
+logic c169b : int
+
+type tnumber_list_typeD1
+
+logic tnumber_list_typeD1qtint : tnumber_list_typeD1 -> int
+
+axiom tnumber_list_typeD1qtaxiom :
+  (forall i:tnumber_list_typeD1. ((0 <= tnumber_list_typeD1qtint(i)) and
+  (tnumber_list_typeD1qtint(i) <= 100000)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type t138b
+
+logic t138bqtint : t138b -> int
+
+axiom t138bqtaxiom :
+  (forall i:t138b. ((0 <= t138bqtint(i)) and (t138bqtint(i) <= 100000)))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic temp_____aggregate_def_293 : bool -> (int,bool) farray
+
+axiom cmod_cases :
+  (forall n:int. forall d:int [mod(n, d)]. (((0 <= n) -> ((0 <  d) -> (mod(n,
+  d) = (n % d)))) and (((n <= 0) -> ((0 <  d) -> (mod(n,
+  d) = (-((-n) % d))))) and (((0 <= n) -> ((d <  0) -> (mod(n,
+  d) = (n % (-d))))) and ((n <= 0) -> ((d <  0) -> (mod(n,
+  d) = (-((-n) % (-d))))))))))
+
+ (* "prime_and_coprime_numbers.adb", line 201, characters 0-0 *)
+goal defqtvc :
+  (forall index_1:int. forall index_3:int. (in_range1(index_1) ->
+  (in_range(index_3) -> (let o = of_int(1) : bool in
+  (forall temp___297:(int,bool) farray.
+  (((forall temp___296:int [(temp___297[temp___296])].
+    (((0 <= temp___296) and (temp___296 <= 100000)) ->
+    ((temp___297[temp___296]) = o))) and
+  (temp___297 = temp_____aggregate_def_293(o))) ->
+  (forall is_prime1:(int,bool) farray. ((is_prime1 = temp___297) ->
+  (forall is_prime2:(int,bool) farray.
+  ((is_prime2 = (is_prime1[0 <- of_int(0)])) ->
+  (forall is_prime3:(int,bool) farray.
+  ((is_prime3 = (is_prime2[1 <- of_int(0)])) ->
+  (forall index_2:int. ((index_2 = 2) ->
+  ((andb((if (2 <= index_2) then true else false),
+  (if (index_2 <= 100000) then true else false)) = true) ->
+  (forall is_prime4:(int,bool) farray. forall index_11:int.
+  forall index_31:int. forall index_21:int.
+  (((forall v:int. (((0 <= v) and (v <= (index_21 - 1))) ->
+    (((is_prime4[v]) = true) <-> (is_prime(v) = true)))) and
+  (forall v:int. (((index_21 <= v) and (v <= 100000)) ->
+  (((is_prime4[v]) = true) <->
+  (forall div1:int. (((2 <= div1) and (div1 <= (index_21 - 1))) ->
+  (not (mod1(v, div1) = 0)))))))) -> ((andb((if (in_range1(index_11) and
+  in_range(index_31)) then true else false), (if ((2 <= index_21) and
+  (index_21 <= 100000)) then true else false)) = true) ->
+  (forall spark__branch:bool. ((spark__branch = (is_prime4[index_21])) ->
+  ((spark__branch = true) ->
+  (forall index_12:int. ((index_12 = index_21) -> (let o1 = (2 * index_12)
+  : int in (in_range(o1) ->
+  (forall index_32:int. ((index_32 = o1) -> ((index_32 <= 100000) ->
+  (((0 <= index_32) and (index_32 <= 100000)) ->
+  (forall is_prime5:(int,bool) farray.
+  ((is_prime5 = (is_prime4[index_32 <- of_int(0)])) ->
+  ((forall v:int. (((0 <= v) and (v <= index_21)) ->
+   (((is_prime5[v]) = true) <-> (is_prime(v) = true)))) ->
+  (forall v:int. (((index_21 <= v) and (v <= 100000)) ->
+  (((is_prime5[v]) = true) -> ((((index_21 + 1) <= v) and (v <= index_32)) ->
+  (not (mod1(v, index_21) = 0))))))))))))))))))))))))))))))))))))))

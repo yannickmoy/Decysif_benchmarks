@@ -1,0 +1,225 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type less_than_max
+
+logic less_than_maxqtint : less_than_max -> int
+
+axiom less_than_maxqtaxiom :
+  (forall i:less_than_max. ((0 <= less_than_maxqtint(i)) and
+  (less_than_maxqtint(i) <= 100)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 100))
+
+function to_rep(x: less_than_max) : int = less_than_maxqtint(x)
+
+logic of_rep : int -> less_than_max
+
+axiom inversion_axiom :
+  (forall x:less_than_max [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:less_than_max [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type element
+
+logic elementqtint : element -> int
+
+axiom elementqtaxiom :
+  (forall i:element. ((0 <= elementqtint(i)) and
+  (elementqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function to_rep1(x: element) : int = elementqtint(x)
+
+logic of_rep1 : int -> element
+
+axiom inversion_axiom1 :
+  (forall x:element [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:element [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_ext_type
+
+logic null__ext__ : us_ext_type
+
+type us_split_fields = { rec__stacks__stack_root__content :
+(int,element) farray; rec__stacks__stack_root__length : less_than_max;
+rec__ext__ : us_ext_type }
+
+type us_rep = { us_split_fields1 : us_split_fields; attr__tag : int
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic stacks__stack_root__content__first__bit : int
+
+logic stacks__stack_root__content__last__bit : int
+
+logic stacks__stack_root__content__position : int
+
+axiom stacks__stack_root__content__first__bit_axiom :
+  (0 <= stacks__stack_root__content__first__bit)
+
+axiom stacks__stack_root__content__last__bit_axiom :
+  (stacks__stack_root__content__first__bit <  stacks__stack_root__content__last__bit)
+
+axiom stacks__stack_root__content__position_axiom :
+  (0 <= stacks__stack_root__content__position)
+
+logic stacks__stack_root__length__first__bit : int
+
+logic stacks__stack_root__length__last__bit : int
+
+logic stacks__stack_root__length__position : int
+
+axiom stacks__stack_root__length__first__bit_axiom :
+  (0 <= stacks__stack_root__length__first__bit)
+
+axiom stacks__stack_root__length__last__bit_axiom :
+  (stacks__stack_root__length__first__bit <  stacks__stack_root__length__last__bit)
+
+axiom stacks__stack_root__length__position_axiom :
+  (0 <= stacks__stack_root__length__position)
+
+logic dummy : us_rep
+
+function size(param__s: us_rep) : int =
+  to_rep(((param__s).us_split_fields1).rec__stacks__stack_root__length)
+
+logic s : us_rep
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep2(x: integer) : int = integerqtint(x)
+
+logic of_rep2 : int -> integer
+
+axiom inversion_axiom2 :
+  (forall x:integer [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:integer [to_rep2(x)]. in_range2(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,element) farray; rt : t
+}
+
+function first(a: us_t) : int = to_rep2(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep2(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+type positive_less_than_max
+
+logic positive_less_than_maxqtint : positive_less_than_max -> int
+
+axiom positive_less_than_maxqtaxiom :
+  (forall i:positive_less_than_max.
+  ((1 <= positive_less_than_maxqtint(i)) and
+  (positive_less_than_maxqtint(i) <= 100)))
+
+predicate dynamic_invariant(temp___expr_214: us_rep,
+  temp___is_init_210: bool, temp___skip_constant_211: bool,
+  temp___do_toplevel_212: bool, temp___do_typ_inv_213: bool) = true
+
+predicate dynamic_invariant1(temp___expr_230: us_t, temp___is_init_226: bool,
+  temp___skip_constant_227: bool, temp___do_toplevel_228: bool,
+  temp___do_typ_inv_229: bool) = ((not (temp___skip_constant_227 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_230),
+  last(temp___expr_230)))
+
+ (* "stacks.ads", line 14, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(s, true, false, true, true) ->
+  (exists result:us_t. (dynamic_invariant1(result, true, false, true,
+  true) and ((in_range(first(result)) and in_range(last(result))) and
+  (length(result) = size(s))))))

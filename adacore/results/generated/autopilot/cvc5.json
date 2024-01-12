@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "filename": "generated/autopilot/cvc5/scale.ads_16_19_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 27784,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.adb_58_70_range_check2_1.smt2",
+      "status": "unsat",
+      "steps": 13687,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.adb_58_64_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 2844,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.adb_58_64_overflow_check_1.smt2",
+      "status": "unsat",
+      "steps": 1664,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.ads_16_19_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 30562,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.adb_58_70_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 8390,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/autopilot/cvc5/scale.adb_20_15_range_check2_1.smt2",
+      "status": "unsat",
+      "steps": 108974,
+      "time": 0.25
+    }
+  ]
+}

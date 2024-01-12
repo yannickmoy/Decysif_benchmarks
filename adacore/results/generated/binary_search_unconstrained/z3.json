@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "filename": "generated/binary_search_unconstrained/z3/binary_search.adb_44_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 17075,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/binary_search_unconstrained/z3/binary_search.adb_40_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 17824,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/binary_search_unconstrained/z3/binary_search.ads_32_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 51115,
+      "time": 0.03
+    }
+  ]
+}

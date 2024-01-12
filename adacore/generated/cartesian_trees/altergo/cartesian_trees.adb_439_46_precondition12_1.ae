@@ -1,0 +1,1314 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function to_rep(x: natural) : int = naturalqtint(x)
+
+logic of_rep : int -> natural
+
+axiom inversion_axiom :
+  (forall x:natural [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:natural [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type small_pos
+
+logic small_posqtint : small_pos -> int
+
+axiom small_posqtaxiom :
+  (forall i:small_pos. ((1 <= small_posqtint(i)) and
+  (small_posqtint(i) <= 2147483646)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483646))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,natural) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,natural) farray = (a).elts
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic left_neighbors : us_t -> us_t
+
+logic left_neighbors__function_guard : us_t, us_t -> prop
+
+predicate dynamic_invariant(temp___expr_220: us_t, temp___is_init_216: bool,
+  temp___skip_constant_217: bool, temp___do_toplevel_218: bool,
+  temp___do_typ_inv_219: bool) = (((not (temp___skip_constant_217 = true)) ->
+  dynamic_property(1, 2147483646, first(temp___expr_220),
+  last(temp___expr_220))) and ((temp___is_init_216 = true) ->
+  ((temp___do_toplevel_218 = true) -> (first(temp___expr_220) = 1))))
+
+logic right_neighbors : us_t -> us_t
+
+logic right_neighbors__function_guard : us_t, us_t -> prop
+
+type us_split_fields = { rec__cartesian_trees__tree_cell__left : natural;
+rec__cartesian_trees__tree_cell__right : natural;
+rec__cartesian_trees__tree_cell__parent : natural }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic cartesian_trees__tree_cell__left__first__bit : int
+
+logic cartesian_trees__tree_cell__left__last__bit : int
+
+logic cartesian_trees__tree_cell__left__position : int
+
+axiom cartesian_trees__tree_cell__left__first__bit_axiom :
+  (0 <= cartesian_trees__tree_cell__left__first__bit)
+
+axiom cartesian_trees__tree_cell__left__last__bit_axiom :
+  (cartesian_trees__tree_cell__left__first__bit <  cartesian_trees__tree_cell__left__last__bit)
+
+axiom cartesian_trees__tree_cell__left__position_axiom :
+  (0 <= cartesian_trees__tree_cell__left__position)
+
+logic cartesian_trees__tree_cell__right__first__bit : int
+
+logic cartesian_trees__tree_cell__right__last__bit : int
+
+logic cartesian_trees__tree_cell__right__position : int
+
+axiom cartesian_trees__tree_cell__right__first__bit_axiom :
+  (0 <= cartesian_trees__tree_cell__right__first__bit)
+
+axiom cartesian_trees__tree_cell__right__last__bit_axiom :
+  (cartesian_trees__tree_cell__right__first__bit <  cartesian_trees__tree_cell__right__last__bit)
+
+axiom cartesian_trees__tree_cell__right__position_axiom :
+  (0 <= cartesian_trees__tree_cell__right__position)
+
+logic cartesian_trees__tree_cell__parent__first__bit : int
+
+logic cartesian_trees__tree_cell__parent__last__bit : int
+
+logic cartesian_trees__tree_cell__parent__position : int
+
+axiom cartesian_trees__tree_cell__parent__first__bit_axiom :
+  (0 <= cartesian_trees__tree_cell__parent__first__bit)
+
+axiom cartesian_trees__tree_cell__parent__last__bit_axiom :
+  (cartesian_trees__tree_cell__parent__first__bit <  cartesian_trees__tree_cell__parent__last__bit)
+
+axiom cartesian_trees__tree_cell__parent__position_axiom :
+  (0 <= cartesian_trees__tree_cell__parent__position)
+
+logic dummy : us_rep
+
+type t1 = { rec__first1 : integer; rec__last1 : integer
+}
+
+logic mk : int, int -> t1
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first1) = f) and (to_rep1((mk(f,
+  l)).rec__last1) = l)))))
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t1 = { elts1 : (int,us_rep) farray; rt1 : t1
+}
+
+function to_array1(a: us_t1) : (int,us_rep) farray = (a).elts1
+
+function of_array(a: (int,us_rep) farray, f: int, l: int) : us_t1 = { elts1 =
+  a; rt1 = mk(f, l) }
+
+function first1(a: us_t1) : int = to_rep1(((a).rt1).rec__first1)
+
+function last1(a: us_t1) : int = to_rep1(((a).rt1).rec__last1)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+function valid_tree_cell(param__t: us_t1) : bool =
+  andb(andb((if (forall x:int. (((first1(param__t) <= x) and
+                (x <= last1(param__t))) ->
+                ((to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0) or
+                (let temp___174 =
+                to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__left)
+                : int in ((first1(param__t) <= temp___174) and
+                (temp___174 <= last1(param__t))))))) then true else false),
+  (if (forall x:int. (((first1(param__t) <= x) and (x <= last1(param__t))) ->
+      ((to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0) or
+      (let temp___176 =
+      to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__right)
+      : int in ((first1(param__t) <= temp___176) and
+      (temp___176 <= last1(param__t))))))) then true else false)),
+  (if (forall x:int. (((first1(param__t) <= x) and (x <= last1(param__t))) ->
+      ((to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0) or
+      (let temp___178 =
+      to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)
+      : int in ((first1(param__t) <= temp___178) and
+      (temp___178 <= last1(param__t))))))) then true else false))
+
+type us_split_discrs = { rec__cartesian_trees__tree__size : natural
+}
+
+type us_split_fields2 = { rec__cartesian_trees__tree__root : natural;
+rec__cartesian_trees__tree__cells : us_t1 }
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields3 :
+us_split_fields2
+}
+
+predicate in_range4(rec__cartesian_trees__tree__size1: int,
+  a: us_split_discrs) =
+  (rec__cartesian_trees__tree__size1 = to_rep((a).rec__cartesian_trees__tree__size))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic cartesian_trees__tree__size__first__bit : int
+
+logic cartesian_trees__tree__size__last__bit : int
+
+logic cartesian_trees__tree__size__position : int
+
+axiom cartesian_trees__tree__size__first__bit_axiom :
+  (0 <= cartesian_trees__tree__size__first__bit)
+
+axiom cartesian_trees__tree__size__last__bit_axiom :
+  (cartesian_trees__tree__size__first__bit <  cartesian_trees__tree__size__last__bit)
+
+axiom cartesian_trees__tree__size__position_axiom :
+  (0 <= cartesian_trees__tree__size__position)
+
+logic cartesian_trees__tree__root__first__bit : int
+
+logic cartesian_trees__tree__root__last__bit : int
+
+logic cartesian_trees__tree__root__position : int
+
+axiom cartesian_trees__tree__root__first__bit_axiom :
+  (0 <= cartesian_trees__tree__root__first__bit)
+
+axiom cartesian_trees__tree__root__last__bit_axiom :
+  (cartesian_trees__tree__root__first__bit <  cartesian_trees__tree__root__last__bit)
+
+axiom cartesian_trees__tree__root__position_axiom :
+  (0 <= cartesian_trees__tree__root__position)
+
+logic cartesian_trees__tree__cells__first__bit : int
+
+logic cartesian_trees__tree__cells__last__bit : int
+
+logic cartesian_trees__tree__cells__position : int
+
+axiom cartesian_trees__tree__cells__first__bit_axiom :
+  (0 <= cartesian_trees__tree__cells__first__bit)
+
+axiom cartesian_trees__tree__cells__last__bit_axiom :
+  (cartesian_trees__tree__cells__first__bit <  cartesian_trees__tree__cells__last__bit)
+
+axiom cartesian_trees__tree__cells__position_axiom :
+  (0 <= cartesian_trees__tree__cells__position)
+
+logic dummy1 : us_rep1
+
+logic bool_eq : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+function one_root(param__t: us_rep1) : bool =
+  andb(andb(bool_ne(to_rep(((param__t).us_split_fields3).rec__cartesian_trees__tree__root),
+  0), bool_eq(to_rep((((let temp___180 =
+  ((param__t).us_split_fields3).rec__cartesian_trees__tree__cells : us_t1 in
+  (to_array1(temp___180)[to_rep(((param__t).us_split_fields3).rec__cartesian_trees__tree__root)]))).us_split_fields1).rec__cartesian_trees__tree_cell__parent),
+  0)),
+  (if (forall x:int. (((1 <= x) and (x <= (let temp___181 =
+      ((param__t).us_split_fields3).rec__cartesian_trees__tree__cells
+      : us_t1 in last1(temp___181)))) ->
+      ((not (x = to_rep(((param__t).us_split_fields3).rec__cartesian_trees__tree__root))) ->
+      (not (to_rep((((let temp___182 =
+      ((param__t).us_split_fields3).rec__cartesian_trees__tree__cells
+      : us_t1 in
+      (to_array1(temp___182)[x]))).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0))))) then true else false))
+
+function well_formed(param__t: us_t1, param__x: int) : bool =
+  andb(andb((if (not (to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) then andb(bool_lt(to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  param__x),
+  bool_eq(to_rep((((to_array1(param__t)[to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__left)])).us_split_fields1).rec__cartesian_trees__tree_cell__parent),
+  param__x)) else of_int(1)),
+  (if (not (to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0)) then andb(bool_lt(param__x,
+  to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__right)),
+  bool_eq(to_rep((((to_array1(param__t)[to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__right)])).us_split_fields1).rec__cartesian_trees__tree_cell__parent),
+  param__x)) else of_int(1))),
+  (if (not (to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) then (if (param__x <  to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) then bool_eq(to_rep((((to_array1(param__t)[to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  param__x) else bool_eq(to_rep((((to_array1(param__t)[to_rep((((to_array1(param__t)[param__x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  param__x)) else of_int(1)))
+
+logic well_formed1 : us_t1 -> bool
+
+function is_heap(param__t: us_t1, param__s: us_t) : bool =
+  (if (forall x:int. (((first1(param__t) <= x) and (x <= last1(param__t))) ->
+      ((not (to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) ->
+      (to_rep((to_array(param__s)[to_rep((((to_array1(param__t)[x])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <  to_rep((to_array(param__s)[x])))))) then true else false)
+
+logic belongs_to : us_t1, int, int -> bool
+
+logic left_smaller : us_t1, int -> bool
+
+logic s : us_t
+
+logic left : us_t
+
+logic right : us_t
+
+type us_split_fields4 = { rec__cartesian_trees__tree__root1 : natural;
+rec__cartesian_trees__tree__cells1 : us_t1 }
+
+type us_rep2 = { us_split_discrs2 : us_split_discrs; us_split_fields5 :
+us_split_fields4
+}
+
+function to_base(a: us_rep2) : us_rep1 = { us_split_discrs1 =
+  (a).us_split_discrs2; us_split_fields3 = {
+  rec__cartesian_trees__tree__root =
+  ((a).us_split_fields5).rec__cartesian_trees__tree__root1;
+  rec__cartesian_trees__tree__cells = (let temp___200 =
+  ((a).us_split_fields5).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (let temp___201 = to_array1(temp___200) : (int,us_rep) farray in
+  of_array(temp___201, first1(temp___200), last1(temp___200)))) } }
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic cartesian_trees__tree__size__first__bit1 : int
+
+logic cartesian_trees__tree__size__last__bit1 : int
+
+logic cartesian_trees__tree__size__position1 : int
+
+axiom cartesian_trees__tree__size__first__bit_axiom1 :
+  (0 <= cartesian_trees__tree__size__first__bit1)
+
+axiom cartesian_trees__tree__size__last__bit_axiom1 :
+  (cartesian_trees__tree__size__first__bit1 <  cartesian_trees__tree__size__last__bit1)
+
+axiom cartesian_trees__tree__size__position_axiom1 :
+  (0 <= cartesian_trees__tree__size__position1)
+
+logic cartesian_trees__tree__root__first__bit1 : int
+
+logic cartesian_trees__tree__root__last__bit1 : int
+
+logic cartesian_trees__tree__root__position1 : int
+
+axiom cartesian_trees__tree__root__first__bit_axiom1 :
+  (0 <= cartesian_trees__tree__root__first__bit1)
+
+axiom cartesian_trees__tree__root__last__bit_axiom1 :
+  (cartesian_trees__tree__root__first__bit1 <  cartesian_trees__tree__root__last__bit1)
+
+axiom cartesian_trees__tree__root__position_axiom1 :
+  (0 <= cartesian_trees__tree__root__position1)
+
+logic cartesian_trees__tree__cells__first__bit1 : int
+
+logic cartesian_trees__tree__cells__last__bit1 : int
+
+logic cartesian_trees__tree__cells__position1 : int
+
+axiom cartesian_trees__tree__cells__first__bit_axiom1 :
+  (0 <= cartesian_trees__tree__cells__first__bit1)
+
+axiom cartesian_trees__tree__cells__last__bit_axiom1 :
+  (cartesian_trees__tree__cells__first__bit1 <  cartesian_trees__tree__cells__last__bit1)
+
+axiom cartesian_trees__tree__cells__position_axiom1 :
+  (0 <= cartesian_trees__tree__cells__position1)
+
+logic dummy2 : us_rep2
+
+logic t__split_discrs : us_split_discrs
+
+predicate dynamic_invariant1(temp___expr_416: us_rep2,
+  temp___is_init_412: bool, temp___skip_constant_413: bool,
+  temp___do_toplevel_414: bool, temp___do_typ_inv_415: bool) =
+  ((((not (temp___skip_constant_413 = true)) -> in_range4(length(s),
+  (to_base(temp___expr_416)).us_split_discrs1)) and
+  ((valid_tree_cell((let temp___418 =
+  ((to_base(temp___expr_416)).us_split_fields3).rec__cartesian_trees__tree__cells
+  : us_t1 in (let temp___419 = to_array1(temp___418) : (int,us_rep) farray in
+  of_array(temp___419, first1(temp___418), last1(temp___418))))) = true) and
+  ((to_rep(((to_base(temp___expr_416)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+  (let temp___421 =
+  to_rep(((to_base(temp___expr_416)).us_split_fields3).rec__cartesian_trees__tree__root)
+  : int in ((1 <= temp___421) and
+  (temp___421 <= to_rep(((to_base(temp___expr_416)).us_split_discrs1).rec__cartesian_trees__tree__size))))))) and
+  ((not (false = true)) -> ((dynamic_property1(1, length(s),
+  first1(((temp___expr_416).us_split_fields5).rec__cartesian_trees__tree__cells1),
+  last1(((temp___expr_416).us_split_fields5).rec__cartesian_trees__tree__cells1)) and
+  (first1(((temp___expr_416).us_split_fields5).rec__cartesian_trees__tree__cells1) = 1)) and
+  (last1(((temp___expr_416).us_split_fields5).rec__cartesian_trees__tree__cells1) = length(s)))))
+
+logic temp_____aggregate_def_430 : us_rep, int, int -> us_t1
+
+logic rliteral : natural
+
+axiom rliteral_axiom : (naturalqtint(rliteral) = 0)
+
+predicate default_initial_assumption(temp___expr_424: us_rep2,
+  temp___skip_top_level_425: bool) =
+  (((to_rep(((temp___expr_424).us_split_discrs2).rec__cartesian_trees__tree__size) = length(s)) and
+  (to_rep(((temp___expr_424).us_split_fields5).rec__cartesian_trees__tree__root1) = 0)) and
+  (((temp___expr_424).us_split_fields5).rec__cartesian_trees__tree__cells1 = (let temp___434 =
+  temp_____aggregate_def_430({ us_split_fields1 = {
+  rec__cartesian_trees__tree_cell__left = rliteral;
+  rec__cartesian_trees__tree_cell__right = rliteral;
+  rec__cartesian_trees__tree_cell__parent = rliteral } }, 1,
+  to_rep(((temp___expr_424).us_split_discrs2).rec__cartesian_trees__tree__size))
+  : us_t1 in (let temp___435 = to_array1(temp___434) : (int,us_rep) farray in
+  of_array(temp___435, first1(temp___434), last1(temp___434))))))
+
+predicate dynamic_property2(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+predicate dynamic_property3(first_int: int, last_int: int, x: int) =
+  ((first_int <= x) and (x <= last_int))
+
+axiom left_neighbors__post_axiom :
+  (forall param__s:us_t [left_neighbors(param__s)].
+  ((dynamic_invariant(param__s, true, false, true, true) and
+  (0 <  length(param__s))) -> (let result = left_neighbors(param__s)
+  : us_t in (left_neighbors__function_guard(result, param__s) ->
+  (((length(param__s) = length(result)) and
+  (forall k:int. (((first(result) <= k) and (k <= last(result))) ->
+  (if (to_rep((to_array(result)[k])) = 0) then (forall l:int.
+                                               (((first(param__s) <= l) and
+                                               (l <= (k - 1))) ->
+                                               (to_rep((to_array(param__s)[k])) <  to_rep((to_array(param__s)[l]))))) else (((let temp___227 =
+  to_rep((to_array(result)[k])) : int in ((1 <= temp___227) and
+  (temp___227 <= (k - 1)))) and
+  (to_rep((to_array(param__s)[to_rep((to_array(result)[k]))])) <= to_rep((to_array(param__s)[k])))) and
+  (forall l:int. ((((to_rep((to_array(result)[k])) + 1) <= l) and
+  (l <= (k - 1))) ->
+  (to_rep((to_array(param__s)[k])) <  to_rep((to_array(param__s)[l])))))))))) and
+  dynamic_invariant(result, true, false, true, true))))))
+
+axiom right_neighbors__post_axiom :
+  (forall param__s:us_t [right_neighbors(param__s)].
+  ((dynamic_invariant(param__s, true, false, true, true) and
+  (0 <  length(param__s))) -> (let result = right_neighbors(param__s)
+  : us_t in (right_neighbors__function_guard(result, param__s) ->
+  (((length(param__s) = length(result)) and
+  (forall k:int. (((first(result) <= k) and (k <= last(result))) ->
+  (if (to_rep((to_array(result)[k])) = 0) then (forall l:int.
+                                               ((((k + 1) <= l) and
+                                               (l <= last(param__s))) ->
+                                               (to_rep((to_array(param__s)[k])) <  to_rep((to_array(param__s)[l]))))) else (((let temp___234 =
+  to_rep((to_array(result)[k])) : int in (((k + 1) <= temp___234) and
+  (temp___234 <= last(param__s)))) and
+  (to_rep((to_array(param__s)[to_rep((to_array(result)[k]))])) <= to_rep((to_array(param__s)[k])))) and
+  (forall l:int. ((((k + 1) <= l) and
+  (l <= (to_rep((to_array(result)[k])) - 1))) ->
+  (to_rep((to_array(param__s)[k])) <  to_rep((to_array(param__s)[l])))))))))) and
+  dynamic_invariant(result, true, false, true, true))))))
+
+axiom well_formed__post_axiom : true
+
+axiom well_formed__def_axiom :
+  (forall param__t:us_t1 [well_formed1(param__t)].
+  ((well_formed1(param__t) = true) <->
+  (forall x:int. (((first1(param__t) <= x) and (x <= last1(param__t))) ->
+  (well_formed(param__t, x) = true)))))
+
+axiom belongs_to__post_axiom : true
+
+axiom belongs_to__def_axiom :
+  (forall param__t:us_t1.
+  (forall param__r:int. forall param__x:int [belongs_to(param__t, param__r,
+  param__x)]. ((belongs_to(param__t, param__r, param__x) = true) <->
+  (((param__r = param__x) or
+  ((not (to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) and
+  (belongs_to(param__t,
+  to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  param__x) = true))) or
+  ((not (to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0)) and
+  (belongs_to(param__t,
+  to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  param__x) = true))))))
+
+axiom left_smaller__post_axiom : true
+
+axiom left_smaller__def_axiom :
+  (forall param__t:us_t1.
+  (forall param__r:int [left_smaller(param__t, param__r)].
+  ((left_smaller(param__t, param__r) = true) <->
+  (forall x:int. (((first1(param__t) <= x) and (x <= last1(param__t))) ->
+  (((not (to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) and
+  (belongs_to(param__t,
+  to_rep((((to_array1(param__t)[param__r])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  x) = true)) -> (x <  param__r)))))))
+
+axiom def_axiom :
+  (forall temp___427:us_rep.
+  (forall temp___first_428:int. forall temp___last_429:int. (let temp___431 =
+  temp_____aggregate_def_430(temp___427, temp___first_428, temp___last_429)
+  : us_t1 in ((dynamic_property1(1, 2147483646, temp___first_428,
+  temp___last_429) -> ((first1(temp___431) = temp___first_428) and
+  (last1(temp___431) = temp___last_429))) and
+  (forall temp___432:int [(to_array1(temp___431)[temp___432])].
+  (((first1(temp___431) <= temp___432) and
+  (temp___432 <= last1(temp___431))) ->
+  ((to_array1(temp___431)[temp___432]) = temp___427)))))))
+
+ (* "cartesian_trees.ads", line 113, characters 0-0 *)
+goal defqtvc :
+  (forall spark__branch:bool. forall t__split_fields:us_split_fields4.
+  (dynamic_invariant(s, true, false, true, true) -> (((0 <  length(s)) and
+  (forall x:int. (((first(s) <= x) and (x <= last(s))) ->
+  (forall y:int. (((first(s) <= y) and (y <= last(s))) ->
+  ((to_rep((to_array(s)[x])) = to_rep((to_array(s)[y]))) -> (x = y))))))) ->
+  (let o = s : us_t in (let cartesian_trees__mk_tree__left__assume =
+  left_neighbors(o) : us_t in
+  ((left_neighbors__function_guard(cartesian_trees__mk_tree__left__assume,
+  o) and (dynamic_invariant(cartesian_trees__mk_tree__left__assume, true,
+  false, true, true) and
+  ((length(o) = length(cartesian_trees__mk_tree__left__assume)) and
+  (forall k:int. (((first(cartesian_trees__mk_tree__left__assume) <= k) and
+  (k <= last(cartesian_trees__mk_tree__left__assume))) ->
+  (if (to_rep((to_array(cartesian_trees__mk_tree__left__assume)[k])) = 0) then 
+  (forall l:int. (((first(o) <= l) and (l <= (k - 1))) ->
+  (to_rep((to_array(o)[k])) <  to_rep((to_array(o)[l]))))) else (((let temp___224 =
+  to_rep((to_array(cartesian_trees__mk_tree__left__assume)[k])) : int in
+  ((1 <= temp___224) and (temp___224 <= (k - 1)))) and
+  (to_rep((to_array(o)[to_rep((to_array(cartesian_trees__mk_tree__left__assume)[k]))])) <= to_rep((to_array(o)[k])))) and
+  (forall l:int.
+  ((((to_rep((to_array(cartesian_trees__mk_tree__left__assume)[k])) + 1) <= l) and
+  (l <= (k - 1))) -> (to_rep((to_array(o)[k])) <  to_rep((to_array(o)[l])))))))))))) ->
+  ((cartesian_trees__mk_tree__left__assume = left) ->
+  (dynamic_invariant(left, true, false, true, true) -> (let o1 = s : us_t in
+  (let cartesian_trees__mk_tree__right__assume = right_neighbors(o1)
+  : us_t in
+  ((right_neighbors__function_guard(cartesian_trees__mk_tree__right__assume,
+  o1) and (dynamic_invariant(cartesian_trees__mk_tree__right__assume, true,
+  false, true, true) and
+  ((length(o1) = length(cartesian_trees__mk_tree__right__assume)) and
+  (forall k:int. (((first(cartesian_trees__mk_tree__right__assume) <= k) and
+  (k <= last(cartesian_trees__mk_tree__right__assume))) ->
+  (if (to_rep((to_array(cartesian_trees__mk_tree__right__assume)[k])) = 0) then 
+  (forall l:int. ((((k + 1) <= l) and (l <= last(o1))) ->
+  (to_rep((to_array(o1)[k])) <  to_rep((to_array(o1)[l]))))) else (((let temp___231 =
+  to_rep((to_array(cartesian_trees__mk_tree__right__assume)[k])) : int in
+  (((k + 1) <= temp___231) and (temp___231 <= last(o1)))) and
+  (to_rep((to_array(o1)[to_rep((to_array(cartesian_trees__mk_tree__right__assume)[k]))])) <= to_rep((to_array(o1)[k])))) and
+  (forall l:int. ((((k + 1) <= l) and
+  (l <= (to_rep((to_array(cartesian_trees__mk_tree__right__assume)[k])) - 1))) ->
+  (to_rep((to_array(o1)[k])) <  to_rep((to_array(o1)[l])))))))))))) ->
+  ((cartesian_trees__mk_tree__right__assume = right) ->
+  (dynamic_invariant(right, true, false, true, true) -> (let o2 = length(s)
+  : int in (in_range(o2) -> (in_range1(o2) -> (default_initial_assumption({
+  us_split_discrs2 = t__split_discrs; us_split_fields5 = t__split_fields },
+  false) -> (dynamic_invariant1({ us_split_discrs2 = t__split_discrs;
+  us_split_fields5 = t__split_fields }, false, false, true, true) ->
+  (forall spark__branch1:bool. forall t__split_fields1:us_split_fields4.
+  ((let temp___810 = first(s) : int in (let temp___811 = last(s) : int in
+  (exists i:int. ((i = temp___810) and
+  (if (andb((if (temp___810 <= i) then true else false),
+  (if (i <= temp___811) then true else false)) = true) then (let o3 =
+  (t__split_fields).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((well_formed1(o3) = true) <->
+  (forall x:int. (((first1(o3) <= x) and (x <= last1(o3))) ->
+  (well_formed(o3, x) = true)))) and
+  (exists t__split_fields2:us_split_fields4. exists i1:int.
+  (((well_formed1((let temp___989qtunused =
+  (t__split_fields2).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields2).rec__cartesian_trees__tree__cells1)) = true) and
+  ((is_heap((let temp___984qtunused =
+  (t__split_fields2).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields2).rec__cartesian_trees__tree__cells1), s) = true) and
+  ((if (to_rep((t__split_fields2).rec__cartesian_trees__tree__root1) = 0) then 
+  (forall k:int. (((1 <= k) and (k <= (i1 - 1))) ->
+  ((not (to_rep((to_array(right)[k])) = 0)) or
+  (not (to_rep((to_array(left)[k])) = 0))))) else ((let temp___979 =
+  to_rep((t__split_fields2).rec__cartesian_trees__tree__root1) : int in
+  ((1 <= temp___979) and (temp___979 <= (i1 - 1)))) and
+  (((to_rep((to_array(right)[to_rep((t__split_fields2).rec__cartesian_trees__tree__root1)])) = 0) and
+  (to_rep((to_array(left)[to_rep((t__split_fields2).rec__cartesian_trees__tree__root1)])) = 0)) and
+  (to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[to_rep((t__split_fields2).rec__cartesian_trees__tree__root1)])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)))) and
+  ((forall k:int. (((i1 <= k) and (k <= last(s))) ->
+   (to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[k])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0))) and
+  (forall k:int. (((1 <= k) and (k <= (i1 - 1))) ->
+  (if ((to_rep((to_array(right)[k])) = 0) and
+  (to_rep((to_array(left)[k])) = 0)) then (to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[k])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0) else (if ((to_rep((to_array(left)[k])) = 0) or
+  ((0 <  to_rep((to_array(right)[k]))) and
+  (to_rep((to_array(s)[to_rep((to_array(left)[k]))])) <  to_rep((to_array(s)[to_rep((to_array(right)[k]))]))))) then ((to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[k])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = to_rep((to_array(right)[k]))) and
+  (to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[to_rep((to_array(right)[k]))])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = k)) else ((to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[k])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = to_rep((to_array(left)[k]))) and
+  (to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[to_rep((to_array(left)[k]))])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = k)))))))))) and
+  ((andb((if dynamic_invariant1({ us_split_discrs2 = t__split_discrs;
+  us_split_fields5 = t__split_fields2 }, false, true, true,
+  true) then true else false), (if ((first(s) <= i1) and
+  (i1 <= last(s))) then true else false)) = true) and
+  ((((first(left) <= i1) and (i1 <= last(left))) and
+  (exists o4:int. ((to_rep((to_array(left)[i1])) = o4) and
+  (((first(right) <= i1) and (i1 <= last(right))) and
+  (exists o5:int. ((to_rep((to_array(right)[i1])) = o5) and
+  (exists spark__branch2:bool.
+  ((spark__branch2 = andb((if (o5 = 0) then true else false),
+  (if (o4 = 0) then true else false))) and
+  (if (spark__branch2 = true) then ((in_range1(i1) and
+  (exists o6:natural. ((to_rep(o6) = i1) and (let o7 = {
+  rec__cartesian_trees__tree__root1 = o6;
+  rec__cartesian_trees__tree__cells1 =
+  (t__split_fields2).rec__cartesian_trees__tree__cells1 }
+  : us_split_fields4 in (let temp___815 = { us_split_discrs2 =
+  t__split_discrs; us_split_fields5 = o7 } : us_rep2 in
+  (((valid_tree_cell((let temp___817qtunused =
+  ((to_base(temp___815)).us_split_fields3).rec__cartesian_trees__tree__cells
+  : us_t1 in
+  ((to_base(temp___815)).us_split_fields3).rec__cartesian_trees__tree__cells)) = true) and
+  ((to_rep(((to_base(temp___815)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+  (let temp___820 =
+  to_rep(((to_base(temp___815)).us_split_fields3).rec__cartesian_trees__tree__root)
+  : int in ((1 <= temp___820) and
+  (temp___820 <= to_rep(((to_base(temp___815)).us_split_discrs1).rec__cartesian_trees__tree__size)))))) and
+  (t__split_fields1 = o7))))))) and
+  (spark__branch1 = spark__branch2)) else (exists o6:bool.
+                                          ((((first(left) <= i1) and
+                                          (i1 <= last(left))) and
+                                          (exists o7:int.
+                                          ((to_rep((to_array(left)[i1])) = o7) and
+                                          (if (o7 = 0) then (o6 = true) else (((first(right) <= i1) and
+                                          (i1 <= last(right))) and
+                                          (exists o8:int.
+                                          ((to_rep((to_array(right)[i1])) = o8) and
+                                          (if (0 <  o8) then (((first(left) <= i1) and
+                                          (i1 <= last(left))) and
+                                          (exists temp___823:int.
+                                          ((to_rep((to_array(left)[i1])) = temp___823) and
+                                          (((first(s) <= temp___823) and
+                                          (temp___823 <= last(s))) and
+                                          (exists o9:int.
+                                          ((to_rep((to_array(s)[temp___823])) = o9) and
+                                          (((first(right) <= i1) and
+                                          (i1 <= last(right))) and
+                                          (exists temp___822:int.
+                                          ((to_rep((to_array(right)[i1])) = temp___822) and
+                                          (((first(s) <= temp___822) and
+                                          (temp___822 <= last(s))) and
+                                          (exists o10:int.
+                                          ((to_rep((to_array(s)[temp___822])) = o10) and
+                                          (o6 = (if (o9 <  o10) then true else false)))))))))))))) else (o6 = false))))))))) and
+                                          ((spark__branch1 = o6) and
+                                          (if (spark__branch1 = true) then ((well_formed((let temp___826qtunused =
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1),
+                                          to_rep((to_array(right)[i1]))) = true) and
+                                          ((to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[to_rep((to_array(right)[i1]))])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0) and
+                                          (dynamic_invariant1({
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = t__split_fields2
+                                          }, false, true, true, true) and
+                                          (((first(s) <= last(s)) ->
+                                          dynamic_property2(first(s),
+                                          last(s), i1)) and (let temp___844 =
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in (let usq_ =
+                                          ((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[i1])).us_split_fields1
+                                          : us_split_fields in
+                                          (((first(right) <= i1) and
+                                          (i1 <= last(right))) and
+                                          (exists o7:int.
+                                          ((to_rep((to_array(right)[i1])) = o7) and
+                                          (exists o8:natural.
+                                          ((to_rep(o8) = o7) and
+                                          (((first1(temp___844) <= i1) and
+                                          (i1 <= last1(temp___844))) and
+                                          (let o9 = {
+                                          rec__cartesian_trees__tree__root1 =
+                                          (t__split_fields2).rec__cartesian_trees__tree__root1;
+                                          rec__cartesian_trees__tree__cells1 =
+                                          { elts1 =
+                                          (to_array1(temp___844)[i1 <- {
+                                          us_split_fields1 = {
+                                          rec__cartesian_trees__tree_cell__left =
+                                          (usq_).rec__cartesian_trees__tree_cell__left;
+                                          rec__cartesian_trees__tree_cell__right =
+                                          (usq_).rec__cartesian_trees__tree_cell__right;
+                                          rec__cartesian_trees__tree_cell__parent =
+                                          o8 } }]); rt1 = (temp___844).rt1 }
+                                          } : us_split_fields4 in
+                                          (let temp___848 = {
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = o9 }
+                                          : us_rep2 in
+                                          (((valid_tree_cell((let temp___850qtunused =
+                                          ((to_base(temp___848)).us_split_fields3).rec__cartesian_trees__tree__cells
+                                          : us_t1 in
+                                          ((to_base(temp___848)).us_split_fields3).rec__cartesian_trees__tree__cells)) = true) and
+                                          ((to_rep(((to_base(temp___848)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+                                          (let temp___853 =
+                                          to_rep(((to_base(temp___848)).us_split_fields3).rec__cartesian_trees__tree__root)
+                                          : int in ((1 <= temp___853) and
+                                          (temp___853 <= to_rep(((to_base(temp___848)).us_split_discrs1).rec__cartesian_trees__tree__size)))))) and
+                                          (exists t__split_fields3:us_split_fields4.
+                                          ((t__split_fields3 = o9) and
+                                          (let temp___859 =
+                                          (t__split_fields3).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (exists o10:int.
+                                          ((to_rep((to_array(right)[i1])) = o10) and
+                                          (let usq_1 =
+                                          ((to_array1((t__split_fields3).rec__cartesian_trees__tree__cells1)[o10])).us_split_fields1
+                                          : us_split_fields in
+                                          (in_range1(i1) and
+                                          (exists o11:natural.
+                                          ((to_rep(o11) = i1) and
+                                          (((first(right) <= i1) and
+                                          (i1 <= last(right))) and
+                                          (exists temp___861:int.
+                                          ((to_rep((to_array(right)[i1])) = temp___861) and
+                                          (((first1(temp___859) <= temp___861) and
+                                          (temp___861 <= last1(temp___859))) and
+                                          (let o12 = {
+                                          rec__cartesian_trees__tree__root1 =
+                                          (t__split_fields3).rec__cartesian_trees__tree__root1;
+                                          rec__cartesian_trees__tree__cells1 =
+                                          { elts1 =
+                                          (to_array1(temp___859)[temp___861 <- {
+                                          us_split_fields1 = {
+                                          rec__cartesian_trees__tree_cell__left =
+                                          o11;
+                                          rec__cartesian_trees__tree_cell__right =
+                                          (usq_1).rec__cartesian_trees__tree_cell__right;
+                                          rec__cartesian_trees__tree_cell__parent =
+                                          (usq_1).rec__cartesian_trees__tree_cell__parent
+                                          } }]); rt1 = (temp___859).rt1 } }
+                                          : us_split_fields4 in
+                                          (let temp___864 = {
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = o12 }
+                                          : us_rep2 in
+                                          (((valid_tree_cell((let temp___866qtunused =
+                                          ((to_base(temp___864)).us_split_fields3).rec__cartesian_trees__tree__cells
+                                          : us_t1 in
+                                          ((to_base(temp___864)).us_split_fields3).rec__cartesian_trees__tree__cells)) = true) and
+                                          ((to_rep(((to_base(temp___864)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+                                          (let temp___869 =
+                                          to_rep(((to_base(temp___864)).us_split_fields3).rec__cartesian_trees__tree__root)
+                                          : int in ((1 <= temp___869) and
+                                          (temp___869 <= to_rep(((to_base(temp___864)).us_split_discrs1).rec__cartesian_trees__tree__size)))))) and
+                                          ((t__split_fields1 = o12) and
+                                          ((i1 <  to_rep((to_array(right)[i1]))) and
+                                          ((not (i1 = to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((to_array(right)[i1]))])).us_split_fields1).rec__cartesian_trees__tree_cell__parent))) and
+                                          (well_formed((let temp___876qtunused =
+                                          (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                          to_rep((to_array(right)[i1]))) = true))))))))))))))))))))))))))))))))))) else ((well_formed((let temp___880qtunused =
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1),
+                                          to_rep((to_array(left)[i1]))) = true) and
+                                          ((to_rep((((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[to_rep((to_array(left)[i1]))])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0) and
+                                          (dynamic_invariant1({
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = t__split_fields2
+                                          }, false, true, true, true) and
+                                          (((first(s) <= last(s)) ->
+                                          dynamic_property2(first(s),
+                                          last(s), i1)) and (let temp___900 =
+                                          (t__split_fields2).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in (let usq_ =
+                                          ((to_array1((t__split_fields2).rec__cartesian_trees__tree__cells1)[i1])).us_split_fields1
+                                          : us_split_fields in
+                                          (((first(left) <= i1) and
+                                          (i1 <= last(left))) and
+                                          (exists o7:int.
+                                          ((to_rep((to_array(left)[i1])) = o7) and
+                                          (exists o8:natural.
+                                          ((to_rep(o8) = o7) and
+                                          (((first1(temp___900) <= i1) and
+                                          (i1 <= last1(temp___900))) and
+                                          (let o9 = {
+                                          rec__cartesian_trees__tree__root1 =
+                                          (t__split_fields2).rec__cartesian_trees__tree__root1;
+                                          rec__cartesian_trees__tree__cells1 =
+                                          { elts1 =
+                                          (to_array1(temp___900)[i1 <- {
+                                          us_split_fields1 = {
+                                          rec__cartesian_trees__tree_cell__left =
+                                          (usq_).rec__cartesian_trees__tree_cell__left;
+                                          rec__cartesian_trees__tree_cell__right =
+                                          (usq_).rec__cartesian_trees__tree_cell__right;
+                                          rec__cartesian_trees__tree_cell__parent =
+                                          o8 } }]); rt1 = (temp___900).rt1 }
+                                          } : us_split_fields4 in
+                                          (let temp___904 = {
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = o9 }
+                                          : us_rep2 in
+                                          (((valid_tree_cell((let temp___906qtunused =
+                                          ((to_base(temp___904)).us_split_fields3).rec__cartesian_trees__tree__cells
+                                          : us_t1 in
+                                          ((to_base(temp___904)).us_split_fields3).rec__cartesian_trees__tree__cells)) = true) and
+                                          ((to_rep(((to_base(temp___904)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+                                          (let temp___909 =
+                                          to_rep(((to_base(temp___904)).us_split_fields3).rec__cartesian_trees__tree__root)
+                                          : int in ((1 <= temp___909) and
+                                          (temp___909 <= to_rep(((to_base(temp___904)).us_split_discrs1).rec__cartesian_trees__tree__size)))))) and
+                                          (exists t__split_fields3:us_split_fields4.
+                                          ((t__split_fields3 = o9) and
+                                          (let temp___915 =
+                                          (t__split_fields3).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (exists o10:int.
+                                          ((to_rep((to_array(left)[i1])) = o10) and
+                                          (let usq_1 =
+                                          ((to_array1((t__split_fields3).rec__cartesian_trees__tree__cells1)[o10])).us_split_fields1
+                                          : us_split_fields in
+                                          (in_range1(i1) and
+                                          (exists o11:natural.
+                                          ((to_rep(o11) = i1) and
+                                          (((first(left) <= i1) and
+                                          (i1 <= last(left))) and
+                                          (exists temp___917:int.
+                                          ((to_rep((to_array(left)[i1])) = temp___917) and
+                                          (((first1(temp___915) <= temp___917) and
+                                          (temp___917 <= last1(temp___915))) and
+                                          (let o12 = {
+                                          rec__cartesian_trees__tree__root1 =
+                                          (t__split_fields3).rec__cartesian_trees__tree__root1;
+                                          rec__cartesian_trees__tree__cells1 =
+                                          { elts1 =
+                                          (to_array1(temp___915)[temp___917 <- {
+                                          us_split_fields1 = {
+                                          rec__cartesian_trees__tree_cell__left =
+                                          (usq_1).rec__cartesian_trees__tree_cell__left;
+                                          rec__cartesian_trees__tree_cell__right =
+                                          o11;
+                                          rec__cartesian_trees__tree_cell__parent =
+                                          (usq_1).rec__cartesian_trees__tree_cell__parent
+                                          } }]); rt1 = (temp___915).rt1 } }
+                                          : us_split_fields4 in
+                                          (let temp___920 = {
+                                          us_split_discrs2 = t__split_discrs;
+                                          us_split_fields5 = o12 }
+                                          : us_rep2 in
+                                          (((valid_tree_cell((let temp___922qtunused =
+                                          ((to_base(temp___920)).us_split_fields3).rec__cartesian_trees__tree__cells
+                                          : us_t1 in
+                                          ((to_base(temp___920)).us_split_fields3).rec__cartesian_trees__tree__cells)) = true) and
+                                          ((to_rep(((to_base(temp___920)).us_split_fields3).rec__cartesian_trees__tree__root) = 0) or
+                                          (let temp___925 =
+                                          to_rep(((to_base(temp___920)).us_split_fields3).rec__cartesian_trees__tree__root)
+                                          : int in ((1 <= temp___925) and
+                                          (temp___925 <= to_rep(((to_base(temp___920)).us_split_discrs1).rec__cartesian_trees__tree__size)))))) and
+                                          ((t__split_fields1 = o12) and
+                                          ((to_rep((to_array(left)[i1])) <  i1) and
+                                          ((not (i1 = to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((to_array(left)[i1]))])).us_split_fields1).rec__cartesian_trees__tree_cell__parent))) and
+                                          (well_formed((let temp___932qtunused =
+                                          (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                          : us_t1 in
+                                          (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                          to_rep((to_array(left)[i1]))) = true)))))))))))))))))))))))))))))))))))))))))))))))) and
+  ((well_formed((let temp___936qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1), i1) = true) and
+  ((forall k:int. (((first(s) <= k) and (k <= last(s))) ->
+   (well_formed((let temp___942qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1), k) = true))) and
+  (i1 = temp___811))))))))) else ((spark__branch1 = spark__branch) and
+  (t__split_fields1 = t__split_fields))))))) ->
+  ((is_heap((let temp___993qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1), s) = true) ->
+  ((one_root(to_base({ us_split_discrs2 = t__split_discrs; us_split_fields5 =
+  t__split_fields1 })) = true) -> (dynamic_invariant1({ us_split_discrs2 =
+  t__split_discrs; us_split_fields5 = t__split_fields1 }, false, true, true,
+  true) ->
+  ((forall x:int. (((first(s) <= x) and (x <= last(s))) ->
+   (left_smaller((let temp___1165qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1), x) = true))) ->
+  (dynamic_invariant1({ us_split_discrs2 = t__split_discrs;
+  us_split_fields5 = t__split_fields1 }, false, true, true, true) ->
+  (let temp___1167 = first(s) : int in
+  (forall i:int. ((i = temp___1167) ->
+  ((andb((if (temp___1167 <= i) then true else false),
+  (if (i <= last(s)) then true else false)) = true) -> (let temp___1290 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1290) <= i) and (i <= last1(temp___1290))) ->
+  (forall o3:int.
+  ((to_rep((((to_array1(temp___1290)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o3) ->
+  (forall spark__branch2:bool.
+  ((spark__branch2 = (if (o3 = 0) then false else true)) ->
+  ((spark__branch2 = true) ->
+  (((i <  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right)) and
+  (to_rep((to_array(s)[i])) <  to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right)])))) ->
+  (dynamic_invariant1({ us_split_discrs2 = t__split_discrs;
+  us_split_fields5 = t__split_fields1 }, false, true, true, true) ->
+  (((first(s) <= last(s)) -> dynamic_property3(first(s), last(s), i)) ->
+  (forall w:int. ((w = 0) -> ((andb((if (0 <= w) then true else false),
+  (if (w <= 2147483647) then true else false)) = true) ->
+  (forall spark__branch3:bool. forall j:int. ((let temp___1188 = first(s)
+  : int in (let temp___1189 = last(s) : int in
+  (exists j1:int. ((j1 = temp___1188) and
+  (if (andb((if (temp___1188 <= j1) then true else false),
+  (if (j1 <= temp___1189) then true else false)) = true) then (exists spark__branch4:bool.
+                                                              ((let temp___1259 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((first1(temp___1259) <= i) and
+                                                              (i <= last1(temp___1259))) and
+                                                              (exists o4:int.
+                                                              ((to_rep((((to_array1(temp___1259)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o4) and
+                                                              (in_range2(j1) and
+                                                              (let temp___1258 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((first1(temp___1258) <= i) and
+                                                              (i <= last1(temp___1258))) and
+                                                              (exists o5:int.
+                                                              ((to_rep((((to_array1(temp___1258)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o5) and
+                                                              (in_range2(o5) and
+                                                              (let o6 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (let o7 =
+                                                              belongs_to(o6,
+                                                              o5, j1)
+                                                              : bool in
+                                                              (((o7 = true) <->
+                                                              (((o5 = j1) or
+                                                              ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) and
+                                                              (belongs_to(o6,
+                                                              to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+                                                              j1) = true))) or
+                                                              ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0)) and
+                                                              (belongs_to(o6,
+                                                              to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+                                                              j1) = true)))) and
+                                                              (exists o8:int.
+                                                              ((to_rep((to_array(s)[j1])) = o8) and
+                                                              (exists spark__branch5:bool.
+                                                              ((spark__branch5 = andb(andb((if (o8 = w) then true else false),
+                                                              o7),
+                                                              (if (j1 = o4) then false else true))) and
+                                                              (if (spark__branch5 = true) then (in_range2(j1) and
+                                                              (let temp___1192 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((first1(temp___1192) <= i) and
+                                                              (i <= last1(temp___1192))) and
+                                                              (exists o9:int.
+                                                              ((to_rep((((to_array1(temp___1192)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o9) and
+                                                              (in_range2(o9) and
+                                                              (let o10 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((j1 = o9) or
+                                                              ((not (to_rep((((to_array1(o10)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) and
+                                                              (belongs_to(o10,
+                                                              o9,
+                                                              to_rep((((to_array1(o10)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true))) and
+                                                              ((not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) and
+                                                              ((is_heap((let temp___1197qtunused =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                              s) = true) and
+                                                              ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <  to_rep((to_array(s)[j1]))) and
+                                                              ((belongs_to((let temp___1206qtunused =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                              to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+                                                              to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true) and
+                                                              ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <= (w - 1)) and
+                                                              ((forall k:int.
+                                                               (((first(s) <= k) and
+                                                               (k <= last(s))) ->
+                                                               ((((to_rep((to_array(s)[k])) <= (w - 1)) and
+                                                               (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+                                                               (belongs_to((let temp___1222qtunused =
+                                                               (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                               : us_t1 in
+                                                               (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                               to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+                                                               k) = true)) ->
+                                                               (i <  k)))) and
+                                                              ((i <  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) and
+                                                              (let temp___1255 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((first1(temp___1255) <= j1) and
+                                                              (j1 <= last1(temp___1255))) and
+                                                              (exists o11:int.
+                                                              ((to_rep((((to_array1(temp___1255)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = o11) and
+                                                              ((spark__branch4 = (if (j1 <  o11) then true else false)) and
+                                                              ((spark__branch4 = true) ->
+                                                              ((well_formed((let temp___1229qtunused =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                              j1) = true) and
+                                                              ((well_formed((let temp___1234qtunused =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                              to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true) and
+                                                              ((to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = j1) and
+                                                              ((not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = j1)) and
+                                                              ((to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = to_rep((to_array(right)[j1]))) and
+                                                              (in_range2(j1) and
+                                                              (let temp___1251 =
+                                                              (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                              : us_t1 in
+                                                              (((first1(temp___1251) <= i) and
+                                                              (i <= last1(temp___1251))) and
+                                                              (exists o12:int.
+                                                              ((to_rep((((to_array1(temp___1251)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o12) and
+                                                              (in_range2(o12) and
+                                                              (let o13 = s
+                                                              : us_t in
+                                                              ((to_rep((to_array(o13)[o12])) <= to_rep((to_array(o13)[j1]))) and
+                                                              ((to_rep((to_array(s)[i])) <  to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right)]))) and
+                                                              ((to_rep((to_array(s)[i])) <  to_rep((to_array(s)[j1]))) and
+                                                              (((j1 <  i) ->
+                                                              (exists l:int.
+                                                              ((((to_rep((to_array(right)[j1])) + 1) <= l) and
+                                                              (l <= (j1 - 1))) and
+                                                              (to_rep((to_array(s)[j1])) <  to_rep((to_array(s)[l])))))) and
+                                                              (i <  j1)))))))))))))))))))))))))))))))))))))) else (spark__branch4 = spark__branch5))))))))))))))))))) and
+                                                              ((forall k:int.
+                                                               (((1 <= k) and
+                                                               (k <= j)) ->
+                                                               ((((to_rep((to_array(s)[k])) = w) and
+                                                               (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+                                                               (belongs_to((let temp___1270qtunused =
+                                                               (t__split_fields1).rec__cartesian_trees__tree__cells1
+                                                               : us_t1 in
+                                                               (t__split_fields1).rec__cartesian_trees__tree__cells1),
+                                                               to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+                                                               k) = true)) ->
+                                                               (i <  k)))) and
+                                                              (((first(s) <= j) and
+                                                              (j <= last(s))) and
+                                                              (j = temp___1189))))) else ((spark__branch3 = spark__branch2) and
+  (j = j1))))))) ->
+  (forall w1:int.
+  ((forall k:int. (((first(s) <= k) and (k <= last(s))) ->
+   ((((to_rep((to_array(s)[k])) <= w1) and
+   (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+   (belongs_to((let temp___1283qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1),
+   to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+   k) = true)) -> (i <  k)))) ->
+  (((0 <= w1) and (w1 <= 2147483647)) -> ((not (w1 = 2147483647)) ->
+  (forall w2:int. ((w2 = (w1 + 1)) -> (let temp___1188 = first(s) : int in
+  (let temp___1189 = last(s) : int in
+  (forall j1:int. ((j1 = temp___1188) ->
+  ((andb((if (temp___1188 <= j1) then true else false),
+  (if (j1 <= temp___1189) then true else false)) = true) ->
+  (forall spark__branch4:bool. ((let temp___1259 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1259) <= i) and (i <= last1(temp___1259))) and
+  (exists o4:int.
+  ((to_rep((((to_array1(temp___1259)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o4) and
+  (in_range2(j1) and (let temp___1258 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1258) <= i) and (i <= last1(temp___1258))) and
+  (exists o5:int.
+  ((to_rep((((to_array1(temp___1258)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o5) and
+  (in_range2(o5) and (let o6 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in (let o7 =
+  belongs_to(o6, o5, j1) : bool in (((o7 = true) <-> (((o5 = j1) or
+  ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) and
+  (belongs_to(o6,
+  to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  j1) = true))) or
+  ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0)) and
+  (belongs_to(o6,
+  to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  j1) = true)))) and
+  (exists o8:int. ((to_rep((to_array(s)[j1])) = o8) and
+  (exists spark__branch5:bool.
+  ((spark__branch5 = andb(andb((if (o8 = w2) then true else false), o7),
+  (if (j1 = o4) then false else true))) and
+  (if (spark__branch5 = true) then (in_range2(j1) and (let temp___1192 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1192) <= i) and (i <= last1(temp___1192))) and
+  (exists o9:int.
+  ((to_rep((((to_array1(temp___1192)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o9) and
+  (in_range2(o9) and (let o10 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((j1 = o9) or
+  ((not (to_rep((((to_array1(o10)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) and
+  (belongs_to(o10, o9,
+  to_rep((((to_array1(o10)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true))) and
+  ((not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) and
+  ((is_heap((let temp___1197qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1), s) = true) and
+  ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <  to_rep((to_array(s)[j1]))) and
+  ((belongs_to((let temp___1206qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1),
+  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true) and
+  ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <= (w2 - 1)) and
+  ((forall k:int. (((first(s) <= k) and (k <= last(s))) ->
+   ((((to_rep((to_array(s)[k])) <= (w2 - 1)) and
+   (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+   (belongs_to((let temp___1222qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1),
+   to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+   k) = true)) -> (i <  k)))) and
+  ((i <  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) and
+  (let temp___1255 = (t__split_fields1).rec__cartesian_trees__tree__cells1
+  : us_t1 in (((first1(temp___1255) <= j1) and
+  (j1 <= last1(temp___1255))) and
+  (exists o11:int.
+  ((to_rep((((to_array1(temp___1255)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = o11) and
+  ((spark__branch4 = (if (j1 <  o11) then true else false)) and
+  ((spark__branch4 = true) -> ((well_formed((let temp___1229qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1), j1) = true) and
+  ((well_formed((let temp___1234qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1),
+  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true) and
+  ((to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = j1) and
+  ((not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = j1)) and
+  ((to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j1])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = to_rep((to_array(right)[j1]))) and
+  (in_range2(j1) and (let temp___1251 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1251) <= i) and (i <= last1(temp___1251))) and
+  (exists o12:int.
+  ((to_rep((((to_array1(temp___1251)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o12) and
+  (in_range2(o12) and (let o13 = s : us_t in
+  ((to_rep((to_array(o13)[o12])) <= to_rep((to_array(o13)[j1]))) and
+  ((to_rep((to_array(s)[i])) <  to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right)]))) and
+  ((to_rep((to_array(s)[i])) <  to_rep((to_array(s)[j1]))) and (((j1 <  i) ->
+  (exists l:int. ((((to_rep((to_array(right)[j1])) + 1) <= l) and
+  (l <= (j1 - 1))) and
+  (to_rep((to_array(s)[j1])) <  to_rep((to_array(s)[l])))))) and
+  (i <  j1)))))))))))))))))))))))))))))))))))))) else (spark__branch4 = spark__branch5))))))))))))))))))) ->
+  (forall j2:int.
+  ((forall k:int. (((1 <= k) and (k <= j2)) ->
+   ((((to_rep((to_array(s)[k])) = w2) and
+   (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+   (belongs_to((let temp___1270qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1),
+   to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+   k) = true)) -> (i <  k)))) ->
+  (((first(s) <= j2) and (j2 <= last(s))) -> ((not (j2 = temp___1189)) ->
+  (forall j3:int. ((j3 = (j2 + 1)) -> (let temp___1259 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1259) <= i) and (i <= last1(temp___1259))) ->
+  (forall o4:int.
+  ((to_rep((((to_array1(temp___1259)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o4) ->
+  (in_range2(j3) -> (let temp___1258 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1258) <= i) and (i <= last1(temp___1258))) ->
+  (forall o5:int.
+  ((to_rep((((to_array1(temp___1258)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o5) ->
+  (in_range2(o5) -> (let o6 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in (let o7 =
+  belongs_to(o6, o5, j3) : bool in (((o7 = true) <-> (((o5 = j3) or
+  ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left) = 0)) and
+  (belongs_to(o6,
+  to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__left),
+  j3) = true))) or
+  ((not (to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0)) and
+  (belongs_to(o6,
+  to_rep((((to_array1(o6)[o5])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  j3) = true)))) ->
+  (forall o8:int. ((to_rep((to_array(s)[j3])) = o8) ->
+  (forall spark__branch5:bool.
+  ((spark__branch5 = andb(andb((if (o8 = w2) then true else false), o7),
+  (if (j3 = o4) then false else true))) -> ((spark__branch5 = true) ->
+  (in_range2(j3) -> (let temp___1192 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((first1(temp___1192) <= i) and (i <= last1(temp___1192))) ->
+  (forall o9:int.
+  ((to_rep((((to_array1(temp___1192)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = o9) ->
+  (in_range2(o9) -> (let o10 =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (((j3 = o9) or
+  ((not (to_rep((((to_array1(o10)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) and
+  (belongs_to(o10, o9,
+  to_rep((((to_array1(o10)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true))) ->
+  ((not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = 0)) ->
+  ((is_heap((let temp___1197qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1), s) = true) ->
+  ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <  to_rep((to_array(s)[j3]))) ->
+  ((belongs_to((let temp___1206qtunused =
+  (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+  (t__split_fields1).rec__cartesian_trees__tree__cells1),
+  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) = true) ->
+  ((to_rep((to_array(s)[to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)])) <= (w2 - 1)) ->
+  ((forall k:int. (((first(s) <= k) and (k <= last(s))) ->
+   ((((to_rep((to_array(s)[k])) <= (w2 - 1)) and
+   (not (to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right) = 0))) and
+   (belongs_to((let temp___1222qtunused =
+   (t__split_fields1).rec__cartesian_trees__tree__cells1 : us_t1 in
+   (t__split_fields1).rec__cartesian_trees__tree__cells1),
+   to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[i])).us_split_fields1).rec__cartesian_trees__tree_cell__right),
+   k) = true)) -> (i <  k)))) ->
+  ((i <  to_rep((((to_array1((t__split_fields1).rec__cartesian_trees__tree__cells1)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent)) ->
+  (let temp___1255 = (t__split_fields1).rec__cartesian_trees__tree__cells1
+  : us_t1 in (((first1(temp___1255) <= j3) and (j3 <= last1(temp___1255))) ->
+  (forall o11:int.
+  ((to_rep((((to_array1(temp___1255)[j3])).us_split_fields1).rec__cartesian_trees__tree_cell__parent) = o11) ->
+  (forall spark__branch6:bool.
+  ((spark__branch6 = (if (j3 <  o11) then true else false)) ->
+  ((spark__branch6 = true) -> (in_range2(j3) ->
+  (valid_tree_cell((t__split_fields1).rec__cartesian_trees__tree__cells1) = true)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

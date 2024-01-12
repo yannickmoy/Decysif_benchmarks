@@ -1,0 +1,121 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type us_image
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+type character
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer }
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic to_string : us_image, int -> us_t
+
+axiom to_string__first :
+  (forall x:us_image.
+  (forall s:int [to_string(x, s)]. (first(to_string(x, s)) = 1)))
+
+axiom to_string__length :
+  (forall x:us_image.
+  (forall s:int [to_string(x, s)]. ((0 <= s) -> (length(to_string(x,
+  s)) <= s))))
+
+logic x : int
+
+type durationt
+
+logic durationtqtint : durationt -> int
+
+axiom durationtqtaxiom :
+  (forall i:durationt. ((0 <= durationtqtint(i)) and
+  (durationtqtint(i) <= 2000)))
+
+predicate in_range2(x1: int) = ((0 <= x1) and (x1 <= 2000))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+ (* "configdata.ads", line 39, characters 0-0 *)
+goal defqtvc : (in_range2(x) -> (let o = attr__ATTRIBUTE_IMAGE(x)
+  : us_image in ((let temp___805 = to_string(o, 12) : us_t in
+  ((first(temp___805) = 1) and (0 <= last(temp___805)))) ->
+  ((last(to_string(o, 12)) <= 1000) -> (3 <= length(to_string(o, 12)))))))

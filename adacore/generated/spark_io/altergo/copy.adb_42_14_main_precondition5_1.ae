@@ -1,0 +1,309 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+type character
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy : us_rep
+
+logic is_open : us_rep -> bool
+
+type file_status
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
+
+logic yes : (int,character) farray
+
+logic no : (int,character) farray
+
+logic to_rep2 : file_status -> int
+
+logic of_rep2 : int -> file_status
+
+axiom inversion_axiom2 :
+  (forall x:file_status [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:file_status [to_rep2(x)]. in_range2(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type us_split_discrs = { rec__ada___spark__text_io__character_result__status
+: file_status }
+
+type us_split_fields = { rec__ada___spark__text_io__character_result__item :
+character }
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic ada___spark__text_io__character_result__status__first__bit : int
+
+logic ada___spark__text_io__character_result__status__last__bit : int
+
+logic ada___spark__text_io__character_result__status__position : int
+
+axiom ada___spark__text_io__character_result__status__first__bit_axiom :
+  (0 <= ada___spark__text_io__character_result__status__first__bit)
+
+axiom ada___spark__text_io__character_result__status__last__bit_axiom :
+  (ada___spark__text_io__character_result__status__first__bit <  ada___spark__text_io__character_result__status__last__bit)
+
+axiom ada___spark__text_io__character_result__status__position_axiom :
+  (0 <= ada___spark__text_io__character_result__status__position)
+
+logic ada___spark__text_io__character_result__item__first__bit : int
+
+logic ada___spark__text_io__character_result__item__last__bit : int
+
+logic ada___spark__text_io__character_result__item__position : int
+
+axiom ada___spark__text_io__character_result__item__first__bit_axiom :
+  (0 <= ada___spark__text_io__character_result__item__first__bit)
+
+axiom ada___spark__text_io__character_result__item__last__bit_axiom :
+  (ada___spark__text_io__character_result__item__first__bit <  ada___spark__text_io__character_result__item__last__bit)
+
+axiom ada___spark__text_io__character_result__item__position_axiom :
+  (0 <= ada___spark__text_io__character_result__item__position)
+
+logic dummy1 : us_rep1
+
+logic c__attr__constrained : bool
+
+logic clast : int
+
+logic clast1 : int
+
+logic length_of_yes_no : int
+
+type tcount_rangeB
+
+logic tcount_rangeBqtint : tcount_rangeB -> int
+
+axiom tcount_rangeBqtaxiom :
+  (forall i:tcount_rangeB. (((- 2147483648) <= tcount_rangeBqtint(i)) and
+  (tcount_rangeBqtint(i) <= 2147483647)))
+
+type count_range
+
+logic count_rangeqtint : count_range -> int
+
+axiom count_rangeqtaxiom :
+  (forall i:count_range. ((0 <= count_rangeqtint(i)) and
+  (count_rangeqtint(i) <= 2147483647)))
+
+type tTresponseSP1
+
+logic tTresponseSP1qtint : tTresponseSP1 -> int
+
+axiom tTresponseSP1qtaxiom :
+  (forall i:tTresponseSP1. ((1 <= tTresponseSP1qtint(i)) and
+  (tTresponseSP1qtint(i) <= 512)))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size1 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+type tTyes_noSP1
+
+logic tTyes_noSP1qtint : tTyes_noSP1 -> int
+
+axiom tTyes_noSP1qtaxiom :
+  (forall i:tTyes_noSP1. ((1 <= tTyes_noSP1qtint(i)) and
+  (tTyes_noSP1qtint(i) <= 4)))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size2 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+type tTyesSP1
+
+logic tTyesSP1qtint : tTyesSP1 -> int
+
+axiom tTyesSP1qtaxiom :
+  (forall i:tTyesSP1. ((1 <= tTyesSP1qtint(i)) and (tTyesSP1qtint(i) <= 3)))
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size3 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+type tTnoSP1
+
+logic tTnoSP1qtint : tTnoSP1 -> int
+
+axiom tTnoSP1qtaxiom :
+  (forall i:tTnoSP1. ((1 <= tTnoSP1qtint(i)) and (tTnoSP1qtint(i) <= 2)))
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic component__size4 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom component__size_axiom4 : (0 <= component__size4)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+type count
+
+logic countqtint : count -> int
+
+axiom countqtaxiom :
+  (forall i:count. ((0 <= countqtint(i)) and (countqtint(i) <= 2147483647)))
+
+axiom is_open__post_axiom : true
+
+ (* "copy.adb", line 32, characters 0-0 *)
+goal defqtvc :
+  (forall destination:us_rep. (not (is_open(destination) = true)))

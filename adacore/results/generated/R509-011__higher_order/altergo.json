@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.ads_63_14_postcondition2_1.ae",
+      "status": "unsat",
+      "steps": 485,
+      "time": 0.0438
+    },
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.adb_16_22_assert_1.ae",
+      "status": "unsat",
+      "steps": 2985,
+      "time": 0.2275
+    },
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.adb_6_27_precondition_1.ae",
+      "status": "unsat",
+      "steps": 1436,
+      "time": 0.1111
+    },
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.adb_19_28_precondition_1.ae",
+      "status": "unsat",
+      "steps": 5187,
+      "time": 0.4034
+    },
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.adb_25_22_assert_1.ae",
+      "status": "unsat",
+      "steps": 8021,
+      "time": 0.9675
+    },
+    {
+      "filename": "generated/R509-011__higher_order/altergo/test_higher_order.adb_19_22_assert_1.ae",
+      "status": "unsat",
+      "steps": 5122,
+      "time": 0.3904
+    }
+  ]
+}

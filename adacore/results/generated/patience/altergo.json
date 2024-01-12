@@ -1,0 +1,166 @@
+{
+  "results": [
+    {
+      "filename": "generated/patience/altergo/patience.adb_36_15_assert6_1.ae",
+      "status": "unsat",
+      "steps": 6704,
+      "time": 0.8654
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_36_15_assert7_1.ae",
+      "status": "unsat",
+      "steps": 6684,
+      "time": 0.8209
+    },
+    {
+      "filename": "generated/patience/altergo/patience.ads_125_18_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_83_22_assert3_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_83_22_assert2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert12_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert9_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_72_8_assert2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_83_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert6_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.ads_125_18_postcondition3_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert7_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert5_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_72_8_assert4_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert4_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert3_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert14_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_80_22_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_72_8_assert_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert16_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert8_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.ads_125_18_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert11_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert15_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/patience/altergo/patience.adb_92_10_assert13_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

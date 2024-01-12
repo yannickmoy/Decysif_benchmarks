@@ -1,0 +1,13 @@
+cvc5 proved 0 out of 7 VCs
+  unproved test.adb_12_21_index_check2_1.smt2 (proved by ['altergo'])
+  unproved test.adb_12_21_index_check_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test.adb_12_21_overflow_check2_1.smt2 (proved by ['altergo'])
+  unproved test.adb_12_21_overflow_check_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test.adb_12_34_range_check2_1.smt2 (proved by ['altergo'])
+  unproved test.ads_23_10_postcondition2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test.ads_23_10_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 4 out of 7 VCs
+  unproved test.adb_12_21_index_check2_1.smt2 (proved by ['altergo'])
+  unproved test.adb_12_21_overflow_check2_1.smt2 (proved by ['altergo'])
+  unproved test.adb_12_34_range_check2_1.smt2 (proved by ['altergo'])
+altergo proved 7 out of 7 VCs

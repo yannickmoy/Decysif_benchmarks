@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/perm.ads_38_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 26519,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_111_33_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 721908,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_97_36_loop_invariant_init2_1.smt2",
+      "status": "timeout",
+      "steps": 656151,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_96_36_loop_invariant_init2_1.smt2",
+      "status": "timeout",
+      "steps": 672786,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_124_36_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 672632,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_95_36_loop_invariant_init2_1.smt2",
+      "status": "timeout",
+      "steps": 727731,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_96_36_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 522931,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.ads_14_14_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 617358,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_109_33_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 785772,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_78_36_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 475970,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/pair_insertion_sort/cvc5/pair_insertion_sort.adb_95_36_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 521002,
+      "time": 9.87
+    }
+  ]
+}

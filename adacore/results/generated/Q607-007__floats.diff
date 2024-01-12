@@ -1,0 +1,12 @@
+cvc5 proved 9 out of 9 VCs
+z3 proved 9 out of 9 VCs
+altergo proved 0 out of 9 VCs
+  unproved normalize.adb_105_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_13_17_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_15_12_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_163_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_18_17_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_47_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_6_17_range_check_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_76_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved normalize.adb_9_17_range_check_1.ae (proved by ['cvc5', 'z3'])

@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "filename": "generated/autopilot/altergo/scale.adb_58_64_overflow_check_1.ae",
+      "status": "unsat",
+      "steps": 34,
+      "time": 0.0147
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.adb_58_70_overflow_check2_1.ae",
+      "status": "unsat",
+      "steps": 85,
+      "time": 0.0169
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.adb_58_64_overflow_check2_1.ae",
+      "status": "unsat",
+      "steps": 34,
+      "time": 0.0133
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.ads_16_19_postcondition_1.ae",
+      "status": "error",
+      "output": "Fatal error: exception Out of memory\n"
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.adb_20_15_range_check2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.ads_16_19_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/autopilot/altergo/scale.adb_58_70_range_check2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

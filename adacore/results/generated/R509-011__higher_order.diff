@@ -1,0 +1,10 @@
+cvc5 proved 2 out of 6 VCs
+  unproved test_higher_order.adb_16_22_assert_1.smt2 (proved by ['altergo'])
+  unproved test_higher_order.adb_19_22_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_higher_order.adb_19_28_precondition_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_higher_order.adb_25_22_assert_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 3 out of 6 VCs
+  unproved test_higher_order.adb_16_22_assert_1.smt2 (proved by ['altergo'])
+  unproved test_higher_order.adb_6_27_precondition_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved test_higher_order.ads_63_14_postcondition2_1.smt2 (proved by ['cvc5', 'altergo'])
+altergo proved 6 out of 6 VCs

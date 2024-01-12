@@ -1,0 +1,46 @@
+{
+  "results": [
+    {
+      "filename": "generated/autopilot/z3/scale.ads_16_19_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 8231,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.ads_16_19_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 9035,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.adb_20_15_range_check2_1.smt2",
+      "status": "unsat",
+      "steps": 7327179,
+      "time": 7.31
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.adb_58_70_range_check2_1.smt2",
+      "status": "timeout",
+      "steps": 8260763,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.adb_58_64_overflow_check2_1.smt2",
+      "status": "timeout",
+      "steps": 22442752,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.adb_58_64_overflow_check_1.smt2",
+      "status": "timeout",
+      "steps": 22037293,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/autopilot/z3/scale.adb_58_70_overflow_check2_1.smt2",
+      "status": "timeout",
+      "steps": 7986170,
+      "time": 9.89
+    }
+  ]
+}

@@ -1,0 +1,1245 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function to_int(b: bool) : int = (if (b = true) then 1 else 0)
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+predicate in_range(x: int) = ((x = 0) or (x = 1))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function to_rep(x: natural) : int = naturalqtint(x)
+
+logic of_rep : int -> natural
+
+axiom inversion_axiom :
+  (forall x:natural [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:natural [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type extended_index_type
+
+logic extended_index_typeqtint : extended_index_type -> int
+
+axiom extended_index_typeqtaxiom :
+  (forall i:extended_index_type. ((0 <= extended_index_typeqtint(i)) and
+  (extended_index_typeqtint(i) <= 100)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 100))
+
+function to_rep1(x: extended_index_type) : int = extended_index_typeqtint(x)
+
+logic of_rep1 : int -> extended_index_type
+
+axiom inversion_axiom1 :
+  (forall x:extended_index_type [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:extended_index_type [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type position_type
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2))
+
+logic to_rep2 : position_type -> int
+
+logic of_rep2 : int -> position_type
+
+axiom inversion_axiom2 :
+  (forall x:position_type [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:position_type [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type us_split_fields = { rec__binary_trees__cell__left : extended_index_type;
+rec__binary_trees__cell__right : extended_index_type;
+rec__binary_trees__cell__parent : extended_index_type;
+rec__binary_trees__cell__position : position_type }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic binary_trees__cell__left__first__bit : int
+
+logic binary_trees__cell__left__last__bit : int
+
+logic binary_trees__cell__left__position : int
+
+axiom binary_trees__cell__left__first__bit_axiom :
+  (0 <= binary_trees__cell__left__first__bit)
+
+axiom binary_trees__cell__left__last__bit_axiom :
+  (binary_trees__cell__left__first__bit <  binary_trees__cell__left__last__bit)
+
+axiom binary_trees__cell__left__position_axiom :
+  (0 <= binary_trees__cell__left__position)
+
+logic binary_trees__cell__right__first__bit : int
+
+logic binary_trees__cell__right__last__bit : int
+
+logic binary_trees__cell__right__position : int
+
+axiom binary_trees__cell__right__first__bit_axiom :
+  (0 <= binary_trees__cell__right__first__bit)
+
+axiom binary_trees__cell__right__last__bit_axiom :
+  (binary_trees__cell__right__first__bit <  binary_trees__cell__right__last__bit)
+
+axiom binary_trees__cell__right__position_axiom :
+  (0 <= binary_trees__cell__right__position)
+
+logic binary_trees__cell__parent__first__bit : int
+
+logic binary_trees__cell__parent__last__bit : int
+
+logic binary_trees__cell__parent__position : int
+
+axiom binary_trees__cell__parent__first__bit_axiom :
+  (0 <= binary_trees__cell__parent__first__bit)
+
+axiom binary_trees__cell__parent__last__bit_axiom :
+  (binary_trees__cell__parent__first__bit <  binary_trees__cell__parent__last__bit)
+
+axiom binary_trees__cell__parent__position_axiom :
+  (0 <= binary_trees__cell__parent__position)
+
+logic binary_trees__cell__position__first__bit : int
+
+logic binary_trees__cell__position__last__bit : int
+
+logic binary_trees__cell__position__position : int
+
+axiom binary_trees__cell__position__first__bit_axiom :
+  (0 <= binary_trees__cell__position__first__bit)
+
+axiom binary_trees__cell__position__last__bit_axiom :
+  (binary_trees__cell__position__first__bit <  binary_trees__cell__position__last__bit)
+
+axiom binary_trees__cell__position__position_axiom :
+  (0 <= binary_trees__cell__position__position)
+
+logic dummy : us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+type us_split_fields2 = { rec__binary_trees__forest__s : extended_index_type;
+rec__binary_trees__forest__c : (int,us_rep) farray }
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic binary_trees__forest__s__first__bit : int
+
+logic binary_trees__forest__s__last__bit : int
+
+logic binary_trees__forest__s__position : int
+
+axiom binary_trees__forest__s__first__bit_axiom :
+  (0 <= binary_trees__forest__s__first__bit)
+
+axiom binary_trees__forest__s__last__bit_axiom :
+  (binary_trees__forest__s__first__bit <  binary_trees__forest__s__last__bit)
+
+axiom binary_trees__forest__s__position_axiom :
+  (0 <= binary_trees__forest__s__position)
+
+logic binary_trees__forest__c__first__bit : int
+
+logic binary_trees__forest__c__last__bit : int
+
+logic binary_trees__forest__c__position : int
+
+axiom binary_trees__forest__c__first__bit_axiom :
+  (0 <= binary_trees__forest__c__first__bit)
+
+axiom binary_trees__forest__c__last__bit_axiom :
+  (binary_trees__forest__c__first__bit <  binary_trees__forest__c__last__bit)
+
+axiom binary_trees__forest__c__position_axiom :
+  (0 <= binary_trees__forest__c__position)
+
+logic dummy1 : us_rep1
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size1 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+type us_split_fields4 = { rec__search_trees__search_tree__root :
+extended_index_type; rec__search_trees__search_tree__struct : us_rep1;
+rec__search_trees__search_tree__values : (int,natural) farray }
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic search_trees__search_tree__root__first__bit : int
+
+logic search_trees__search_tree__root__last__bit : int
+
+logic search_trees__search_tree__root__position : int
+
+axiom search_trees__search_tree__root__first__bit_axiom :
+  (0 <= search_trees__search_tree__root__first__bit)
+
+axiom search_trees__search_tree__root__last__bit_axiom :
+  (search_trees__search_tree__root__first__bit <  search_trees__search_tree__root__last__bit)
+
+axiom search_trees__search_tree__root__position_axiom :
+  (0 <= search_trees__search_tree__root__position)
+
+logic search_trees__search_tree__struct__first__bit : int
+
+logic search_trees__search_tree__struct__last__bit : int
+
+logic search_trees__search_tree__struct__position : int
+
+axiom search_trees__search_tree__struct__first__bit_axiom :
+  (0 <= search_trees__search_tree__struct__first__bit)
+
+axiom search_trees__search_tree__struct__last__bit_axiom :
+  (search_trees__search_tree__struct__first__bit <  search_trees__search_tree__struct__last__bit)
+
+axiom search_trees__search_tree__struct__position_axiom :
+  (0 <= search_trees__search_tree__struct__position)
+
+logic search_trees__search_tree__values__first__bit : int
+
+logic search_trees__search_tree__values__last__bit : int
+
+logic search_trees__search_tree__values__position : int
+
+axiom search_trees__search_tree__values__first__bit_axiom :
+  (0 <= search_trees__search_tree__values__first__bit)
+
+axiom search_trees__search_tree__values__last__bit_axiom :
+  (search_trees__search_tree__values__first__bit <  search_trees__search_tree__values__last__bit)
+
+axiom search_trees__search_tree__values__position_axiom :
+  (0 <= search_trees__search_tree__values__position)
+
+logic dummy2 : us_rep2
+
+logic size : us_rep2 -> int
+
+logic size1 : us_rep1 -> int
+
+function root(param__t: us_rep2) : int =
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root)
+
+type index_type
+
+logic index_typeqtint : index_type -> int
+
+axiom index_typeqtaxiom :
+  (forall i:index_type. ((1 <= index_typeqtint(i)) and
+  (index_typeqtint(i) <= 100)))
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 100))
+
+logic parent : us_rep2, int -> int
+
+logic parent1 : us_rep1, int -> int
+
+logic position : us_rep2, int -> int
+
+logic position1 : us_rep1, int -> int
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 1))
+
+type us_rep3
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic dummy3 : us_rep3
+
+logic last : us_rep3 -> int
+
+type extended_index
+
+logic extended_indexqtint : extended_index -> int
+
+axiom extended_indexqtaxiom :
+  (forall i:extended_index. ((0 <= extended_indexqtint(i)) and
+  (extended_indexqtint(i) <= 2147483647)))
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic get : us_rep3, int -> int
+
+logic bool_eq : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+logic dummy4 : int
+
+function length(param__container: us_rep3) : int =
+  ((last(param__container) + 1) - 1)
+
+function olt(param__left: us_rep3, param__right: us_rep3) : bool =
+  andb(bool_lt(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+type us_split_fields6 = { rec__tree_model__path_type__a : us_rep3;
+rec__tree_model__path_type__k : bool }
+
+type us_rep4 = { us_split_fields7 : us_split_fields6
+}
+
+logic value__size7 : int
+
+logic object__size7 : int
+
+logic alignment7 : int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 : (0 <= object__size7)
+
+axiom alignment_axiom7 : (0 <= alignment7)
+
+logic tree_model__path_type__a__first__bit : int
+
+logic tree_model__path_type__a__last__bit : int
+
+logic tree_model__path_type__a__position : int
+
+axiom tree_model__path_type__a__first__bit_axiom :
+  (0 <= tree_model__path_type__a__first__bit)
+
+axiom tree_model__path_type__a__last__bit_axiom :
+  (tree_model__path_type__a__first__bit <  tree_model__path_type__a__last__bit)
+
+axiom tree_model__path_type__a__position_axiom :
+  (0 <= tree_model__path_type__a__position)
+
+logic tree_model__path_type__k__first__bit : int
+
+logic tree_model__path_type__k__last__bit : int
+
+logic tree_model__path_type__k__position : int
+
+axiom tree_model__path_type__k__first__bit_axiom :
+  (0 <= tree_model__path_type__k__first__bit)
+
+axiom tree_model__path_type__k__last__bit_axiom :
+  (tree_model__path_type__k__first__bit <  tree_model__path_type__k__last__bit)
+
+axiom tree_model__path_type__k__position_axiom :
+  (0 <= tree_model__path_type__k__position)
+
+logic dummy5 : us_rep4
+
+logic model : us_rep1, int -> (int,us_rep4) farray
+
+logic valid_root : us_rep1, int -> bool
+
+function oeq(param__left: us_rep3, param__right: us_rep3) : bool =
+  andb(bool_eq(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+logic is_add : us_rep3, int, us_rep3 -> bool
+
+logic value__size8 : int
+
+logic object__size8 : int
+
+logic component__size2 : int
+
+logic alignment8 : int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 : (0 <= object__size8)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom8 : (0 <= alignment8)
+
+predicate dynamic_invariant(temp___expr_403: (int,us_rep4) farray,
+  temp___is_init_399: bool, temp___skip_constant_400: bool,
+  temp___do_toplevel_401: bool, temp___do_typ_inv_402: bool) =
+  (forall temp___404:int. (((1 <= temp___404) and (temp___404 <= 100)) ->
+  (length((((temp___expr_403[temp___404])).us_split_fields7).rec__tree_model__path_type__a) <  100)))
+
+logic model1 : us_rep2 -> (int,us_rep4) farray
+
+logic peek : us_rep1, int, int -> int
+
+logic peek1 : us_rep2, int, int -> int
+
+type us_rep5
+
+logic value__size9 : int
+
+logic object__size9 : int
+
+logic alignment9 : int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 : (0 <= object__size9)
+
+axiom alignment_axiom9 : (0 <= alignment9)
+
+logic dummy6 : us_rep5
+
+logic values : us_rep2 -> us_rep5
+
+logic is_empty : us_rep5 -> bool
+
+logic contains : us_rep5, int -> bool
+
+logic contains1 : us_rep2, int -> bool
+
+logic tree_structure : us_rep1 -> bool
+
+predicate dynamic_invariant1(temp___expr_299: us_rep2,
+  temp___is_init_295: bool, temp___skip_constant_296: bool,
+  temp___do_toplevel_297: bool, temp___do_typ_inv_298: bool) =
+  ((temp___do_typ_inv_298 = true) ->
+  (tree_structure(((temp___expr_299).us_split_fields5).rec__search_trees__search_tree__struct) = true))
+
+logic ordered_leafs : us_rep1, int, (int,natural) farray -> bool
+
+predicate type_invariant(temp___318: us_rep2) =
+  (if (size1(((temp___318).us_split_fields5).rec__search_trees__search_tree__struct) = 0) then (to_rep1(((temp___318).us_split_fields5).rec__search_trees__search_tree__root) = 0) else (((not (to_rep1(((temp___318).us_split_fields5).rec__search_trees__search_tree__root) = 0)) and
+  (valid_root(((temp___318).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((temp___318).us_split_fields5).rec__search_trees__search_tree__root)) = true)) and
+  (ordered_leafs(((temp___318).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((temp___318).us_split_fields5).rec__search_trees__search_tree__root),
+  ((temp___318).us_split_fields5).rec__search_trees__search_tree__values) = true)))
+
+logic v : int
+
+logic oeq1 : us_rep5, us_rep5 -> bool
+
+logic ole : us_rep5, us_rep5 -> bool
+
+logic is_add1 : us_rep5, int, us_rep5 -> bool
+
+logic included_except : us_rep5, us_rep5, int -> bool
+
+logic oeq2 : (int,us_rep4) farray, (int,us_rep4) farray -> bool
+
+predicate dynamic_invariant2(temp___expr_274: us_rep1,
+  temp___is_init_270: bool, temp___skip_constant_271: bool,
+  temp___do_toplevel_272: bool, temp___do_typ_inv_273: bool) =
+  ((temp___do_typ_inv_273 = true) ->
+  (tree_structure(temp___expr_274) = true))
+
+type tcount_typeB
+
+logic tcount_typeBqtint : tcount_typeB -> int
+
+axiom tcount_typeBqtaxiom :
+  (forall i:tcount_typeB. (((- 2147483648) <= tcount_typeBqtint(i)) and
+  (tcount_typeBqtint(i) <= 2147483647)))
+
+logic length1 : us_rep5 -> int
+
+logic ordered_prefix : (int,us_rep4) farray, (int,natural) farray, int,
+  int -> bool
+
+predicate dynamic_invariant3(temp___expr_369: int, temp___is_init_365: bool,
+  temp___skip_constant_366: bool, temp___do_toplevel_367: bool,
+  temp___do_typ_inv_368: bool) = ((temp___is_init_365 = true) ->
+  ((temp___do_toplevel_367 = true) -> (0 <= temp___expr_369)))
+
+axiom size__post_axiom :
+  (forall param__f:us_rep1 [size1(param__f)]. (dynamic_invariant2(param__f,
+  true, false, true, true) -> in_range2(size1(param__f))))
+
+axiom size__post_axiom1 :
+  (forall param__t:us_rep2 [size(param__t)]. ((dynamic_invariant1(param__t,
+  true, false, true, true) and type_invariant(param__t)) ->
+  in_range2(size(param__t))))
+
+axiom size__def_axiom :
+  (forall param__t:us_rep2 [size(param__t)].
+  (size(param__t) = size1(((param__t).us_split_fields5).rec__search_trees__search_tree__struct)))
+
+axiom valid_root__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [valid_root(param__f, param__i)].
+  ((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) -> ((size1(param__f) <  param__i) ->
+  (not (valid_root(param__f, param__i) = true))))))
+
+axiom parent__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [parent1(param__f, param__i)].
+  ((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) -> (let result = parent1(param__f, param__i) : int in
+  ((((valid_root(param__f, param__i) = true) -> (result = 0)) and
+  ((size1(param__f) = 0) -> (result = 0))) and in_range2(result))))))
+
+axiom parent__post_axiom1 :
+  (forall param__t:us_rep2.
+  (forall param__i:int [parent(param__t, param__i)].
+  (((dynamic_invariant1(param__t, true, false, true, true) and
+  in_range4(param__i)) and type_invariant(param__t)) -> (let result =
+  parent(param__t, param__i) : int in (((size(param__t) = 0) ->
+  (result = 0)) and in_range2(result))))))
+
+axiom parent__def_axiom :
+  (forall param__t:us_rep2.
+  (forall param__i:int [parent(param__t, param__i)]. (parent(param__t,
+  param__i) = parent1(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  param__i))))
+
+axiom position__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [position1(param__f, param__i)].
+  (((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) and (not (parent1(param__f, param__i) = 0))) ->
+  in_range5(position1(param__f, param__i)))))
+
+axiom position__post_axiom1 :
+  (forall param__t:us_rep2.
+  (forall param__i:int [position(param__t, param__i)].
+  ((((dynamic_invariant1(param__t, true, false, true, true) and
+  in_range4(param__i)) and type_invariant(param__t)) and
+  (not (parent(param__t, param__i) = 0))) -> in_range5(position(param__t,
+  param__i)))))
+
+axiom position__def_axiom :
+  (forall param__t:us_rep2.
+  (forall param__i:int [position(param__t, param__i)]. (position(param__t,
+  param__i) = position1(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  param__i))))
+
+axiom last__post_axiom :
+  (forall param__container:us_rep3 [last(param__container)].
+  in_range6(last(param__container)))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep3.
+  (forall param__position:int [get(param__container, param__position)].
+  ((in_range6(param__position) and ((1 <= param__position) and
+  (param__position <= last(param__container)))) ->
+  in_range5(get(param__container, param__position)))))
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall param__s1:us_rep3. forall param__s2:us_rep3.
+  (forall param__d:int [is_add(param__s1, param__d, param__s2)].
+  ((is_add(param__s1, param__d, param__s2) = true) <->
+  ((((length(param__s2) - 1) = length(param__s1)) and (olt(param__s1,
+  param__s2) = true)) and (get(param__s2, last(param__s2)) = param__d)))))
+
+axiom model__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__root:int [model(param__f, param__root)].
+  (((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__root)) and (valid_root(param__f, param__root) = true)) ->
+  (let result = model(param__f, param__root) : (int,us_rep4) farray in
+  (((((((((result[param__root])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (last((((result[param__root])).us_split_fields7).rec__tree_model__path_type__a) = 0)) and
+  (forall i:int. (((1 <= i) and (i <= 100)) -> ((not (i = param__root)) ->
+  (if ((not (parent1(param__f, i) = 0)) and ((((result[parent1(param__f,
+  i)])).us_split_fields7).rec__tree_model__path_type__k = true)) then ((((result[i])).us_split_fields7).rec__tree_model__path_type__k = true) else (not ((((result[i])).us_split_fields7).rec__tree_model__path_type__k = true))))))) and
+  (forall i:int. (((1 <= i) and (i <= 100)) ->
+  (if (((((result[i])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (not (i = param__root))) then (is_add((((result[parent1(param__f,
+  i)])).us_split_fields7).rec__tree_model__path_type__a, position1(param__f,
+  i),
+  (((result[i])).us_split_fields7).rec__tree_model__path_type__a) = true) else (last((((result[i])).us_split_fields7).rec__tree_model__path_type__a) = 0))))) and
+  (forall i:int. (((1 <= i) and (i <= 100)) ->
+  (((((result[i])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) ->
+  ((((((result[j])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (oeq((((result[i])).us_split_fields7).rec__tree_model__path_type__a,
+  (((result[j])).us_split_fields7).rec__tree_model__path_type__a) = true)) ->
+  (j = i)))))))) and dynamic_invariant(result, true, false, true, true))))))
+
+axiom model__post_axiom1 :
+  (forall param__t:us_rep2 [model1(param__t)].
+  (((dynamic_invariant1(param__t, true, false, true, true) and
+  type_invariant(param__t)) and (not (size(param__t) = 0))) ->
+  dynamic_invariant(model1(param__t), true, false, true, true)))
+
+axiom model__def_axiom :
+  (forall param__t:us_rep2 [model1(param__t)].
+  (model1(param__t) = model(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root))))
+
+axiom peek__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int. forall param__d:int [peek(param__f, param__i,
+  param__d)]. (((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) and in_range5(param__d)) -> (let result =
+  peek(param__f, param__i, param__d) : int in
+  (((if (not (result = 0)) then ((position1(param__f, result) = param__d) and
+  (parent1(param__f,
+  result) = param__i)) else (forall j:int. (((1 <= j) and (j <= 100)) ->
+                            ((parent1(param__f, j) = param__i) ->
+                            (not (position1(param__f, j) = param__d)))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (((parent1(param__f,
+  j) = param__i) and (position1(param__f, j) = param__d)) -> (result = j))))) and
+  in_range2(result))))))
+
+axiom peek__post_axiom1 :
+  (forall param__t:us_rep2.
+  (forall param__i:int. forall param__d:int [peek1(param__t, param__i,
+  param__d)]. (((((dynamic_invariant1(param__t, true, false, true, true) and
+  in_range4(param__i)) and in_range5(param__d)) and
+  type_invariant(param__t)) and ((not (size(param__t) = 0)) and
+  ((((let temp___430qtunused = model1(param__t) : (int,us_rep4) farray in
+  (model1(param__t)[param__i]))).us_split_fields7).rec__tree_model__path_type__k = true))) ->
+  in_range2(peek1(param__t, param__i, param__d)))))
+
+axiom peek__def_axiom :
+  (forall param__t:us_rep2.
+  (forall param__i:int. forall param__d:int [peek1(param__t, param__i,
+  param__d)]. (peek1(param__t, param__i,
+  param__d) = peek(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  param__i, param__d))))
+
+axiom length__post_axiom :
+  (forall param__container:us_rep5 [length1(param__container)].
+  dynamic_invariant3(length1(param__container), true, false, true, true))
+
+axiom is_empty__post_axiom :
+  (forall param__container:us_rep5 [is_empty(param__container)].
+  (let result = is_empty(param__container) : bool in (((result = true) <->
+  (forall item:int. (not (in_range1(item) and (contains(param__container,
+  item) = true))))) and ((result = true) <->
+  (length1(param__container) = 0)))))
+
+axiom values__post_refine_axiom :
+  (forall param__t:us_rep2 [values(param__t)]. ((dynamic_invariant1(param__t,
+  true, false, true, true) and type_invariant(param__t)) -> (let result =
+  values(param__t) : us_rep5 in
+  (if (size1(((param__t).us_split_fields5).rec__search_trees__search_tree__struct) = 0) then (is_empty(result) = true) else (
+  (forall i:int. (((1 <= i) and (i <= 100)) -> (((((let temp___461qtunused =
+  model(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root))
+  : (int,us_rep4) farray in
+  (model(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root))[i]))).us_split_fields7).rec__tree_model__path_type__k = true) ->
+  (contains(result, to_rep((let temp___460qtunused =
+  ((param__t).us_split_fields5).rec__search_trees__search_tree__values
+  : (int,natural) farray in
+  (((param__t).us_split_fields5).rec__search_trees__search_tree__values[i])))) = true)))) and
+  (forall v1:int. (((0 <= v1) and (v1 <= 2147483647)) -> ((contains(result,
+  v1) = true) ->
+  (exists i:int. (((1 <= i) and (i <= 100)) and (((((let temp___462qtunused =
+  model(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root))
+  : (int,us_rep4) farray in
+  (model(((param__t).us_split_fields5).rec__search_trees__search_tree__struct,
+  to_rep1(((param__t).us_split_fields5).rec__search_trees__search_tree__root))[i]))).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (to_rep((let temp___463qtunused =
+  ((param__t).us_split_fields5).rec__search_trees__search_tree__values
+  : (int,natural) farray in
+  (((param__t).us_split_fields5).rec__search_trees__search_tree__values[i]))) = v1))))))))))))
+
+axiom contains__post_axiom : true
+
+axiom contains__post_axiom1 :
+  (forall param__t:us_rep2.
+  (forall param__v:int [contains1(param__t, param__v)].
+  (((dynamic_invariant1(param__t, true, false, true, true) and
+  in_range1(param__v)) and type_invariant(param__t)) -> ((contains1(param__t,
+  param__v) = true) <-> (contains(values(param__t), param__v) = true)))))
+
+axiom ole__post_axiom :
+  (forall param__left:us_rep5. forall param__right:us_rep5 [ole(param__left,
+  param__right)]. ((ole(param__left, param__right) = true) <->
+  (forall item:int. ((in_range1(item) and (contains(param__left,
+  item) = true)) -> (contains(param__right, item) = true)))))
+
+axiom oeq__post_axiom :
+  (forall param__left:us_rep5. forall param__right:us_rep5 [oeq1(param__left,
+  param__right)]. ((oeq1(param__left, param__right) = true) <->
+  ((ole(param__left, param__right) = true) and (ole(param__right,
+  param__left) = true))))
+
+axiom included_except__post_axiom :
+  (forall param__left:us_rep5. forall param__right:us_rep5.
+  (forall param__item:int [included_except(param__left, param__right,
+  param__item)]. (in_range1(param__item) -> ((included_except(param__left,
+  param__right, param__item) = true) <->
+  (forall e:int. ((in_range1(e) and (contains(param__left, e) = true)) ->
+  ((contains(param__right, e) = true) or (e = param__item))))))))
+
+axiom is_add__post_axiom1 : true
+
+axiom is_add__def_axiom1 :
+  (forall param__s1:us_rep5. forall param__s2:us_rep5.
+  (forall param__e:int [is_add1(param__s1, param__e, param__s2)].
+  ((is_add1(param__s1, param__e, param__s2) = true) <->
+  ((((not (contains(param__s1, param__e) = true)) and (contains(param__s2,
+  param__e) = true)) and (ole(param__s1, param__s2) = true)) and
+  (included_except(param__s2, param__s1, param__e) = true)))))
+
+axiom ordered_prefix__post_axiom :
+  (forall param__model:(int,us_rep4) farray.
+  (forall param__values:(int,natural) farray.
+  (forall param__i:int. forall param__j:int [ordered_prefix(param__model,
+  param__values, param__i, param__j)]. ((((dynamic_invariant(param__model,
+  true, false, true, true) and in_range4(param__i)) and
+  in_range4(param__j)) and
+  ((((((param__model[param__i])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  ((((param__model[param__j])).us_split_fields7).rec__tree_model__path_type__k = true)) and
+  (olt((((param__model[param__i])).us_split_fields7).rec__tree_model__path_type__a,
+  (((param__model[param__j])).us_split_fields7).rec__tree_model__path_type__a) = true))) ->
+  in_range(to_int(ordered_prefix(param__model, param__values, param__i,
+  param__j)))))))
+
+axiom ordered_prefix__def_axiom :
+  (forall param__model:(int,us_rep4) farray.
+  (forall param__values:(int,natural) farray.
+  (forall param__i:int. forall param__j:int [ordered_prefix(param__model,
+  param__values, param__i, param__j)]. ((ordered_prefix(param__model,
+  param__values, param__i, param__j) = true) <->
+  (if (get((((param__model[param__j])).us_split_fields7).rec__tree_model__path_type__a,
+  (last((((param__model[param__i])).us_split_fields7).rec__tree_model__path_type__a) + 1)) = 0) then (to_rep((param__values[param__j])) <  to_rep((param__values[param__i]))) else (to_rep((param__values[param__i])) <  to_rep((param__values[param__j]))))))))
+
+axiom ordered_leafs__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__root:int.
+  (forall param__values:(int,natural) farray [ordered_leafs(param__f,
+  param__root, param__values)]. (((dynamic_invariant2(param__f, true, false,
+  true, true) and in_range4(param__root)) and (valid_root(param__f,
+  param__root) = true)) -> in_range(to_int(ordered_leafs(param__f,
+  param__root, param__values)))))))
+
+axiom ordered_leafs__def_axiom :
+  (forall param__f:us_rep1.
+  (forall param__root:int.
+  (forall param__values:(int,natural) farray [ordered_leafs(param__f,
+  param__root, param__values)]. ((ordered_leafs(param__f, param__root,
+  param__values) = true) <->
+  (forall i:int. (((1 <= i) and (i <= 100)) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) ->
+  (((((((let temp___517qtunused = model(param__f, param__root)
+  : (int,us_rep4) farray in (model(param__f,
+  param__root)[i]))).us_split_fields7).rec__tree_model__path_type__k = true) and
+  ((((let temp___518qtunused = model(param__f, param__root)
+  : (int,us_rep4) farray in (model(param__f,
+  param__root)[j]))).us_split_fields7).rec__tree_model__path_type__k = true)) and
+  (olt((((let temp___519qtunused = model(param__f, param__root)
+  : (int,us_rep4) farray in (model(param__f,
+  param__root)[i]))).us_split_fields7).rec__tree_model__path_type__a,
+  (((let temp___520qtunused = model(param__f, param__root)
+  : (int,us_rep4) farray in (model(param__f,
+  param__root)[j]))).us_split_fields7).rec__tree_model__path_type__a) = true)) ->
+  (ordered_prefix(model(param__f, param__root), param__values, i,
+  j) = true))))))))))
+
+axiom lemma_contains_equivalent__post_axiom :
+  (forall param__container:us_rep5.
+  (forall param__item:int. ((in_range1(param__item) and
+  ((of_int(1) = true) and (not (contains(param__container,
+  param__item) = true)))) ->
+  (forall e:int. ((in_range1(e) and (contains(param__container,
+  e) = true)) -> (not (param__item = e)))))))
+
+axiom tree_structure__post_axiom : true
+
+axiom oeq__post_axiom1 : true
+
+axiom oeq__def_axiom :
+  (forall param__m1:(int,us_rep4) farray.
+  forall param__m2:(int,us_rep4) farray [oeq2(param__m1, param__m2)].
+  ((oeq2(param__m1, param__m2) = true) <->
+  (forall i:int. (((1 <= i) and (i <= 100)) ->
+  ((oeq((((param__m1[i])).us_split_fields7).rec__tree_model__path_type__a,
+  (((param__m2[i])).us_split_fields7).rec__tree_model__path_type__a) = true) and
+  (((((param__m1[i])).us_split_fields7).rec__tree_model__path_type__k = true) <->
+  ((((param__m2[i])).us_split_fields7).rec__tree_model__path_type__k = true)))))))
+
+ (* "search_trees.ads", line 45, characters 0-0 *)
+goal defqtvc :
+  (forall t__split_fields:us_split_fields4. forall i:int.
+  (dynamic_invariant1({ us_split_fields5 = t__split_fields }, true, false,
+  true, true) -> (in_range1(v) -> (in_range2(i) -> (type_invariant({
+  us_split_fields5 = t__split_fields }) -> ((size({ us_split_fields5 =
+  t__split_fields }) <  100) -> (type_invariant({ us_split_fields5 =
+  t__split_fields }) -> (let temp___1309 = values({ us_split_fields5 =
+  t__split_fields }) : us_rep5 in
+  ((if (size1((t__split_fields).rec__search_trees__search_tree__struct) = 0) then (is_empty(temp___1309) = true) else (
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((((model((t__split_fields).rec__search_trees__search_tree__struct,
+  to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i1])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+  (contains(temp___1309,
+  to_rep(((t__split_fields).rec__search_trees__search_tree__values[i1]))) = true)))) and
+  (forall v1:int. (((0 <= v1) and (v1 <= 2147483647)) ->
+  ((contains(temp___1309, v1) = true) ->
+  (exists i1:int. (((1 <= i1) and (i1 <= 100)) and
+  (((((model((t__split_fields).rec__search_trees__search_tree__struct,
+  to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i1])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (to_rep(((t__split_fields).rec__search_trees__search_tree__values[i1])) = v1))))))))) ->
+  (let temp___871 = contains(temp___1309, v) : bool in (type_invariant({
+  us_split_fields5 = t__split_fields }) -> (let temp___1304 = size({
+  us_split_fields5 = t__split_fields }) : int in ((in_range2(temp___1304) and
+  (temp___1304 = size1((t__split_fields).rec__search_trees__search_tree__struct))) ->
+  (forall t__split_fields1:us_split_fields4. forall i1:int.
+  ((exists t_old__split_fields:us_split_fields4.
+   ((t_old__split_fields = t__split_fields) and (dynamic_invariant1({
+   us_split_fields5 = t_old__split_fields }, true, false, true, true) and
+   (exists o:int.
+   ((to_rep1((t__split_fields).rec__search_trees__search_tree__root) = o) and
+   (exists spark__branch:bool.
+   ((spark__branch = (if (o = 0) then true else false)) and
+   (if (spark__branch = true) then (let o1 =
+   ((t__split_fields).rec__search_trees__search_tree__struct).us_split_fields3
+   : us_split_fields2 in
+   (exists param__f__split_fields:us_split_fields2. exists param__root:int.
+   (((((((((((size1({ us_split_fields3 = param__f__split_fields }) = (size1({
+   us_split_fields3 = o1 }) + 1)) and (not (valid_root({ us_split_fields3 =
+   o1 }, param__root) = true))) and (valid_root({ us_split_fields3 =
+   param__f__split_fields }, param__root) = true)) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> (parent1({
+   us_split_fields3 = param__f__split_fields }, i2) = parent1({
+   us_split_fields3 = o1 }, i2))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> ((not (parent1({
+   us_split_fields3 = param__f__split_fields }, i2) = 0)) -> (position1({
+   us_split_fields3 = param__f__split_fields }, i2) = position1({
+   us_split_fields3 = o1 }, i2)))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> ((valid_root({
+   us_split_fields3 = o1 }, i2) = true) -> (valid_root({ us_split_fields3 =
+   param__f__split_fields }, i2) = true))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> (((valid_root({
+   us_split_fields3 = param__f__split_fields }, i2) = true) and
+   (not (i2 = param__root))) -> (valid_root({ us_split_fields3 = o1 },
+   i2) = true))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> ((valid_root({
+   us_split_fields3 = o1 }, i2) = true) -> (oeq2(model({ us_split_fields3 =
+   param__f__split_fields }, i2), model({ us_split_fields3 = o1 },
+   i2)) = true))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) ->
+   ((not (i2 = param__root)) -> (not ((((model({ us_split_fields3 =
+   param__f__split_fields },
+   param__root)[i2])).us_split_fields7).rec__tree_model__path_type__k = true)))))) and
+   (dynamic_invariant2({ us_split_fields3 = param__f__split_fields }, true,
+   true, true, true) and in_range4(param__root))) and
+   (exists t__split_fields2:us_split_fields4. ((t__split_fields2 = {
+   rec__search_trees__search_tree__root =
+   (t__split_fields).rec__search_trees__search_tree__root;
+   rec__search_trees__search_tree__struct = { us_split_fields3 =
+   param__f__split_fields }; rec__search_trees__search_tree__values =
+   (t__split_fields).rec__search_trees__search_tree__values }) and
+   ((i1 = param__root) and
+   (exists o2:natural. ((to_rep(o2) = v) and (((1 <= i1) and (i1 <= 100)) and
+   (exists t__split_fields3:us_split_fields4. ((t__split_fields3 = {
+   rec__search_trees__search_tree__root =
+   (t__split_fields2).rec__search_trees__search_tree__root;
+   rec__search_trees__search_tree__struct =
+   (t__split_fields2).rec__search_trees__search_tree__struct;
+   rec__search_trees__search_tree__values =
+   ((t__split_fields2).rec__search_trees__search_tree__values[i1 <- o2])
+   }) and
+   (exists o3:extended_index_type. ((to_rep1(o3) = i1) and
+   (t__split_fields1 = { rec__search_trees__search_tree__root = o3;
+   rec__search_trees__search_tree__struct =
+   (t__split_fields3).rec__search_trees__search_tree__struct;
+   rec__search_trees__search_tree__values =
+   (t__split_fields3).rec__search_trees__search_tree__values })))))))))))))) else 
+   (exists o1:int.
+   ((to_rep1((t__split_fields).rec__search_trees__search_tree__root) = o1) and
+   (exists current:int. ((current = o1) and (in_range2(current) and
+   (exists previous:int. ((previous = 0) and (in_range2(previous) and
+   (exists d:int. ((d = 0) and (in_range5(d) and ((((not (current = 0)) and
+   (exists o2:int.
+   ((to_rep1((t__split_fields).rec__search_trees__search_tree__root) = o2) and
+   (in_range4(o2) and (let o3 =
+   (t__split_fields).rec__search_trees__search_tree__struct : us_rep1 in
+   (let temp___940 = model(o3, o2) : (int,us_rep4) farray in
+   ((dynamic_invariant(temp___940, true, false, true, true) and
+   ((((((((temp___940[o2])).us_split_fields7).rec__tree_model__path_type__k = true) and
+   (last((((temp___940[o2])).us_split_fields7).rec__tree_model__path_type__a) = 0)) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> ((not (i2 = o2)) ->
+   (if ((not (parent1(o3, i2) = 0)) and ((((temp___940[parent1(o3,
+   i2)])).us_split_fields7).rec__tree_model__path_type__k = true)) then ((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__k = true) else (not ((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__k = true))))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) ->
+   (if (((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__k = true) and
+   (not (i2 = o2))) then (is_add((((temp___940[parent1(o3,
+   i2)])).us_split_fields7).rec__tree_model__path_type__a, position1(o3, i2),
+   (((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__a) = true) else (last((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__a) = 0))))) and
+   (forall i2:int. (((1 <= i2) and (i2 <= 100)) ->
+   (((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+   (forall j:int. (((1 <= j) and (j <= 100)) ->
+   ((((((temp___940[j])).us_split_fields7).rec__tree_model__path_type__k = true) and
+   (oeq((((temp___940[i2])).us_split_fields7).rec__tree_model__path_type__a,
+   (((temp___940[j])).us_split_fields7).rec__tree_model__path_type__a) = true)) ->
+   (j = i2))))))))) and (((1 <= current) and (current <= 100)) and
+   (exists i2:int. exists current1:int. exists previous1:int. exists d1:int.
+   ((((((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__k = true) and
+   (forall i3:int. (((1 <= i3) and (i3 <= 100)) ->
+   (((((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+   ((olt((((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__a,
+   (((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__a) = true) ->
+   (if (get((((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__a,
+   (last((((model((t__split_fields).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__a) + 1)) = 0) then (v <  to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3]))) else (to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3])) <  v))))))) and
+   ((andb((if ((((i2 = i) and in_range2(current1)) and
+   in_range2(previous1)) and in_range5(d1)) then true else false),
+   (if (not (current1 = 0)) then true else false)) = true) and
+   (exists previous2:int. ((previous2 = current1) and (((1 <= previous2) and
+   (previous2 <= 100)) and
+   (exists o4:int.
+   ((to_rep(((t__split_fields).rec__search_trees__search_tree__values[previous2])) = o4) and
+   (exists spark__branch1:bool.
+   ((spark__branch1 = (if (v = o4) then true else false)) and
+   ((spark__branch1 = true) and ((i1 = 0) and
+   ((exists i3:int. (((1 <= i3) and (i3 <= 100)) and (((((model1({
+    us_split_fields5 = t__split_fields
+    })[i3])).us_split_fields7).rec__tree_model__path_type__k = true) and
+    (to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3])) = v)))) and
+   (contains1({ us_split_fields5 = t__split_fields }, v) = true)))))))))))))))))))))) and
+   (t__split_fields1 = t__split_fields)) or
+   (exists i2:int. exists previous1:int. exists d1:int.
+   ((if (not (current = 0)) then (exists o2:int.
+                                 ((to_rep1((t__split_fields).rec__search_trees__search_tree__root) = o2) and
+                                 (in_range4(o2) and (let o3 =
+                                 (t__split_fields).rec__search_trees__search_tree__struct
+                                 : us_rep1 in (let temp___940 = model(o3, o2)
+                                 : (int,us_rep4) farray in
+                                 ((dynamic_invariant(temp___940, true, false,
+                                 true, true) and
+                                 ((((((((temp___940[o2])).us_split_fields7).rec__tree_model__path_type__k = true) and
+                                 (last((((temp___940[o2])).us_split_fields7).rec__tree_model__path_type__a) = 0)) and
+                                 (forall i3:int. (((1 <= i3) and
+                                 (i3 <= 100)) -> ((not (i3 = o2)) ->
+                                 (if ((not (parent1(o3, i3) = 0)) and
+                                 ((((temp___940[parent1(o3,
+                                 i3)])).us_split_fields7).rec__tree_model__path_type__k = true)) then ((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__k = true) else (not ((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__k = true))))))) and
+                                 (forall i3:int. (((1 <= i3) and
+                                 (i3 <= 100)) ->
+                                 (if (((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__k = true) and
+                                 (not (i3 = o2))) then (is_add((((temp___940[parent1(o3,
+                                 i3)])).us_split_fields7).rec__tree_model__path_type__a,
+                                 position1(o3, i3),
+                                 (((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__a) = true) else (last((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__a) = 0))))) and
+                                 (forall i3:int. (((1 <= i3) and
+                                 (i3 <= 100)) ->
+                                 (((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+                                 (forall j:int. (((1 <= j) and (j <= 100)) ->
+                                 ((((((temp___940[j])).us_split_fields7).rec__tree_model__path_type__k = true) and
+                                 (oeq((((temp___940[i3])).us_split_fields7).rec__tree_model__path_type__a,
+                                 (((temp___940[j])).us_split_fields7).rec__tree_model__path_type__a) = true)) ->
+                                 (j = i3))))))))) and (((1 <= current) and
+                                 (current <= 100)) and
+                                 (exists current1:int. exists previous2:int.
+                                 exists d2:int.
+                                 ((((((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__k = true) and
+                                 (forall i3:int. (((1 <= i3) and
+                                 (i3 <= 100)) ->
+                                 (((((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+                                 ((olt((((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__a,
+                                 (((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__a) = true) ->
+                                 (if (get((((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[current1])).us_split_fields7).rec__tree_model__path_type__a,
+                                 (last((((model((t__split_fields).rec__search_trees__search_tree__struct,
+                                 to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__a) + 1)) = 0) then (v <  to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3]))) else (to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3])) <  v))))))) and
+                                 ((andb((if ((((i2 = i) and
+                                 in_range2(current1)) and
+                                 in_range2(previous2)) and
+                                 in_range5(d2)) then true else false),
+                                 (if (not (current1 = 0)) then true else false)) = true) and
+                                 ((previous1 = current1) and
+                                 ((((1 <= previous1) and
+                                 (previous1 <= 100)) and
+                                 (exists o4:int.
+                                 ((to_rep(((t__split_fields).rec__search_trees__search_tree__values[previous1])) = o4) and
+                                 (exists spark__branch1:bool.
+                                 ((spark__branch1 = (if (v = o4) then true else false)) and
+                                 ((not (spark__branch1 = true)) and
+                                 (((1 <= previous1) and
+                                 (previous1 <= 100)) and
+                                 (exists o5:int.
+                                 ((to_rep(((t__split_fields).rec__search_trees__search_tree__values[previous1])) = o5) and
+                                 (exists spark__branch2:bool.
+                                 ((spark__branch2 = (if (v <  o5) then true else false)) and
+                                 (if (spark__branch2 = true) then (d1 = 0) else (d1 = 1))))))))))))) and
+                                 (in_range4(previous1) and (let o4 =
+                                 (t__split_fields).rec__search_trees__search_tree__struct
+                                 : us_rep1 in (let o5 = peek(o4, previous1,
+                                 d1) : int in ((in_range2(o5) and
+                                 ((if (not (o5 = 0)) then ((position1(o4,
+                                 o5) = d1) and (parent1(o4,
+                                 o5) = previous1)) else (forall j:int.
+                                                        (((1 <= j) and
+                                                        (j <= 100)) ->
+                                                        ((parent1(o4,
+                                                        j) = previous1) ->
+                                                        (not (position1(o4,
+                                                        j) = d1)))))) and
+                                 (forall j:int. (((1 <= j) and (j <= 100)) ->
+                                 (((parent1(o4, j) = previous1) and
+                                 (position1(o4, j) = d1)) -> (o5 = j)))))) and
+                                 (exists current2:int. ((current2 = o5) and
+                                 (current2 = 0))))))))))))))))))) else (((i2 = i) and
+   (previous1 = previous)) and (d1 = d))) and (in_range4(previous1) and
+   ((forall i3:int. (((1 <= i3) and (i3 <= 100)) ->
+    (((((model((t__split_fields).rec__search_trees__search_tree__struct,
+    to_rep1((t__split_fields).rec__search_trees__search_tree__root))[i3])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+    (not (to_rep(((t__split_fields).rec__search_trees__search_tree__values[i3])) = v))))) and
+   (let o2 =
+   ((t__split_fields).rec__search_trees__search_tree__struct).us_split_fields3
+   : us_split_fields2 in (in_range4(previous1) and
+   (exists o3:int.
+   ((to_rep1((t__split_fields).rec__search_trees__search_tree__root) = o3) and
+   (in_range4(o3) and
+   (exists param__f__split_fields:us_split_fields2. exists param__v:int.
+   ((((((((((((((((size1({ us_split_fields3 = param__f__split_fields
+   }) = (size1({ us_split_fields3 = o2 }) + 1)) and ((((model({
+   us_split_fields3 = param__f__split_fields },
+   o3)[previous1])).us_split_fields7).rec__tree_model__path_type__k = true)) and
+   (peek({ us_split_fields3 = param__f__split_fields }, previous1,
+   d1) = param__v)) and
+   (forall i3:int. (((1 <= i3) and (i3 <= 100)) -> (if (valid_root({
+   us_split_fields3 = o2 }, i3) = true) then (valid_root({ us_split_fields3 =
+   param__f__split_fields }, i3) = true) else (not (valid_root({
+   us_split_fields3 = param__f__split_fields }, i3) = true)))))) and
+   ((((model({ us_split_fields3 = param__f__split_fields },
+   o3)[param__v])).us_split_fields7).rec__tree_model__path_type__k = true)) and
+   (not ((((model({ us_split_fields3 = o2 },
+   o3)[param__v])).us_split_fields7).rec__tree_model__path_type__k = true))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) -> ((not (j = param__v)) ->
+   (parent1({ us_split_fields3 = param__f__split_fields }, j) = parent1({
+   us_split_fields3 = o2 }, j)))))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) -> (((not (j = param__v)) and
+   (not (parent1({ us_split_fields3 = o2 }, j) = 0))) -> (position1({
+   us_split_fields3 = param__f__split_fields }, j) = position1({
+   us_split_fields3 = o2 }, j)))))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) ->
+   (forall e:int. (((0 <= e) and (e <= 1)) -> (((not (j = previous1)) or
+   (not (e = d1))) -> (peek({ us_split_fields3 = param__f__split_fields }, j,
+   e) = peek({ us_split_fields3 = o2 }, j, e)))))))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) -> (((((model({
+   us_split_fields3 = param__f__split_fields },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+   (((((model({ us_split_fields3 = o2 },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__k = true) or
+   (j = param__v)))))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) -> (((((model({
+   us_split_fields3 = o2 },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+   ((((model({ us_split_fields3 = param__f__split_fields },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__k = true))))) and
+   (forall j:int. (((1 <= j) and (j <= 100)) -> ((((((model({
+   us_split_fields3 = param__f__split_fields },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__k = true) and
+   (not (j = param__v))) -> (oeq((((model({ us_split_fields3 =
+   param__f__split_fields },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__a, (((model({
+   us_split_fields3 = o2 },
+   o3)[j])).us_split_fields7).rec__tree_model__path_type__a) = true))))) and
+   (is_add((((model({ us_split_fields3 = param__f__split_fields },
+   o3)[previous1])).us_split_fields7).rec__tree_model__path_type__a, d1,
+   (((model({ us_split_fields3 = param__f__split_fields },
+   o3)[param__v])).us_split_fields7).rec__tree_model__path_type__a) = true)) and
+   (forall i3:int. (((1 <= i3) and (i3 <= 100)) -> (((not (i3 = o3)) and
+   (valid_root({ us_split_fields3 = o2 }, i3) = true)) -> (oeq2(model({
+   us_split_fields3 = param__f__split_fields }, i3), model({
+   us_split_fields3 = o2 }, i3)) = true))))) and (dynamic_invariant2({
+   us_split_fields3 = param__f__split_fields }, true, true, true, true) and
+   in_range4(param__v))) and
+   (exists t__split_fields2:us_split_fields4. ((t__split_fields2 = {
+   rec__search_trees__search_tree__root =
+   (t__split_fields).rec__search_trees__search_tree__root;
+   rec__search_trees__search_tree__struct = { us_split_fields3 =
+   param__f__split_fields }; rec__search_trees__search_tree__values =
+   (t__split_fields).rec__search_trees__search_tree__values }) and
+   ((i1 = param__v) and
+   (exists o4:natural. ((to_rep(o4) = v) and (((1 <= i1) and (i1 <= 100)) and
+   ((t__split_fields1 = { rec__search_trees__search_tree__root =
+   (t__split_fields2).rec__search_trees__search_tree__root;
+   rec__search_trees__search_tree__struct =
+   (t__split_fields2).rec__search_trees__search_tree__struct;
+   rec__search_trees__search_tree__values =
+   ((t__split_fields2).rec__search_trees__search_tree__values[i1 <- o4])
+   }) and (in_range4(previous1) and (type_invariant({ us_split_fields5 =
+   t_old__split_fields }) and
+   (ordered_leafs((t__split_fields1).rec__search_trees__search_tree__struct,
+   to_rep1((t__split_fields1).rec__search_trees__search_tree__root),
+   (t__split_fields1).rec__search_trees__search_tree__values) = true))))))))))))))))))))))))))))))))))))))))) ->
+  (type_invariant({ us_split_fields5 = t__split_fields1 }) ->
+  (((temp___871 = true) -> (((((((((i1 = 0) and (root({ us_split_fields5 =
+  t__split_fields1 }) = root({ us_split_fields5 = t__split_fields }))) and
+  (size({ us_split_fields5 = t__split_fields1 }) = size({ us_split_fields5 =
+  t__split_fields }))) and (oeq1(values({ us_split_fields5 = t__split_fields1
+  }), values({ us_split_fields5 = t__split_fields })) = true)) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (parent({ us_split_fields5 =
+  t__split_fields1 }, j) = parent({ us_split_fields5 = t__split_fields },
+  j))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> ((not (parent({
+  us_split_fields5 = t__split_fields1 }, j) = 0)) -> (position({
+  us_split_fields5 = t__split_fields1 }, j) = position({ us_split_fields5 =
+  t__split_fields }, j)))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (((((model1({
+  us_split_fields5 = t__split_fields1
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+  ((((model1({ us_split_fields5 = t__split_fields
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) -> (((((model1({
+  us_split_fields5 = t__split_fields
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true) ->
+  ((((model1({ us_split_fields5 = t__split_fields1
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true))))) and
+  (forall j:int. (((1 <= j) and (j <= 100)) ->
+  (forall d:int. (((0 <= d) and (d <= 1)) -> (((((model1({ us_split_fields5 =
+  t__split_fields1
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true) -> (peek1({
+  us_split_fields5 = t__split_fields }, j, d) = peek1({ us_split_fields5 =
+  t__split_fields1 }, j, d))))))))) -> (((temp___1304 = 0) ->
+  ((((((not (i1 = 0)) and (size({ us_split_fields5 = t__split_fields1
+  }) = 1)) and (root({ us_split_fields5 = t__split_fields1 }) = i1)) and
+  (is_add1(values({ us_split_fields5 = t__split_fields }), v, values({
+  us_split_fields5 = t__split_fields1 })) = true)) and
+  (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> ((not (i2 = root({
+  us_split_fields5 = t__split_fields1 }))) -> (not ((((model1({
+  us_split_fields5 = t__split_fields1
+  })[i2])).us_split_fields7).rec__tree_model__path_type__k = true)))))) and
+  (forall i2:int. (((1 <= i2) and (i2 <= 100)) -> (parent({
+  us_split_fields5 = t__split_fields1 }, i2) = parent({ us_split_fields5 =
+  t__split_fields }, i2)))))) -> ((not (orb(temp___871,
+  (if (temp___1304 = 0) then true else false)) = true)) ->
+  (forall j:int. (((1 <= j) and (j <= 100)) ->
+  (forall d:int. (((0 <= d) and (d <= 1)) -> (((((((model1({
+  us_split_fields5 = t__split_fields1
+  })[j])).us_split_fields7).rec__tree_model__path_type__k = true) and
+  (not (i1 = j))) and ((not (j = parent({ us_split_fields5 = t__split_fields1
+  }, i1))) or (not (d = position({ us_split_fields5 = t__split_fields1 },
+  i1))))) -> (peek1({ us_split_fields5 = t__split_fields }, j, d) = peek1({
+  us_split_fields5 = t__split_fields1 }, j, d))))))))))))))))))))))))))

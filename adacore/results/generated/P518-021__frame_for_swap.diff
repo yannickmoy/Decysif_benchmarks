@@ -1,0 +1,5 @@
+cvc5 proved 0 out of 2 VCs
+  unproved test_swap_lines.adb_38_33_test_swap_lines.adb_67_4_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_swap_lines.adb_68_19_assert2_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 2 out of 2 VCs
+altergo proved 2 out of 2 VCs

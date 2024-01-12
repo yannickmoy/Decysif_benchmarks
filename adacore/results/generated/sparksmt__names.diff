@@ -1,0 +1,5 @@
+cvc5 proved 2 out of 2 VCs
+z3 proved 1 out of 2 VCs
+  unproved names.adb_134_16_loop_invariant_preserv3_1.smt2 (proved by ['cvc5', 'altergo'])
+altergo proved 1 out of 2 VCs
+  unproved names.ads_48_19_postcondition2_1.ae (proved by ['cvc5', 'z3'])

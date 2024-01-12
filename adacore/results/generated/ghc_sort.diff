@@ -1,0 +1,14 @@
+cvc5 proved 3 out of 8 VCs
+  unproved ghc_sort.adb_191_33_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved ghc_sort.adb_206_33_loop_invariant_init_1.smt2 (proved by ['z3', 'altergo'])
+  unproved ghc_sort.adb_24_13_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved ghc_sort.ads_54_14_postcondition_1.smt2 (proved by ['z3'])
+  unproved ghc_sort.ads_8_14_postcondition9_1.smt2 (proved by ['z3'])
+z3 proved 8 out of 8 VCs
+altergo proved 2 out of 8 VCs
+  unproved ghc_sort.adb_24_13_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved ghc_sort.adb_72_16_loop_invariant_preserv_1.ae (proved by ['cvc5', 'z3'])
+  unproved ghc_sort.adb_97_16_loop_invariant_init_1.ae (proved by ['cvc5', 'z3'])
+  unproved ghc_sort.ads_40_14_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved ghc_sort.ads_54_14_postcondition_1.ae (proved by ['z3'])
+  unproved ghc_sort.ads_8_14_postcondition9_1.ae (proved by ['z3'])

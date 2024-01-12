@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "filename": "generated/binary_search/z3/binary_search.ads_23_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 19625,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/binary_search/z3/binary_search.adb_26_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 28921,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/binary_search/z3/binary_search.adb_26_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 26186,
+      "time": 0.02
+    }
+  ]
+}

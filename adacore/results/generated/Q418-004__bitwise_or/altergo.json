@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q418-004__bitwise_or/altergo/bitset.ads_31_15_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/Q418-004__bitwise_or/altergo/bitset.ads_23_15_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic has_key : us_rep, int -> bool
+
+logic get : us_rep, int -> int
+
+logic bool_lt : int, int -> bool
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy1 : int
+
+logic length : us_rep -> int
+
+predicate dynamic_invariant(temp___expr_266: int, temp___is_init_262: bool,
+  temp___skip_constant_263: bool, temp___do_toplevel_264: bool,
+  temp___do_typ_inv_265: bool) = ((temp___is_init_262 = true) ->
+  ((temp___do_toplevel_264 = true) -> (0 <= temp___expr_266)))
+
+logic is_empty : us_rep -> bool
+
+logic keys_included_except : us_rep, us_rep, int -> bool
+
+logic elements_equal : us_rep, us_rep -> bool
+
+logic add : us_rep, int, int -> us_rep
+
+logic keys_included : us_rep, us_rep -> bool
+
+function same_keys(param__left: us_rep, param__right: us_rep) : bool =
+  andb(keys_included(param__left, param__right), keys_included(param__right,
+  param__left))
+
+logic elements_equal_except : us_rep, us_rep, int -> bool
+
+logic set : us_rep, int, int -> us_rep
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic dummy2 : us_rep
+
+logic is_add : us_rep, int, us_rep -> bool
+
+logic ole : us_rep, us_rep -> bool
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((1 <= indexqtint(i)) and (indexqtint(i) <= 2147483646)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483646))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic a : us_t
+
+logic i : int
+
+logic j : int
+
+logic occurrences : us_t, int, int -> us_rep
+
+logic occurrences__function_guard : us_rep, us_t, int, int -> prop
+
+predicate dynamic_invariant1(temp___expr_228: us_t, temp___is_init_224: bool,
+  temp___skip_constant_225: bool, temp___do_toplevel_226: bool,
+  temp___do_typ_inv_227: bool) = ((not (temp___skip_constant_225 = true)) ->
+  dynamic_property(1, 2147483646, first(temp___expr_228),
+  last(temp___expr_228)))
+
+predicate default_initial_assumption(temp___expr_324: us_rep,
+  temp___skip_top_level_325: bool) =
+  ((not (temp___skip_top_level_325 = true)) ->
+  (is_empty(temp___expr_324) = true))
+
+axiom has_key__post_axiom : true
+
+axiom lemma_has_key_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int. ((in_range(param__key) and ((of_int(1) = true) and
+  (not (has_key(param__container, param__key) = true)))) ->
+  (forall k:int. ((in_range(k) and (has_key(param__container, k) = true)) ->
+  (not (param__key = k)))))))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int [get(param__container, param__key)].
+  ((in_range(param__key) and (has_key(param__container,
+  param__key) = true)) -> in_range2(get(param__container, param__key)))))
+
+axiom lemma_get_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key_1:int. forall param__key_2:int.
+  (((in_range(param__key_1) and in_range(param__key_2)) and
+  (((of_int(1) = true) and (param__key_1 = param__key_2)) and
+  ((has_key(param__container, param__key_1) = true) or
+  (has_key(param__container, param__key_2) = true)))) ->
+  (get(param__container, param__key_1) = get(param__container,
+  param__key_2)))))
+
+axiom length__post_axiom :
+  (forall param__container:us_rep [length(param__container)].
+  dynamic_invariant(length(param__container), true, false, true, true))
+
+axiom is_empty__post_axiom :
+  (forall param__container:us_rep [is_empty(param__container)]. (let result =
+  is_empty(param__container) : bool in (((result = true) <->
+  (forall key:int. (not (in_range(key) and (has_key(param__container,
+  key) = true))))) and ((result = true) <->
+  (length(param__container) = 0)))))
+
+axiom ole__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep [ole(param__left,
+  param__right)]. ((ole(param__left, param__right) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((has_key(param__right, key) = true) and (get(param__right,
+  key) = get(param__left, key)))))))
+
+axiom keys_included__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep
+  [keys_included(param__left, param__right)]. ((keys_included(param__left,
+  param__right) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  (has_key(param__right, key) = true)))))
+
+axiom keys_included_except__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep.
+  (forall param__new_key:int [keys_included_except(param__left, param__right,
+  param__new_key)]. (in_range(param__new_key) ->
+  ((keys_included_except(param__left, param__right,
+  param__new_key) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((not (key = param__new_key)) -> (has_key(param__right, key) = true))))))))
+
+axiom elements_equal__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep
+  [elements_equal(param__left, param__right)]. ((elements_equal(param__left,
+  param__right) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((has_key(param__right, key) = true) and (get(param__left,
+  key) = get(param__right, key)))))))
+
+axiom elements_equal_except__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep.
+  (forall param__new_key:int [elements_equal_except(param__left,
+  param__right, param__new_key)]. (in_range(param__new_key) ->
+  ((elements_equal_except(param__left, param__right,
+  param__new_key) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((not (key = param__new_key)) -> ((has_key(param__right, key) = true) and
+  (get(param__left, key) = get(param__right, key))))))))))
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall param__occ:us_rep. forall param__res:us_rep.
+  (forall param__k:int [is_add(param__occ, param__k, param__res)].
+  ((is_add(param__occ, param__k, param__res) = true) <->
+  (if (has_key(param__occ, param__k) = true) then (((same_keys(param__res,
+  param__occ) = true) and ((get(param__res, param__k) - 1) = get(param__occ,
+  param__k))) and (elements_equal_except(param__res, param__occ,
+  param__k) = true)) else ((((has_key(param__res, param__k) = true) and
+  (get(param__res, param__k) = 1)) and (ole(param__occ,
+  param__res) = true)) and (keys_included_except(param__res, param__occ,
+  param__k) = true))))))
+
+ (* "recursive_mergesort.ads", line 72, characters 0-0 *)
+goal defqtvc :
+  (forall res:us_rep. (dynamic_invariant1(a, true, false, true, true) ->
+  (in_range2(i) -> (in_range1(j) -> (((j <  i) or (((first(a) <= i) and
+  (i <= last(a))) and ((first(a) <= j) and (j <= last(a))))) ->
+  (default_initial_assumption(res, false) ->
+  (forall res1:us_rep.
+  ((forall temp___compl_568:us_t. forall temp___compl_569:int.
+   forall temp___330:int.
+   occurrences__function_guard(occurrences(temp___compl_568,
+   temp___compl_569, temp___330), temp___compl_568, temp___compl_569,
+   temp___330)) ->
+  ((exists spark__branch:bool.
+   ((spark__branch = (if (i <= j) then true else false)) and
+   (if (spark__branch = true) then (let temp___compl_568 = a : us_t in
+   (let temp___compl_569 = i : int in (let o = (j - 1) : int in
+   (in_range1(o) and (let temp___571 = occurrences(temp___compl_568,
+   temp___compl_569, o) : us_rep in ((occurrences__function_guard(temp___571,
+   temp___compl_568, temp___compl_569, o) and (((o <  temp___compl_569) or
+   ((length(temp___571) <= ((o - temp___compl_569) + 1)) and
+   (forall k:int. ((in_range(k) and (has_key(temp___571, k) = true)) ->
+   (get(temp___571, k) <= ((o - temp___compl_569) + 1)))))) and
+   (if (bool_lt(o,
+   temp___compl_569) = true) then ((is_empty(temp___571) = true) and
+   (length(temp___571) = 0)) else (is_add((let temp___330 = (o - 1) : int in
+   occurrences(temp___compl_568, temp___compl_569, temp___330)),
+   to_rep((to_array(temp___compl_568)[o])), temp___571) = true)))) and
+   (exists res2:us_rep. ((res2 = temp___571) and (((first(a) <= j) and
+   (j <= last(a))) and
+   (exists o1:int. ((to_rep((to_array(a)[j])) = o1) and
+   (exists spark__branch1:bool. ((spark__branch1 = has_key(res2, o1)) and
+   (if (spark__branch1 = true) then (((first(a) <= j) and (j <= last(a))) and
+   (exists o2:int. ((to_rep((to_array(a)[j])) = o2) and (let o3 = get(res2,
+   o2) : int in (in_range2(o3) and (let o4 = (o3 + 1) : int in
+   (in_range(o4) and (((first(a) <= j) and (j <= last(a))) and
+   (exists o5:int. ((to_rep((to_array(a)[j])) = o5) and (let o6 = set(res2,
+   o5, o4) : us_rep in (((((length(res2) = length(o6)) and (get(o6,
+   o5) = o4)) and (same_keys(res2, o6) = true)) and
+   (elements_equal_except(res2, o6, o5) = true)) and (res1 = o6))))))))))))) else (((first(a) <= j) and
+   (j <= last(a))) and
+   (exists o2:int. ((to_rep((to_array(a)[j])) = o2) and (let o3 = add(res2,
+   o2, 1) : us_rep in (((((((length(res2) + 1) = length(o3)) and (has_key(o3,
+   o2) = true)) and (get(o3, o2) = 1)) and (elements_equal(res2,
+   o3) = true)) and (keys_included_except(o3, res2, o2) = true)) and
+   (res1 = o3)))))))))))))))))))) else (res1 = res)))) ->
+  (forall recursive_mergesort__occurrences__result:us_rep.
+  ((recursive_mergesort__occurrences__result = res1) -> (((j <  i) ->
+  ((is_empty(recursive_mergesort__occurrences__result) = true) and
+  (length(recursive_mergesort__occurrences__result) = 0))) ->
+  ((forall temp___587:int. occurrences__function_guard(occurrences(a, i,
+   temp___587), a, i, temp___587)) ->
+  (((not (j <  i)) -> (is_add((let temp___587 = (j - 1) : int in
+  occurrences(a, i, temp___587)), to_rep((to_array(a)[j])),
+  recursive_mergesort__occurrences__result) = true)) -> ((j <  i) or
+  ((length(recursive_mergesort__occurrences__result) <= ((j - i) + 1)) and
+  (forall k:int. ((in_range(k) and
+  (has_key(recursive_mergesort__occurrences__result, k) = true)) ->
+  (get(recursive_mergesort__occurrences__result, k) <= ((j - i) + 1))))))))))))))))))))

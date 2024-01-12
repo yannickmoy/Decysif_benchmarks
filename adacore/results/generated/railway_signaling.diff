@@ -1,0 +1,23 @@
+cvc5 proved 0 out of 14 VCs
+  unproved trains.adb_113_25_assert2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_113_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_132_19_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_160_22_loop_invariant_init_1.smt2 (proved by ['z3'])
+  unproved trains.adb_160_22_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_168_31_assert2_1.smt2 (proved by ['z3'])
+  unproved trains.adb_59_13_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_65_13_assert_1.smt2 (proved by ['z3'])
+  unproved trains.adb_77_25_assert2_1.smt2 (proved by ['z3'])
+  unproved trains.adb_77_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_84_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.adb_85_25_assert2_1.smt2 (proved by ['altergo'])
+  unproved trains.adb_85_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved trains.ads_228_14_postcondition_1.smt2 (proved by ['z3'])
+z3 proved 13 out of 14 VCs
+  unproved trains.adb_85_25_assert2_1.smt2 (proved by ['altergo'])
+altergo proved 9 out of 14 VCs
+  unproved trains.adb_160_22_loop_invariant_init_1.ae (proved by ['z3'])
+  unproved trains.adb_168_31_assert2_1.ae (proved by ['z3'])
+  unproved trains.adb_65_13_assert_1.ae (proved by ['z3'])
+  unproved trains.adb_77_25_assert2_1.ae (proved by ['z3'])
+  unproved trains.ads_228_14_postcondition_1.ae (proved by ['z3'])

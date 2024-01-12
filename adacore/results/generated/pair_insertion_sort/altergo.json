@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.ads_14_14_postcondition_1.ae",
+      "status": "unsat",
+      "steps": 3124,
+      "time": 0.2709
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_111_33_loop_invariant_preserv_1.ae",
+      "status": "unsat",
+      "steps": 8489,
+      "time": 1.0471
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_78_36_loop_invariant_preserv2_1.ae",
+      "status": "unsat",
+      "steps": 39558,
+      "time": 5.7919
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_124_36_loop_invariant_preserv_1.ae",
+      "status": "unsat",
+      "steps": 18278,
+      "time": 2.7673
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_95_36_loop_invariant_preserv2_1.ae",
+      "status": "unsat",
+      "steps": 48933,
+      "time": 6.8003
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_96_36_loop_invariant_init2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/perm.ads_38_8_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_95_36_loop_invariant_init2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_109_33_loop_invariant_preserv_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_96_36_loop_invariant_preserv2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/pair_insertion_sort/altergo/pair_insertion_sort.adb_97_36_loop_invariant_init2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

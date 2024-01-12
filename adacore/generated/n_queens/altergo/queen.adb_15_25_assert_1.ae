@@ -1,0 +1,76 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((1 <= indexqtint(i)) and (indexqtint(i) <= 8)))
+
+predicate in_range(x: int) = ((1 <= x) and (x <= 8))
+
+function to_rep(x: index) : int = indexqtint(x)
+
+logic of_rep : int -> index
+
+axiom inversion_axiom : (forall x:index [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:index [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function consistent(param__b: (int,index) farray, param__k: int) : bool =
+  (if (forall i:int. (((1 <= i) and (i <= param__k)) ->
+      (forall j:int. (((1 <= j) and (j <= (i - 1))) ->
+      (((not (to_rep((param__b[i])) = to_rep((param__b[j])))) and
+      (not ((i - j) = (to_rep((param__b[i])) - to_rep((param__b[j])))))) and
+      (not ((i - j) = (to_rep((param__b[j])) - to_rep((param__b[i])))))))))) then true else false)
+
+logic i : int
+
+logic c : (int,index) farray
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+ (* "queen.ads", line 34, characters 0-0 *)
+goal defqtvc :
+  (forall b:(int,index) farray. forall done__:bool. (in_range(i) ->
+  ((((not (done__ = true)) and
+  (forall j:int. (((1 <= j) and (j <= i)) ->
+  (to_rep((c[j])) = to_rep((b[j])))))) and ((1 <  i) -> (consistent(b,
+  (i - 1)) = true))) -> (let o = i : int in (let o1 = consistent(b, o)
+  : bool in (((o1 = true) <->
+  (forall i1:int. (((1 <= i1) and (i1 <= o)) ->
+  (forall j:int. (((1 <= j) and (j <= (i1 - 1))) ->
+  (((not (to_rep((b[i1])) = to_rep((b[j])))) and
+  (not ((i1 - j) = (to_rep((b[i1])) - to_rep((b[j])))))) and
+  (not ((i1 - j) = (to_rep((b[j])) - to_rep((b[i1]))))))))))) ->
+  (forall spark__branch:bool. ((spark__branch = o1) ->
+  ((not (spark__branch = true)) -> (not (consistent(c, i) = true)))))))))))

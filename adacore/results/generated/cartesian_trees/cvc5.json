@@ -1,0 +1,1540 @@
+{
+  "results": [
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_544_13_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 28998,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_140_13_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 28421,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_208_33_index_check3_1.smt2",
+      "status": "unsat",
+      "steps": 39991,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_519_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 36657,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 87057,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_208_68_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 55232,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition22_1.smt2",
+      "status": "unsat",
+      "steps": 82090,
+      "time": 0.35
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_505_16_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 25945,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 75569,
+      "time": 0.38
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 99810,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_209_33_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 40030,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_324_57_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 96984,
+      "time": 0.43
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition30_1.smt2",
+      "status": "unsat",
+      "steps": 77119,
+      "time": 0.43
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check2_1.smt2",
+      "status": "unsat",
+      "steps": 71936,
+      "time": 0.27
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition23_1.smt2",
+      "status": "unsat",
+      "steps": 79482,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition11_1.smt2",
+      "status": "unsat",
+      "steps": 104694,
+      "time": 0.55
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition17_1.smt2",
+      "status": "unsat",
+      "steps": 86610,
+      "time": 0.42
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check8_1.smt2",
+      "status": "unsat",
+      "steps": 93734,
+      "time": 0.61
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_326_57_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 98002,
+      "time": 0.63
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_285_36_assert_1.smt2",
+      "status": "unsat",
+      "steps": 105144,
+      "time": 0.81
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition22_1.smt2",
+      "status": "unsat",
+      "steps": 73951,
+      "time": 0.28
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_403_58_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 73457,
+      "time": 0.3
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_270_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 120268,
+      "time": 0.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_442_66_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 98770,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_281_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 154033,
+      "time": 1.58
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition37_1.smt2",
+      "status": "unsat",
+      "steps": 97038,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check6_1.smt2",
+      "status": "unsat",
+      "steps": 79608,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_277_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 126713,
+      "time": 1.44
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_443_46_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 287902,
+      "time": 3.02
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_251_17_predicate_check_1.smt2",
+      "status": "unsat",
+      "steps": 211596,
+      "time": 3.25
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_535_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 27504,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 69986,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition37_1.smt2",
+      "status": "unsat",
+      "steps": 100263,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_442_66_index_check8_1.smt2",
+      "status": "unsat",
+      "steps": 100963,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 84671,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 591386,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_378_31_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 269391,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_276_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 513283,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_422_43_precondition21_1.smt2",
+      "status": "timeout",
+      "steps": 498239,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_187_36_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 655906,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition10_1.smt2",
+      "status": "timeout",
+      "steps": 660945,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_380_42_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 273695,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_378_31_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 584952,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_472_34_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 393974,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_205_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 59105,
+      "time": 0.29
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition47_1.smt2",
+      "status": "timeout",
+      "steps": 473067,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 564095,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_321_28_precondition33_1.smt2",
+      "status": "timeout",
+      "steps": 541584,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_385_36_assert_1.smt2",
+      "status": "timeout",
+      "steps": 368706,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_484_60_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 586530,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 85868,
+      "time": 0.49
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_441_66_index_check8_1.smt2",
+      "status": "unsat",
+      "steps": 100911,
+      "time": 0.49
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_263_28_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 545568,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.ads_51_7_range_check2_1.smt2",
+      "status": "unknown",
+      "steps": 1566,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition9_1.smt2",
+      "status": "timeout",
+      "steps": 430618,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition62_1.smt2",
+      "status": "unsat",
+      "steps": 93823,
+      "time": 0.45
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 73063,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition51_1.smt2",
+      "status": "unsat",
+      "steps": 92437,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_544_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 28619,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_365_84_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 477526,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_441_66_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 98675,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_324_57_index_check10_1.smt2",
+      "status": "unsat",
+      "steps": 89429,
+      "time": 0.56
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_443_46_assert7_1.smt2",
+      "status": "unsat",
+      "steps": 121167,
+      "time": 0.73
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition20_1.smt2",
+      "status": "unsat",
+      "steps": 99795,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_325_43_precondition39_1.smt2",
+      "status": "unsat",
+      "steps": 98217,
+      "time": 0.57
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_472_34_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 437307,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_442_66_index_check6_1.smt2",
+      "status": "unsat",
+      "steps": 85440,
+      "time": 0.39
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_448_68_index_check8_1.smt2",
+      "status": "unsat",
+      "steps": 91031,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_315_42_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 551716,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_448_68_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 106413,
+      "time": 0.49
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_348_31_precondition75_1.smt2",
+      "status": "timeout",
+      "steps": 619949,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition12_1.smt2",
+      "status": "timeout",
+      "steps": 632348,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_131_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 26890,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition32_1.smt2",
+      "status": "unsat",
+      "steps": 84477,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_192_16_loop_invariant_preserv6_1.smt2",
+      "status": "unsat",
+      "steps": 66002,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition32_1.smt2",
+      "status": "unsat",
+      "steps": 90746,
+      "time": 0.33
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 72005,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_115_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 37131,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_240_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 40375,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_207_89_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 50721,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 61673,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_425_57_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 177873,
+      "time": 1.85
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_257_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 37356,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_140_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 44773,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition23_1.smt2",
+      "status": "unsat",
+      "steps": 125567,
+      "time": 0.69
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 68268,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_402_57_index_check2_1.smt2",
+      "status": "unsat",
+      "steps": 61077,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 73738,
+      "time": 0.28
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_331_43_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 97728,
+      "time": 0.47
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_80_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 12126,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_403_58_index_check2_1.smt2",
+      "status": "unsat",
+      "steps": 61146,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_101_16_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 24782,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition22_1.smt2",
+      "status": "unsat",
+      "steps": 79008,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_131_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 43788,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition34_1.smt2",
+      "status": "unsat",
+      "steps": 100474,
+      "time": 0.48
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition32_1.smt2",
+      "status": "unsat",
+      "steps": 87455,
+      "time": 0.38
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_263_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 88376,
+      "time": 0.54
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 132800,
+      "time": 0.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_205_16_loop_invariant_preserv5_1.smt2",
+      "status": "unsat",
+      "steps": 62882,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_205_16_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 62507,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition16_1.smt2",
+      "status": "unsat",
+      "steps": 71552,
+      "time": 0.27
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition39_1.smt2",
+      "status": "unsat",
+      "steps": 177000,
+      "time": 1.47
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_544_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 27999,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_404_93_index_check2_1.smt2",
+      "status": "unsat",
+      "steps": 62369,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_248_42_assert_1.smt2",
+      "status": "unsat",
+      "steps": 319015,
+      "time": 4.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_305_92_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 46510,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_403_37_assert_1.smt2",
+      "status": "unsat",
+      "steps": 85943,
+      "time": 0.58
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_208_68_index_check3_1.smt2",
+      "status": "unsat",
+      "steps": 55309,
+      "time": 0.18
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition65_1.smt2",
+      "status": "timeout",
+      "steps": 1083790,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 107700,
+      "time": 0.82
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition17_1.smt2",
+      "status": "unsat",
+      "steps": 75341,
+      "time": 0.29
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_219_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 41836,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_323_43_precondition24_1.smt2",
+      "status": "timeout",
+      "steps": 452334,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_234_31_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 398595,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition21_1.smt2",
+      "status": "timeout",
+      "steps": 491910,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_479_42_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 280145,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_329_92_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 675094,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition25_1.smt2",
+      "status": "timeout",
+      "steps": 567250,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 396826,
+      "time": 9.97
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_264_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 442186,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_131_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 27529,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition54_1.smt2",
+      "status": "timeout",
+      "steps": 515496,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_329_92_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 478953,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_380_19_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 398031,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition19_1.smt2",
+      "status": "timeout",
+      "steps": 458663,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_441_46_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 65245,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_assert7_1.smt2",
+      "status": "unsat",
+      "steps": 102648,
+      "time": 0.48
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 71439,
+      "time": 0.3
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_477_31_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 278368,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition37_1.smt2",
+      "status": "unsat",
+      "steps": 85443,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition8_1.smt2",
+      "status": "unsat",
+      "steps": 83300,
+      "time": 0.35
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_209_67_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 55133,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 486605,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_364_28_loop_invariant_preserv4_1.smt2",
+      "status": "timeout",
+      "steps": 540426,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_305_45_assert4_1.smt2",
+      "status": "timeout",
+      "steps": 595537,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_463_28_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 576588,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_58_10_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 7662,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_441_66_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 129400,
+      "time": 0.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_234_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 26557,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition17_1.smt2",
+      "status": "unsat",
+      "steps": 85270,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 447592,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_439_46_precondition21_1.smt2",
+      "status": "timeout",
+      "steps": 465687,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition27_1.smt2",
+      "status": "unsat",
+      "steps": 94343,
+      "time": 0.56
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 84362,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_443_46_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 98051,
+      "time": 0.51
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_326_57_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 102196,
+      "time": 0.54
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_440_46_precondition24_1.smt2",
+      "status": "timeout",
+      "steps": 548892,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_385_60_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 580030,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_404_93_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 74153,
+      "time": 0.29
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition17_1.smt2",
+      "status": "unsat",
+      "steps": 91023,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_544_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 44214,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_325_43_precondition34_1.smt2",
+      "status": "unsat",
+      "steps": 102579,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_304_37_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 110858,
+      "time": 0.66
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_365_84_precondition30_1.smt2",
+      "status": "timeout",
+      "steps": 487768,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_258_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 26588,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition14_1.smt2",
+      "status": "unsat",
+      "steps": 80067,
+      "time": 0.33
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_325_43_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 510892,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_422_43_precondition9_1.smt2",
+      "status": "timeout",
+      "steps": 463222,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_365_84_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 534642,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_364_28_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 529049,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition25_1.smt2",
+      "status": "timeout",
+      "steps": 434589,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_535_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 27280,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition37_1.smt2",
+      "status": "unsat",
+      "steps": 89363,
+      "time": 0.39
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_212_17_predicate_check_1.smt2",
+      "status": "timeout",
+      "steps": 213779,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition44_1.smt2",
+      "status": "unsat",
+      "steps": 84042,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_276_38_index_check_1.smt2",
+      "status": "timeout",
+      "steps": 522156,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_441_66_index_check6_1.smt2",
+      "status": "unsat",
+      "steps": 85356,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_187_36_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1261927,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_284_90_index_check_1.smt2",
+      "status": "timeout",
+      "steps": 536180,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_370_82_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 473877,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition17_1.smt2",
+      "status": "unsat",
+      "steps": 83284,
+      "time": 0.31
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_544_13_loop_invariant_preserv5_1.smt2",
+      "status": "unsat",
+      "steps": 66467,
+      "time": 0.27
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 484101,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_275_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 561101,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 537685,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_422_43_precondition12_1.smt2",
+      "status": "timeout",
+      "steps": 584023,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 388898,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition33_1.smt2",
+      "status": "timeout",
+      "steps": 628595,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_323_43_precondition21_1.smt2",
+      "status": "timeout",
+      "steps": 480394,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 385368,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_341_46_precondition24_1.smt2",
+      "status": "timeout",
+      "steps": 658718,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_283_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 170730,
+      "time": 1.62
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_331_43_assert7_1.smt2",
+      "status": "unsat",
+      "steps": 101991,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_342_46_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 64951,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 161566,
+      "time": 1.39
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition37_1.smt2",
+      "status": "unsat",
+      "steps": 97873,
+      "time": 0.45
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_424_43_precondition19_1.smt2",
+      "status": "unsat",
+      "steps": 93560,
+      "time": 0.44
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_324_57_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 102047,
+      "time": 0.53
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_425_57_index_check8_1.smt2",
+      "status": "unsat",
+      "steps": 93268,
+      "time": 0.45
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_140_13_loop_invariant_preserv5_1.smt2",
+      "status": "unsat",
+      "steps": 63959,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_205_16_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 77862,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_282_90_index_check_1.smt2",
+      "status": "timeout",
+      "steps": 622041,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_425_57_index_check14_1.smt2",
+      "status": "unsat",
+      "steps": 98459,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_404_45_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 64546,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_535_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 42729,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_140_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 28412,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition32_1.smt2",
+      "status": "unsat",
+      "steps": 90583,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_207_73_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 51212,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_403_37_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 95409,
+      "time": 0.76
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_302_37_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 369853,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_442_46_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 66118,
+      "time": 0.27
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_200_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 59529,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_402_57_index_check4_1.smt2",
+      "status": "unsat",
+      "steps": 73181,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_205_16_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 65335,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition9_1.smt2",
+      "status": "unsat",
+      "steps": 73940,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_439_46_precondition12_1.smt2",
+      "status": "timeout",
+      "steps": 578597,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 430995,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_479_19_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 393821,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_463_28_loop_invariant_preserv4_1.smt2",
+      "status": "timeout",
+      "steps": 474547,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 506691,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 609361,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition10_1.smt2",
+      "status": "timeout",
+      "steps": 565757,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_321_28_precondition47_1.smt2",
+      "status": "timeout",
+      "steps": 473323,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 384127,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition12_1.smt2",
+      "status": "timeout",
+      "steps": 634326,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_370_82_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 527371,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_469_83_precondition10_1.smt2",
+      "status": "timeout",
+      "steps": 382841,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_401_37_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 366975,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition27_1.smt2",
+      "status": "unsat",
+      "steps": 82798,
+      "time": 0.35
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_404_45_assert4_1.smt2",
+      "status": "timeout",
+      "steps": 892685,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_443_46_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 197143,
+      "time": 1.64
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition30_1.smt2",
+      "status": "timeout",
+      "steps": 499378,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_428_93_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 587564,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_442_66_index_check16_1.smt2",
+      "status": "unsat",
+      "steps": 129679,
+      "time": 0.85
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 596083,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition30_1.smt2",
+      "status": "timeout",
+      "steps": 432683,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_228_17_predicate_check_1.smt2",
+      "status": "timeout",
+      "steps": 402654,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_425_57_index_check6_1.smt2",
+      "status": "unsat",
+      "steps": 80298,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_423_57_index_check10_1.smt2",
+      "status": "unsat",
+      "steps": 89413,
+      "time": 0.47
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition72_1.smt2",
+      "status": "unsat",
+      "steps": 106089,
+      "time": 0.6
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 487134,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_420_28_precondition26_1.smt2",
+      "status": "timeout",
+      "steps": 548884,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 540053,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_315_42_precondition25_1.smt2",
+      "status": "timeout",
+      "steps": 445095,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_414_42_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 393271,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_340_46_precondition24_1.smt2",
+      "status": "timeout",
+      "steps": 627517,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition35_1.smt2",
+      "status": "timeout",
+      "steps": 570233,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 450597,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_315_42_precondition40_1.smt2",
+      "status": "timeout",
+      "steps": 506657,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_479_42_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 574995,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_447_31_precondition75_1.smt2",
+      "status": "timeout",
+      "steps": 509164,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_422_43_precondition24_1.smt2",
+      "status": "timeout",
+      "steps": 577616,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_373_34_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 473819,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_252_17_predicate_check_1.smt2",
+      "status": "unsat",
+      "steps": 213012,
+      "time": 4.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_265_30_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 476152,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_227_17_predicate_check_1.smt2",
+      "status": "timeout",
+      "steps": 325301,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_477_31_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 574878,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_186_36_precondition2_1.smt2",
+      "status": "timeout",
+      "steps": 644155,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_380_42_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 576848,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_270_25_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 1547476,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_464_85_precondition20_1.smt2",
+      "status": "timeout",
+      "steps": 460306,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_344_46_assert8_1.smt2",
+      "status": "timeout",
+      "steps": 435299,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_401_37_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 271998,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_365_84_precondition25_1.smt2",
+      "status": "timeout",
+      "steps": 585100,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_484_36_assert_1.smt2",
+      "status": "timeout",
+      "steps": 392614,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/cartesian_trees/cvc5/cartesian_trees.adb_315_42_precondition30_1.smt2",
+      "status": "timeout",
+      "steps": 530169,
+      "time": 9.87
+    }
+  ]
+}

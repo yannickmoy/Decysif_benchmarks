@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q418-004__bitwise_or/z3/bitset.ads_31_15_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 36056,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q418-004__bitwise_or/z3/bitset.ads_23_15_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 24035,
+      "time": 0.02
+    }
+  ]
+}

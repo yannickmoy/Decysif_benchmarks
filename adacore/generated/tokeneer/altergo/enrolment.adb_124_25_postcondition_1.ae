@@ -1,0 +1,1215 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function to_int(b: bool) : int = (if (b = true) then 1 else 0)
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy : us_rep
+
+type issueridt
+
+logic issueridtqtint : issueridt -> int
+
+axiom issueridtqtaxiom :
+  (forall i:issueridt. ((0 <= issueridtqtint(i)) and
+  (issueridtqtint(i) <= 4294967295)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 4294967295))
+
+function to_rep2(x: issueridt) : int = issueridtqtint(x)
+
+logic of_rep2 : int -> issueridt
+
+axiom inversion_axiom2 :
+  (forall x:issueridt [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:issueridt [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type namecountt
+
+logic namecounttqtint : namecountt -> int
+
+axiom namecounttqtaxiom :
+  (forall i:namecountt. ((0 <= namecounttqtint(i)) and
+  (namecounttqtint(i) <= 40)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 40))
+
+function to_rep3(x: namecountt) : int = namecounttqtint(x)
+
+logic of_rep3 : int -> namecountt
+
+axiom inversion_axiom3 :
+  (forall x:namecountt [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:namecountt [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+type us_split_fields = { rec__cryptotypes__issuert__id : issueridt;
+rec__cryptotypes__issuert__namelength : namecountt;
+rec__cryptotypes__issuert__name : (int,character) farray }
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic cryptotypes__issuert__id__first__bit : int
+
+logic cryptotypes__issuert__id__last__bit : int
+
+logic cryptotypes__issuert__id__position : int
+
+axiom cryptotypes__issuert__id__first__bit_axiom :
+  (0 <= cryptotypes__issuert__id__first__bit)
+
+axiom cryptotypes__issuert__id__last__bit_axiom :
+  (cryptotypes__issuert__id__first__bit <  cryptotypes__issuert__id__last__bit)
+
+axiom cryptotypes__issuert__id__position_axiom :
+  (0 <= cryptotypes__issuert__id__position)
+
+logic cryptotypes__issuert__namelength__first__bit : int
+
+logic cryptotypes__issuert__namelength__last__bit : int
+
+logic cryptotypes__issuert__namelength__position : int
+
+axiom cryptotypes__issuert__namelength__first__bit_axiom :
+  (0 <= cryptotypes__issuert__namelength__first__bit)
+
+axiom cryptotypes__issuert__namelength__last__bit_axiom :
+  (cryptotypes__issuert__namelength__first__bit <  cryptotypes__issuert__namelength__last__bit)
+
+axiom cryptotypes__issuert__namelength__position_axiom :
+  (0 <= cryptotypes__issuert__namelength__position)
+
+logic cryptotypes__issuert__name__first__bit : int
+
+logic cryptotypes__issuert__name__last__bit : int
+
+logic cryptotypes__issuert__name__position : int
+
+axiom cryptotypes__issuert__name__first__bit_axiom :
+  (0 <= cryptotypes__issuert__name__first__bit)
+
+axiom cryptotypes__issuert__name__last__bit_axiom :
+  (cryptotypes__issuert__name__first__bit <  cryptotypes__issuert__name__last__bit)
+
+axiom cryptotypes__issuert__name__position_axiom :
+  (0 <= cryptotypes__issuert__name__position)
+
+logic dummy1 : us_rep1
+
+type us_split_fields2 = { rec__keystore__optionalprivatekeyt__ispresent :
+bool; rec__keystore__optionalprivatekeyt__owner : us_rep1 }
+
+type us_rep2 = { us_split_fields3 : us_split_fields2
+}
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic keystore__optionalprivatekeyt__ispresent__first__bit : int
+
+logic keystore__optionalprivatekeyt__ispresent__last__bit : int
+
+logic keystore__optionalprivatekeyt__ispresent__position : int
+
+axiom keystore__optionalprivatekeyt__ispresent__first__bit_axiom :
+  (0 <= keystore__optionalprivatekeyt__ispresent__first__bit)
+
+axiom keystore__optionalprivatekeyt__ispresent__last__bit_axiom :
+  (keystore__optionalprivatekeyt__ispresent__first__bit <  keystore__optionalprivatekeyt__ispresent__last__bit)
+
+axiom keystore__optionalprivatekeyt__ispresent__position_axiom :
+  (0 <= keystore__optionalprivatekeyt__ispresent__position)
+
+logic keystore__optionalprivatekeyt__owner__first__bit : int
+
+logic keystore__optionalprivatekeyt__owner__last__bit : int
+
+logic keystore__optionalprivatekeyt__owner__position : int
+
+axiom keystore__optionalprivatekeyt__owner__first__bit_axiom :
+  (0 <= keystore__optionalprivatekeyt__owner__first__bit)
+
+axiom keystore__optionalprivatekeyt__owner__last__bit_axiom :
+  (keystore__optionalprivatekeyt__owner__first__bit <  keystore__optionalprivatekeyt__owner__last__bit)
+
+axiom keystore__optionalprivatekeyt__owner__position_axiom :
+  (0 <= keystore__optionalprivatekeyt__owner__position)
+
+logic dummy2 : us_rep2
+
+predicate dynamic_invariant(temp___expr_271: us_rep2,
+  temp___is_init_267: bool, temp___skip_constant_268: bool,
+  temp___do_toplevel_269: bool, temp___do_typ_inv_270: bool) = true
+
+logic privatekeypresent : us_split_fields2 -> bool
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size2 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic nodescription : (int,character) farray
+
+logic istis : bool
+
+logic nullrawcertificate : (int,character) farray
+
+type algorithmt
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 10))
+
+logic to_rep4 : algorithmt -> int
+
+logic of_rep4 : int -> algorithmt
+
+axiom inversion_axiom4 :
+  (forall x:algorithmt [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 :
+  (forall x:algorithmt [to_rep4(x)]. in_range6(to_rep4(x)))
+
+axiom coerce_axiom4 :
+  (forall x:int [to_rep4(of_rep4(x))]. (in_range6(x) ->
+  (to_rep4(of_rep4(x)) = x)))
+
+type keyidt
+
+logic keyidtqtint : keyidt -> int
+
+axiom keyidtqtaxiom :
+  (forall i:keyidt. ((0 <= keyidtqtint(i)) and
+  (keyidtqtint(i) <= 4294967295)))
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 4294967295))
+
+function to_rep5(x: keyidt) : int = keyidtqtint(x)
+
+logic of_rep5 : int -> keyidt
+
+axiom inversion_axiom5 :
+  (forall x:keyidt [to_rep5(x)]. (of_rep5(to_rep5(x)) = x))
+
+axiom range_axiom5 : (forall x:keyidt [to_rep5(x)]. in_range7(to_rep5(x)))
+
+axiom coerce_axiom5 :
+  (forall x:int [to_rep5(of_rep5(x))]. (in_range7(x) ->
+  (to_rep5(of_rep5(x)) = x)))
+
+type keylengtht
+
+logic keylengthtqtint : keylengtht -> int
+
+axiom keylengthtqtaxiom :
+  (forall i:keylengtht. ((0 <= keylengthtqtint(i)) and
+  (keylengthtqtint(i) <= 128)))
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 128))
+
+function to_rep6(x: keylengtht) : int = keylengthtqtint(x)
+
+logic of_rep6 : int -> keylengtht
+
+axiom inversion_axiom6 :
+  (forall x:keylengtht [to_rep6(x)]. (of_rep6(to_rep6(x)) = x))
+
+axiom range_axiom6 :
+  (forall x:keylengtht [to_rep6(x)]. in_range8(to_rep6(x)))
+
+axiom coerce_axiom6 :
+  (forall x:int [to_rep6(of_rep6(x))]. (in_range8(x) ->
+  (to_rep6(of_rep6(x)) = x)))
+
+type us_split_fields4 = { rec__cryptotypes__keypartt__algorithmid :
+algorithmt; rec__cryptotypes__keypartt__keyid : keyidt;
+rec__cryptotypes__keypartt__keylength : keylengtht }
+
+type us_rep3 = { us_split_fields5 : us_split_fields4
+}
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+logic cryptotypes__keypartt__algorithmid__first__bit : int
+
+logic cryptotypes__keypartt__algorithmid__last__bit : int
+
+logic cryptotypes__keypartt__algorithmid__position : int
+
+axiom cryptotypes__keypartt__algorithmid__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__algorithmid__first__bit)
+
+axiom cryptotypes__keypartt__algorithmid__last__bit_axiom :
+  (cryptotypes__keypartt__algorithmid__first__bit <  cryptotypes__keypartt__algorithmid__last__bit)
+
+axiom cryptotypes__keypartt__algorithmid__position_axiom :
+  (0 <= cryptotypes__keypartt__algorithmid__position)
+
+logic cryptotypes__keypartt__keyid__first__bit : int
+
+logic cryptotypes__keypartt__keyid__last__bit : int
+
+logic cryptotypes__keypartt__keyid__position : int
+
+axiom cryptotypes__keypartt__keyid__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__keyid__first__bit)
+
+axiom cryptotypes__keypartt__keyid__last__bit_axiom :
+  (cryptotypes__keypartt__keyid__first__bit <  cryptotypes__keypartt__keyid__last__bit)
+
+axiom cryptotypes__keypartt__keyid__position_axiom :
+  (0 <= cryptotypes__keypartt__keyid__position)
+
+logic cryptotypes__keypartt__keylength__first__bit : int
+
+logic cryptotypes__keypartt__keylength__last__bit : int
+
+logic cryptotypes__keypartt__keylength__position : int
+
+axiom cryptotypes__keypartt__keylength__first__bit_axiom :
+  (0 <= cryptotypes__keypartt__keylength__first__bit)
+
+axiom cryptotypes__keypartt__keylength__last__bit_axiom :
+  (cryptotypes__keypartt__keylength__first__bit <  cryptotypes__keypartt__keylength__last__bit)
+
+axiom cryptotypes__keypartt__keylength__position_axiom :
+  (0 <= cryptotypes__keypartt__keylength__position)
+
+logic dummy3 : us_rep3
+
+type serialnumbert
+
+logic serialnumbertqtint : serialnumbert -> int
+
+axiom serialnumbertqtaxiom :
+  (forall i:serialnumbert. ((0 <= serialnumbertqtint(i)) and
+  (serialnumbertqtint(i) <= 4294967295)))
+
+predicate in_range9(x: int) = ((0 <= x) and (x <= 4294967295))
+
+function to_rep7(x: serialnumbert) : int = serialnumbertqtint(x)
+
+logic of_rep7 : int -> serialnumbert
+
+axiom inversion_axiom7 :
+  (forall x:serialnumbert [to_rep7(x)]. (of_rep7(to_rep7(x)) = x))
+
+axiom range_axiom7 :
+  (forall x:serialnumbert [to_rep7(x)]. in_range9(to_rep7(x)))
+
+axiom coerce_axiom7 :
+  (forall x:int [to_rep7(of_rep7(x))]. (in_range9(x) ->
+  (to_rep7(of_rep7(x)) = x)))
+
+type us_split_fields6 = { rec__certtypes__idt__issuer : us_rep1;
+rec__certtypes__idt__serialnumber : serialnumbert }
+
+type us_rep4 = { us_split_fields7 : us_split_fields6
+}
+
+logic value__size7 : int
+
+logic object__size7 : int
+
+logic alignment7 : int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 : (0 <= object__size7)
+
+axiom alignment_axiom7 : (0 <= alignment7)
+
+logic certtypes__idt__issuer__first__bit : int
+
+logic certtypes__idt__issuer__last__bit : int
+
+logic certtypes__idt__issuer__position : int
+
+axiom certtypes__idt__issuer__first__bit_axiom :
+  (0 <= certtypes__idt__issuer__first__bit)
+
+axiom certtypes__idt__issuer__last__bit_axiom :
+  (certtypes__idt__issuer__first__bit <  certtypes__idt__issuer__last__bit)
+
+axiom certtypes__idt__issuer__position_axiom :
+  (0 <= certtypes__idt__issuer__position)
+
+logic certtypes__idt__serialnumber__first__bit : int
+
+logic certtypes__idt__serialnumber__last__bit : int
+
+logic certtypes__idt__serialnumber__position : int
+
+axiom certtypes__idt__serialnumber__first__bit_axiom :
+  (0 <= certtypes__idt__serialnumber__first__bit)
+
+axiom certtypes__idt__serialnumber__last__bit_axiom :
+  (certtypes__idt__serialnumber__first__bit <  certtypes__idt__serialnumber__last__bit)
+
+axiom certtypes__idt__serialnumber__position_axiom :
+  (0 <= certtypes__idt__serialnumber__position)
+
+logic dummy4 : us_rep4
+
+type yearst
+
+logic yearstqtint : yearst -> int
+
+axiom yearstqtaxiom :
+  (forall i:yearst. ((1901 <= yearstqtint(i)) and (yearstqtint(i) <= 2099)))
+
+predicate in_range10(x: int) = ((1901 <= x) and (x <= 2099))
+
+function to_rep8(x: yearst) : int = yearstqtint(x)
+
+logic of_rep8 : int -> yearst
+
+axiom inversion_axiom8 :
+  (forall x:yearst [to_rep8(x)]. (of_rep8(to_rep8(x)) = x))
+
+axiom range_axiom8 : (forall x:yearst [to_rep8(x)]. in_range10(to_rep8(x)))
+
+axiom coerce_axiom8 :
+  (forall x:int [to_rep8(of_rep8(x))]. (in_range10(x) ->
+  (to_rep8(of_rep8(x)) = x)))
+
+type monthst
+
+logic monthstqtint : monthst -> int
+
+axiom monthstqtaxiom :
+  (forall i:monthst. ((1 <= monthstqtint(i)) and (monthstqtint(i) <= 12)))
+
+predicate in_range11(x: int) = ((1 <= x) and (x <= 12))
+
+function to_rep9(x: monthst) : int = monthstqtint(x)
+
+logic of_rep9 : int -> monthst
+
+axiom inversion_axiom9 :
+  (forall x:monthst [to_rep9(x)]. (of_rep9(to_rep9(x)) = x))
+
+axiom range_axiom9 : (forall x:monthst [to_rep9(x)]. in_range11(to_rep9(x)))
+
+axiom coerce_axiom9 :
+  (forall x:int [to_rep9(of_rep9(x))]. (in_range11(x) ->
+  (to_rep9(of_rep9(x)) = x)))
+
+type dayst
+
+logic daystqtint : dayst -> int
+
+axiom daystqtaxiom :
+  (forall i:dayst. ((1 <= daystqtint(i)) and (daystqtint(i) <= 31)))
+
+predicate in_range12(x: int) = ((1 <= x) and (x <= 31))
+
+function to_rep10(x: dayst) : int = daystqtint(x)
+
+logic of_rep10 : int -> dayst
+
+axiom inversion_axiom10 :
+  (forall x:dayst [to_rep10(x)]. (of_rep10(to_rep10(x)) = x))
+
+axiom range_axiom10 : (forall x:dayst [to_rep10(x)]. in_range12(to_rep10(x)))
+
+axiom coerce_axiom10 :
+  (forall x:int [to_rep10(of_rep10(x))]. (in_range12(x) ->
+  (to_rep10(of_rep10(x)) = x)))
+
+type millisecst
+
+logic millisecstqtint : millisecst -> int
+
+axiom millisecstqtaxiom :
+  (forall i:millisecst. ((0 <= millisecstqtint(i)) and
+  (millisecstqtint(i) <= 86399999)))
+
+predicate in_range13(x: int) = ((0 <= x) and (x <= 86399999))
+
+function to_rep11(x: millisecst) : int = millisecstqtint(x)
+
+logic of_rep11 : int -> millisecst
+
+axiom inversion_axiom11 :
+  (forall x:millisecst [to_rep11(x)]. (of_rep11(to_rep11(x)) = x))
+
+axiom range_axiom11 :
+  (forall x:millisecst [to_rep11(x)]. in_range13(to_rep11(x)))
+
+axiom coerce_axiom11 :
+  (forall x:int [to_rep11(of_rep11(x))]. (in_range13(x) ->
+  (to_rep11(of_rep11(x)) = x)))
+
+type us_split_fields8 = { rec__clock__timet__year : yearst;
+rec__clock__timet__month : monthst; rec__clock__timet__day : dayst;
+rec__clock__timet__millisec : millisecst }
+
+type us_rep5 = { us_split_fields9 : us_split_fields8
+}
+
+logic value__size8 : int
+
+logic object__size8 : int
+
+logic alignment8 : int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 : (0 <= object__size8)
+
+axiom alignment_axiom8 : (0 <= alignment8)
+
+logic clock__timet__year__first__bit : int
+
+logic clock__timet__year__last__bit : int
+
+logic clock__timet__year__position : int
+
+axiom clock__timet__year__first__bit_axiom :
+  (0 <= clock__timet__year__first__bit)
+
+axiom clock__timet__year__last__bit_axiom :
+  (clock__timet__year__first__bit <  clock__timet__year__last__bit)
+
+axiom clock__timet__year__position_axiom :
+  (0 <= clock__timet__year__position)
+
+logic clock__timet__month__first__bit : int
+
+logic clock__timet__month__last__bit : int
+
+logic clock__timet__month__position : int
+
+axiom clock__timet__month__first__bit_axiom :
+  (0 <= clock__timet__month__first__bit)
+
+axiom clock__timet__month__last__bit_axiom :
+  (clock__timet__month__first__bit <  clock__timet__month__last__bit)
+
+axiom clock__timet__month__position_axiom :
+  (0 <= clock__timet__month__position)
+
+logic clock__timet__day__first__bit : int
+
+logic clock__timet__day__last__bit : int
+
+logic clock__timet__day__position : int
+
+axiom clock__timet__day__first__bit_axiom :
+  (0 <= clock__timet__day__first__bit)
+
+axiom clock__timet__day__last__bit_axiom :
+  (clock__timet__day__first__bit <  clock__timet__day__last__bit)
+
+axiom clock__timet__day__position_axiom : (0 <= clock__timet__day__position)
+
+logic clock__timet__millisec__first__bit : int
+
+logic clock__timet__millisec__last__bit : int
+
+logic clock__timet__millisec__position : int
+
+axiom clock__timet__millisec__first__bit_axiom :
+  (0 <= clock__timet__millisec__first__bit)
+
+axiom clock__timet__millisec__last__bit_axiom :
+  (clock__timet__millisec__first__bit <  clock__timet__millisec__last__bit)
+
+axiom clock__timet__millisec__position_axiom :
+  (0 <= clock__timet__millisec__position)
+
+logic dummy5 : us_rep5
+
+type us_split_fields10 = { rec__ada___cert__id__contentst__id : us_rep4;
+rec__ada___cert__id__contentst__notbefore : us_rep5;
+rec__ada___cert__id__contentst__notafter : us_rep5;
+rec__ada___cert__id__contentst__mechanism : algorithmt;
+rec__ada___cert__id__contentst__subject : us_rep1;
+rec__ada___cert__id__contentst__subjectpublickey : us_rep3 }
+
+type us_rep6 = { us_split_fields11 : us_split_fields10
+}
+
+logic value__size9 : int
+
+logic object__size9 : int
+
+logic alignment9 : int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 : (0 <= object__size9)
+
+axiom alignment_axiom9 : (0 <= alignment9)
+
+logic ada___cert__id__contentst__id__first__bit : int
+
+logic ada___cert__id__contentst__id__last__bit : int
+
+logic ada___cert__id__contentst__id__position : int
+
+axiom ada___cert__id__contentst__id__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__id__first__bit)
+
+axiom ada___cert__id__contentst__id__last__bit_axiom :
+  (ada___cert__id__contentst__id__first__bit <  ada___cert__id__contentst__id__last__bit)
+
+axiom ada___cert__id__contentst__id__position_axiom :
+  (0 <= ada___cert__id__contentst__id__position)
+
+logic ada___cert__id__contentst__notbefore__first__bit : int
+
+logic ada___cert__id__contentst__notbefore__last__bit : int
+
+logic ada___cert__id__contentst__notbefore__position : int
+
+axiom ada___cert__id__contentst__notbefore__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__notbefore__first__bit)
+
+axiom ada___cert__id__contentst__notbefore__last__bit_axiom :
+  (ada___cert__id__contentst__notbefore__first__bit <  ada___cert__id__contentst__notbefore__last__bit)
+
+axiom ada___cert__id__contentst__notbefore__position_axiom :
+  (0 <= ada___cert__id__contentst__notbefore__position)
+
+logic ada___cert__id__contentst__notafter__first__bit : int
+
+logic ada___cert__id__contentst__notafter__last__bit : int
+
+logic ada___cert__id__contentst__notafter__position : int
+
+axiom ada___cert__id__contentst__notafter__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__notafter__first__bit)
+
+axiom ada___cert__id__contentst__notafter__last__bit_axiom :
+  (ada___cert__id__contentst__notafter__first__bit <  ada___cert__id__contentst__notafter__last__bit)
+
+axiom ada___cert__id__contentst__notafter__position_axiom :
+  (0 <= ada___cert__id__contentst__notafter__position)
+
+logic ada___cert__id__contentst__mechanism__first__bit : int
+
+logic ada___cert__id__contentst__mechanism__last__bit : int
+
+logic ada___cert__id__contentst__mechanism__position : int
+
+axiom ada___cert__id__contentst__mechanism__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__mechanism__first__bit)
+
+axiom ada___cert__id__contentst__mechanism__last__bit_axiom :
+  (ada___cert__id__contentst__mechanism__first__bit <  ada___cert__id__contentst__mechanism__last__bit)
+
+axiom ada___cert__id__contentst__mechanism__position_axiom :
+  (0 <= ada___cert__id__contentst__mechanism__position)
+
+logic ada___cert__id__contentst__subject__first__bit : int
+
+logic ada___cert__id__contentst__subject__last__bit : int
+
+logic ada___cert__id__contentst__subject__position : int
+
+axiom ada___cert__id__contentst__subject__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__subject__first__bit)
+
+axiom ada___cert__id__contentst__subject__last__bit_axiom :
+  (ada___cert__id__contentst__subject__first__bit <  ada___cert__id__contentst__subject__last__bit)
+
+axiom ada___cert__id__contentst__subject__position_axiom :
+  (0 <= ada___cert__id__contentst__subject__position)
+
+logic ada___cert__id__contentst__subjectpublickey__first__bit : int
+
+logic ada___cert__id__contentst__subjectpublickey__last__bit : int
+
+logic ada___cert__id__contentst__subjectpublickey__position : int
+
+axiom ada___cert__id__contentst__subjectpublickey__first__bit_axiom :
+  (0 <= ada___cert__id__contentst__subjectpublickey__first__bit)
+
+axiom ada___cert__id__contentst__subjectpublickey__last__bit_axiom :
+  (ada___cert__id__contentst__subjectpublickey__first__bit <  ada___cert__id__contentst__subjectpublickey__last__bit)
+
+axiom ada___cert__id__contentst__subjectpublickey__position_axiom :
+  (0 <= ada___cert__id__contentst__subjectpublickey__position)
+
+logic dummy6 : us_rep6
+
+predicate dynamic_invariant1(temp___expr_426: us_rep6,
+  temp___is_init_422: bool, temp___skip_constant_423: bool,
+  temp___do_toplevel_424: bool, temp___do_typ_inv_425: bool) = true
+
+predicate dynamic_invariant2(temp___expr_258: us_rep1,
+  temp___is_init_254: bool, temp___skip_constant_255: bool,
+  temp___do_toplevel_256: bool, temp___do_typ_inv_257: bool) = true
+
+logic endoffile : us_rep -> bool
+
+predicate dynamic_invariant3(temp___expr_110: us_t, temp___is_init_106: bool,
+  temp___skip_constant_107: bool, temp___do_toplevel_108: bool,
+  temp___do_typ_inv_109: bool) = ((not (temp___skip_constant_107 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_110),
+  last(temp___expr_110)))
+
+logic thesubject : us_rep6 -> us_rep1
+
+type us_split_fields12 = { rec__cert__contentst__id : us_rep4;
+rec__cert__contentst__notbefore : us_rep5; rec__cert__contentst__notafter :
+us_rep5; rec__cert__contentst__mechanism : algorithmt }
+
+type us_rep7 = { us_split_fields13 : us_split_fields12
+}
+
+logic value__size10 : int
+
+logic object__size10 : int
+
+logic alignment10 : int
+
+axiom value__size_axiom10 : (0 <= value__size10)
+
+axiom object__size_axiom10 : (0 <= object__size10)
+
+axiom alignment_axiom10 : (0 <= alignment10)
+
+logic cert__contentst__id__first__bit : int
+
+logic cert__contentst__id__last__bit : int
+
+logic cert__contentst__id__position : int
+
+axiom cert__contentst__id__first__bit_axiom :
+  (0 <= cert__contentst__id__first__bit)
+
+axiom cert__contentst__id__last__bit_axiom :
+  (cert__contentst__id__first__bit <  cert__contentst__id__last__bit)
+
+axiom cert__contentst__id__position_axiom :
+  (0 <= cert__contentst__id__position)
+
+logic cert__contentst__notbefore__first__bit : int
+
+logic cert__contentst__notbefore__last__bit : int
+
+logic cert__contentst__notbefore__position : int
+
+axiom cert__contentst__notbefore__first__bit_axiom :
+  (0 <= cert__contentst__notbefore__first__bit)
+
+axiom cert__contentst__notbefore__last__bit_axiom :
+  (cert__contentst__notbefore__first__bit <  cert__contentst__notbefore__last__bit)
+
+axiom cert__contentst__notbefore__position_axiom :
+  (0 <= cert__contentst__notbefore__position)
+
+logic cert__contentst__notafter__first__bit : int
+
+logic cert__contentst__notafter__last__bit : int
+
+logic cert__contentst__notafter__position : int
+
+axiom cert__contentst__notafter__first__bit_axiom :
+  (0 <= cert__contentst__notafter__first__bit)
+
+axiom cert__contentst__notafter__last__bit_axiom :
+  (cert__contentst__notafter__first__bit <  cert__contentst__notafter__last__bit)
+
+axiom cert__contentst__notafter__position_axiom :
+  (0 <= cert__contentst__notafter__position)
+
+logic cert__contentst__mechanism__first__bit : int
+
+logic cert__contentst__mechanism__last__bit : int
+
+logic cert__contentst__mechanism__position : int
+
+axiom cert__contentst__mechanism__first__bit_axiom :
+  (0 <= cert__contentst__mechanism__first__bit)
+
+axiom cert__contentst__mechanism__last__bit_axiom :
+  (cert__contentst__mechanism__first__bit <  cert__contentst__mechanism__last__bit)
+
+axiom cert__contentst__mechanism__position_axiom :
+  (0 <= cert__contentst__mechanism__position)
+
+logic dummy7 : us_rep7
+
+logic theissuer : us_rep7 -> us_rep1
+
+predicate dynamic_invariant4(temp___expr_471: us_rep7,
+  temp___is_init_467: bool, temp___skip_constant_468: bool,
+  temp___do_toplevel_469: bool, temp___do_typ_inv_470: bool) = true
+
+logic cert_id_to_cert : us_rep6 -> us_rep7
+
+logic thepublickey : us_rep6 -> us_rep3
+
+logic bool_eq : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+type t3s
+
+logic t3sqtint : t3s -> int
+
+axiom t3sqtaxiom :
+  (forall i:t3s. ((1 <= t3sqtint(i)) and (t3sqtint(i) <= 150)))
+
+logic value__size11 : int
+
+logic object__size11 : int
+
+logic component__size3 : int
+
+logic alignment11 : int
+
+axiom value__size_axiom11 : (0 <= value__size11)
+
+axiom object__size_axiom11 : (0 <= object__size11)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom11 : (0 <= alignment11)
+
+logic temp_____aggregate_def_171 : int -> (int,character) farray
+
+type rawcertificatei
+
+logic rawcertificateiqtint : rawcertificatei -> int
+
+axiom rawcertificateiqtaxiom :
+  (forall i:rawcertificatei. ((1 <= rawcertificateiqtint(i)) and
+  (rawcertificateiqtint(i) <= 4096)))
+
+logic value__size12 : int
+
+logic object__size12 : int
+
+logic component__size4 : int
+
+logic alignment12 : int
+
+axiom value__size_axiom12 : (0 <= value__size12)
+
+axiom object__size_axiom12 : (0 <= object__size12)
+
+axiom component__size_axiom4 : (0 <= component__size4)
+
+axiom alignment_axiom12 : (0 <= alignment12)
+
+type t1s
+
+logic t1sqtint : t1s -> int
+
+axiom t1sqtaxiom :
+  (forall i:t1s. ((1 <= t1sqtint(i)) and (t1sqtint(i) <= 4096)))
+
+logic value__size13 : int
+
+logic object__size13 : int
+
+logic component__size5 : int
+
+logic alignment13 : int
+
+axiom value__size_axiom13 : (0 <= value__size13)
+
+axiom object__size_axiom13 : (0 <= object__size13)
+
+axiom component__size_axiom5 : (0 <= component__size5)
+
+axiom alignment_axiom13 : (0 <= alignment13)
+
+logic temp_____aggregate_def_185 : int -> (int,character) farray
+
+axiom nodescription__def_axiom : (nodescription = (let temp___175qtunused =
+  temp_____aggregate_def_171(32) : (int,character) farray in
+  temp_____aggregate_def_171(32)))
+
+axiom def_axiom :
+  (forall temp___170:int. (let temp___172 =
+  temp_____aggregate_def_171(temp___170) : (int,character) farray in
+  (forall temp___173:int [(temp___172[temp___173])]. (((1 <= temp___173) and
+  (temp___173 <= 150)) -> (in_range3(temp___170) ->
+  (to_rep((temp___172[temp___173])) = temp___170))))))
+
+axiom nullrawcertificate__def_axiom :
+  (nullrawcertificate = (let temp___189qtunused =
+  temp_____aggregate_def_185(32) : (int,character) farray in
+  temp_____aggregate_def_185(32)))
+
+axiom def_axiom1 :
+  (forall temp___184:int. (let temp___186 =
+  temp_____aggregate_def_185(temp___184) : (int,character) farray in
+  (forall temp___187:int [(temp___186[temp___187])]. (((1 <= temp___187) and
+  (temp___187 <= 4096)) -> (in_range3(temp___184) ->
+  (to_rep((temp___186[temp___187])) = temp___184))))))
+
+axiom privatekeypresent__post_axiom : true
+
+axiom privatekeypresent__def_axiom :
+  (forall Keystore__thistisinfo___thistisinfo__split_fields___:us_split_fields2
+  [privatekeypresent(Keystore__thistisinfo___thistisinfo__split_fields___)].
+  ((privatekeypresent(Keystore__thistisinfo___thistisinfo__split_fields___) = true) <->
+  ((Keystore__thistisinfo___thistisinfo__split_fields___).rec__keystore__optionalprivatekeyt__ispresent = true)))
+
+axiom endoffile__post_axiom : true
+
+ (* "enrolment.adb", line 93, characters 0-0 *)
+goal defqtvc :
+  (forall thefile:us_rep. forall thistisinfo__split_fields:us_split_fields2.
+  forall certno:int. forall thecontents__split_fields:us_split_fields10.
+  forall thesubject__split_fields:us_split_fields.
+  forall theissuer__split_fields:us_split_fields.
+  (forall temp___620:(int,character) farray.
+  (((forall temp___174:int [(temp___620[temp___174])].
+    (((1 <= temp___174) and (temp___174 <= 150)) -> (in_range3(32) ->
+    (to_rep((temp___620[temp___174])) = 32)))) and
+  (temp___620 = temp_____aggregate_def_171(32))) ->
+  ((temp___620 = nodescription) ->
+  (forall temp___624:(int,character) farray.
+  (((forall temp___188:int [(temp___624[temp___188])].
+    (((1 <= temp___188) and (temp___188 <= 4096)) -> (in_range3(32) ->
+    (to_rep((temp___624[temp___188])) = 32)))) and
+  (temp___624 = temp_____aggregate_def_185(32))) ->
+  ((temp___624 = nullrawcertificate) -> (in_range2(certno) ->
+  (dynamic_invariant({ us_split_fields3 = thistisinfo__split_fields }, true,
+  false, true, true) ->
+  (((privatekeypresent(thistisinfo__split_fields) = true) <->
+  ((thistisinfo__split_fields).rec__keystore__optionalprivatekeyt__ispresent = true)) ->
+  (forall thecert:(int,character) farray. ((thecert = nullrawcertificate) ->
+  (dynamic_invariant1({ us_split_fields11 = thecontents__split_fields },
+  false, false, true, true) -> (dynamic_invariant2({ us_split_fields1 =
+  thesubject__split_fields }, false, false, true, true) ->
+  (dynamic_invariant2({ us_split_fields1 = theissuer__split_fields }, false,
+  false, true, true) ->
+  (forall addedok:bool. ((addedok = of_int(1)) ->
+  (forall verifiedok:bool. ((verifiedok = of_int(0)) ->
+  (forall stop:int. ((stop = 0) -> (in_range1(stop) ->
+  (forall thecert1:(int,character) farray.
+  ((if (andb((if (stop = 0) then true else false),
+  (if (endoffile(thefile) = true) then false else true)) = true) then 
+  (exists thefile1:us_rep. exists stop1:int.
+  ((andb((if in_range1(stop1) then true else false), (if ((stop1 = 0) and
+  (not (endoffile(thefile1) = true))) then true else false)) = true) and
+  (exists o:integer. ((to_rep1(o) = 4096) and
+  (exists o1:integer. ((to_rep1(o1) = 1) and
+  (exists thefile2:us_rep. exists stop2:int.
+  exists param__item:(int,character) farray.
+  ((dynamic_invariant3(of_array(param__item, to_rep1(o1), to_rep1(o)), true,
+  true, true, true) and in_range1(stop2)) and ((thecert1 = slide(param__item,
+  1, 1)) and (not (andb((if (stop2 = 0) then true else false),
+  (if (endoffile(thefile2) = true) then false else true)) = true))))))))))) else (thecert1 = thecert)) ->
+  (forall thecontents__split_fields1:us_split_fields10.
+  forall extracted:bool. (dynamic_invariant1({ us_split_fields11 =
+  thecontents__split_fields1 }, true, true, true, true) -> (let temp___588 =
+  thesubject({ us_split_fields11 = thecontents__split_fields1 }) : us_rep1 in
+  (dynamic_invariant2(temp___588, true, false, true, true) ->
+  (forall thesubject__split_fields1:us_split_fields.
+  ((thesubject__split_fields1 = (temp___588).us_split_fields1) -> (let o =
+  cert_id_to_cert({ us_split_fields11 = thecontents__split_fields1 })
+  : us_rep7 in (dynamic_invariant4(o, true, false, true, true) ->
+  (let temp___590 = theissuer(o) : us_rep1 in (dynamic_invariant2(temp___590,
+  true, false, true, true) ->
+  (forall theissuer__split_fields1:us_split_fields.
+  ((theissuer__split_fields1 = (temp___590).us_split_fields1) ->
+  (forall thepublickey__split_fields:us_split_fields4.
+  ((thepublickey__split_fields = (thepublickey({ us_split_fields11 =
+  thecontents__split_fields1 })).us_split_fields5) ->
+  (forall spark__branch:bool.
+  forall thistisinfo__split_fields1:us_split_fields2. forall addedok1:bool.
+  ((exists spark__branch1:bool. ((spark__branch1 = extracted) and
+   (if (spark__branch1 = true) then (exists o1:int.
+                                    ((to_rep2((theissuer__split_fields1).rec__cryptotypes__issuert__id) = o1) and
+                                    (exists o2:int.
+                                    ((to_rep2((thesubject__split_fields1).rec__cryptotypes__issuert__id) = o2) and
+                                    ((spark__branch = (if (o2 = o1) then true else false)) and
+                                    (if (spark__branch = true) then (let o3 =
+                                    of_int(1) : bool in
+                                    ((andb(orb(andb(andb(addedok1, notb(o3)),
+                                    privatekeypresent(thistisinfo__split_fields1)),
+                                    andb(notb(andb(addedok1, notb(o3))),
+                                    bool_eq(to_int(privatekeypresent(thistisinfo__split_fields1)),
+                                    to_int(privatekeypresent(thistisinfo__split_fields))))),
+                                    notb(andb(andb(andb(addedok1, notb(o3)),
+                                    privatekeypresent(thistisinfo__split_fields1)),
+                                    andb(notb(andb(addedok1, notb(o3))),
+                                    bool_eq(to_int(privatekeypresent(thistisinfo__split_fields1)),
+                                    to_int(privatekeypresent(thistisinfo__split_fields))))))) = true) and
+                                    dynamic_invariant({ us_split_fields3 =
+                                    thistisinfo__split_fields1 }, true, true,
+                                    true,
+                                    true))) else ((thistisinfo__split_fields1 = thistisinfo__split_fields) and
+                                    (addedok1 = addedok)))))))) else (((spark__branch = spark__branch1) and
+   (thistisinfo__split_fields1 = thistisinfo__split_fields)) and
+   (addedok1 = addedok))))) ->
+  (forall spark__branch1:bool. forall verifiedok1:bool.
+  (((spark__branch1 = andb(extracted, addedok1)) and
+  (if (spark__branch1 = true) then dynamic_invariant4(cert_id_to_cert({
+  us_split_fields11 = thecontents__split_fields1 }), true, false, true,
+  true) else (verifiedok1 = verifiedok))) ->
+  (forall spark__branch2:bool.
+  forall thistisinfo__split_fields2:us_split_fields2. forall addedok2:bool.
+  ((exists o1:int.
+   ((to_rep2((theissuer__split_fields1).rec__cryptotypes__issuert__id) = o1) and
+   (exists o2:int.
+   ((to_rep2((thesubject__split_fields1).rec__cryptotypes__issuert__id) = o2) and
+   ((spark__branch2 = andb(verifiedok1,
+   (if (o2 = o1) then false else true))) and
+   (if (spark__branch2 = true) then (let o3 = of_int(1) : bool in
+   ((andb(orb(andb(andb(addedok2, notb(o3)),
+   privatekeypresent(thistisinfo__split_fields2)), andb(notb(andb(addedok2,
+   notb(o3))), bool_eq(to_int(privatekeypresent(thistisinfo__split_fields2)),
+   to_int(privatekeypresent(thistisinfo__split_fields1))))),
+   notb(andb(andb(andb(addedok2, notb(o3)),
+   privatekeypresent(thistisinfo__split_fields2)), andb(notb(andb(addedok2,
+   notb(o3))), bool_eq(to_int(privatekeypresent(thistisinfo__split_fields2)),
+   to_int(privatekeypresent(thistisinfo__split_fields1))))))) = true) and
+   dynamic_invariant({ us_split_fields3 = thistisinfo__split_fields2 }, true,
+   true, true,
+   true))) else ((thistisinfo__split_fields2 = thistisinfo__split_fields1) and
+   (addedok2 = addedok1)))))))) ->
+  (forall spark__branch3:bool.
+  forall thistisinfo__split_fields3:us_split_fields2. forall addedok3:bool.
+  (((spark__branch3 = andb(andb(verifiedok1, addedok2), istis)) and
+  (if (spark__branch3 = true) then (let o1 = of_int(0) : bool in
+  ((andb(orb(andb(andb(addedok3, notb(o1)),
+  privatekeypresent(thistisinfo__split_fields3)), andb(notb(andb(addedok3,
+  notb(o1))), bool_eq(to_int(privatekeypresent(thistisinfo__split_fields3)),
+  to_int(privatekeypresent(thistisinfo__split_fields2))))),
+  notb(andb(andb(andb(addedok3, notb(o1)),
+  privatekeypresent(thistisinfo__split_fields3)), andb(notb(andb(addedok3,
+  notb(o1))), bool_eq(to_int(privatekeypresent(thistisinfo__split_fields3)),
+  to_int(privatekeypresent(thistisinfo__split_fields2))))))) = true) and
+  dynamic_invariant({ us_split_fields3 = thistisinfo__split_fields3 }, true,
+  true, true,
+  true))) else ((thistisinfo__split_fields3 = thistisinfo__split_fields2) and
+  (addedok3 = addedok2)))) ->
+  ((exists spark__branch4:bool.
+   ((spark__branch4 = (if (extracted = true) then false else true)) and
+   (if (spark__branch4 = true) then ((0 <= 43) and ((43 <= 1000) and
+   dynamic_property(1, 2147483647, 1,
+   43))) else (exists spark__branch5:bool.
+              ((spark__branch5 = (if (addedok3 = true) then false else true)) and
+              (if (spark__branch5 = true) then ((0 <= 39) and
+              ((39 <= 1000) and dynamic_property(1, 2147483647, 1,
+              39))) else (exists spark__branch6:bool.
+                         ((spark__branch6 = (if (verifiedok1 = true) then false else true)) and
+                         ((spark__branch6 = true) -> ((0 <= 33) and
+                         ((33 <= 1000) and dynamic_property(1, 2147483647, 1,
+                         33)))))))))))) ->
+  (forall keyadded:bool. ((keyadded = andb(verifiedok1, addedok3)) ->
+  (((istis = true) and (keyadded = true)) ->
+  (privatekeypresent(thistisinfo__split_fields3) = true)))))))))))))))))))))))))))))))))))))))))))))))))))

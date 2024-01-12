@@ -1,0 +1,3 @@
+cvc5:{'timeout': 212, 'unsat': 266}
+z3:{'timeout': 87, 'unsat': 387, 'unknown': 4}
+altergo:{'timeout': 389, 'unsat': 89}

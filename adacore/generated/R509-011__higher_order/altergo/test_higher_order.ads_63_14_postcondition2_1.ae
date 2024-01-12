@@ -1,0 +1,157 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type small_int
+
+logic small_intqtint : small_int -> int
+
+axiom small_intqtaxiom :
+  (forall i:small_int. (((- 100) <= small_intqtint(i)) and
+  (small_intqtint(i) <= 100)))
+
+predicate in_range1(x: int) = (((- 100) <= x) and (x <= 100))
+
+type small_index
+
+logic small_indexqtint : small_index -> int
+
+axiom small_indexqtaxiom :
+  (forall i:small_index. ((1 <= small_indexqtint(i)) and
+  (small_indexqtint(i) <= 100)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 100))
+
+function to_rep1(x: small_int) : int = small_intqtint(x)
+
+logic of_rep1 : int -> small_int
+
+axiom inversion_axiom1 :
+  (forall x:small_int [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:small_int [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type map
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type t1 = { rec__first1 : integer; rec__last1 : integer
+}
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : map; rt : t; rt_2 : t1
+}
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function first_2(a: us_t) : int = to_rep(((a).rt_2).rec__first1)
+
+function last_2(a: us_t) : int = to_rep(((a).rt_2).rec__last1)
+
+function length_2(a: us_t) : int =
+  (if (first_2(a) <= last_2(a)) then ((last_2(a) - first_2(a)) + 1) else 0)
+
+predicate dynamic_property2(range_first1: int, range_last1: int, f1: int,
+  l1: int, range_first2: int, range_last2: int, f2: int, l2: int) =
+  (dynamic_property(range_first1, range_last1, f1, l1) and
+  dynamic_property1(range_first2, range_last2, f2, l2))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic a : us_t
+
+logic x : int
+
+logic i : int
+
+logic j : int
+
+predicate dynamic_invariant(temp___expr_343: us_t, temp___is_init_339: bool,
+  temp___skip_constant_340: bool, temp___do_toplevel_341: bool,
+  temp___do_typ_inv_342: bool) = ((not (temp___skip_constant_340 = true)) ->
+  dynamic_property2(1, 100, first(temp___expr_343), last(temp___expr_343), 1,
+  100, first_2(temp___expr_343), last_2(temp___expr_343)))
+
+ (* "test_higher_order.ads", line 58, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(a, true, false, true, true) ->
+  (in_range(x) -> (in_range2(i) -> (in_range2(j) -> ((((first(a) <= i) and
+  (i <= last(a))) and ((first_2(a) <= j) and (j <= last_2(a)))) -> (let o =
+  length_2(a) : int in (in_range(o) -> (let o1 = (last(a) - i) : int in
+  (in_range(o1) -> (let o2 = (o1 * o) : int in (in_range(o2) -> (let o3 =
+  (o2 + last_2(a)) : int in (in_range(o3) -> (let o4 = (o3 - j) : int in
+  (in_range(o4) -> (let o5 = (o4 + 1) : int in (in_range(o5) -> (let o6 =
+  (100 * o5) : int in (in_range(o6) -> (let o7 = ((- 2147483648) + o6)
+  : int in (in_range(o7) -> (let o8 = length_2(a) : int in (in_range(o8) ->
+  (let o9 = (last(a) - i) : int in (in_range(o9) -> (let o10 = (o9 * o8)
+  : int in (in_range(o10) -> (let o11 = (o10 + last_2(a)) : int in
+  (in_range(o11) -> (let o12 = (o11 - j) : int in (in_range(o12) ->
+  (let o13 = (o12 + 1) : int in (in_range(o13) -> (let o14 = (100 * o13)
+  : int in (in_range(o14) -> (let o15 = (2147483647 - o14) : int in
+  (in_range(o15) ->
+  (forall test_higher_order__in_range__2__result:bool.
+  ((test_higher_order__in_range__2__result = andb((if (x <= o15) then true else false),
+  (if (o7 <= x) then true else false))) ->
+  ((test_higher_order__in_range__2__result = true) ->
+  ((- 2147483548) <= x)))))))))))))))))))))))))))))))))))))))))

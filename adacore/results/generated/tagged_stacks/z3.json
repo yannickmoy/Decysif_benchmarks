@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_12_22_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 179018,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_12_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 94428,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_9_19_assert_1.smt2",
+      "status": "unsat",
+      "steps": 773654,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_12_22_assert5_1.smt2",
+      "status": "unsat",
+      "steps": 198296,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/stacks.ads_36_20_stacks.ads_53_4_postcondition_2.smt2",
+      "status": "unsat",
+      "steps": 70370,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_12_22_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 147834,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/stacks.ads_62_20_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 167595,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/test_stack.adb_12_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 82163,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/stacks.ads_40_20_stacks.ads_55_4_postcondition_2.smt2",
+      "status": "unsat",
+      "steps": 559981,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/tagged_stacks/z3/stacks.ads_14_13_feasible_post_1.smt2",
+      "status": "timeout",
+      "steps": 19959307,
+      "time": 9.89
+    }
+  ]
+}

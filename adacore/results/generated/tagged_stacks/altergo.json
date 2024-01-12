@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "filename": "generated/tagged_stacks/altergo/stacks.ads_14_13_feasible_post_1.ae",
+      "status": "unknown",
+      "steps": 67,
+      "time": 0.0175
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_12_22_assert_1.ae",
+      "status": "unsat",
+      "steps": 2191,
+      "time": 0.1925
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_12_22_assert2_1.ae",
+      "status": "unsat",
+      "steps": 8413,
+      "time": 0.8109
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/stacks.ads_36_20_stacks.ads_53_4_postcondition_2.ae",
+      "status": "unsat",
+      "steps": 9543,
+      "time": 1.2019
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/stacks.ads_40_20_stacks.ads_55_4_postcondition_2.ae",
+      "status": "unsat",
+      "steps": 19546,
+      "time": 2.1834
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/stacks.ads_62_20_postcondition_1.ae",
+      "status": "unsat",
+      "steps": 24141,
+      "time": 3.1966
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_9_19_assert_1.ae",
+      "status": "unsat",
+      "steps": 39927,
+      "time": 5.0805
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_12_22_assert3_1.ae",
+      "status": "unsat",
+      "steps": 42155,
+      "time": 5.29
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_12_22_assert4_1.ae",
+      "status": "unsat",
+      "steps": 64743,
+      "time": 8.221
+    },
+    {
+      "filename": "generated/tagged_stacks/altergo/test_stack.adb_12_22_assert5_1.ae",
+      "status": "unsat",
+      "steps": 68542,
+      "time": 8.8202
+    }
+  ]
+}

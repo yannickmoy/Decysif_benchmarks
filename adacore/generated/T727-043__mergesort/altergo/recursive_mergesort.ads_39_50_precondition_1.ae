@@ -1,0 +1,118 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic has_key : us_rep, int -> bool
+
+logic get : us_rep, int -> int
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+logic keys_included : us_rep, us_rep -> bool
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy1 : us_rep
+
+logic left : us_rep
+
+logic right : us_rep
+
+logic result__ : us_rep
+
+axiom has_key__post_axiom : true
+
+axiom lemma_has_key_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int. ((in_range(param__key) and ((of_int(1) = true) and
+  (not (has_key(param__container, param__key) = true)))) ->
+  (forall k:int. ((in_range(k) and (has_key(param__container, k) = true)) ->
+  (not (param__key = k)))))))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int [get(param__container, param__key)].
+  ((in_range(param__key) and (has_key(param__container,
+  param__key) = true)) -> in_range1(get(param__container, param__key)))))
+
+axiom lemma_get_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key_1:int. forall param__key_2:int.
+  (((in_range(param__key_1) and in_range(param__key_2)) and
+  (((of_int(1) = true) and (param__key_1 = param__key_2)) and
+  ((has_key(param__container, param__key_1) = true) or
+  (has_key(param__container, param__key_2) = true)))) ->
+  (get(param__container, param__key_1) = get(param__container,
+  param__key_2)))))
+
+ (* "recursive_mergesort.ads", line 34, characters 0-0 *)
+goal defqtvc :
+  (forall o:bool. ((let o1 = result__ : us_rep in (let o2 = left : us_rep in
+  (let o3 = keys_included(o2, o1) : bool in (((o3 = true) <->
+  (forall key:int. ((in_range(key) and (has_key(o2, key) = true)) ->
+  (has_key(o1, key) = true)))) and (if (o3 = true) then (let o4 = result__
+  : us_rep in (let o5 = right : us_rep in ((o = keys_included(o5, o4)) and
+  ((o = true) <->
+  (forall key:int. ((in_range(key) and (has_key(o5, key) = true)) ->
+  (has_key(o4, key) = true))))))) else (o = false)))))) -> ((o = true) ->
+  (forall usf:int. ((andb((if in_range(usf) then true else false),
+  has_key(result__, usf)) = true) -> ((andb(has_key(left, usf),
+  has_key(right, usf)) = true) -> (in_range1(get(left, usf)) ->
+  (has_key(right, usf) = true))))))))

@@ -1,0 +1,652 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type us_image
+
+function length(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+logic div : int, int -> int
+
+logic mod : int, int -> int
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (x = ((y * div(x,
+  y)) + mod(x, y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> ((0 <= div(x,
+  y)) and (div(x, y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (((-abs_int(y)) <  mod(x,
+  y)) and (mod(x, y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> (0 <= div(x, y))))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) -> (0 <= mod(x,
+  y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) -> (mod(x,
+  y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (abs_int((div(x,
+  y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (div(x, 1) = x))
+
+axiom Mod_1 : (forall x:int. (mod(x, 1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (div(x, y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (mod(x, y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [div(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (div(((x * y) + z),
+  x) = (y + div(z, x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [mod(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (mod(((x * y) + z), x) = mod(z,
+  x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length1(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic to_string : us_image, int -> us_t
+
+axiom to_string__first :
+  (forall x:us_image.
+  (forall s:int [to_string(x, s)]. (first(to_string(x, s)) = 1)))
+
+axiom to_string__length :
+  (forall x:us_image.
+  (forall s:int [to_string(x, s)]. ((0 <= s) -> (length1(to_string(x,
+  s)) <= s))))
+
+logic nodescription : (int,character) farray
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 5))
+
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
+
+logic classt_image : int -> us_t
+
+predicate dynamic_invariant(temp___expr_262: us_t, temp___is_init_258: bool,
+  temp___skip_constant_259: bool, temp___do_toplevel_260: bool,
+  temp___do_typ_inv_261: bool) = (((not (temp___skip_constant_259 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_262),
+  last(temp___expr_262))) and ((temp___is_init_258 = true) ->
+  (((first(temp___expr_262) = 1) and (0 <= last(temp___expr_262))) and
+  ((temp___do_toplevel_260 = true) -> (last(temp___expr_262) <= 12)))))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic printduration : int -> (int,character) farray
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 1))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic accesspolicyt_image : int -> us_t
+
+logic str__first : integer
+
+logic str__last : integer
+
+type durationt
+
+logic durationtqtint : durationt -> int
+
+axiom durationtqtaxiom :
+  (forall i:durationt. ((0 <= durationtqtint(i)) and
+  (durationtqtint(i) <= 864000)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 864000))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+type durationt1
+
+logic durationtqtint1 : durationt1 -> int
+
+axiom durationtqtaxiom1 :
+  (forall i:durationt1. ((0 <= durationtqtint1(i)) and
+  (durationtqtint1(i) <= 2000)))
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2000))
+
+type filesizet
+
+logic filesizetqtint : filesizet -> int
+
+axiom filesizetqtaxiom :
+  (forall i:filesizet. ((0 <= filesizetqtint(i)) and
+  (filesizetqtint(i) <= 4194304)))
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 4194304))
+
+type fart
+
+logic fartqtint : fart -> int
+
+axiom fartqtaxiom :
+  (forall i:fart. ((0 <= fartqtint(i)) and (fartqtint(i) <= 2147483647)))
+
+predicate in_range8(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type descriptioni
+
+logic descriptioniqtint : descriptioni -> int
+
+axiom descriptioniqtaxiom :
+  (forall i:descriptioni. ((1 <= descriptioniqtint(i)) and
+  (descriptioniqtint(i) <= 150)))
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+type t3s
+
+logic t3sqtint : t3s -> int
+
+axiom t3sqtaxiom :
+  (forall i:t3s. ((1 <= t3sqtint(i)) and (t3sqtint(i) <= 150)))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic temp_____aggregate_def_170 : int -> (int,character) farray
+
+type t6b
+
+logic t6bqtint : t6b -> int
+
+axiom t6bqtaxiom :
+  (forall i:t6b. ((1 <= t6bqtint(i)) and (t6bqtint(i) <= 5)))
+
+type durationtexti
+
+logic durationtextiqtint : durationtexti -> int
+
+axiom durationtextiqtaxiom :
+  (forall i:durationtexti. ((1 <= durationtextiqtint(i)) and
+  (durationtextiqtint(i) <= 10)))
+
+type t9b
+
+logic t9bqtint : t9b -> int
+
+axiom t9bqtaxiom :
+  (forall i:t9b. ((1 <= t9bqtint(i)) and (t9bqtint(i) <= 5)))
+
+type t12b
+
+logic t12bqtint : t12b -> int
+
+axiom t12bqtaxiom :
+  (forall i:t12b. ((1 <= t12bqtint(i)) and (t12bqtint(i) <= 5)))
+
+logic temp___String_Literal_364 : unit -> (int,character) farray
+
+axiom temp___String_Literal_364__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_364(us_void_param)].
+  ((to_rep((temp___String_Literal_364(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_364(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_365 : unit -> (int,character) farray
+
+axiom temp___String_Literal_365__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_365(us_void_param)].
+  ((to_rep((temp___String_Literal_365(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_365(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_369 : unit -> (int,character) farray
+
+axiom temp___String_Literal_369__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_369(us_void_param)].
+  ((to_rep((temp___String_Literal_369(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_369(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_373 : unit -> (int,character) farray
+
+axiom temp___String_Literal_373__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_373(us_void_param)].
+  ((to_rep((temp___String_Literal_373(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_373(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_377 : unit -> (int,character) farray
+
+axiom temp___String_Literal_377__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_377(us_void_param)].
+  ((to_rep((temp___String_Literal_377(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_377(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_378 : unit -> (int,character) farray
+
+axiom temp___String_Literal_378__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_378(us_void_param)].
+  ((to_rep((temp___String_Literal_378(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_378(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_379 : unit -> (int,character) farray
+
+axiom temp___String_Literal_379__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_379(us_void_param)].
+  ((to_rep((temp___String_Literal_379(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_379(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_380 : unit -> (int,character) farray
+
+axiom temp___String_Literal_380__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_380(us_void_param)].
+  ((to_rep((temp___String_Literal_380(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_380(us_void_param)[2])) = 32)))
+
+logic temp___String_Literal_381 : unit -> (int,character) farray
+
+axiom temp___String_Literal_381__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_381(us_void_param)].
+  ((to_rep((temp___String_Literal_381(us_void_param)[1])) = 59) and
+  (to_rep((temp___String_Literal_381(us_void_param)[2])) = 32)))
+
+axiom nodescription__def_axiom : (nodescription = (let temp___174qtunused =
+  temp_____aggregate_def_170(32) : (int,character) farray in
+  temp_____aggregate_def_170(32)))
+
+axiom def_axiom :
+  (forall temp___169:int. (let temp___171 =
+  temp_____aggregate_def_170(temp___169) : (int,character) farray in
+  (forall temp___172:int [(temp___171[temp___172])]. (((1 <= temp___172) and
+  (temp___172 <= 150)) -> (in_range2(temp___169) ->
+  (to_rep((temp___171[temp___172])) = temp___169))))))
+
+axiom cmod_cases :
+  (forall n:int. forall d:int [mod(n, d)]. (((0 <= n) -> ((0 <  d) -> (mod(n,
+  d) = (n % d)))) and (((n <= 0) -> ((0 <  d) -> (mod(n,
+  d) = (-((-n) % d))))) and (((0 <= n) -> ((d <  0) -> (mod(n,
+  d) = (n % (-d))))) and ((n <= 0) -> ((d <  0) -> (mod(n,
+  d) = (-((-n) % (-d))))))))))
+
+ (* "configuration.adb", line 81, characters 0-0 *)
+goal defqtvc :
+  (forall thelatchunlockduration:int. forall thealarmsilentduration:int.
+  forall thefingerwaitduration:int. forall thetokenremovalduration:int.
+  forall theenclaveclearance:int. forall theworkinghoursstart:int.
+  forall theworkinghoursend:int. forall themaxauthduration:int.
+  forall theaccesspolicy:int. forall theminentryclass:int.
+  forall theminpreservedlogsize:int. forall thealarmthresholdsize:int.
+  forall thesystemmaxfar:int.
+  (forall temp___456:(int,character) farray.
+  (((forall temp___173:int [(temp___456[temp___173])].
+    (((1 <= temp___173) and (temp___173 <= 150)) -> (in_range2(32) ->
+    (to_rep((temp___456[temp___173])) = 32)))) and
+  (temp___456 = temp_____aggregate_def_170(32))) ->
+  ((temp___456 = nodescription) -> (in_range6(thelatchunlockduration) ->
+  (in_range6(thealarmsilentduration) -> (in_range6(thefingerwaitduration) ->
+  (in_range6(thetokenremovalduration) -> (in_range3(theenclaveclearance) ->
+  (in_range5(theworkinghoursstart) -> (in_range5(theworkinghoursend) ->
+  (in_range5(themaxauthduration) -> (in_range4(theaccesspolicy) ->
+  (in_range3(theminentryclass) -> (in_range7(theminpreservedlogsize) ->
+  (in_range7(thealarmthresholdsize) -> (in_range8(thesystemmaxfar) ->
+  (forall localtext:(int,character) farray. ((localtext = nodescription) ->
+  (let temp___417 = classt_image(theminentryclass) : us_t in
+  ((dynamic_invariant(temp___417, true, false, true, true) and
+  (temp___417 = (let temp___267qtunused =
+  to_string(attr__ATTRIBUTE_IMAGE(theminentryclass), 2040) : us_t in
+  to_string(attr__ATTRIBUTE_IMAGE(theminentryclass), 2040)))) ->
+  (forall temp___416:us_t. ((let temp___415 = temp___String_Literal_364(void)
+  : (int,character) farray in
+  (exists temp___414:us_t. ((let temp___413 =
+  accesspolicyt_image(theaccesspolicy) : us_t in
+  ((dynamic_invariant(temp___413, true, false, true, true) and
+  (temp___413 = (let temp___292qtunused =
+  to_string(attr__ATTRIBUTE_IMAGE1(theaccesspolicy), 2040) : us_t in
+  to_string(attr__ATTRIBUTE_IMAGE1(theaccesspolicy), 2040)))) and
+  (exists temp___412:us_t. ((let temp___411 = temp___String_Literal_365(void)
+  : (int,character) farray in
+  (exists temp___410:us_t. ((let temp___366 =
+  printduration(themaxauthduration) : (int,character) farray in (((1 <= 5) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (exists temp___408:us_t. ((let temp___407 = temp___String_Literal_369(void)
+  : (int,character) farray in
+  (exists temp___406:us_t. ((let temp___370 =
+  printduration(theworkinghoursend) : (int,character) farray in (((1 <= 5) ->
+  (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (exists temp___404:us_t. ((let temp___403 = temp___String_Literal_373(void)
+  : (int,character) farray in
+  (exists temp___402:us_t. ((let temp___374 =
+  printduration(theworkinghoursstart) : (int,character) farray in
+  (((1 <= 5) -> (((1 <= 1) and (1 <= 10)) and ((1 <= 5) and (5 <= 10)))) and
+  (exists temp___400:us_t. ((let temp___399 = temp___String_Literal_377(void)
+  : (int,character) farray in
+  (exists temp___398:us_t. ((let temp___397 =
+  classt_image(theenclaveclearance) : us_t in ((dynamic_invariant(temp___397,
+  true, false, true, true) and (temp___397 = (let temp___267qtunused =
+  to_string(attr__ATTRIBUTE_IMAGE(theenclaveclearance), 2040) : us_t in
+  to_string(attr__ATTRIBUTE_IMAGE(theenclaveclearance), 2040)))) and
+  (exists temp___396:us_t. ((let temp___395 = temp___String_Literal_378(void)
+  : (int,character) farray in
+  (exists temp___394:us_t. ((let o =
+  attr__ATTRIBUTE_IMAGE2(div(thefingerwaitduration, 10)) : us_image in
+  (let temp___393 = to_string(o, 12) : us_t in
+  (exists temp___392:us_t. ((let temp___391 = temp___String_Literal_379(void)
+  : (int,character) farray in
+  (exists temp___390:us_t. ((let o1 =
+  attr__ATTRIBUTE_IMAGE2(div(thetokenremovalduration, 10)) : us_image in
+  (let temp___389 = to_string(o1, 12) : us_t in
+  (exists temp___388:us_t. ((let temp___387 = temp___String_Literal_380(void)
+  : (int,character) farray in
+  (exists temp___386:us_t. ((let o2 =
+  attr__ATTRIBUTE_IMAGE2(div(thelatchunlockduration, 10)) : us_image in
+  (let temp___385 = to_string(o2, 12) : us_t in
+  (exists temp___384:us_t. ((let temp___383 = temp___String_Literal_381(void)
+  : (int,character) farray in (let temp___382 =
+  to_string(attr__ATTRIBUTE_IMAGE2(div(thealarmsilentduration, 10)), 12)
+  : us_t in
+  (if (length1(temp___382) = 0) then (temp___384 = of_array(temp___383, 1,
+  2)) else (let o3 = ((first(temp___382) + (length(first(temp___382),
+  last(temp___382)) + length(1, 2))) - 1) : int in (in_range1(o3) and
+  (temp___384 = of_array(concat(to_array(temp___382), first(temp___382),
+  last(temp___382), temp___383, 1, 2), first(temp___382), o3))))))) and
+  (if (length1(temp___384) = 0) then (temp___386 = to_string(o2,
+  12)) else (let o3 = ((first(temp___384) + (length(first(temp___384),
+  last(temp___384)) + length(first(temp___385), last(temp___385)))) - 1)
+  : int in (in_range1(o3) and
+  (temp___386 = of_array(concat(to_array(temp___384), first(temp___384),
+  last(temp___384), to_array(temp___385), first(temp___385),
+  last(temp___385)), first(temp___384), o3))))))))) and
+  (if (length1(temp___386) = 0) then (temp___388 = of_array(temp___387, 1,
+  2)) else (let o2 = ((first(temp___386) + (length(first(temp___386),
+  last(temp___386)) + length(1, 2))) - 1) : int in (in_range1(o2) and
+  (temp___388 = of_array(concat(to_array(temp___386), first(temp___386),
+  last(temp___386), temp___387, 1, 2), first(temp___386), o2)))))))) and
+  (if (length1(temp___388) = 0) then (temp___390 = to_string(o1,
+  12)) else (let o2 = ((first(temp___388) + (length(first(temp___388),
+  last(temp___388)) + length(first(temp___389), last(temp___389)))) - 1)
+  : int in (in_range1(o2) and
+  (temp___390 = of_array(concat(to_array(temp___388), first(temp___388),
+  last(temp___388), to_array(temp___389), first(temp___389),
+  last(temp___389)), first(temp___388), o2))))))))) and
+  (if (length1(temp___390) = 0) then (temp___392 = of_array(temp___391, 1,
+  2)) else (let o1 = ((first(temp___390) + (length(first(temp___390),
+  last(temp___390)) + length(1, 2))) - 1) : int in (in_range1(o1) and
+  (temp___392 = of_array(concat(to_array(temp___390), first(temp___390),
+  last(temp___390), temp___391, 1, 2), first(temp___390), o1)))))))) and
+  (if (length1(temp___392) = 0) then (temp___394 = to_string(o,
+  12)) else (let o1 = ((first(temp___392) + (length(first(temp___392),
+  last(temp___392)) + length(first(temp___393), last(temp___393)))) - 1)
+  : int in (in_range1(o1) and
+  (temp___394 = of_array(concat(to_array(temp___392), first(temp___392),
+  last(temp___392), to_array(temp___393), first(temp___393),
+  last(temp___393)), first(temp___392), o1))))))))) and
+  (if (length1(temp___394) = 0) then (temp___396 = of_array(temp___395, 1,
+  2)) else (let o = ((first(temp___394) + (length(first(temp___394),
+  last(temp___394)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___396 = of_array(concat(to_array(temp___394), first(temp___394),
+  last(temp___394), temp___395, 1, 2), first(temp___394), o)))))))) and
+  (if (length1(temp___396) = 0) then (temp___398 = classt_image(theenclaveclearance)) else (let o =
+  ((first(temp___396) + (length(first(temp___396),
+  last(temp___396)) + length(first(temp___397), last(temp___397)))) - 1)
+  : int in (in_range1(o) and
+  (temp___398 = of_array(concat(to_array(temp___396), first(temp___396),
+  last(temp___396), to_array(temp___397), first(temp___397),
+  last(temp___397)), first(temp___396), o))))))))) and
+  (if (length1(temp___398) = 0) then (temp___400 = of_array(temp___399, 1,
+  2)) else (let o = ((first(temp___398) + (length(first(temp___398),
+  last(temp___398)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___400 = of_array(concat(to_array(temp___398), first(temp___398),
+  last(temp___398), temp___399, 1, 2), first(temp___398), o)))))))) and
+  (if (length1(temp___400) = 0) then (temp___402 = of_array(temp___374, 1,
+  5)) else (let o = ((first(temp___400) + (length(first(temp___400),
+  last(temp___400)) + length(1, 5))) - 1) : int in (in_range1(o) and
+  (temp___402 = of_array(concat(to_array(temp___400), first(temp___400),
+  last(temp___400), temp___374, 1, 5), first(temp___400), o))))))))) and
+  (if (length1(temp___402) = 0) then (temp___404 = of_array(temp___403, 1,
+  2)) else (let o = ((first(temp___402) + (length(first(temp___402),
+  last(temp___402)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___404 = of_array(concat(to_array(temp___402), first(temp___402),
+  last(temp___402), temp___403, 1, 2), first(temp___402), o)))))))) and
+  (if (length1(temp___404) = 0) then (temp___406 = of_array(temp___370, 1,
+  5)) else (let o = ((first(temp___404) + (length(first(temp___404),
+  last(temp___404)) + length(1, 5))) - 1) : int in (in_range1(o) and
+  (temp___406 = of_array(concat(to_array(temp___404), first(temp___404),
+  last(temp___404), temp___370, 1, 5), first(temp___404), o))))))))) and
+  (if (length1(temp___406) = 0) then (temp___408 = of_array(temp___407, 1,
+  2)) else (let o = ((first(temp___406) + (length(first(temp___406),
+  last(temp___406)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___408 = of_array(concat(to_array(temp___406), first(temp___406),
+  last(temp___406), temp___407, 1, 2), first(temp___406), o)))))))) and
+  (if (length1(temp___408) = 0) then (temp___410 = of_array(temp___366, 1,
+  5)) else (let o = ((first(temp___408) + (length(first(temp___408),
+  last(temp___408)) + length(1, 5))) - 1) : int in (in_range1(o) and
+  (temp___410 = of_array(concat(to_array(temp___408), first(temp___408),
+  last(temp___408), temp___366, 1, 5), first(temp___408), o))))))))) and
+  (if (length1(temp___410) = 0) then (temp___412 = of_array(temp___411, 1,
+  2)) else (let o = ((first(temp___410) + (length(first(temp___410),
+  last(temp___410)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___412 = of_array(concat(to_array(temp___410), first(temp___410),
+  last(temp___410), temp___411, 1, 2), first(temp___410), o)))))))) and
+  (if (length1(temp___412) = 0) then (temp___414 = accesspolicyt_image(theaccesspolicy)) else (let o =
+  ((first(temp___412) + (length(first(temp___412),
+  last(temp___412)) + length(first(temp___413), last(temp___413)))) - 1)
+  : int in (in_range1(o) and
+  (temp___414 = of_array(concat(to_array(temp___412), first(temp___412),
+  last(temp___412), to_array(temp___413), first(temp___413),
+  last(temp___413)), first(temp___412), o))))))))) and
+  (if (length1(temp___414) = 0) then (temp___416 = of_array(temp___415, 1,
+  2)) else (let o = ((first(temp___414) + (length(first(temp___414),
+  last(temp___414)) + length(1, 2))) - 1) : int in (in_range1(o) and
+  (temp___416 = of_array(concat(to_array(temp___414), first(temp___414),
+  last(temp___414), temp___415, 1, 2), first(temp___414), o)))))))) ->
+  ((not (length1(temp___416) = 0)) ->
+  (((first(temp___416) + (length(first(temp___416),
+  last(temp___416)) + length(first(temp___417),
+  last(temp___417)))) - 1) <= 2147483647)))))))))))))))))))))))))

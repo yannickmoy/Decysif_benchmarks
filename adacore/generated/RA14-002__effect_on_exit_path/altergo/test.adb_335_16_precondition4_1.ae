@@ -1,0 +1,1002 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom : (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 255)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (8 <= n)) -> (nth(x, n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  8)) -> (nth(ones, n) = true)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic two_power_size_minus_one : int
+
+axiom two_power_size_minus_one_val :
+  (two_power_size_minus_one = pow2((8 - 1)))
+
+logic is_signed_positive : t -> prop
+
+logic of_int : int -> t
+
+function to_int(x: t) : int =
+  (if is_signed_positive(x) then tqtint(x) else (-(256 - tqtint(x))))
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  256)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  256)) -> (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 8)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 255)
+
+logic acc : ('a,('a,bool) farray) farray, 'a -> prop
+
+axiom acc_x :
+  (forall r:('a,('a,bool) farray) farray. forall x:'a.
+  ((forall y:'a. ((((r[y])[x]) = true) -> acc(r, y))) -> acc(r, x)))
+
+axiom acc_inversion :
+  (forall z:('a,('a,bool) farray) farray. forall z1:'a. (acc(z, z1) ->
+  (forall y:'a. ((((z[y])[z1]) = true) -> acc(z, y)))))
+
+predicate well_founded(r: ('a,('a,bool) farray) farray) =
+  (forall x:'a. acc(r, x))
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+logic ult_closure : (t,(t,bool) farray) farray
+
+axiom ult_closure_def :
+  (forall y:t. forall y1:t. ((((ult_closure[y])[y1]) = true) <-> ult(y, y1)))
+
+axiom ult_wf : well_founded(ult_closure)
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+logic ugt_closure : (t,(t,bool) farray) farray
+
+axiom ugt_closure_def :
+  (forall y:t. forall y1:t. ((((ugt_closure[y])[y1]) = true) <-> ugt(y, y1)))
+
+axiom ugt_wf : well_founded(ugt_closure)
+
+predicate uge(x: t, y: t) = (tqtint(y) <= tqtint(x))
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+logic slt_closure : (t,(t,bool) farray) farray
+
+axiom slt_closure_def :
+  (forall y:t. forall y1:t. ((((slt_closure[y])[y1]) = true) <-> slt(y, y1)))
+
+axiom slt_wf : well_founded(slt_closure)
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+logic sgt_closure : (t,(t,bool) farray) farray
+
+axiom sgt_closure_def :
+  (forall y:t. forall y1:t. ((((sgt_closure[y])[y1]) = true) <-> sgt(y, y1)))
+
+axiom sgt_wf : well_founded(sgt_closure)
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) + tqtint(v2)) <  256) ->
+  (tqtint(add(v1, v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic sub : t, t -> t
+
+axiom to_uint_sub_bounded :
+  (forall v1:t. forall v2:t. (((0 <= (tqtint(v1) - tqtint(v2))) and
+  ((tqtint(v1) - tqtint(v2)) <  256)) -> (tqtint(sub(v1,
+  v2)) = (tqtint(v1) - tqtint(v2)))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  256)) -> (nth_bv(x,
+  of_int(i)) = nth(x, i))))
+
+function bool_eq(x: t, y: t) : bool = (if (x = y) then true else false)
+
+function min(x: int, y: int) : int = (if (x <= y) then x else y)
+
+function max(x: int, y: int) : int = (if (x <= y) then y else x)
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+type os_mbx_index_t
+
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 2)
+
+predicate in_range(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
+
+logic to_rep : os_mbx_index_t -> t
+
+logic of_rep : t -> os_mbx_index_t
+
+axiom inversion_axiom :
+  (forall x:os_mbx_index_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom :
+  (forall x:os_mbx_index_t [to_rep(x)]. in_range(to_rep(x)))
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 3)
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (let y = urem(x, rliteral2) : t in
+  (in_range(y) -> (to_rep(of_rep(x)) = y))))
+
+type os_mbx_count_t
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral2))
+
+logic to_rep1 : os_mbx_count_t -> t
+
+logic of_rep1 : t -> os_mbx_count_t
+
+axiom inversion_axiom1 :
+  (forall x:os_mbx_count_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:os_mbx_count_t [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type os_task_id_t
+
+logic os_task_id_tqtint : os_task_id_t -> int
+
+axiom os_task_id_tqtaxiom :
+  (forall i:os_task_id_t. (((- 1) <= os_task_id_tqtint(i)) and
+  (os_task_id_tqtint(i) <= 4)))
+
+predicate in_range2(x: int) = (((- 1) <= x) and (x <= 4))
+
+function to_rep2(x: os_task_id_t) : int = os_task_id_tqtint(x)
+
+logic of_rep2 : int -> os_task_id_t
+
+axiom inversion_axiom2 :
+  (forall x:os_task_id_t [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:os_task_id_t [to_rep2(x)]. in_range2(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type os_mbx_msg_t
+
+logic os_mbx_msg_tqtint : os_mbx_msg_t -> int
+
+axiom os_mbx_msg_tqtaxiom :
+  (forall i:os_mbx_msg_t. ((0 <= os_mbx_msg_tqtint(i)) and
+  (os_mbx_msg_tqtint(i) <= 4294967295)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 4294967295))
+
+function to_rep3(x: os_mbx_msg_t) : int = os_mbx_msg_tqtint(x)
+
+logic of_rep3 : int -> os_mbx_msg_t
+
+axiom inversion_axiom3 :
+  (forall x:os_mbx_msg_t [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:os_mbx_msg_t [to_rep3(x)]. in_range3(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range3(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type us_split_fields = { rec__test__os_mbx_entry_t__sender_id : os_task_id_t;
+rec__test__os_mbx_entry_t__msg : os_mbx_msg_t }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic test__os_mbx_entry_t__sender_id__first__bit : int
+
+logic test__os_mbx_entry_t__sender_id__last__bit : int
+
+logic test__os_mbx_entry_t__sender_id__position : int
+
+axiom test__os_mbx_entry_t__sender_id__first__bit_axiom :
+  (0 <= test__os_mbx_entry_t__sender_id__first__bit)
+
+axiom test__os_mbx_entry_t__sender_id__last__bit_axiom :
+  (test__os_mbx_entry_t__sender_id__first__bit <  test__os_mbx_entry_t__sender_id__last__bit)
+
+axiom test__os_mbx_entry_t__sender_id__position_axiom :
+  (0 <= test__os_mbx_entry_t__sender_id__position)
+
+logic test__os_mbx_entry_t__msg__first__bit : int
+
+logic test__os_mbx_entry_t__msg__last__bit : int
+
+logic test__os_mbx_entry_t__msg__position : int
+
+axiom test__os_mbx_entry_t__msg__first__bit_axiom :
+  (0 <= test__os_mbx_entry_t__msg__first__bit)
+
+axiom test__os_mbx_entry_t__msg__last__bit_axiom :
+  (test__os_mbx_entry_t__msg__first__bit <  test__os_mbx_entry_t__msg__last__bit)
+
+axiom test__os_mbx_entry_t__msg__position_axiom :
+  (0 <= test__os_mbx_entry_t__msg__position)
+
+logic dummy : us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+type us_split_fields2 = { rec__test__os_mbx_t__head : os_mbx_index_t;
+rec__test__os_mbx_t__count : os_mbx_count_t; rec__test__os_mbx_t__mbx_array :
+(t,us_rep) farray }
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic test__os_mbx_t__head__first__bit : int
+
+logic test__os_mbx_t__head__last__bit : int
+
+logic test__os_mbx_t__head__position : int
+
+axiom test__os_mbx_t__head__first__bit_axiom :
+  (0 <= test__os_mbx_t__head__first__bit)
+
+axiom test__os_mbx_t__head__last__bit_axiom :
+  (test__os_mbx_t__head__first__bit <  test__os_mbx_t__head__last__bit)
+
+axiom test__os_mbx_t__head__position_axiom :
+  (0 <= test__os_mbx_t__head__position)
+
+logic test__os_mbx_t__count__first__bit : int
+
+logic test__os_mbx_t__count__last__bit : int
+
+logic test__os_mbx_t__count__position : int
+
+axiom test__os_mbx_t__count__first__bit_axiom :
+  (0 <= test__os_mbx_t__count__first__bit)
+
+axiom test__os_mbx_t__count__last__bit_axiom :
+  (test__os_mbx_t__count__first__bit <  test__os_mbx_t__count__last__bit)
+
+axiom test__os_mbx_t__count__position_axiom :
+  (0 <= test__os_mbx_t__count__position)
+
+logic test__os_mbx_t__mbx_array__first__bit : int
+
+logic test__os_mbx_t__mbx_array__last__bit : int
+
+logic test__os_mbx_t__mbx_array__position : int
+
+axiom test__os_mbx_t__mbx_array__first__bit_axiom :
+  (0 <= test__os_mbx_t__mbx_array__first__bit)
+
+axiom test__os_mbx_t__mbx_array__last__bit_axiom :
+  (test__os_mbx_t__mbx_array__first__bit <  test__os_mbx_t__mbx_array__last__bit)
+
+axiom test__os_mbx_t__mbx_array__position_axiom :
+  (0 <= test__os_mbx_t__mbx_array__position)
+
+logic dummy1 : us_rep1
+
+function os_mbx_get_mbx_count(param__task_id: int,
+  Test__os_task_mbx_rw___os_task_mbx_rw___: (int,us_rep1) farray) : t =
+  to_rep1((((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__count)
+
+logic os_ghost_mbx_are_well_formed : (int,us_rep1) farray -> bool
+
+function oadd(param__left: t, param__right: t) : t = (let temp___172 =
+  add(param__left, urem(param__right, rliteral2)) : t in
+  (if ule(sub(rliteral2, param__left), urem(param__right,
+  rliteral2)) then sub(temp___172, rliteral2) else temp___172))
+
+function os_mbx_get_mbx_head(param__task_id: int,
+  Test__os_task_mbx_rw___os_task_mbx_rw___: (int,us_rep1) farray) : t =
+  to_rep((((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__head)
+
+type os_task_id_param_t
+
+logic os_task_id_param_tqtint : os_task_id_param_t -> int
+
+axiom os_task_id_param_tqtaxiom :
+  (forall i:os_task_id_param_t. ((0 <= os_task_id_param_tqtint(i)) and
+  (os_task_id_param_tqtint(i) <= 4)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 4))
+
+function os_ghost_task_mbx_are_well_formed(param__task_id: int,
+  Test__os_task_mbx_rw___os_task_mbx_rw___: (int,us_rep1) farray) : bool =
+  (if (forall index:t. ((ule(rliteral, index) and ule(index, rliteral1)) ->
+      (if uge(index, os_mbx_get_mbx_count(param__task_id,
+      Test__os_task_mbx_rw___os_task_mbx_rw___)) then (to_rep2((((let temp___175 =
+      (((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__mbx_array
+      : (t,us_rep) farray in
+      (temp___175[oadd(os_mbx_get_mbx_head(param__task_id,
+      Test__os_task_mbx_rw___os_task_mbx_rw___),
+      index)]))).us_split_fields1).rec__test__os_mbx_entry_t__sender_id) = (- 1)) else in_range4(to_rep2((((let temp___176 =
+      (((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__mbx_array
+      : (t,us_rep) farray in
+      (temp___176[oadd(os_mbx_get_mbx_head(param__task_id,
+      Test__os_task_mbx_rw___os_task_mbx_rw___),
+      index)]))).us_split_fields1).rec__test__os_mbx_entry_t__sender_id))))) then true else false)
+
+type t1
+
+logic tqtint1 : t1 -> int
+
+axiom tqtaxiom1 :
+  (forall i:t1. ((0 <= tqtint1(i)) and (tqtint1(i) <= 4294967295)))
+
+logic nth1 : t1, int -> bool
+
+axiom nth_out_of_bound1 :
+  (forall x:t1. forall n:int. (((n <  0) or (32 <= n)) -> (nth1(x,
+  n) = false)))
+
+logic zeros1 : t1
+
+axiom Nth_zeros1 : (forall n:int. (nth1(zeros1, n) = false))
+
+logic one1 : t1
+
+logic ones1 : t1
+
+axiom Nth_ones1 :
+  (forall n:int. (((0 <= n) and (n <  32)) -> (nth1(ones1, n) = true)))
+
+logic two_power_size_minus_one1 : int
+
+axiom two_power_size_minus_one_val1 :
+  (two_power_size_minus_one1 = pow2((32 - 1)))
+
+logic is_signed_positive1 : t1 -> prop
+
+logic of_int1 : int -> t1
+
+function to_int1(x: t1) : int =
+  (if is_signed_positive1(x) then tqtint1(x) else (-(4294967296 - tqtint1(x))))
+
+axiom to_uint_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((tqtint1(v) = tqtint1(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality1 :
+  (forall v:t1. forall vqt:t1. ((to_int1(v) = to_int1(vqt)) -> (v = vqt)))
+
+axiom to_uint_bounds1 :
+  (forall v:t1. ((0 <= tqtint1(v)) and (tqtint1(v) <  4294967296)))
+
+axiom to_uint_of_int1 :
+  (forall i:int. (((0 <= i) and (i <  4294967296)) ->
+  (tqtint1(of_int1(i)) = i)))
+
+logic size_bv1 : t1
+
+axiom to_uint_size_bv1 : (tqtint1(size_bv1) = 32)
+
+axiom to_uint_zeros1 : (tqtint1(zeros1) = 0)
+
+axiom to_uint_one1 : (tqtint1(one1) = 1)
+
+axiom to_uint_ones1 : (tqtint1(ones1) = 4294967295)
+
+predicate ult1(x: t1, y: t1) = (tqtint1(x) <  tqtint1(y))
+
+logic ult_closure1 : (t1,(t1,bool) farray) farray
+
+axiom ult_closure_def1 :
+  (forall y:t1. forall y1:t1. ((((ult_closure1[y])[y1]) = true) <-> ult1(y,
+  y1)))
+
+axiom ult_wf1 : well_founded(ult_closure1)
+
+predicate ugt1(x: t1, y: t1) = (tqtint1(y) <  tqtint1(x))
+
+logic ugt_closure1 : (t1,(t1,bool) farray) farray
+
+axiom ugt_closure_def1 :
+  (forall y:t1. forall y1:t1. ((((ugt_closure1[y])[y1]) = true) <-> ugt1(y,
+  y1)))
+
+axiom ugt_wf1 : well_founded(ugt_closure1)
+
+predicate slt1(v1: t1, v2: t1) = (to_int1(v1) <  to_int1(v2))
+
+logic slt_closure1 : (t1,(t1,bool) farray) farray
+
+axiom slt_closure_def1 :
+  (forall y:t1. forall y1:t1. ((((slt_closure1[y])[y1]) = true) <-> slt1(y,
+  y1)))
+
+axiom slt_wf1 : well_founded(slt_closure1)
+
+predicate sgt1(v1: t1, v2: t1) = (to_int1(v2) <  to_int1(v1))
+
+logic sgt_closure1 : (t1,(t1,bool) farray) farray
+
+axiom sgt_closure_def1 :
+  (forall y:t1. forall y1:t1. ((((sgt_closure1[y])[y1]) = true) <-> sgt1(y,
+  y1)))
+
+axiom sgt_wf1 : well_founded(sgt_closure1)
+
+predicate sge1(v1: t1, v2: t1) = (to_int1(v2) <= to_int1(v1))
+
+axiom positive_is_ge_zeros1 :
+  (forall x:t1. (is_signed_positive1(x) <-> sge1(x, zeros1)))
+
+logic nth_bv1 : t1, t1 -> bool
+
+axiom Nth_bv_is_nth1 :
+  (forall x:t1. forall i:t1. (nth1(x, tqtint1(i)) = nth_bv1(x, i)))
+
+axiom Nth_bv_is_nth21 :
+  (forall x:t1. forall i:int. (((0 <= i) and (i <  4294967296)) ->
+  (nth_bv1(x, of_int1(i)) = nth1(x, i))))
+
+type os_mbx_mask_t
+
+logic attr__ATTRIBUTE_MODULUS1 : t1
+
+logic to_rep4 : os_mbx_mask_t -> t1
+
+logic of_rep4 : t1 -> os_mbx_mask_t
+
+axiom inversion_axiom4 :
+  (forall x:os_mbx_mask_t [to_rep4(x)]. (of_rep4(to_rep4(x)) = x))
+
+axiom range_axiom4 : true
+
+axiom coerce_axiom4 :
+  (forall x:t1 [to_rep4(of_rep4(x))]. (to_rep4(of_rep4(x)) = x))
+
+type us_split_fields4 = { rec__test__os_task_rw_t__next : os_task_id_t;
+rec__test__os_task_rw_t__prev : os_task_id_t;
+rec__test__os_task_rw_t__mbx_waiting_mask : os_mbx_mask_t }
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic test__os_task_rw_t__next__first__bit : int
+
+logic test__os_task_rw_t__next__last__bit : int
+
+logic test__os_task_rw_t__next__position : int
+
+axiom test__os_task_rw_t__next__first__bit_axiom :
+  (0 <= test__os_task_rw_t__next__first__bit)
+
+axiom test__os_task_rw_t__next__last__bit_axiom :
+  (test__os_task_rw_t__next__first__bit <  test__os_task_rw_t__next__last__bit)
+
+axiom test__os_task_rw_t__next__position_axiom :
+  (0 <= test__os_task_rw_t__next__position)
+
+logic test__os_task_rw_t__prev__first__bit : int
+
+logic test__os_task_rw_t__prev__last__bit : int
+
+logic test__os_task_rw_t__prev__position : int
+
+axiom test__os_task_rw_t__prev__first__bit_axiom :
+  (0 <= test__os_task_rw_t__prev__first__bit)
+
+axiom test__os_task_rw_t__prev__last__bit_axiom :
+  (test__os_task_rw_t__prev__first__bit <  test__os_task_rw_t__prev__last__bit)
+
+axiom test__os_task_rw_t__prev__position_axiom :
+  (0 <= test__os_task_rw_t__prev__position)
+
+logic test__os_task_rw_t__mbx_waiting_mask__first__bit : int
+
+logic test__os_task_rw_t__mbx_waiting_mask__last__bit : int
+
+logic test__os_task_rw_t__mbx_waiting_mask__position : int
+
+axiom test__os_task_rw_t__mbx_waiting_mask__first__bit_axiom :
+  (0 <= test__os_task_rw_t__mbx_waiting_mask__first__bit)
+
+axiom test__os_task_rw_t__mbx_waiting_mask__last__bit_axiom :
+  (test__os_task_rw_t__mbx_waiting_mask__first__bit <  test__os_task_rw_t__mbx_waiting_mask__last__bit)
+
+axiom test__os_task_rw_t__mbx_waiting_mask__position_axiom :
+  (0 <= test__os_task_rw_t__mbx_waiting_mask__position)
+
+logic dummy2 : us_rep2
+
+function os_mbx_is_empty(param__task_id: int,
+  Test__os_task_mbx_rw___os_task_mbx_rw___: (int,us_rep1) farray) : bool =
+  bool_eq(to_rep1((((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__count),
+  rliteral)
+
+logic os_mbx_get_mbx_entry_sender : int, t, (int,us_rep1) farray -> int
+
+logic os_mbx_get_mbx_entry_sender__function_guard : int, int, t,
+  (int,us_rep1) farray -> prop
+
+predicate dynamic_invariant(temp___expr_324: us_rep1,
+  temp___is_init_320: bool, temp___skip_constant_321: bool,
+  temp___do_toplevel_322: bool, temp___do_typ_inv_323: bool) = true
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size1 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic current : int
+
+logic r25b : t
+
+type os_status_t
+
+logic os_status_tqtint : os_status_t -> int
+
+axiom os_status_tqtaxiom :
+  (forall i:os_status_t. (((- 5) <= os_status_tqtint(i)) and
+  (os_status_tqtint(i) <= 0)))
+
+predicate in_range5(x: int) = (((- 5) <= x) and (x <= 0))
+
+logic attr__ATTRIBUTE_MODULUS2 : t
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size2 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+axiom os_ghost_mbx_are_well_formed__post_axiom : true
+
+axiom os_ghost_mbx_are_well_formed__def_axiom :
+  (forall Test__os_task_mbx_rw___os_task_mbx_rw___:(int,us_rep1) farray
+  [os_ghost_mbx_are_well_formed(Test__os_task_mbx_rw___os_task_mbx_rw___)].
+  ((os_ghost_mbx_are_well_formed(Test__os_task_mbx_rw___os_task_mbx_rw___) = true) <->
+  (forall task_id:int. (((0 <= task_id) and (task_id <= 4)) ->
+  (os_ghost_task_mbx_are_well_formed(task_id,
+  Test__os_task_mbx_rw___os_task_mbx_rw___) = true)))))
+
+axiom os_mbx_get_mbx_entry_sender__post_axiom :
+  (forall param__task_id:int.
+  (forall param__index:t.
+  (forall Test__os_task_mbx_rw___os_task_mbx_rw___:(int,us_rep1) farray
+  [os_mbx_get_mbx_entry_sender(param__task_id, param__index,
+  Test__os_task_mbx_rw___os_task_mbx_rw___)].
+  ((((in_range4(param__task_id) and in_range1(param__index)) and
+  (forall temp___386:int. (((0 <= temp___386) and (temp___386 <= 4)) ->
+  dynamic_invariant((Test__os_task_mbx_rw___os_task_mbx_rw___[temp___386]),
+  true, false, true, true)))) and in_range4(to_rep2((((let temp___382 =
+  (((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__mbx_array
+  : (t,us_rep) farray in (temp___382[oadd(os_mbx_get_mbx_head(param__task_id,
+  Test__os_task_mbx_rw___os_task_mbx_rw___),
+  param__index)]))).us_split_fields1).rec__test__os_mbx_entry_t__sender_id))) ->
+  (let result = os_mbx_get_mbx_entry_sender(param__task_id, param__index,
+  Test__os_task_mbx_rw___os_task_mbx_rw___) : int in
+  (os_mbx_get_mbx_entry_sender__function_guard(result, param__task_id,
+  param__index, Test__os_task_mbx_rw___os_task_mbx_rw___) ->
+  in_range4(result)))))))
+
+axiom os_mbx_get_mbx_entry_sender__def_axiom :
+  (forall param__task_id:int.
+  (forall param__index:t.
+  (forall Test__os_task_mbx_rw___os_task_mbx_rw___:(int,us_rep1) farray
+  [os_mbx_get_mbx_entry_sender(param__task_id, param__index,
+  Test__os_task_mbx_rw___os_task_mbx_rw___)].
+  (os_mbx_get_mbx_entry_sender(param__task_id, param__index,
+  Test__os_task_mbx_rw___os_task_mbx_rw___) = to_rep2((((let temp___387qtunused =
+  (((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__mbx_array
+  : (t,us_rep) farray in
+  ((((Test__os_task_mbx_rw___os_task_mbx_rw___[param__task_id])).us_split_fields3).rec__test__os_mbx_t__mbx_array[oadd(os_mbx_get_mbx_head(param__task_id,
+  Test__os_task_mbx_rw___os_task_mbx_rw___),
+  param__index)]))).us_split_fields1).rec__test__os_mbx_entry_t__sender_id)))))
+
+logic rliteral3 : os_task_id_t
+
+axiom rliteral_axiom3 : (os_task_id_tqtint(rliteral3) = (- 1))
+
+logic rliteral4 : os_mbx_msg_t
+
+axiom rliteral_axiom4 : (os_mbx_msg_tqtint(rliteral4) = 0)
+
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 1)
+
+ (* "test.ads", line 80, characters 0-0 *)
+goal defqtvc :
+  (forall os_task_mbx_rw:(int,us_rep1) farray. forall status:int.
+  forall mbx_entry__split_fields:us_split_fields. forall os_task_current:int.
+  ((forall temp___479:int. (((0 <= temp___479) and (temp___479 <= 4)) ->
+   dynamic_invariant((os_task_mbx_rw[temp___479]), true, false, true, true))) ->
+  (in_range4(os_task_current) -> (in_range5(status) ->
+  ((os_ghost_mbx_are_well_formed(os_task_mbx_rw) = true) ->
+  ((in_range4(os_task_current) and (os_task_current = os_task_current)) ->
+  ((os_task_current = current) -> (in_range4(current) ->
+  (forall mbx_entry__split_fields1:us_split_fields.
+  ((mbx_entry__split_fields1 = { rec__test__os_mbx_entry_t__sender_id =
+  rliteral3; rec__test__os_mbx_entry_t__msg =
+  (mbx_entry__split_fields).rec__test__os_mbx_entry_t__msg }) ->
+  (forall mbx_entry__split_fields2:us_split_fields.
+  ((mbx_entry__split_fields2 = { rec__test__os_mbx_entry_t__sender_id =
+  (mbx_entry__split_fields1).rec__test__os_mbx_entry_t__sender_id;
+  rec__test__os_mbx_entry_t__msg = rliteral4 }) -> (let o = current : int in
+  (let o1 = os_mbx_is_empty(o, os_task_mbx_rw) : bool in (((o1 = true) <->
+  (to_rep1((((os_task_mbx_rw[o])).us_split_fields3).rec__test__os_mbx_t__count) = rliteral)) ->
+  (forall spark__branch:bool. ((spark__branch = o1) ->
+  ((not (spark__branch = true)) ->
+  (forall status1:int. ((status1 = (- 4)) -> (let o2 = current : int in
+  (let o3 = os_mbx_get_mbx_count(o2, os_task_mbx_rw) : t in
+  ((in_range1(o3) and
+  (o3 = to_rep1((((os_task_mbx_rw[o2])).us_split_fields3).rec__test__os_mbx_t__count))) ->
+  ((sub(o3, rliteral5) = r25b) ->
+  (forall iterator:t. ((iterator = rliteral) -> ((andb((if ule(rliteral,
+  iterator) then true else false), (if ule(iterator,
+  r25b) then true else false)) = true) -> (let o4 = current : int in
+  (((os_mbx_is_empty(o4, os_task_mbx_rw) = true) <->
+  (to_rep1((((os_task_mbx_rw[o4])).us_split_fields3).rec__test__os_mbx_t__count) = rliteral)) ->
+  (((os_ghost_mbx_are_well_formed(os_task_mbx_rw) = true) <->
+  (forall task_id:int. (((0 <= task_id) and (task_id <= 4)) ->
+  (os_ghost_task_mbx_are_well_formed(task_id, os_task_mbx_rw) = true)))) ->
+  (forall os_task_mbx_rw1:(int,us_rep1) farray. forall status2:int.
+  forall mbx_entry__split_fields3:us_split_fields. forall iterator1:t.
+  (((os_ghost_mbx_are_well_formed(os_task_mbx_rw1) = true) and
+  (not (os_mbx_is_empty(current, os_task_mbx_rw1) = true))) ->
+  ((andb((if (((status2 = status1) and
+  (os_task_mbx_rw1 = os_task_mbx_rw)) and
+  (mbx_entry__split_fields3 = mbx_entry__split_fields2)) then true else false),
+  (if (ule(rliteral, iterator1) and ule(iterator1,
+  r25b)) then true else false)) = true) -> (in_range1(iterator1) ->
+  ((forall o5:int.
+   os_mbx_get_mbx_entry_sender__function_guard(os_mbx_get_mbx_entry_sender(o5,
+   iterator1, os_task_mbx_rw1), o5, iterator1, os_task_mbx_rw1)) ->
+  (0 <= os_mbx_get_mbx_entry_sender(current, iterator1,
+  os_task_mbx_rw1)))))))))))))))))))))))))))))))))))))

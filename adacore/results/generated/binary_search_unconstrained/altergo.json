@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "filename": "generated/binary_search_unconstrained/altergo/binary_search.adb_44_28_assert_1.ae",
+      "status": "unsat",
+      "steps": 427,
+      "time": 0.0595
+    },
+    {
+      "filename": "generated/binary_search_unconstrained/altergo/binary_search.adb_40_28_assert_1.ae",
+      "status": "unsat",
+      "steps": 378,
+      "time": 0.0569
+    },
+    {
+      "filename": "generated/binary_search_unconstrained/altergo/binary_search.ads_32_14_postcondition2_1.ae",
+      "status": "unsat",
+      "steps": 4693,
+      "time": 0.6197
+    }
+  ]
+}

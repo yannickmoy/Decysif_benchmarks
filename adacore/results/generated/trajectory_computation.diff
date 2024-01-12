@@ -1,0 +1,122 @@
+cvc5 proved 36 out of 62 VCs
+  unproved complex_trajectory.adb_29_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_30_22_assert_1.smt2
+  unproved complex_trajectory.adb_35_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_37_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_39_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_46_25_assert2_1.smt2
+  unproved complex_trajectory.adb_46_25_assert_1.smt2
+  unproved complex_trajectory.adb_48_25_assert2_1.smt2
+  unproved complex_trajectory.adb_48_25_assert_1.smt2
+  unproved complex_trajectory.adb_51_22_assert_1.smt2
+  unproved complex_trajectory.adb_52_22_assert_1.smt2
+  unproved complex_trajectory.adb_60_22_assert_1.smt2
+  unproved complex_trajectory.adb_63_22_assert_1.smt2
+  unproved complex_trajectory.adb_67_22_assert_1.smt2
+  unproved complex_trajectory.adb_69_22_assert_1.smt2
+  unproved complex_trajectory.adb_72_22_assert_1.smt2
+  unproved complex_trajectory_overflow.adb_29_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_30_22_assert_1.smt2
+  unproved complex_trajectory_overflow.adb_35_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_37_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_39_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_28_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_29_22_assert_1.smt2
+  unproved simple_trajectory.adb_34_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_36_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_38_22_assert_1.smt2 (proved by ['altergo'])
+z3 proved 5 out of 62 VCs
+  unproved complex_trajectory.adb_18_22_fp_overflow_check_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_22_22_assert2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory.adb_22_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory.adb_23_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_28_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_29_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_30_22_assert_1.smt2
+  unproved complex_trajectory.adb_34_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory.adb_35_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_37_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_38_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_39_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory.adb_42_29_fp_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory.adb_44_22_assert2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory.adb_44_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_46_25_assert2_1.smt2
+  unproved complex_trajectory.adb_46_25_assert_1.smt2
+  unproved complex_trajectory.adb_48_25_assert2_1.smt2
+  unproved complex_trajectory.adb_48_25_assert_1.smt2
+  unproved complex_trajectory.adb_50_22_assert2_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_51_22_assert_1.smt2
+  unproved complex_trajectory.adb_52_22_assert_1.smt2
+  unproved complex_trajectory.adb_53_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_54_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_56_28_fp_overflow_check_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_60_22_assert_1.smt2
+  unproved complex_trajectory.adb_63_22_assert_1.smt2
+  unproved complex_trajectory.adb_67_22_assert_1.smt2
+  unproved complex_trajectory.adb_69_22_assert_1.smt2
+  unproved complex_trajectory.adb_71_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory.adb_72_22_assert_1.smt2
+  unproved complex_trajectory_overflow.adb_18_22_fp_overflow_check_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_22_22_assert2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory_overflow.adb_22_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory_overflow.adb_23_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_28_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_29_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_30_22_assert_1.smt2
+  unproved complex_trajectory_overflow.adb_34_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory_overflow.adb_35_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_37_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_38_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory_overflow.adb_39_22_assert_1.smt2 (proved by ['altergo'])
+  unproved complex_trajectory_overflow.adb_48_29_fp_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved complex_trajectory_overflow.adb_49_28_fp_overflow_check_1.smt2 (proved by ['cvc5'])
+  unproved simple_trajectory.adb_17_30_fp_overflow_check_1.smt2 (proved by ['cvc5'])
+  unproved simple_trajectory.adb_21_22_assert2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved simple_trajectory.adb_21_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved simple_trajectory.adb_22_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved simple_trajectory.adb_27_22_assert_1.smt2 (proved by ['cvc5'])
+  unproved simple_trajectory.adb_28_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_29_22_assert_1.smt2
+  unproved simple_trajectory.adb_33_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved simple_trajectory.adb_34_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_36_22_assert_1.smt2 (proved by ['altergo'])
+  unproved simple_trajectory.adb_37_22_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved simple_trajectory.adb_38_22_assert_1.smt2 (proved by ['altergo'])
+altergo proved 26 out of 62 VCs
+  unproved complex_trajectory.adb_18_22_fp_overflow_check_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_23_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_24_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved complex_trajectory.adb_28_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_30_22_assert_1.ae
+  unproved complex_trajectory.adb_38_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_44_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_46_25_assert2_1.ae
+  unproved complex_trajectory.adb_46_25_assert_1.ae
+  unproved complex_trajectory.adb_48_25_assert2_1.ae
+  unproved complex_trajectory.adb_48_25_assert_1.ae
+  unproved complex_trajectory.adb_50_22_assert2_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_50_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved complex_trajectory.adb_51_22_assert_1.ae
+  unproved complex_trajectory.adb_52_22_assert_1.ae
+  unproved complex_trajectory.adb_53_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_54_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_56_28_fp_overflow_check_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_60_22_assert_1.ae
+  unproved complex_trajectory.adb_63_22_assert_1.ae
+  unproved complex_trajectory.adb_67_22_assert_1.ae
+  unproved complex_trajectory.adb_69_22_assert_1.ae
+  unproved complex_trajectory.adb_71_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory.adb_72_22_assert_1.ae
+  unproved complex_trajectory.ads_48_19_postcondition4_1.ae (proved by ['cvc5', 'z3'])
+  unproved complex_trajectory_overflow.adb_18_22_fp_overflow_check_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_23_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_24_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved complex_trajectory_overflow.adb_28_22_assert_1.ae (proved by ['cvc5'])
+  unproved complex_trajectory_overflow.adb_30_22_assert_1.ae
+  unproved complex_trajectory_overflow.adb_49_28_fp_overflow_check_1.ae (proved by ['cvc5'])
+  unproved simple_trajectory.adb_17_30_fp_overflow_check_1.ae (proved by ['cvc5'])
+  unproved simple_trajectory.adb_22_22_assert_1.ae (proved by ['cvc5'])
+  unproved simple_trajectory.adb_23_22_assert_1.ae (proved by ['cvc5', 'z3'])
+  unproved simple_trajectory.adb_27_22_assert_1.ae (proved by ['cvc5'])
+  unproved simple_trajectory.adb_29_22_assert_1.ae

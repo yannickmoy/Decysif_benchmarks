@@ -1,0 +1,166 @@
+{
+  "results": [
+    {
+      "filename": "generated/patience/z3/patience.adb_72_8_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 79980,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert15_1.smt2",
+      "status": "unsat",
+      "steps": 115775,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 109863,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_36_15_assert7_1.smt2",
+      "status": "unsat",
+      "steps": 27034,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/patience/z3/patience.ads_125_18_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 94865,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert_1.smt2",
+      "status": "unsat",
+      "steps": 104206,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert11_1.smt2",
+      "status": "unsat",
+      "steps": 104324,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_83_22_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 115879,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/z3/patience.ads_125_18_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 91131,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert16_1.smt2",
+      "status": "unsat",
+      "steps": 162549,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_83_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 132194,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert7_1.smt2",
+      "status": "unsat",
+      "steps": 126807,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_83_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 105332,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert13_1.smt2",
+      "status": "unsat",
+      "steps": 104679,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert14_1.smt2",
+      "status": "unsat",
+      "steps": 121315,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert6_1.smt2",
+      "status": "unsat",
+      "steps": 130285,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert8_1.smt2",
+      "status": "unsat",
+      "steps": 189702,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 102593,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert12_1.smt2",
+      "status": "unsat",
+      "steps": 118845,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.ads_125_18_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 123604,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_36_15_assert6_1.smt2",
+      "status": "unsat",
+      "steps": 26998,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert5_1.smt2",
+      "status": "unsat",
+      "steps": 127291,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert9_1.smt2",
+      "status": "unsat",
+      "steps": 186406,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_80_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 126983,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_72_8_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 79341,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_72_8_assert_1.smt2",
+      "status": "unsat",
+      "steps": 78892,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/patience/z3/patience.adb_92_10_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 118651,
+      "time": 0.05
+    }
+  ]
+}

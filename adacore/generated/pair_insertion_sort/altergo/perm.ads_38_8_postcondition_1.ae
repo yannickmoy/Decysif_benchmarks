@@ -1,0 +1,306 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((0 <= indexqtint(i)) and (indexqtint(i) <= 2147483646)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483646))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+predicate dynamic_invariant(temp___expr_197: us_t, temp___is_init_193: bool,
+  temp___skip_constant_194: bool, temp___do_toplevel_195: bool,
+  temp___do_typ_inv_196: bool) = (((not (temp___skip_constant_194 = true)) ->
+  dynamic_property(0, 2147483646, first(temp___expr_197),
+  last(temp___expr_197))) and ((temp___is_init_193 = true) ->
+  ((temp___do_toplevel_195 = true) -> (first(temp___expr_197) = 0))))
+
+function remove_last(param__a: us_t) : us_t = (let temp___172 =
+  (let temp___171 = (last(param__a) - 1) : int in (let temp___170 =
+  first(param__a) : int in of_array(to_array(param__a), temp___170,
+  temp___171))) : us_t in (let temp___173 = to_array(temp___172)
+  : (int,integer) farray in of_array(temp___173, first(temp___172),
+  last(temp___172))))
+
+logic occ : us_t, int -> int
+
+logic occ__function_guard : int, us_t, int -> prop
+
+logic occ_def : us_t, int -> int
+
+logic occ_def__function_guard : int, us_t, int -> prop
+
+type nb_occ
+
+logic nb_occqtint : nb_occ -> int
+
+axiom nb_occqtaxiom :
+  (forall i:nb_occ. ((0 <= nb_occqtint(i)) and
+  (nb_occqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+function is_set(param__a: us_t, param__i: int, param__v: int,
+  param__r: us_t) : bool = andb(andb(andb(bool_eq(first(param__r),
+  first(param__a)), bool_eq(last(param__r), last(param__a))),
+  bool_eq(to_rep((to_array(param__r)[param__i])), param__v)),
+  (if (forall j:int. (((first(param__a) <= j) and (j <= last(param__a))) ->
+      ((not (param__i = j)) ->
+      (to_rep((to_array(param__r)[j])) = to_rep((to_array(param__a)[j])))))) then true else false))
+
+logic a : us_t
+
+logic i : int
+
+logic v : int
+
+logic e : int
+
+logic r : us_t
+
+logic b__first : integer
+
+logic b__last : integer
+
+axiom occ_def__post_axiom :
+  (forall param__a:us_t.
+  (forall param__e:int [occ_def(param__a, param__e)].
+  ((dynamic_invariant(param__a, true, false, true, true) and
+  in_range(param__e)) -> (let result = occ_def(param__a, param__e) : int in
+  (occ_def__function_guard(result, param__a, param__e) ->
+  ((result <= length(param__a)) and in_range2(result)))))))
+
+axiom occ_def__def_axiom :
+  (forall param__a:us_t.
+  (forall param__e:int [occ_def(param__a, param__e)].
+  ((forall temp___213:us_t. occ_def__function_guard(occ_def(temp___213,
+   param__e), temp___213, param__e)) and
+  ((forall temp___215:us_t. occ_def__function_guard(occ_def(temp___215,
+   param__e), temp___215, param__e)) and
+  (occ_def(param__a,
+  param__e) = (if (length(param__a) = 0) then 0 else (if (to_rep((to_array(param__a)[last(param__a)])) = param__e) then ((let temp___213 =
+  remove_last(param__a) : us_t in occ_def(temp___213,
+  param__e)) + 1) else (let temp___215 = remove_last(param__a) : us_t in
+  occ_def(temp___215, param__e)))))))))
+
+axiom occ__post_axiom :
+  (forall param__a:us_t.
+  (forall param__e:int [occ(param__a, param__e)].
+  ((dynamic_invariant(param__a, true, false, true, true) and
+  in_range(param__e)) -> (let result = occ(param__a, param__e) : int in
+  (occ__function_guard(result, param__a, param__e) ->
+  ((result <= length(param__a)) and in_range2(result)))))))
+
+axiom occ__def_axiom :
+  (forall param__a:us_t.
+  (forall param__e:int [occ(param__a, param__e)].
+  (occ_def__function_guard(occ_def(param__a, param__e), param__a,
+  param__e) and (occ(param__a, param__e) = occ_def(param__a, param__e)))))
+
+ (* "perm.ads", line 32, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(a, true, false, true, true) ->
+  (in_range1(i) -> (in_range(v) -> (in_range(e) -> (dynamic_invariant(r,
+  true, false, true, true) -> ((((first(a) <= i) and (i <= last(a))) and
+  (is_set(a, i, v, r) = true)) ->
+  ((forall o:int. forall o1:us_t. occ__function_guard(occ(o1, o), o1, o)) ->
+  ((forall o:int. forall o1:us_t. occ__function_guard(occ(o1, o), o1, o)) ->
+  ((forall o:int. forall o1:us_t. occ__function_guard(occ(o1, o), o1, o)) ->
+  ((forall o:int. forall o1:us_t. occ__function_guard(occ(o1, o), o1, o)) ->
+  ((forall temp___compl_307:int. forall temp___compl_308:us_t.
+   occ__function_guard(occ(temp___compl_308, temp___compl_307),
+   temp___compl_308, temp___compl_307)) ->
+  ((forall temp___compl_304:us_t. forall temp___compl_307:int.
+   occ__function_guard(occ(temp___compl_304, temp___compl_307),
+   temp___compl_304, temp___compl_307)) ->
+  ((forall temp___compl_307:int. forall temp___compl_308:us_t.
+   occ__function_guard(occ(temp___compl_308, temp___compl_307),
+   temp___compl_308, temp___compl_307)) ->
+  ((forall temp___compl_304:us_t. forall temp___compl_307:int.
+   occ__function_guard(occ(temp___compl_304, temp___compl_307),
+   temp___compl_304, temp___compl_307)) ->
+  ((forall temp___compl_307:int. forall temp___compl_308:us_t.
+   occ__function_guard(occ(temp___compl_308, temp___compl_307),
+   temp___compl_308, temp___compl_307)) ->
+  ((forall temp___compl_304:us_t. forall temp___compl_307:int.
+   occ__function_guard(occ(temp___compl_304, temp___compl_307),
+   temp___compl_304, temp___compl_307)) ->
+  ((forall temp___compl_307:int. forall temp___compl_308:us_t.
+   occ__function_guard(occ(temp___compl_308, temp___compl_307),
+   temp___compl_308, temp___compl_307)) ->
+  ((forall temp___compl_304:us_t. forall temp___compl_307:int.
+   occ__function_guard(occ(temp___compl_304, temp___compl_307),
+   temp___compl_304, temp___compl_307)) -> ((let o = a : us_t in
+  (let perm__occ_set__b__assume = remove_last(o) : us_t in
+  ((dynamic_invariant(perm__occ_set__b__assume, true, false, true, true) and
+  (perm__occ_set__b__assume = (let temp___203qtunused = (let temp___202 =
+  (last(o) - 1) : int in (let temp___201 = first(o) : int in
+  of_array(to_array(o), temp___201, temp___202))) : us_t in (let temp___202 =
+  (last(o) - 1) : int in (let temp___201 = first(o) : int in
+  of_array(to_array(o), temp___201, temp___202)))))) and
+  (exists b:(int,integer) farray.
+  ((b = to_array(perm__occ_set__b__assume)) and
+  ((to_rep(b__first) = first(perm__occ_set__b__assume)) and
+  ((to_rep(b__last) = last(perm__occ_set__b__assume)) and
+  (dynamic_invariant(of_array(b, to_rep(b__first), to_rep(b__last)), true,
+  false, true, true) and
+  (exists spark__branch:bool.
+  ((spark__branch = (if (length(a) = 0) then true else false)) and
+  ((not (spark__branch = true)) ->
+  (exists spark__branch1:bool.
+  ((spark__branch1 = (if (i = last(a)) then true else false)) and
+  (if (spark__branch1 = true) then (let o1 = e : int in (let o2 = r : us_t in
+  (let o3 = remove_last(o2) : us_t in ((dynamic_invariant(o3, true, false,
+  true, true) and (o3 = (let temp___203qtunused = (let temp___202 =
+  (last(o2) - 1) : int in (let temp___201 = first(o2) : int in
+  of_array(to_array(o2), temp___201, temp___202))) : us_t in
+  (let temp___202 = (last(o2) - 1) : int in (let temp___201 = first(o2)
+  : int in of_array(to_array(o2), temp___201, temp___202)))))) and
+  (exists o4:int. ((to_rep(b__last) = o4) and
+  (exists o5:int. ((to_rep(b__first) = o5) and (occ(of_array(b, o5, o4),
+  o1) = occ(o3, o1)))))))))) else (exists o1:int. ((to_rep(b__last) = o1) and
+                                  (exists o2:int.
+                                  ((to_rep(b__first) = o2) and
+                                  (exists o3:integer. ((to_rep(o3) = v) and
+                                  (((o2 <= i) and (i <= o1)) and
+                                  (let temp___302 = { elts = (b[i <- o3]);
+                                  rt = (of_array(b, o2, o1)).rt } : us_t in
+                                  ((first(temp___302) = 0) and
+                                  (exists b1:(int,integer) farray.
+                                  ((b1 = to_array(temp___302)) and (let o4 =
+                                  e : int in
+                                  (exists o5:int. ((to_rep(b__last) = o5) and
+                                  (exists o6:int.
+                                  ((to_rep(b__first) = o6) and (let o7 = r
+                                  : us_t in (let o8 = remove_last(o7)
+                                  : us_t in ((dynamic_invariant(o8, true,
+                                  false, true, true) and
+                                  (o8 = (let temp___203qtunused =
+                                  (let temp___202 = (last(o7) - 1) : int in
+                                  (let temp___201 = first(o7) : int in
+                                  of_array(to_array(o7), temp___201,
+                                  temp___202))) : us_t in (let temp___202 =
+                                  (last(o7) - 1) : int in (let temp___201 =
+                                  first(o7) : int in of_array(to_array(o7),
+                                  temp___201, temp___202)))))) and ((occ(o8,
+                                  o4) = occ(of_array(b1, o6, o5), o4)) and
+                                  (let o9 = a : us_t in
+                                  (let temp___compl_304 = remove_last(o9)
+                                  : us_t in
+                                  ((dynamic_invariant(temp___compl_304, true,
+                                  false, true, true) and
+                                  (temp___compl_304 = (let temp___203qtunused =
+                                  (let temp___202 = (last(o9) - 1) : int in
+                                  (let temp___201 = first(o9) : int in
+                                  of_array(to_array(o9), temp___201,
+                                  temp___202))) : us_t in (let temp___202 =
+                                  (last(o9) - 1) : int in (let temp___201 =
+                                  first(o9) : int in of_array(to_array(o9),
+                                  temp___201, temp___202)))))) and
+                                  (let temp___compl_305 = i : int in
+                                  (let temp___compl_306 = v : int in
+                                  (let temp___compl_307 = e : int in
+                                  (exists o10:int.
+                                  ((to_rep(b__last) = o10) and
+                                  (exists o11:int.
+                                  ((to_rep(b__first) = o11) and
+                                  (let temp___compl_308 = of_array(b1, o11,
+                                  o10) : us_t in
+                                  (if (temp___compl_306 = to_rep((to_array(temp___compl_304)[temp___compl_305]))) then (occ(temp___compl_308,
+                                  temp___compl_307) = occ(temp___compl_304,
+                                  temp___compl_307)) else (if (temp___compl_306 = temp___compl_307) then (occ(temp___compl_308,
+                                  temp___compl_307) = (occ(temp___compl_304,
+                                  temp___compl_307) + 1)) else (if (to_rep((to_array(temp___compl_304)[temp___compl_305])) = temp___compl_307) then (occ(temp___compl_308,
+                                  temp___compl_307) = (occ(temp___compl_304,
+                                  temp___compl_307) - 1)) else (occ(temp___compl_308,
+                                  temp___compl_307) = occ(temp___compl_304,
+                                  temp___compl_307)))))))))))))))))))))))))))))))))))))))))))))))))) ->
+  ((v = to_rep((to_array(a)[i]))) -> (occ__function_guard(occ(r, e), r, e) ->
+  (occ__function_guard(occ(a, e), a, e) -> (occ(r, e) = occ(a,
+  e))))))))))))))))))))))))

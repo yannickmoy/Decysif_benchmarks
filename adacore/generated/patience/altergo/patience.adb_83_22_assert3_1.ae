@@ -1,0 +1,790 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type cardindex
+
+logic cardindexqtint : cardindex -> int
+
+axiom cardindexqtaxiom :
+  (forall i:cardindex. (((- 1) <= cardindexqtint(i)) and
+  (cardindexqtint(i) <= 100)))
+
+predicate in_range1(x: int) = (((- 1) <= x) and (x <= 100))
+
+function to_rep(x: cardindex) : int = cardindexqtint(x)
+
+logic of_rep : int -> cardindex
+
+axiom inversion_axiom :
+  (forall x:cardindex [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:cardindex [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type card
+
+logic cardqtint : card -> int
+
+axiom cardqtaxiom :
+  (forall i:card. ((1 <= cardqtint(i)) and (cardqtint(i) <= 52)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 52))
+
+function to_rep1(x: card) : int = cardqtint(x)
+
+logic of_rep1 : int -> card
+
+axiom inversion_axiom1 :
+  (forall x:card [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:card [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+type us_split_fields = { rec__patience__state__numelts : cardindex;
+rec__patience__state__values : (int,card) farray;
+rec__patience__state__numstacks : cardindex; rec__patience__state__stacksizes
+: (int,cardindex) farray; rec__patience__state__stacks :
+(int,(int,cardindex) farray) farray; rec__patience__state__posstack :
+(int,cardindex) farray; rec__patience__state__posheight :
+(int,cardindex) farray; rec__patience__state__preds : (int,cardindex) farray
+}
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic patience__state__numelts__first__bit : int
+
+logic patience__state__numelts__last__bit : int
+
+logic patience__state__numelts__position : int
+
+axiom patience__state__numelts__first__bit_axiom :
+  (0 <= patience__state__numelts__first__bit)
+
+axiom patience__state__numelts__last__bit_axiom :
+  (patience__state__numelts__first__bit <  patience__state__numelts__last__bit)
+
+axiom patience__state__numelts__position_axiom :
+  (0 <= patience__state__numelts__position)
+
+logic patience__state__values__first__bit : int
+
+logic patience__state__values__last__bit : int
+
+logic patience__state__values__position : int
+
+axiom patience__state__values__first__bit_axiom :
+  (0 <= patience__state__values__first__bit)
+
+axiom patience__state__values__last__bit_axiom :
+  (patience__state__values__first__bit <  patience__state__values__last__bit)
+
+axiom patience__state__values__position_axiom :
+  (0 <= patience__state__values__position)
+
+logic patience__state__numstacks__first__bit : int
+
+logic patience__state__numstacks__last__bit : int
+
+logic patience__state__numstacks__position : int
+
+axiom patience__state__numstacks__first__bit_axiom :
+  (0 <= patience__state__numstacks__first__bit)
+
+axiom patience__state__numstacks__last__bit_axiom :
+  (patience__state__numstacks__first__bit <  patience__state__numstacks__last__bit)
+
+axiom patience__state__numstacks__position_axiom :
+  (0 <= patience__state__numstacks__position)
+
+logic patience__state__stacksizes__first__bit : int
+
+logic patience__state__stacksizes__last__bit : int
+
+logic patience__state__stacksizes__position : int
+
+axiom patience__state__stacksizes__first__bit_axiom :
+  (0 <= patience__state__stacksizes__first__bit)
+
+axiom patience__state__stacksizes__last__bit_axiom :
+  (patience__state__stacksizes__first__bit <  patience__state__stacksizes__last__bit)
+
+axiom patience__state__stacksizes__position_axiom :
+  (0 <= patience__state__stacksizes__position)
+
+logic patience__state__stacks__first__bit : int
+
+logic patience__state__stacks__last__bit : int
+
+logic patience__state__stacks__position : int
+
+axiom patience__state__stacks__first__bit_axiom :
+  (0 <= patience__state__stacks__first__bit)
+
+axiom patience__state__stacks__last__bit_axiom :
+  (patience__state__stacks__first__bit <  patience__state__stacks__last__bit)
+
+axiom patience__state__stacks__position_axiom :
+  (0 <= patience__state__stacks__position)
+
+logic patience__state__posstack__first__bit : int
+
+logic patience__state__posstack__last__bit : int
+
+logic patience__state__posstack__position : int
+
+axiom patience__state__posstack__first__bit_axiom :
+  (0 <= patience__state__posstack__first__bit)
+
+axiom patience__state__posstack__last__bit_axiom :
+  (patience__state__posstack__first__bit <  patience__state__posstack__last__bit)
+
+axiom patience__state__posstack__position_axiom :
+  (0 <= patience__state__posstack__position)
+
+logic patience__state__posheight__first__bit : int
+
+logic patience__state__posheight__last__bit : int
+
+logic patience__state__posheight__position : int
+
+axiom patience__state__posheight__first__bit_axiom :
+  (0 <= patience__state__posheight__first__bit)
+
+axiom patience__state__posheight__last__bit_axiom :
+  (patience__state__posheight__first__bit <  patience__state__posheight__last__bit)
+
+axiom patience__state__posheight__position_axiom :
+  (0 <= patience__state__posheight__position)
+
+logic patience__state__preds__first__bit : int
+
+logic patience__state__preds__last__bit : int
+
+logic patience__state__preds__position : int
+
+axiom patience__state__preds__first__bit_axiom :
+  (0 <= patience__state__preds__first__bit)
+
+axiom patience__state__preds__last__bit_axiom :
+  (patience__state__preds__first__bit <  patience__state__preds__last__bit)
+
+axiom patience__state__preds__position_axiom :
+  (0 <= patience__state__preds__position)
+
+logic dummy : us_rep
+
+logic bool_eq : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+function inv(param__s: us_rep) : bool =
+  andb(andb(andb(andb(andb(andb(andb(andb(andb(bool_le(0,
+  to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks)),
+  bool_le(to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks),
+  to_rep(((param__s).us_split_fields1).rec__patience__state__numelts))),
+  bool_le(to_rep(((param__s).us_split_fields1).rec__patience__state__numelts),
+  100)),
+  orb(bool_eq(to_rep(((param__s).us_split_fields1).rec__patience__state__numelts),
+  0),
+  bool_gt(to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks),
+  0))),
+  (if (forall i:int. (((0 <= i) and
+      (i <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks) - 1))) ->
+      (((1 <= to_rep((let temp___221 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___221[i])))) and
+      (to_rep((let temp___222 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in
+      (temp___222[i]))) <= to_rep(((param__s).us_split_fields1).rec__patience__state__numelts))) and
+      (forall j:int. (((0 <= j) and (j <= (to_rep((let temp___223 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___223[i]))) - 1))) ->
+      ((0 <= to_rep((let temp___225 = (let temp___224 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___224[i]))
+      : (int,cardindex) farray in (temp___225[j])))) and
+      (to_rep((let temp___227 = (let temp___226 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___226[i]))
+      : (int,cardindex) farray in
+      (temp___227[j]))) <  to_rep(((param__s).us_split_fields1).rec__patience__state__numelts)))))))) then true else false)),
+  (if (forall i:int. (((0 <= i) and
+      (i <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numelts) - 1))) ->
+      (((let temp___230 = to_rep((let temp___228 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___228[i]))) : int in
+      ((0 <= temp___230) and
+      (temp___230 <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks) - 1)))) and
+      (let temp___233 = to_rep((let temp___231 =
+      ((param__s).us_split_fields1).rec__patience__state__posheight
+      : (int,cardindex) farray in (temp___231[i]))) : int in
+      ((0 <= temp___233) and (temp___233 <= (to_rep((let temp___234 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___234[to_rep((let temp___235 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___235[i])))]))) - 1))))) and
+      (to_rep((let temp___238 = (let temp___236 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in
+      (temp___236[to_rep((let temp___237 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___237[i])))]))
+      : (int,cardindex) farray in (temp___238[to_rep((let temp___239 =
+      ((param__s).us_split_fields1).rec__patience__state__posheight
+      : (int,cardindex) farray in (temp___239[i])))]))) = i)))) then true else false)),
+  (if (forall ist:int. (((0 <= ist) and
+      (ist <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks) - 1))) ->
+      (forall ip:int. (((0 <= ip) and (ip <= (to_rep((let temp___240 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___240[ist]))) - 1))) ->
+      ((ist = to_rep((let temp___241 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___241[to_rep((let temp___243 =
+      (let temp___242 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___242[ist]))
+      : (int,cardindex) farray in (temp___243[ip])))])))) and
+      (ip = to_rep((let temp___244 =
+      ((param__s).us_split_fields1).rec__patience__state__posheight
+      : (int,cardindex) farray in (temp___244[to_rep((let temp___246 =
+      (let temp___245 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___245[ist]))
+      : (int,cardindex) farray in (temp___246[ip])))]))))))))) then true else false)),
+  (if (forall i:int. (((0 <= i) and
+      (i <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks) - 1))) ->
+      (forall j:int. (((0 <= j) and (j <= (to_rep((let temp___247 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___247[i]))) - 2))) ->
+      (forall k:int. ((((j + 1) <= k) and (k <= (to_rep((let temp___248 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___248[i]))) - 1))) ->
+      (to_rep((let temp___250 = (let temp___249 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___249[i]))
+      : (int,cardindex) farray in
+      (temp___250[j]))) <  to_rep((let temp___252 = (let temp___251 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___251[i]))
+      : (int,cardindex) farray in (temp___252[k])))))))))) then true else false)),
+  (if (forall i:int. (((0 <= i) and
+      (i <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numstacks) - 1))) ->
+      (forall j:int. (((0 <= j) and (j <= (to_rep((let temp___253 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___253[i]))) - 2))) ->
+      (forall k:int. ((((j + 1) <= k) and (k <= (to_rep((let temp___254 =
+      ((param__s).us_split_fields1).rec__patience__state__stacksizes
+      : (int,cardindex) farray in (temp___254[i]))) - 1))) ->
+      (to_rep1((let temp___258 =
+      ((param__s).us_split_fields1).rec__patience__state__values
+      : (int,card) farray in (temp___258[to_rep((let temp___260 =
+      (let temp___259 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___259[i]))
+      : (int,cardindex) farray in
+      (temp___260[k])))]))) <= to_rep1((let temp___255 =
+      ((param__s).us_split_fields1).rec__patience__state__values
+      : (int,card) farray in (temp___255[to_rep((let temp___257 =
+      (let temp___256 =
+      ((param__s).us_split_fields1).rec__patience__state__stacks
+      : (int,(int,cardindex) farray) farray in (temp___256[i]))
+      : (int,cardindex) farray in (temp___257[j])))])))))))))) then true else false)),
+  (if (forall i:int. (((0 <= i) and
+      (i <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numelts) - 1))) ->
+      (((let temp___263 = to_rep((let temp___261 =
+      ((param__s).us_split_fields1).rec__patience__state__preds
+      : (int,cardindex) farray in (temp___261[i]))) : int in
+      (((- 1) <= temp___263) and
+      (temp___263 <= (to_rep(((param__s).us_split_fields1).rec__patience__state__numelts) - 1)))) and
+      (to_rep((let temp___264 =
+      ((param__s).us_split_fields1).rec__patience__state__preds
+      : (int,cardindex) farray in (temp___264[i]))) <  i)) and
+      (if (to_rep((let temp___273 =
+      ((param__s).us_split_fields1).rec__patience__state__preds
+      : (int,cardindex) farray in
+      (temp___273[i]))) <  0) then (to_rep((let temp___265 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in
+      (temp___265[i]))) = 0) else (((to_rep1((let temp___266 =
+      ((param__s).us_split_fields1).rec__patience__state__values
+      : (int,card) farray in (temp___266[to_rep((let temp___267 =
+      ((param__s).us_split_fields1).rec__patience__state__preds
+      : (int,cardindex) farray in
+      (temp___267[i])))]))) <  to_rep1((let temp___268 =
+      ((param__s).us_split_fields1).rec__patience__state__values
+      : (int,card) farray in (temp___268[i])))) and
+      (0 <  to_rep((let temp___269 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___269[i]))))) and
+      (to_rep((let temp___270 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___270[to_rep((let temp___271 =
+      ((param__s).us_split_fields1).rec__patience__state__preds
+      : (int,cardindex) farray in
+      (temp___271[i])))]))) = (to_rep((let temp___272 =
+      ((param__s).us_split_fields1).rec__patience__state__posstack
+      : (int,cardindex) farray in (temp___272[i]))) - 1))))))) then true else false))
+
+logic c : int
+
+type tindexmatrixD1
+
+logic tindexmatrixD1qtint : tindexmatrixD1 -> int
+
+axiom tindexmatrixD1qtaxiom :
+  (forall i:tindexmatrixD1. ((0 <= tindexmatrixD1qtint(i)) and
+  (tindexmatrixD1qtint(i) <= 99)))
+
+predicate dynamic_invariant(temp___expr_332: us_rep,
+  temp___is_init_328: bool, temp___skip_constant_329: bool,
+  temp___do_toplevel_330: bool, temp___do_typ_inv_331: bool) = true
+
+type tcardarrayD1
+
+logic tcardarrayD1qtint : tcardarrayD1 -> int
+
+axiom tcardarrayD1qtaxiom :
+  (forall i:tcardarrayD1. ((0 <= tcardarrayD1qtint(i)) and
+  (tcardarrayD1qtint(i) <= 99)))
+
+type tindexarrayD1
+
+logic tindexarrayD1qtint : tindexarrayD1 -> int
+
+axiom tindexarrayD1qtaxiom :
+  (forall i:tindexarrayD1. ((0 <= tindexarrayD1qtint(i)) and
+  (tindexarrayD1qtint(i) <= 99)))
+
+logic rliteral : cardindex
+
+axiom rliteral_axiom : (cardindexqtint(rliteral) = 1)
+
+logic rliteral1 : cardindex
+
+axiom rliteral_axiom1 : (cardindexqtint(rliteral1) = 0)
+
+ (* "patience.ads", line 122, characters 0-0 *)
+goal defqtvc :
+  (forall s__split_fields:us_split_fields. forall idx:int. forall pred:int.
+  forall i:int. forall stackisize:int. forall topstacki:int. (in_range2(c) ->
+  (dynamic_invariant({ us_split_fields1 = s__split_fields }, true, false,
+  true, true) -> (((inv({ us_split_fields1 = s__split_fields }) = true) and
+  (to_rep((s__split_fields).rec__patience__state__numelts) <  100)) ->
+  (forall temp___old_989:int.
+  ((to_rep((s__split_fields).rec__patience__state__numelts) = temp___old_989) ->
+  (forall temp___old_988:int.
+  ((to_rep((s__split_fields).rec__patience__state__numelts) = temp___old_988) ->
+  (in_range(idx) -> (in_range(pred) -> (in_range(i) ->
+  (in_range1(stackisize) -> (in_range1(topstacki) ->
+  (forall pred1:int. ((pred1 = (- 1)) ->
+  (forall i1:int. ((i1 = 0) ->
+  (forall pred2:int. forall i2:int. forall stackisize1:int.
+  ((exists o:int.
+   ((to_rep((s__split_fields).rec__patience__state__numstacks) = o) and
+   (if (i1 <  o) then (exists o1:int.
+                      ((to_rep((s__split_fields).rec__patience__state__numstacks) = o1) and
+                      (exists pred3:int. exists i3:int.
+                      exists stackisize2:int. exists topstacki1:int.
+                      ((((0 <= i3) and
+                      (i3 <= to_rep((s__split_fields).rec__patience__state__numstacks))) and
+                      (if (i3 = 0) then (pred3 = (- 1)) else (((((0 <= pred3) and
+                      (pred3 <= (to_rep((s__split_fields).rec__patience__state__numelts) - 1))) and
+                      (pred3 = to_rep((((s__split_fields).rec__patience__state__stacks[(i3 - 1)])[(to_rep(((s__split_fields).rec__patience__state__stacksizes[(i3 - 1)])) - 1)])))) and
+                      (to_rep1(((s__split_fields).rec__patience__state__values[pred3])) <  c)) and
+                      (to_rep(((s__split_fields).rec__patience__state__posstack[pred3])) = (i3 - 1))))) and
+                      ((andb((if (((in_range1(stackisize2) and
+                      in_range1(topstacki1)) and in_range(pred3)) and
+                      in_range(i3)) then true else false),
+                      (if (i3 <  to_rep((s__split_fields).rec__patience__state__numstacks)) then true else false)) = true) and
+                      (((0 <= i3) and (i3 <= 99)) and
+                      (exists o2:int.
+                      ((to_rep(((s__split_fields).rec__patience__state__stacksizes[i3])) = o2) and
+                      ((stackisize1 = o2) and (((0 <= i3) and (i3 <= 99)) and
+                      (let temp___646 = (stackisize1 - 1) : int in
+                      (((0 <= temp___646) and (temp___646 <= 99)) and
+                      (exists o3:int.
+                      ((to_rep((((s__split_fields).rec__patience__state__stacks[i3])[temp___646])) = o3) and
+                      (exists topstacki2:int. ((topstacki2 = o3) and
+                      (((0 <= topstacki2) and (topstacki2 <= 99)) and
+                      (exists o4:int.
+                      ((to_rep1(((s__split_fields).rec__patience__state__values[topstacki2])) = o4) and
+                      (if (c <= o4) then ((pred2 = pred3) and
+                      (i2 = i3)) else (((0 <= topstacki2) and
+                      (topstacki2 <  to_rep((s__split_fields).rec__patience__state__numelts))) and
+                      ((((((((0 <= to_rep(((s__split_fields).rec__patience__state__posstack[topstacki2]))) and
+                      (to_rep(((s__split_fields).rec__patience__state__posstack[topstacki2])) <  to_rep((s__split_fields).rec__patience__state__numstacks))) and
+                      (0 <= to_rep(((s__split_fields).rec__patience__state__posheight[topstacki2])))) and
+                      (to_rep(((s__split_fields).rec__patience__state__posheight[topstacki2])) <  to_rep(((s__split_fields).rec__patience__state__stacksizes[to_rep(((s__split_fields).rec__patience__state__posstack[topstacki2]))])))) and
+                      (to_rep((((s__split_fields).rec__patience__state__stacks[to_rep(((s__split_fields).rec__patience__state__posstack[topstacki2]))])[to_rep(((s__split_fields).rec__patience__state__posheight[topstacki2]))])) = topstacki2)) and
+                      (to_rep(((s__split_fields).rec__patience__state__posstack[topstacki2])) = i3)) and
+                      (to_rep(((s__split_fields).rec__patience__state__posheight[topstacki2])) = (stackisize1 - 1))) and
+                      ((pred2 = topstacki2) and (let o5 = (i3 + 1) : int in
+                      (in_range(o5) and ((i2 = o5) and
+                      (exists o6:int.
+                      ((to_rep((s__split_fields).rec__patience__state__numstacks) = o6) and
+                      (not (i2 <  o6)))))))))))))))))))))))))))))) else (((pred2 = pred1) and
+   (i2 = i1)) and (stackisize1 = stackisize))))) ->
+  (forall o:int.
+  ((to_rep((s__split_fields).rec__patience__state__numelts) = o) ->
+  (forall idx1:int. ((idx1 = o) ->
+  (forall o1:card. ((to_rep1(o1) = c) -> (((0 <= idx1) and (idx1 <= 99)) ->
+  (forall s__split_fields1:us_split_fields. ((s__split_fields1 = {
+  rec__patience__state__numelts =
+  (s__split_fields).rec__patience__state__numelts;
+  rec__patience__state__values =
+  ((s__split_fields).rec__patience__state__values[idx1 <- o1]);
+  rec__patience__state__numstacks =
+  (s__split_fields).rec__patience__state__numstacks;
+  rec__patience__state__stacksizes =
+  (s__split_fields).rec__patience__state__stacksizes;
+  rec__patience__state__stacks =
+  (s__split_fields).rec__patience__state__stacks;
+  rec__patience__state__posstack =
+  (s__split_fields).rec__patience__state__posstack;
+  rec__patience__state__posheight =
+  (s__split_fields).rec__patience__state__posheight;
+  rec__patience__state__preds = (s__split_fields).rec__patience__state__preds
+  }) -> (let o2 = (idx1 + 1) : int in (in_range(o2) -> (in_range1(o2) ->
+  (forall o3:cardindex. ((to_rep(o3) = o2) ->
+  (forall s__split_fields2:us_split_fields. ((s__split_fields2 = {
+  rec__patience__state__numelts = o3; rec__patience__state__values =
+  (s__split_fields1).rec__patience__state__values;
+  rec__patience__state__numstacks =
+  (s__split_fields1).rec__patience__state__numstacks;
+  rec__patience__state__stacksizes =
+  (s__split_fields1).rec__patience__state__stacksizes;
+  rec__patience__state__stacks =
+  (s__split_fields1).rec__patience__state__stacks;
+  rec__patience__state__posstack =
+  (s__split_fields1).rec__patience__state__posstack;
+  rec__patience__state__posheight =
+  (s__split_fields1).rec__patience__state__posheight;
+  rec__patience__state__preds =
+  (s__split_fields1).rec__patience__state__preds }) -> (in_range1(pred2) ->
+  (forall o4:cardindex. ((to_rep(o4) = pred2) -> (((0 <= idx1) and
+  (idx1 <= 99)) ->
+  (forall s__split_fields3:us_split_fields. ((s__split_fields3 = {
+  rec__patience__state__numelts =
+  (s__split_fields2).rec__patience__state__numelts;
+  rec__patience__state__values =
+  (s__split_fields2).rec__patience__state__values;
+  rec__patience__state__numstacks =
+  (s__split_fields2).rec__patience__state__numstacks;
+  rec__patience__state__stacksizes =
+  (s__split_fields2).rec__patience__state__stacksizes;
+  rec__patience__state__stacks =
+  (s__split_fields2).rec__patience__state__stacks;
+  rec__patience__state__posstack =
+  (s__split_fields2).rec__patience__state__posstack;
+  rec__patience__state__posheight =
+  (s__split_fields2).rec__patience__state__posheight;
+  rec__patience__state__preds =
+  ((s__split_fields2).rec__patience__state__preds[idx1 <- o4]) }) ->
+  (forall s__split_fields4:us_split_fields.
+  ((exists o5:int.
+   ((to_rep((s__split_fields3).rec__patience__state__numstacks) = o5) and
+   (exists spark__branch:bool.
+   ((spark__branch = (if (i2 = o5) then true else false)) and
+   (if (spark__branch = true) then (exists o6:int.
+                                   ((to_rep((s__split_fields3).rec__patience__state__numstacks) = o6) and
+                                   (exists i3:int. ((i3 = o6) and
+                                   (exists o7:int.
+                                   ((to_rep((s__split_fields3).rec__patience__state__numstacks) = o7) and
+                                   (let o8 = (o7 + 1) : int in
+                                   (in_range1(o8) and
+                                   (exists o9:cardindex.
+                                   ((to_rep(o9) = o8) and
+                                   (exists s__split_fields5:us_split_fields.
+                                   ((s__split_fields5 = {
+                                   rec__patience__state__numelts =
+                                   (s__split_fields3).rec__patience__state__numelts;
+                                   rec__patience__state__values =
+                                   (s__split_fields3).rec__patience__state__values;
+                                   rec__patience__state__numstacks = o9;
+                                   rec__patience__state__stacksizes =
+                                   (s__split_fields3).rec__patience__state__stacksizes;
+                                   rec__patience__state__stacks =
+                                   (s__split_fields3).rec__patience__state__stacks;
+                                   rec__patience__state__posstack =
+                                   (s__split_fields3).rec__patience__state__posstack;
+                                   rec__patience__state__posheight =
+                                   (s__split_fields3).rec__patience__state__posheight;
+                                   rec__patience__state__preds =
+                                   (s__split_fields3).rec__patience__state__preds
+                                   }) and (((0 <= i3) and (i3 <= 99)) and
+                                   (exists s__split_fields6:us_split_fields.
+                                   ((s__split_fields6 = {
+                                   rec__patience__state__numelts =
+                                   (s__split_fields5).rec__patience__state__numelts;
+                                   rec__patience__state__values =
+                                   (s__split_fields5).rec__patience__state__values;
+                                   rec__patience__state__numstacks =
+                                   (s__split_fields5).rec__patience__state__numstacks;
+                                   rec__patience__state__stacksizes =
+                                   ((s__split_fields5).rec__patience__state__stacksizes[i3 <- rliteral]);
+                                   rec__patience__state__stacks =
+                                   (s__split_fields5).rec__patience__state__stacks;
+                                   rec__patience__state__posstack =
+                                   (s__split_fields5).rec__patience__state__posstack;
+                                   rec__patience__state__posheight =
+                                   (s__split_fields5).rec__patience__state__posheight;
+                                   rec__patience__state__preds =
+                                   (s__split_fields5).rec__patience__state__preds
+                                   }) and (in_range1(idx1) and
+                                   (exists o10:cardindex.
+                                   ((to_rep(o10) = idx1) and (((0 <= i3) and
+                                   (i3 <= 99)) and
+                                   (exists s__split_fields7:us_split_fields.
+                                   ((s__split_fields7 = {
+                                   rec__patience__state__numelts =
+                                   (s__split_fields6).rec__patience__state__numelts;
+                                   rec__patience__state__values =
+                                   (s__split_fields6).rec__patience__state__values;
+                                   rec__patience__state__numstacks =
+                                   (s__split_fields6).rec__patience__state__numstacks;
+                                   rec__patience__state__stacksizes =
+                                   (s__split_fields6).rec__patience__state__stacksizes;
+                                   rec__patience__state__stacks =
+                                   ((s__split_fields6).rec__patience__state__stacks[i3 <- (((s__split_fields6).rec__patience__state__stacks[i3])[0 <- o10])]);
+                                   rec__patience__state__posstack =
+                                   (s__split_fields6).rec__patience__state__posstack;
+                                   rec__patience__state__posheight =
+                                   (s__split_fields6).rec__patience__state__posheight;
+                                   rec__patience__state__preds =
+                                   (s__split_fields6).rec__patience__state__preds
+                                   }) and (in_range1(i3) and
+                                   (exists o11:cardindex.
+                                   ((to_rep(o11) = i3) and (((0 <= idx1) and
+                                   (idx1 <= 99)) and
+                                   (exists s__split_fields8:us_split_fields.
+                                   ((s__split_fields8 = {
+                                   rec__patience__state__numelts =
+                                   (s__split_fields7).rec__patience__state__numelts;
+                                   rec__patience__state__values =
+                                   (s__split_fields7).rec__patience__state__values;
+                                   rec__patience__state__numstacks =
+                                   (s__split_fields7).rec__patience__state__numstacks;
+                                   rec__patience__state__stacksizes =
+                                   (s__split_fields7).rec__patience__state__stacksizes;
+                                   rec__patience__state__stacks =
+                                   (s__split_fields7).rec__patience__state__stacks;
+                                   rec__patience__state__posstack =
+                                   ((s__split_fields7).rec__patience__state__posstack[idx1 <- o11]);
+                                   rec__patience__state__posheight =
+                                   (s__split_fields7).rec__patience__state__posheight;
+                                   rec__patience__state__preds =
+                                   (s__split_fields7).rec__patience__state__preds
+                                   }) and (((0 <= idx1) and (idx1 <= 99)) and
+                                   (s__split_fields4 = {
+                                   rec__patience__state__numelts =
+                                   (s__split_fields8).rec__patience__state__numelts;
+                                   rec__patience__state__values =
+                                   (s__split_fields8).rec__patience__state__values;
+                                   rec__patience__state__numstacks =
+                                   (s__split_fields8).rec__patience__state__numstacks;
+                                   rec__patience__state__stacksizes =
+                                   (s__split_fields8).rec__patience__state__stacksizes;
+                                   rec__patience__state__stacks =
+                                   (s__split_fields8).rec__patience__state__stacks;
+                                   rec__patience__state__posstack =
+                                   (s__split_fields8).rec__patience__state__posstack;
+                                   rec__patience__state__posheight =
+                                   ((s__split_fields8).rec__patience__state__posheight[idx1 <- rliteral1]);
+                                   rec__patience__state__preds =
+                                   (s__split_fields8).rec__patience__state__preds
+                                   }))))))))))))))))))))))))))))) else (((0 <= i2) and
+   (i2 <= 99)) and
+   (exists o6:int.
+   ((to_rep(((s__split_fields3).rec__patience__state__stacksizes[i2])) = o6) and
+   (exists stackisize2:int. ((stackisize2 = o6) and (let o7 =
+   (stackisize2 + 1) : int in (in_range1(o7) and
+   (exists o8:cardindex. ((to_rep(o8) = o7) and (((0 <= i2) and
+   (i2 <= 99)) and
+   (exists s__split_fields5:us_split_fields. ((s__split_fields5 = {
+   rec__patience__state__numelts =
+   (s__split_fields3).rec__patience__state__numelts;
+   rec__patience__state__values =
+   (s__split_fields3).rec__patience__state__values;
+   rec__patience__state__numstacks =
+   (s__split_fields3).rec__patience__state__numstacks;
+   rec__patience__state__stacksizes =
+   ((s__split_fields3).rec__patience__state__stacksizes[i2 <- o8]);
+   rec__patience__state__stacks =
+   (s__split_fields3).rec__patience__state__stacks;
+   rec__patience__state__posstack =
+   (s__split_fields3).rec__patience__state__posstack;
+   rec__patience__state__posheight =
+   (s__split_fields3).rec__patience__state__posheight;
+   rec__patience__state__preds =
+   (s__split_fields3).rec__patience__state__preds }) and (in_range1(idx1) and
+   (exists o9:cardindex. ((to_rep(o9) = idx1) and (((0 <= stackisize2) and
+   (stackisize2 <= 99)) and (((0 <= i2) and (i2 <= 99)) and
+   (exists s__split_fields6:us_split_fields. ((s__split_fields6 = {
+   rec__patience__state__numelts =
+   (s__split_fields5).rec__patience__state__numelts;
+   rec__patience__state__values =
+   (s__split_fields5).rec__patience__state__values;
+   rec__patience__state__numstacks =
+   (s__split_fields5).rec__patience__state__numstacks;
+   rec__patience__state__stacksizes =
+   (s__split_fields5).rec__patience__state__stacksizes;
+   rec__patience__state__stacks =
+   ((s__split_fields5).rec__patience__state__stacks[i2 <- (((s__split_fields5).rec__patience__state__stacks[i2])[stackisize2 <- o9])]);
+   rec__patience__state__posstack =
+   (s__split_fields5).rec__patience__state__posstack;
+   rec__patience__state__posheight =
+   (s__split_fields5).rec__patience__state__posheight;
+   rec__patience__state__preds =
+   (s__split_fields5).rec__patience__state__preds }) and (in_range1(i2) and
+   (exists o10:cardindex. ((to_rep(o10) = i2) and (((0 <= idx1) and
+   (idx1 <= 99)) and
+   (exists s__split_fields7:us_split_fields. ((s__split_fields7 = {
+   rec__patience__state__numelts =
+   (s__split_fields6).rec__patience__state__numelts;
+   rec__patience__state__values =
+   (s__split_fields6).rec__patience__state__values;
+   rec__patience__state__numstacks =
+   (s__split_fields6).rec__patience__state__numstacks;
+   rec__patience__state__stacksizes =
+   (s__split_fields6).rec__patience__state__stacksizes;
+   rec__patience__state__stacks =
+   (s__split_fields6).rec__patience__state__stacks;
+   rec__patience__state__posstack =
+   ((s__split_fields6).rec__patience__state__posstack[idx1 <- o10]);
+   rec__patience__state__posheight =
+   (s__split_fields6).rec__patience__state__posheight;
+   rec__patience__state__preds =
+   (s__split_fields6).rec__patience__state__preds }) and
+   (exists o11:cardindex. ((to_rep(o11) = stackisize2) and (((0 <= idx1) and
+   (idx1 <= 99)) and (s__split_fields4 = { rec__patience__state__numelts =
+   (s__split_fields7).rec__patience__state__numelts;
+   rec__patience__state__values =
+   (s__split_fields7).rec__patience__state__values;
+   rec__patience__state__numstacks =
+   (s__split_fields7).rec__patience__state__numstacks;
+   rec__patience__state__stacksizes =
+   (s__split_fields7).rec__patience__state__stacksizes;
+   rec__patience__state__stacks =
+   (s__split_fields7).rec__patience__state__stacks;
+   rec__patience__state__posstack =
+   (s__split_fields7).rec__patience__state__posstack;
+   rec__patience__state__posheight =
+   ((s__split_fields7).rec__patience__state__posheight[idx1 <- o11]);
+   rec__patience__state__preds =
+   (s__split_fields7).rec__patience__state__preds })))))))))))))))))))))))))))))))))) ->
+  (((((0 <= to_rep((s__split_fields4).rec__patience__state__numstacks)) and
+  (to_rep((s__split_fields4).rec__patience__state__numstacks) <= to_rep((s__split_fields4).rec__patience__state__numelts))) and
+  (to_rep((s__split_fields4).rec__patience__state__numelts) <= 100)) and
+  ((to_rep((s__split_fields4).rec__patience__state__numelts) = 0) or
+  (0 <  to_rep((s__split_fields4).rec__patience__state__numstacks)))) ->
+  ((forall i3:int. (((0 <= i3) and
+   (i3 <= (to_rep((s__split_fields4).rec__patience__state__numstacks) - 1))) ->
+   (1 <= to_rep(((s__split_fields4).rec__patience__state__stacksizes[i3]))))) ->
+  (forall i3:int. (((0 <= i3) and
+  (i3 <= (to_rep((s__split_fields4).rec__patience__state__numstacks) - 1))) ->
+  (forall j:int. (((0 <= j) and
+  (j <= (to_rep(((s__split_fields4).rec__patience__state__stacksizes[i3])) - 1))) ->
+  (to_rep((((s__split_fields4).rec__patience__state__stacks[i3])[j])) <  to_rep((s__split_fields4).rec__patience__state__numelts)))))))))))))))))))))))))))))))))))))))))))))))))))

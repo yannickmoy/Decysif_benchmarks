@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_69_16_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 50906,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 458451,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 419041,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 584063,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_84_16_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 228341,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_69_16_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 50906,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_69_16_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 50906,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_84_16_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 228341,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 458451,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 419041,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/z3/p.ads_104_16_postcondition8_1.smt2",
+      "status": "unsat",
+      "steps": 458451,
+      "time": 0.09
+    }
+  ]
+}

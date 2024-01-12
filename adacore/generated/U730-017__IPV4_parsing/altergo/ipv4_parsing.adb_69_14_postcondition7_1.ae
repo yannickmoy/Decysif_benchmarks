@@ -1,0 +1,761 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type t
+
+logic tqtint : t -> int
+
+axiom tqtaxiom : (forall i:t. ((0 <= tqtint(i)) and (tqtint(i) <= 255)))
+
+logic nth : t, int -> bool
+
+axiom nth_out_of_bound :
+  (forall x:t. forall n:int. (((n <  0) or (8 <= n)) -> (nth(x, n) = false)))
+
+logic zeros : t
+
+axiom Nth_zeros : (forall n:int. (nth(zeros, n) = false))
+
+logic one : t
+
+logic ones : t
+
+axiom Nth_ones :
+  (forall n:int. (((0 <= n) and (n <  8)) -> (nth(ones, n) = true)))
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_1 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_1 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+logic pow2 : int -> int
+
+axiom Power_0 : (pow2(0) = 1)
+
+axiom Power_s : (forall n:int. ((0 <= n) -> (pow2((n + 1)) = (2 * pow2(n)))))
+
+axiom Power_1 : (pow2(1) = 2)
+
+axiom Power_sum :
+  (forall n:int. forall m:int. (((0 <= n) and (0 <= m)) ->
+  (pow2((n + m)) = (pow2(n) * pow2(m)))))
+
+axiom pow2pos : (forall i:int. ((0 <= i) -> (0 <  pow2(i))))
+
+axiom pow2_0 : (pow2(0) = 1)
+
+axiom pow2_1 : (pow2(1) = 2)
+
+axiom pow2_2 : (pow2(2) = 4)
+
+axiom pow2_3 : (pow2(3) = 8)
+
+axiom pow2_4 : (pow2(4) = 16)
+
+axiom pow2_5 : (pow2(5) = 32)
+
+axiom pow2_6 : (pow2(6) = 64)
+
+axiom pow2_7 : (pow2(7) = 128)
+
+axiom pow2_8 : (pow2(8) = 256)
+
+axiom pow2_9 : (pow2(9) = 512)
+
+axiom pow2_10 : (pow2(10) = 1024)
+
+axiom pow2_11 : (pow2(11) = 2048)
+
+axiom pow2_12 : (pow2(12) = 4096)
+
+axiom pow2_13 : (pow2(13) = 8192)
+
+axiom pow2_14 : (pow2(14) = 16384)
+
+axiom pow2_15 : (pow2(15) = 32768)
+
+axiom pow2_16 : (pow2(16) = 65536)
+
+axiom pow2_17 : (pow2(17) = 131072)
+
+axiom pow2_18 : (pow2(18) = 262144)
+
+axiom pow2_19 : (pow2(19) = 524288)
+
+axiom pow2_20 : (pow2(20) = 1048576)
+
+axiom pow2_21 : (pow2(21) = 2097152)
+
+axiom pow2_22 : (pow2(22) = 4194304)
+
+axiom pow2_23 : (pow2(23) = 8388608)
+
+axiom pow2_24 : (pow2(24) = 16777216)
+
+axiom pow2_25 : (pow2(25) = 33554432)
+
+axiom pow2_26 : (pow2(26) = 67108864)
+
+axiom pow2_27 : (pow2(27) = 134217728)
+
+axiom pow2_28 : (pow2(28) = 268435456)
+
+axiom pow2_29 : (pow2(29) = 536870912)
+
+axiom pow2_30 : (pow2(30) = 1073741824)
+
+axiom pow2_31 : (pow2(31) = 2147483648)
+
+axiom pow2_32 : (pow2(32) = 4294967296)
+
+axiom pow2_33 : (pow2(33) = 8589934592)
+
+axiom pow2_34 : (pow2(34) = 17179869184)
+
+axiom pow2_35 : (pow2(35) = 34359738368)
+
+axiom pow2_36 : (pow2(36) = 68719476736)
+
+axiom pow2_37 : (pow2(37) = 137438953472)
+
+axiom pow2_38 : (pow2(38) = 274877906944)
+
+axiom pow2_39 : (pow2(39) = 549755813888)
+
+axiom pow2_40 : (pow2(40) = 1099511627776)
+
+axiom pow2_41 : (pow2(41) = 2199023255552)
+
+axiom pow2_42 : (pow2(42) = 4398046511104)
+
+axiom pow2_43 : (pow2(43) = 8796093022208)
+
+axiom pow2_44 : (pow2(44) = 17592186044416)
+
+axiom pow2_45 : (pow2(45) = 35184372088832)
+
+axiom pow2_46 : (pow2(46) = 70368744177664)
+
+axiom pow2_47 : (pow2(47) = 140737488355328)
+
+axiom pow2_48 : (pow2(48) = 281474976710656)
+
+axiom pow2_49 : (pow2(49) = 562949953421312)
+
+axiom pow2_50 : (pow2(50) = 1125899906842624)
+
+axiom pow2_51 : (pow2(51) = 2251799813685248)
+
+axiom pow2_52 : (pow2(52) = 4503599627370496)
+
+axiom pow2_53 : (pow2(53) = 9007199254740992)
+
+axiom pow2_54 : (pow2(54) = 18014398509481984)
+
+axiom pow2_55 : (pow2(55) = 36028797018963968)
+
+axiom pow2_56 : (pow2(56) = 72057594037927936)
+
+axiom pow2_57 : (pow2(57) = 144115188075855872)
+
+axiom pow2_58 : (pow2(58) = 288230376151711744)
+
+axiom pow2_59 : (pow2(59) = 576460752303423488)
+
+axiom pow2_60 : (pow2(60) = 1152921504606846976)
+
+axiom pow2_61 : (pow2(61) = 2305843009213693952)
+
+axiom pow2_62 : (pow2(62) = 4611686018427387904)
+
+axiom pow2_63 : (pow2(63) = 9223372036854775808)
+
+axiom pow2_64 : (pow2(64) = 18446744073709551616)
+
+logic two_power_size_minus_one : int
+
+axiom two_power_size_minus_one_val :
+  (two_power_size_minus_one = pow2((8 - 1)))
+
+logic is_signed_positive : t -> prop
+
+logic of_int : int -> t
+
+function to_int(x: t) : int =
+  (if is_signed_positive(x) then tqtint(x) else (-(256 - tqtint(x))))
+
+axiom to_uint_extensionality :
+  (forall v:t. forall vqt:t. ((tqtint(v) = tqtint(vqt)) -> (v = vqt)))
+
+axiom to_int_extensionality :
+  (forall v:t. forall vqt:t. ((to_int(v) = to_int(vqt)) -> (v = vqt)))
+
+axiom to_uint_bounds :
+  (forall v:t. ((0 <= tqtint(v)) and (tqtint(v) <  256)))
+
+axiom to_uint_of_int :
+  (forall i:int. (((0 <= i) and (i <  256)) -> (tqtint(of_int(i)) = i)))
+
+logic size_bv : t
+
+axiom to_uint_size_bv : (tqtint(size_bv) = 8)
+
+axiom to_uint_zeros : (tqtint(zeros) = 0)
+
+axiom to_uint_one : (tqtint(one) = 1)
+
+axiom to_uint_ones : (tqtint(ones) = 255)
+
+logic acc : ('a,('a,bool) farray) farray, 'a -> prop
+
+axiom acc_x :
+  (forall r:('a,('a,bool) farray) farray. forall x:'a.
+  ((forall y:'a. ((((r[y])[x]) = true) -> acc(r, y))) -> acc(r, x)))
+
+axiom acc_inversion :
+  (forall z:('a,('a,bool) farray) farray. forall z1:'a. (acc(z, z1) ->
+  (forall y:'a. ((((z[y])[z1]) = true) -> acc(z, y)))))
+
+predicate well_founded(r: ('a,('a,bool) farray) farray) =
+  (forall x:'a. acc(r, x))
+
+predicate ult(x: t, y: t) = (tqtint(x) <  tqtint(y))
+
+logic ult_closure : (t,(t,bool) farray) farray
+
+axiom ult_closure_def :
+  (forall y:t. forall y1:t. ((((ult_closure[y])[y1]) = true) <-> ult(y, y1)))
+
+axiom ult_wf : well_founded(ult_closure)
+
+predicate ule(x: t, y: t) = (tqtint(x) <= tqtint(y))
+
+predicate ugt(x: t, y: t) = (tqtint(y) <  tqtint(x))
+
+logic ugt_closure : (t,(t,bool) farray) farray
+
+axiom ugt_closure_def :
+  (forall y:t. forall y1:t. ((((ugt_closure[y])[y1]) = true) <-> ugt(y, y1)))
+
+axiom ugt_wf : well_founded(ugt_closure)
+
+predicate slt(v1: t, v2: t) = (to_int(v1) <  to_int(v2))
+
+logic slt_closure : (t,(t,bool) farray) farray
+
+axiom slt_closure_def :
+  (forall y:t. forall y1:t. ((((slt_closure[y])[y1]) = true) <-> slt(y, y1)))
+
+axiom slt_wf : well_founded(slt_closure)
+
+predicate sgt(v1: t, v2: t) = (to_int(v2) <  to_int(v1))
+
+logic sgt_closure : (t,(t,bool) farray) farray
+
+axiom sgt_closure_def :
+  (forall y:t. forall y1:t. ((((sgt_closure[y])[y1]) = true) <-> sgt(y, y1)))
+
+axiom sgt_wf : well_founded(sgt_closure)
+
+predicate sge(v1: t, v2: t) = (to_int(v2) <= to_int(v1))
+
+axiom positive_is_ge_zeros :
+  (forall x:t. (is_signed_positive(x) <-> sge(x, zeros)))
+
+logic add : t, t -> t
+
+axiom to_uint_add_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) + tqtint(v2)) <  256) ->
+  (tqtint(add(v1, v2)) = (tqtint(v1) + tqtint(v2)))))
+
+logic mul : t, t -> t
+
+axiom to_uint_mul_bounded :
+  (forall v1:t. forall v2:t. (((tqtint(v1) * tqtint(v2)) <  256) ->
+  (tqtint(mul(v1, v2)) = (tqtint(v1) * tqtint(v2)))))
+
+logic udiv : t, t -> t
+
+axiom to_uint_udiv :
+  (forall v1:t. forall v2:t. (tqtint(udiv(v1,
+  v2)) = (tqtint(v1) / tqtint(v2))))
+
+logic urem : t, t -> t
+
+axiom to_uint_urem :
+  (forall v1:t. forall v2:t. (tqtint(urem(v1,
+  v2)) = (tqtint(v1) % tqtint(v2))))
+
+logic nth_bv : t, t -> bool
+
+axiom Nth_bv_is_nth :
+  (forall x:t. forall i:t. (nth(x, tqtint(i)) = nth_bv(x, i)))
+
+axiom Nth_bv_is_nth2 :
+  (forall x:t. forall i:int. (((0 <= i) and (i <  256)) -> (nth_bv(x,
+  of_int(i)) = nth(x, i))))
+
+function min(x: int, y: int) : int = (if (x <= y) then x else y)
+
+function max(x: int, y: int) : int = (if (x <= y) then y else x)
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+function of_int1(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t1 = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t1
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type character__init_wrapper = { rec__value : character; us_attr__init : bool
+}
+
+logic dummy : character__init_wrapper
+
+axiom dummy__def : ((dummy).us_attr__init = false)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+predicate dynamic_invariant(temp___expr_112: us_t, temp___is_init_108: bool,
+  temp___skip_constant_109: bool, temp___do_toplevel_110: bool,
+  temp___do_typ_inv_111: bool) = ((not (temp___skip_constant_109 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_112),
+  last(temp___expr_112)))
+
+logic valid_byte_10 : us_t, int, int -> bool
+
+logic bool_eq : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+function less_than_byte_max_10(param__s: us_t, param__first: int,
+  param__last: int) : bool =
+  orb(bool_lt(to_rep((to_array(param__s)[param__first])), 50),
+  andb(bool_eq(to_rep((to_array(param__s)[param__first])), 50),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 1)])), 53),
+  andb(bool_eq(to_rep((to_array(param__s)[(param__first + 1)])), 53),
+  bool_lt(to_rep((to_array(param__s)[(param__first + 2)])), 54)))))
+
+predicate in_range3(x: int) = ((48 <= x) and (x <= 57))
+
+logic is_byte_10 : us_t, int, int, t -> bool
+
+logic is_byte_10__function_guard : bool, us_t, int, int, t -> prop
+
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1)
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 2)
+
+logic rliteral3 : t
+
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 3)
+
+logic rliteral4 : t
+
+axiom rliteral_axiom4 : (tqtint(rliteral4) = 4)
+
+logic rliteral5 : t
+
+axiom rliteral_axiom5 : (tqtint(rliteral5) = 5)
+
+logic rliteral6 : t
+
+axiom rliteral_axiom6 : (tqtint(rliteral6) = 6)
+
+logic rliteral7 : t
+
+axiom rliteral_axiom7 : (tqtint(rliteral7) = 7)
+
+logic rliteral8 : t
+
+axiom rliteral_axiom8 : (tqtint(rliteral8) = 8)
+
+function char_of_byte_10(param__i: t) : int =
+  (if (param__i = rliteral) then 48 else (if (param__i = rliteral1) then 49 else (if (param__i = rliteral2) then 50 else (if (param__i = rliteral3) then 51 else (if (param__i = rliteral4) then 52 else (if (param__i = rliteral5) then 53 else (if (param__i = rliteral6) then 54 else (if (param__i = rliteral7) then 55 else (if (param__i = rliteral8) then 56 else 57)))))))))
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic rliteral9 : t
+
+axiom rliteral_axiom9 : (tqtint(rliteral9) = 9)
+
+predicate in_range4(x: t) = (ule(rliteral, x) and ule(x, rliteral9))
+
+function byte_of_char_10(param__c: int) : t =
+  (if (param__c = 48) then rliteral else (if (param__c = 49) then rliteral1 else (if (param__c = 50) then rliteral2 else (if (param__c = 51) then rliteral3 else (if (param__c = 52) then rliteral4 else (if (param__c = 53) then rliteral5 else (if (param__c = 54) then rliteral6 else (if (param__c = 55) then rliteral7 else (if (param__c = 56) then rliteral8 else rliteral9)))))))))
+
+logic s : us_t
+
+logic attr__ATTRIBUTE_MODULUS1 : t
+
+axiom valid_byte_10__post_axiom : true
+
+axiom valid_byte_10__def_axiom :
+  (forall param__s:us_t.
+  (forall param__first:int. forall param__last:int [valid_byte_10(param__s,
+  param__first, param__last)]. ((valid_byte_10(param__s, param__first,
+  param__last) = true) <-> ((((param__first <= param__last) and
+  ((param__last - param__first) <= 2)) and
+  (forall i:int. (((param__first <= i) and (i <= param__last)) ->
+  in_range3(to_rep((to_array(param__s)[i])))))) and
+  (((param__last - param__first) = 2) -> (less_than_byte_max_10(param__s,
+  param__first, param__last) = true))))))
+
+axiom is_byte_10__post_axiom :
+  (forall param__s:us_t.
+  (forall param__first:int. forall param__last:int.
+  (forall param__v:t [is_byte_10(param__s, param__first, param__last,
+  param__v)]. ((((dynamic_invariant(param__s, true, false, true, true) and
+  in_range(param__first)) and in_range(param__last)) and
+  (((first(param__s) <= param__first) and
+  (param__first <= last(param__s))) and ((first(param__s) <= param__last) and
+  (param__last <= last(param__s))))) -> (let result = is_byte_10(param__s,
+  param__first, param__last, param__v) : bool in
+  (is_byte_10__function_guard(result, param__s, param__first, param__last,
+  param__v) -> ((result = true) -> (valid_byte_10(param__s, param__first,
+  param__last) = true))))))))
+
+logic rliteral10 : t
+
+axiom rliteral_axiom10 : (tqtint(rliteral10) = 10)
+
+logic rliteral11 : t
+
+axiom rliteral_axiom11 : (tqtint(rliteral11) = 100)
+
+axiom is_byte_10__def_axiom :
+  (forall param__s:us_t.
+  (forall param__first:int. forall param__last:int.
+  (forall param__v:t [is_byte_10(param__s, param__first, param__last,
+  param__v)]. ((is_byte_10(param__s, param__first, param__last,
+  param__v) = true) <-> ((((((param__last - 2) <= param__first) and
+  (param__first <= param__last)) and (char_of_byte_10(urem(param__v,
+  rliteral10)) = to_rep((to_array(param__s)[param__last])))) and
+  (char_of_byte_10(urem(udiv(param__v, rliteral10),
+  rliteral10)) = (if (param__first <  param__last) then to_rep((to_array(param__s)[(param__last - 1)])) else 48))) and
+  (char_of_byte_10(udiv(param__v,
+  rliteral11)) = (if (param__first <  (param__last - 1)) then to_rep((to_array(param__s)[(param__last - 2)])) else 48)))))))
+
+logic rliteral12 : t
+
+axiom rliteral_axiom12 : (tqtint(rliteral12) = 25)
+
+ (* "ipv4_parsing.adb", line 67, characters 0-0 *)
+goal defqtvc :
+  (forall first1:int. (dynamic_invariant(s, true, false, true, true) ->
+  (in_range1(first1) -> (((last(s) <  2147483647) and
+  ((first(s) <= first1) and (first1 <= (last(s) + 1)))) ->
+  (forall first2:int. forall v:t. forall error:bool.
+  ((exists v1:t. ((v1 = rliteral) and
+   (exists o:bool.
+   ((if (last(s) <  first1) then (o = true) else (((first(s) <= first1) and
+   (first1 <= last(s))) and
+   (exists temp___601:int. ((to_rep((to_array(s)[first1])) = temp___601) and
+   (o = (if in_range3(temp___601) then false else true)))))) and
+   (exists spark__branch:bool. ((spark__branch = o) and
+   (if (spark__branch = true) then (((error = of_int1(1)) and
+   (first2 = first1)) and
+   (v = v1)) else (exists i:int. ((i = 1) and (((first(s) <= first1) and
+                  (first1 <= last(s))) and
+                  (exists o1:int. ((to_rep((to_array(s)[first1])) = o1) and
+                  (in_range3(o1) and (let o2 = byte_of_char_10(o1) : t in
+                  ((in_range4(o2) and
+                  (o2 = (if (o1 = 48) then rliteral else (if (o1 = 49) then rliteral1 else (if (o1 = 50) then rliteral2 else (if (o1 = 51) then rliteral3 else (if (o1 = 52) then rliteral4 else (if (o1 = 53) then rliteral5 else (if (o1 = 54) then rliteral6 else (if (o1 = 55) then rliteral7 else (if (o1 = 56) then rliteral8 else rliteral9))))))))))) and
+                  (exists v2:t. ((v2 = add(mul(v1, rliteral10), o2)) and
+                  (let o3 = (first1 + 1) : int in (in_range(o3) and
+                  (exists first3:int. ((first3 = o3) and
+                  (exists o4:bool.
+                  ((if (last(s) <  first3) then (o4 = true) else (((first(s) <= first3) and
+                  (first3 <= last(s))) and
+                  (exists o5:int. ((to_rep((to_array(s)[first3])) = o5) and
+                  (o4 = (if (o5 = 46) then true else false)))))) and
+                  (exists spark__branch1:bool. ((spark__branch1 = o4) and
+                  (if (spark__branch1 = true) then (((error = of_int1(0)) and
+                  (first2 = first3)) and
+                  (v = v2)) else (exists o5:bool.
+                                 ((exists o6:bool.
+                                  ((if (i = 3) then (o6 = true) else (((first(s) <= first3) and
+                                  (first3 <= last(s))) and
+                                  (exists temp___607:int.
+                                  ((to_rep((to_array(s)[first3])) = temp___607) and
+                                  (o6 = (if in_range3(temp___607) then false else true)))))) and
+                                  (if (o6 = true) then (o5 = true) else (if (i = 2) then (if ugt(v2,
+                                  rliteral12) then (o5 = true) else (if (v2 = rliteral12) then (((first(s) <= first3) and
+                                  (first3 <= last(s))) and
+                                  (exists o7:int.
+                                  ((to_rep((to_array(s)[first3])) = o7) and
+                                  (o5 = (if (54 <= o7) then true else false))))) else (o5 = false))) else (o5 = false))))) and
+                                 (exists spark__branch2:bool.
+                                 ((spark__branch2 = o5) and
+                                 (if (spark__branch2 = true) then (((error = of_int1(1)) and
+                                 (first2 = first3)) and
+                                 (v = v2)) else (exists i1:int. ((i1 = 2) and
+                                                (((first(s) <= first3) and
+                                                (first3 <= last(s))) and
+                                                (exists o6:int.
+                                                ((to_rep((to_array(s)[first3])) = o6) and
+                                                (in_range3(o6) and (let o7 =
+                                                byte_of_char_10(o6) : t in
+                                                ((in_range4(o7) and
+                                                (o7 = (if (o6 = 48) then rliteral else (if (o6 = 49) then rliteral1 else (if (o6 = 50) then rliteral2 else (if (o6 = 51) then rliteral3 else (if (o6 = 52) then rliteral4 else (if (o6 = 53) then rliteral5 else (if (o6 = 54) then rliteral6 else (if (o6 = 55) then rliteral7 else (if (o6 = 56) then rliteral8 else rliteral9))))))))))) and
+                                                (exists v3:t.
+                                                ((v3 = add(mul(v2,
+                                                rliteral10), o7)) and
+                                                (let o8 = (first3 + 1)
+                                                : int in (in_range(o8) and
+                                                (exists first4:int.
+                                                ((first4 = o8) and
+                                                (exists o9:bool.
+                                                ((if (last(s) <  first4) then (o9 = true) else (((first(s) <= first4) and
+                                                (first4 <= last(s))) and
+                                                (exists o10:int.
+                                                ((to_rep((to_array(s)[first4])) = o10) and
+                                                (o9 = (if (o10 = 46) then true else false)))))) and
+                                                (exists spark__branch3:bool.
+                                                ((spark__branch3 = o9) and
+                                                (if (spark__branch3 = true) then (((error = of_int1(0)) and
+                                                (first2 = first4)) and
+                                                (v = v3)) else (exists o10:bool.
+                                                               ((exists o11:bool.
+                                                                ((if (i1 = 3) then (o11 = true) else (((first(s) <= first4) and
+                                                                (first4 <= last(s))) and
+                                                                (exists temp___607:int.
+                                                                ((to_rep((to_array(s)[first4])) = temp___607) and
+                                                                (o11 = (if in_range3(temp___607) then false else true)))))) and
+                                                                (if (o11 = true) then (o10 = true) else (if (i1 = 2) then (if ugt(v3,
+                                                                rliteral12) then (o10 = true) else (if (v3 = rliteral12) then (((first(s) <= first4) and
+                                                                (first4 <= last(s))) and
+                                                                (exists o12:int.
+                                                                ((to_rep((to_array(s)[first4])) = o12) and
+                                                                (o10 = (if (54 <= o12) then true else false))))) else (o10 = false))) else (o10 = false))))) and
+                                                               (exists spark__branch4:bool.
+                                                               ((spark__branch4 = o10) and
+                                                               (if (spark__branch4 = true) then (((error = of_int1(1)) and
+                                                               (first2 = first4)) and
+                                                               (v = v3)) else 
+                                                               (exists i2:int.
+                                                               ((i2 = 3) and
+                                                               (((first(s) <= first4) and
+                                                               (first4 <= last(s))) and
+                                                               (exists o11:int.
+                                                               ((to_rep((to_array(s)[first4])) = o11) and
+                                                               (in_range3(o11) and
+                                                               (let o12 =
+                                                               byte_of_char_10(o11)
+                                                               : t in
+                                                               ((in_range4(o12) and
+                                                               (o12 = (if (o11 = 48) then rliteral else (if (o11 = 49) then rliteral1 else (if (o11 = 50) then rliteral2 else (if (o11 = 51) then rliteral3 else (if (o11 = 52) then rliteral4 else (if (o11 = 53) then rliteral5 else (if (o11 = 54) then rliteral6 else (if (o11 = 55) then rliteral7 else (if (o11 = 56) then rliteral8 else rliteral9))))))))))) and
+                                                               ((v = add(mul(v3,
+                                                               rliteral10),
+                                                               o12)) and
+                                                               (let o13 =
+                                                               (first4 + 1)
+                                                               : int in
+                                                               (in_range(o13) and
+                                                               ((first2 = o13) and
+                                                               (exists o14:bool.
+                                                               ((if (last(s) <  first2) then (o14 = true) else (((first(s) <= first2) and
+                                                               (first2 <= last(s))) and
+                                                               (exists o15:int.
+                                                               ((to_rep((to_array(s)[first2])) = o15) and
+                                                               (o14 = (if (o15 = 46) then true else false)))))) and
+                                                               (exists spark__branch5:bool.
+                                                               ((spark__branch5 = o14) and
+                                                               (if (spark__branch5 = true) then (error = of_int1(0)) else 
+                                                               (exists o15:bool.
+                                                               ((exists o16:bool.
+                                                                ((if (i2 = 3) then (o16 = true) else (((first(s) <= first2) and
+                                                                (first2 <= last(s))) and
+                                                                (exists temp___607:int.
+                                                                ((to_rep((to_array(s)[first2])) = temp___607) and
+                                                                (o16 = (if in_range3(temp___607) then false else true)))))) and
+                                                                (if (o16 = true) then (o15 = true) else (if (i2 = 2) then (if ugt(v,
+                                                                rliteral12) then (o15 = true) else (if (v = rliteral12) then (((first(s) <= first2) and
+                                                                (first2 <= last(s))) and
+                                                                (exists o17:int.
+                                                                ((to_rep((to_array(s)[first2])) = o17) and
+                                                                (o15 = (if (54 <= o17) then true else false))))) else (o15 = false))) else (o15 = false))))) and
+                                                               (exists spark__branch6:bool.
+                                                               ((spark__branch6 = o15) and
+                                                               ((spark__branch6 = true) and
+                                                               (error = of_int1(1))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) ->
+  ((not (error = true)) ->
+  ((forall temp___624:int. is_byte_10__function_guard(is_byte_10(s, first1,
+   temp___624, v), s, first1, temp___624, v)) ->
+  ((let temp___624 = (first2 - 1) : int in is_byte_10(s, first1, temp___624,
+  v)) = true)))))))))

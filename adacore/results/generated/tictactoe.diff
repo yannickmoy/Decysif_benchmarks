@@ -1,0 +1,5 @@
+cvc5 proved 2 out of 2 VCs
+z3 proved 2 out of 2 VCs
+altergo proved 0 out of 2 VCs
+  unproved tictactoe.adb_127_10_precondition_1.ae (proved by ['cvc5', 'z3'])
+  unproved tictactoe.adb_13_14_postcondition_1.ae (proved by ['cvc5', 'z3'])

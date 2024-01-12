@@ -1,0 +1,6 @@
+cvc5 proved 0 out of 3 VCs
+  unproved binary_search.adb_26_13_loop_invariant_preserv2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved binary_search.adb_26_13_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved binary_search.ads_23_14_postcondition2_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 3 out of 3 VCs
+altergo proved 3 out of 3 VCs

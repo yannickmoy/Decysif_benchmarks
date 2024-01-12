@@ -1,0 +1,16 @@
+cvc5 proved 0 out of 5 VCs
+  unproved wibble.adb_15_17_postcondition_1.smt2 (proved by ['altergo'])
+  unproved wibble.adb_25_17_postcondition_1.smt2 (proved by ['altergo'])
+  unproved wibble.adb_35_17_postcondition_1.smt2
+  unproved wibble.adb_45_17_postcondition2_1.smt2
+  unproved wibble.adb_55_17_postcondition2_1.smt2
+z3 proved 0 out of 5 VCs
+  unproved wibble.adb_15_17_postcondition_1.smt2 (proved by ['altergo'])
+  unproved wibble.adb_25_17_postcondition_1.smt2 (proved by ['altergo'])
+  unproved wibble.adb_35_17_postcondition_1.smt2
+  unproved wibble.adb_45_17_postcondition2_1.smt2
+  unproved wibble.adb_55_17_postcondition2_1.smt2
+altergo proved 2 out of 5 VCs
+  unproved wibble.adb_35_17_postcondition_1.ae
+  unproved wibble.adb_45_17_postcondition2_1.ae
+  unproved wibble.adb_55_17_postcondition2_1.ae

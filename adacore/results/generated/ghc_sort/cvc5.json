@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.adb_97_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 16270,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.adb_72_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 81701,
+      "time": 0.78
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.ads_40_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 702909,
+      "time": 3.45
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.adb_24_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 650741,
+      "time": 9.78
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.adb_206_33_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 1441468,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.ads_8_14_postcondition9_1.smt2",
+      "status": "timeout",
+      "steps": 640421,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.ads_54_14_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 547808,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/ghc_sort/cvc5/ghc_sort.adb_191_33_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 586744,
+      "time": 9.86
+    }
+  ]
+}

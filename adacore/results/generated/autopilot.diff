@@ -1,0 +1,11 @@
+cvc5 proved 7 out of 7 VCs
+z3 proved 3 out of 7 VCs
+  unproved scale.adb_58_64_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved scale.adb_58_64_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved scale.adb_58_70_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved scale.adb_58_70_range_check2_1.smt2 (proved by ['cvc5'])
+altergo proved 3 out of 7 VCs
+  unproved scale.adb_20_15_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved scale.adb_58_70_range_check2_1.ae (proved by ['cvc5'])
+  unproved scale.ads_16_19_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved scale.ads_16_19_postcondition_1.ae (proved by ['cvc5', 'z3'])

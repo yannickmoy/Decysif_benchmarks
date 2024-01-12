@@ -1,0 +1,422 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type issueridt
+
+logic issueridtqtint : issueridt -> int
+
+axiom issueridtqtaxiom :
+  (forall i:issueridt. ((0 <= issueridtqtint(i)) and
+  (issueridtqtint(i) <= 4294967295)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 4294967295))
+
+function to_rep1(x: issueridt) : int = issueridtqtint(x)
+
+logic of_rep1 : int -> issueridt
+
+axiom inversion_axiom1 :
+  (forall x:issueridt [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:issueridt [to_rep1(x)]. in_range3(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range3(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type namecountt
+
+logic namecounttqtint : namecountt -> int
+
+axiom namecounttqtaxiom :
+  (forall i:namecountt. ((0 <= namecounttqtint(i)) and
+  (namecounttqtint(i) <= 40)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 40))
+
+function to_rep2(x: namecountt) : int = namecounttqtint(x)
+
+logic of_rep2 : int -> namecountt
+
+axiom inversion_axiom2 :
+  (forall x:namecountt [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:namecountt [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+type us_split_fields = { rec__cryptotypes__issuert__id : issueridt;
+rec__cryptotypes__issuert__namelength : namecountt;
+rec__cryptotypes__issuert__name : (int,character) farray }
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic cryptotypes__issuert__id__first__bit : int
+
+logic cryptotypes__issuert__id__last__bit : int
+
+logic cryptotypes__issuert__id__position : int
+
+axiom cryptotypes__issuert__id__first__bit_axiom :
+  (0 <= cryptotypes__issuert__id__first__bit)
+
+axiom cryptotypes__issuert__id__last__bit_axiom :
+  (cryptotypes__issuert__id__first__bit <  cryptotypes__issuert__id__last__bit)
+
+axiom cryptotypes__issuert__id__position_axiom :
+  (0 <= cryptotypes__issuert__id__position)
+
+logic cryptotypes__issuert__namelength__first__bit : int
+
+logic cryptotypes__issuert__namelength__last__bit : int
+
+logic cryptotypes__issuert__namelength__position : int
+
+axiom cryptotypes__issuert__namelength__first__bit_axiom :
+  (0 <= cryptotypes__issuert__namelength__first__bit)
+
+axiom cryptotypes__issuert__namelength__last__bit_axiom :
+  (cryptotypes__issuert__namelength__first__bit <  cryptotypes__issuert__namelength__last__bit)
+
+axiom cryptotypes__issuert__namelength__position_axiom :
+  (0 <= cryptotypes__issuert__namelength__position)
+
+logic cryptotypes__issuert__name__first__bit : int
+
+logic cryptotypes__issuert__name__last__bit : int
+
+logic cryptotypes__issuert__name__position : int
+
+axiom cryptotypes__issuert__name__first__bit_axiom :
+  (0 <= cryptotypes__issuert__name__first__bit)
+
+axiom cryptotypes__issuert__name__last__bit_axiom :
+  (cryptotypes__issuert__name__first__bit <  cryptotypes__issuert__name__last__bit)
+
+axiom cryptotypes__issuert__name__position_axiom :
+  (0 <= cryptotypes__issuert__name__position)
+
+logic dummy1 : us_rep1
+
+type us_split_fields2 = { rec__keystore__optionalprivatekeyt__ispresent :
+bool; rec__keystore__optionalprivatekeyt__owner : us_rep1 }
+
+type us_rep2 = { us_split_fields3 : us_split_fields2
+}
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic keystore__optionalprivatekeyt__ispresent__first__bit : int
+
+logic keystore__optionalprivatekeyt__ispresent__last__bit : int
+
+logic keystore__optionalprivatekeyt__ispresent__position : int
+
+axiom keystore__optionalprivatekeyt__ispresent__first__bit_axiom :
+  (0 <= keystore__optionalprivatekeyt__ispresent__first__bit)
+
+axiom keystore__optionalprivatekeyt__ispresent__last__bit_axiom :
+  (keystore__optionalprivatekeyt__ispresent__first__bit <  keystore__optionalprivatekeyt__ispresent__last__bit)
+
+axiom keystore__optionalprivatekeyt__ispresent__position_axiom :
+  (0 <= keystore__optionalprivatekeyt__ispresent__position)
+
+logic keystore__optionalprivatekeyt__owner__first__bit : int
+
+logic keystore__optionalprivatekeyt__owner__last__bit : int
+
+logic keystore__optionalprivatekeyt__owner__position : int
+
+axiom keystore__optionalprivatekeyt__owner__first__bit_axiom :
+  (0 <= keystore__optionalprivatekeyt__owner__first__bit)
+
+axiom keystore__optionalprivatekeyt__owner__last__bit_axiom :
+  (keystore__optionalprivatekeyt__owner__first__bit <  keystore__optionalprivatekeyt__owner__last__bit)
+
+axiom keystore__optionalprivatekeyt__owner__position_axiom :
+  (0 <= keystore__optionalprivatekeyt__owner__position)
+
+logic dummy2 : us_rep2
+
+predicate dynamic_invariant(temp___expr_271: us_rep2,
+  temp___is_init_267: bool, temp___skip_constant_268: bool,
+  temp___do_toplevel_269: bool, temp___do_typ_inv_270: bool) = true
+
+logic privatekeypresent : us_split_fields2 -> bool
+
+function to_rep3(x: integer) : int = integerqtint(x)
+
+logic of_rep3 : int -> integer
+
+axiom inversion_axiom3 :
+  (forall x:integer [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 : (forall x:integer [to_rep3(x)]. in_range(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep3((mk(f, l)).rec__first) = f) and (to_rep3((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size1 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size2 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic makedescription : us_t, int -> (int,character) farray
+
+logic endoffile : us_rep -> bool
+
+logic endofline : us_rep -> bool
+
+logic temp___String_Literal_512 : unit -> (int,character) farray
+
+axiom temp___String_Literal_512__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_512(us_void_param)].
+  (((to_rep((temp___String_Literal_512(us_void_param)[1])) = 84) and
+  (to_rep((temp___String_Literal_512(us_void_param)[2])) = 104)) and
+  ((((((to_rep((temp___String_Literal_512(us_void_param)[3])) = 101) and
+  (to_rep((temp___String_Literal_512(us_void_param)[4])) = 32)) and
+  ((to_rep((temp___String_Literal_512(us_void_param)[5])) = 101) and
+  (to_rep((temp___String_Literal_512(us_void_param)[6])) = 110))) and
+  (((to_rep((temp___String_Literal_512(us_void_param)[7])) = 114) and
+  (to_rep((temp___String_Literal_512(us_void_param)[8])) = 111)) and
+  (to_rep((temp___String_Literal_512(us_void_param)[9])) = 108))) and
+  ((((to_rep((temp___String_Literal_512(us_void_param)[10])) = 109) and
+  (to_rep((temp___String_Literal_512(us_void_param)[11])) = 101)) and
+  ((to_rep((temp___String_Literal_512(us_void_param)[12])) = 110) and
+  (to_rep((temp___String_Literal_512(us_void_param)[13])) = 116))) and
+  (((to_rep((temp___String_Literal_512(us_void_param)[14])) = 32) and
+  (to_rep((temp___String_Literal_512(us_void_param)[15])) = 102)) and
+  (to_rep((temp___String_Literal_512(us_void_param)[16])) = 105)))) and
+  (((((to_rep((temp___String_Literal_512(us_void_param)[17])) = 108) and
+  (to_rep((temp___String_Literal_512(us_void_param)[18])) = 101)) and
+  ((to_rep((temp___String_Literal_512(us_void_param)[19])) = 32) and
+  (to_rep((temp___String_Literal_512(us_void_param)[20])) = 105))) and
+  (((to_rep((temp___String_Literal_512(us_void_param)[21])) = 115) and
+  (to_rep((temp___String_Literal_512(us_void_param)[22])) = 32)) and
+  (to_rep((temp___String_Literal_512(us_void_param)[23])) = 99))) and
+  ((((to_rep((temp___String_Literal_512(us_void_param)[24])) = 111) and
+  (to_rep((temp___String_Literal_512(us_void_param)[25])) = 114)) and
+  (to_rep((temp___String_Literal_512(us_void_param)[26])) = 114)) and
+  (((to_rep((temp___String_Literal_512(us_void_param)[27])) = 117) and
+  (to_rep((temp___String_Literal_512(us_void_param)[28])) = 112)) and
+  (to_rep((temp___String_Literal_512(us_void_param)[29])) = 116)))))))
+
+axiom privatekeypresent__post_axiom : true
+
+axiom privatekeypresent__def_axiom :
+  (forall Keystore__thistisinfo___thistisinfo__split_fields___:us_split_fields2
+  [privatekeypresent(Keystore__thistisinfo___thistisinfo__split_fields___)].
+  ((privatekeypresent(Keystore__thistisinfo___thistisinfo__split_fields___) = true) <->
+  ((Keystore__thistisinfo___thistisinfo__split_fields___).rec__keystore__optionalprivatekeyt__ispresent = true)))
+
+axiom endoffile__post_axiom : true
+
+ (* "enrolment.ads", line 54, characters 0-0 *)
+goal defqtvc :
+  (forall thistisinfo__split_fields:us_split_fields2. (dynamic_invariant({
+  us_split_fields3 = thistisinfo__split_fields }, true, false, true, true) ->
+  ((not (privatekeypresent(thistisinfo__split_fields) = true)) ->
+  (forall certno:int. ((certno = 1) -> (in_range1(certno) ->
+  (forall thefile:us_rep. forall dataok:bool.
+  (forall spark__branch:bool. forall thefile1:us_rep. forall dataok1:bool.
+  forall description:(int,character) farray.
+  forall thistisinfo__split_fields1:us_split_fields2.
+  (((spark__branch = dataok) and (if (spark__branch = true) then (let o =
+  of_int(0) : bool in (((((o = true) and (dataok1 = true)) ->
+  (privatekeypresent(thistisinfo__split_fields1) = true)) and
+  ((not ((o = true) and (dataok1 = true))) ->
+  ((privatekeypresent(thistisinfo__split_fields1) = true) <->
+  (privatekeypresent(thistisinfo__split_fields) = true)))) and
+  dynamic_invariant({ us_split_fields3 = thistisinfo__split_fields1 }, true,
+  true, true, true))) else (((((0 <= 29) and ((29 <= 1000) and
+  (dynamic_property(1, 2147483647, 1, 29) and
+  (description = makedescription(of_array(temp___String_Literal_512(void), 1,
+  29), certno))))) and (thefile1 = thefile)) and (dataok1 = dataok)) and
+  (thistisinfo__split_fields1 = thistisinfo__split_fields)))) ->
+  (forall spark__branch1:bool. forall thefile2:us_rep. forall dataok2:bool.
+  forall description1:(int,character) farray.
+  forall thistisinfo__split_fields2:us_split_fields2. forall certno1:int.
+  (((spark__branch1 = dataok1) and (if (spark__branch1 = true) then (let o =
+  (certno + 1) : int in (in_range(o) and ((certno1 = o) and (let o1 =
+  of_int(1) : bool in (((((o1 = true) and (dataok2 = true)) ->
+  (privatekeypresent(thistisinfo__split_fields2) = true)) and
+  ((not ((o1 = true) and (dataok2 = true))) ->
+  ((privatekeypresent(thistisinfo__split_fields2) = true) <->
+  (privatekeypresent(thistisinfo__split_fields1) = true)))) and
+  dynamic_invariant({ us_split_fields3 = thistisinfo__split_fields2 }, true,
+  true, true, true)))))) else (((((thefile2 = thefile1) and
+  (dataok2 = dataok1)) and (description1 = description)) and
+  (thistisinfo__split_fields2 = thistisinfo__split_fields1)) and
+  (certno1 = certno)))) ->
+  ((andb((if (endoffile(thefile2) = true) then false else true),
+  dataok2) = true) ->
+  (((privatekeypresent(thistisinfo__split_fields2) = true) <->
+  ((thistisinfo__split_fields2).rec__keystore__optionalprivatekeyt__ispresent = true)) ->
+  (forall thefile3:us_rep. forall dataok3:bool.
+  forall thistisinfo__split_fields3:us_split_fields2. forall certno2:int.
+  (((privatekeypresent(thistisinfo__split_fields3) = true) and
+  (2 <= certno2)) -> ((andb((if (dynamic_invariant({ us_split_fields3 =
+  thistisinfo__split_fields3 }, true, true, true, true) and
+  in_range1(certno2)) then true else false),
+  (if ((not (endoffile(thefile3) = true)) and
+  (dataok3 = true)) then true else false)) = true) ->
+  (forall spark__branch2:bool.
+  ((spark__branch2 = (if (endofline(thefile3) = true) then false else true)) ->
+  ((spark__branch2 = true) -> ((certno2 + 1) <= 2147483647))))))))))))))))))))

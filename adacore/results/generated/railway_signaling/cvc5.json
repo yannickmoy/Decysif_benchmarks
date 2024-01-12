@@ -1,0 +1,88 @@
+{
+  "results": [
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_65_13_assert_1.smt2",
+      "status": "unknown",
+      "steps": 30129,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_77_25_assert_1.smt2",
+      "status": "unknown",
+      "steps": 37709,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.ads_228_14_postcondition_1.smt2",
+      "status": "unknown",
+      "steps": 40219,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_132_19_assert_1.smt2",
+      "status": "unknown",
+      "steps": 39333,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_59_13_assert_1.smt2",
+      "status": "unknown",
+      "steps": 27961,
+      "time": 0.23
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_85_25_assert_1.smt2",
+      "status": "unknown",
+      "steps": 38864,
+      "time": 0.51
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_85_25_assert2_1.smt2",
+      "status": "unknown",
+      "steps": 41340,
+      "time": 0.47
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_160_22_loop_invariant_init_1.smt2",
+      "status": "unknown",
+      "steps": 56355,
+      "time": 0.75
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_84_25_assert_1.smt2",
+      "status": "unknown",
+      "steps": 31031,
+      "time": 0.44
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_168_31_assert2_1.smt2",
+      "status": "unknown",
+      "steps": 60786,
+      "time": 0.72
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_113_25_assert2_1.smt2",
+      "status": "unknown",
+      "steps": 64097,
+      "time": 0.84
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_77_25_assert2_1.smt2",
+      "status": "unknown",
+      "steps": 37121,
+      "time": 0.6
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_160_22_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 81779,
+      "time": 1.16
+    },
+    {
+      "filename": "generated/railway_signaling/cvc5/trains.adb_113_25_assert_1.smt2",
+      "status": "unknown",
+      "steps": 61311,
+      "time": 1.13
+    }
+  ]
+}

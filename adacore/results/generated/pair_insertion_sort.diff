@@ -1,0 +1,19 @@
+cvc5 proved 1 out of 11 VCs
+  unproved pair_insertion_sort.adb_109_33_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved pair_insertion_sort.adb_111_33_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved pair_insertion_sort.adb_124_36_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved pair_insertion_sort.adb_78_36_loop_invariant_preserv2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved pair_insertion_sort.adb_95_36_loop_invariant_init2_1.smt2 (proved by ['z3'])
+  unproved pair_insertion_sort.adb_95_36_loop_invariant_preserv2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved pair_insertion_sort.adb_96_36_loop_invariant_init2_1.smt2 (proved by ['z3'])
+  unproved pair_insertion_sort.adb_96_36_loop_invariant_preserv2_1.smt2 (proved by ['z3'])
+  unproved pair_insertion_sort.adb_97_36_loop_invariant_init2_1.smt2 (proved by ['z3'])
+  unproved pair_insertion_sort.ads_14_14_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 11 out of 11 VCs
+altergo proved 5 out of 11 VCs
+  unproved pair_insertion_sort.adb_109_33_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved pair_insertion_sort.adb_95_36_loop_invariant_init2_1.ae (proved by ['z3'])
+  unproved pair_insertion_sort.adb_96_36_loop_invariant_init2_1.ae (proved by ['z3'])
+  unproved pair_insertion_sort.adb_96_36_loop_invariant_preserv2_1.ae (proved by ['z3'])
+  unproved pair_insertion_sort.adb_97_36_loop_invariant_init2_1.ae (proved by ['z3'])
+  unproved perm.ads_38_8_postcondition_1.ae (proved by ['cvc5', 'z3'])

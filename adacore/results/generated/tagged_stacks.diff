@@ -1,0 +1,15 @@
+cvc5 proved 0 out of 10 VCs
+  unproved stacks.ads_14_13_feasible_post_1.smt2
+  unproved stacks.ads_36_20_stacks.ads_53_4_postcondition_2.smt2 (proved by ['z3', 'altergo'])
+  unproved stacks.ads_40_20_stacks.ads_55_4_postcondition_2.smt2 (proved by ['z3', 'altergo'])
+  unproved stacks.ads_62_20_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_12_22_assert2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_12_22_assert3_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_12_22_assert4_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_12_22_assert5_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_12_22_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved test_stack.adb_9_19_assert_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 9 out of 10 VCs
+  unproved stacks.ads_14_13_feasible_post_1.smt2
+altergo proved 9 out of 10 VCs
+  unproved stacks.ads_14_13_feasible_post_1.ae

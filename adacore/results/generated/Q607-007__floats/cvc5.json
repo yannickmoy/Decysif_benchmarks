@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_9_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 12071,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_47_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 181518,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_6_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 12061,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_76_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 182613,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_163_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 187690,
+      "time": 0.21
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_15_12_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 29263,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_18_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 12071,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_13_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 12071,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q607-007__floats/cvc5/normalize.adb_105_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 182613,
+      "time": 0.22
+    }
+  ]
+}

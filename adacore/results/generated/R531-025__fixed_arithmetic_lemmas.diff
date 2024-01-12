@@ -1,0 +1,22 @@
+cvc5 proved 9 out of 12 VCs
+  unproved spark-lemmas-fixed_point_arithmetic.ads_32_14_test_fixed_points.adb_6_4_postcondition_1.smt2
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_14_test_fixed_points.adb_6_4_postcondition_1.smt2
+  unproved spark-lemmas-fixed_point_arithmetic.ads_71_20_test_fixed_points.adb_6_4_overflow_check2_1.smt2
+z3 proved 0 out of 12 VCs
+  unproved spark-lemmas-fixed_point_arithmetic.ads_32_14_test_fixed_points.adb_6_4_postcondition_1.smt2
+  unproved spark-lemmas-fixed_point_arithmetic.ads_32_19_test_fixed_points.adb_6_4_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_14_test_fixed_points.adb_6_4_postcondition_1.smt2
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_18_test_fixed_points.adb_6_4_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_18_test_fixed_points.adb_6_4_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_34_test_fixed_points.adb_6_4_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved spark-lemmas-fixed_point_arithmetic.ads_71_20_test_fixed_points.adb_6_4_overflow_check2_1.smt2
+  unproved test_fixed_points.ads_28_18_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved test_fixed_points.ads_28_18_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved test_fixed_points.ads_28_34_overflow_check2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved test_fixed_points.ads_28_34_overflow_check_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved test_fixed_points.ads_36_20_overflow_check2_1.smt2 (proved by ['cvc5'])
+altergo proved 8 out of 12 VCs
+  unproved spark-lemmas-fixed_point_arithmetic.ads_32_14_test_fixed_points.adb_6_4_postcondition_1.ae
+  unproved spark-lemmas-fixed_point_arithmetic.ads_52_14_test_fixed_points.adb_6_4_postcondition_1.ae
+  unproved spark-lemmas-fixed_point_arithmetic.ads_71_20_test_fixed_points.adb_6_4_overflow_check2_1.ae
+  unproved test_fixed_points.ads_36_20_overflow_check2_1.ae (proved by ['cvc5'])

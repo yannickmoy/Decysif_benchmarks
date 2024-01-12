@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "filename": "generated/tagged_stacks/cvc5/stacks.ads_14_13_feasible_post_1.smt2",
+      "status": "unknown",
+      "steps": 2189,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_12_22_assert4_1.smt2",
+      "status": "timeout",
+      "steps": 488852,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_9_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 569105,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_12_22_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 1311393,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_12_22_assert5_1.smt2",
+      "status": "timeout",
+      "steps": 522977,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/stacks.ads_36_20_stacks.ads_53_4_postcondition_2.smt2",
+      "status": "timeout",
+      "steps": 1021573,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_12_22_assert3_1.smt2",
+      "status": "timeout",
+      "steps": 370256,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/stacks.ads_62_20_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 2196865,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/stacks.ads_40_20_stacks.ads_55_4_postcondition_2.smt2",
+      "status": "timeout",
+      "steps": 1017858,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/tagged_stacks/cvc5/test_stack.adb_12_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1257560,
+      "time": 9.93
+    }
+  ]
+}

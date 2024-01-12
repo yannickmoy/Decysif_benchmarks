@@ -1,0 +1,575 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type extended_index_type
+
+logic extended_index_typeqtint : extended_index_type -> int
+
+axiom extended_index_typeqtaxiom :
+  (forall i:extended_index_type. ((0 <= extended_index_typeqtint(i)) and
+  (extended_index_typeqtint(i) <= 100)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 100))
+
+function to_rep(x: extended_index_type) : int = extended_index_typeqtint(x)
+
+logic of_rep : int -> extended_index_type
+
+axiom inversion_axiom :
+  (forall x:extended_index_type [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom :
+  (forall x:extended_index_type [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type position_type
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2))
+
+logic to_rep1 : position_type -> int
+
+logic of_rep1 : int -> position_type
+
+axiom inversion_axiom1 :
+  (forall x:position_type [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:position_type [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__binary_trees__cell__left : extended_index_type;
+rec__binary_trees__cell__right : extended_index_type;
+rec__binary_trees__cell__parent : extended_index_type;
+rec__binary_trees__cell__position : position_type }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic binary_trees__cell__left__first__bit : int
+
+logic binary_trees__cell__left__last__bit : int
+
+logic binary_trees__cell__left__position : int
+
+axiom binary_trees__cell__left__first__bit_axiom :
+  (0 <= binary_trees__cell__left__first__bit)
+
+axiom binary_trees__cell__left__last__bit_axiom :
+  (binary_trees__cell__left__first__bit <  binary_trees__cell__left__last__bit)
+
+axiom binary_trees__cell__left__position_axiom :
+  (0 <= binary_trees__cell__left__position)
+
+logic binary_trees__cell__right__first__bit : int
+
+logic binary_trees__cell__right__last__bit : int
+
+logic binary_trees__cell__right__position : int
+
+axiom binary_trees__cell__right__first__bit_axiom :
+  (0 <= binary_trees__cell__right__first__bit)
+
+axiom binary_trees__cell__right__last__bit_axiom :
+  (binary_trees__cell__right__first__bit <  binary_trees__cell__right__last__bit)
+
+axiom binary_trees__cell__right__position_axiom :
+  (0 <= binary_trees__cell__right__position)
+
+logic binary_trees__cell__parent__first__bit : int
+
+logic binary_trees__cell__parent__last__bit : int
+
+logic binary_trees__cell__parent__position : int
+
+axiom binary_trees__cell__parent__first__bit_axiom :
+  (0 <= binary_trees__cell__parent__first__bit)
+
+axiom binary_trees__cell__parent__last__bit_axiom :
+  (binary_trees__cell__parent__first__bit <  binary_trees__cell__parent__last__bit)
+
+axiom binary_trees__cell__parent__position_axiom :
+  (0 <= binary_trees__cell__parent__position)
+
+logic binary_trees__cell__position__first__bit : int
+
+logic binary_trees__cell__position__last__bit : int
+
+logic binary_trees__cell__position__position : int
+
+axiom binary_trees__cell__position__first__bit_axiom :
+  (0 <= binary_trees__cell__position__first__bit)
+
+axiom binary_trees__cell__position__last__bit_axiom :
+  (binary_trees__cell__position__first__bit <  binary_trees__cell__position__last__bit)
+
+axiom binary_trees__cell__position__position_axiom :
+  (0 <= binary_trees__cell__position__position)
+
+logic dummy : us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+type us_split_fields2 = { rec__binary_trees__forest__s : extended_index_type;
+rec__binary_trees__forest__c : (int,us_rep) farray }
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic binary_trees__forest__s__first__bit : int
+
+logic binary_trees__forest__s__last__bit : int
+
+logic binary_trees__forest__s__position : int
+
+axiom binary_trees__forest__s__first__bit_axiom :
+  (0 <= binary_trees__forest__s__first__bit)
+
+axiom binary_trees__forest__s__last__bit_axiom :
+  (binary_trees__forest__s__first__bit <  binary_trees__forest__s__last__bit)
+
+axiom binary_trees__forest__s__position_axiom :
+  (0 <= binary_trees__forest__s__position)
+
+logic binary_trees__forest__c__first__bit : int
+
+logic binary_trees__forest__c__last__bit : int
+
+logic binary_trees__forest__c__position : int
+
+axiom binary_trees__forest__c__first__bit_axiom :
+  (0 <= binary_trees__forest__c__first__bit)
+
+axiom binary_trees__forest__c__last__bit_axiom :
+  (binary_trees__forest__c__first__bit <  binary_trees__forest__c__last__bit)
+
+axiom binary_trees__forest__c__position_axiom :
+  (0 <= binary_trees__forest__c__position)
+
+logic dummy1 : us_rep1
+
+logic valid_root : us_rep1, int -> bool
+
+logic size : us_rep1 -> int
+
+logic parent : us_rep1, int -> int
+
+type us_rep2
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic dummy2 : us_rep2
+
+logic bool_eq : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic dummy3 : int
+
+logic last : us_rep2 -> int
+
+type extended_index
+
+logic extended_indexqtint : extended_index -> int
+
+axiom extended_indexqtaxiom :
+  (forall i:extended_index. ((0 <= extended_indexqtint(i)) and
+  (extended_indexqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function length(param__container: us_rep2) : int =
+  ((last(param__container) + 1) - 1)
+
+predicate dynamic_invariant(temp___expr_369: int, temp___is_init_365: bool,
+  temp___skip_constant_366: bool, temp___do_toplevel_367: bool,
+  temp___do_typ_inv_368: bool) = ((temp___is_init_365 = true) ->
+  ((temp___do_toplevel_367 = true) -> (0 <= temp___expr_369)))
+
+logic get : us_rep2, int -> int
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 1))
+
+type us_split_fields4 = { rec__tree_model__path_type__a : us_rep2;
+rec__tree_model__path_type__k : bool }
+
+type us_rep3 = { us_split_fields5 : us_split_fields4
+}
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic tree_model__path_type__a__first__bit : int
+
+logic tree_model__path_type__a__last__bit : int
+
+logic tree_model__path_type__a__position : int
+
+axiom tree_model__path_type__a__first__bit_axiom :
+  (0 <= tree_model__path_type__a__first__bit)
+
+axiom tree_model__path_type__a__last__bit_axiom :
+  (tree_model__path_type__a__first__bit <  tree_model__path_type__a__last__bit)
+
+axiom tree_model__path_type__a__position_axiom :
+  (0 <= tree_model__path_type__a__position)
+
+logic tree_model__path_type__k__first__bit : int
+
+logic tree_model__path_type__k__last__bit : int
+
+logic tree_model__path_type__k__position : int
+
+axiom tree_model__path_type__k__first__bit_axiom :
+  (0 <= tree_model__path_type__k__first__bit)
+
+axiom tree_model__path_type__k__last__bit_axiom :
+  (tree_model__path_type__k__first__bit <  tree_model__path_type__k__last__bit)
+
+axiom tree_model__path_type__k__position_axiom :
+  (0 <= tree_model__path_type__k__position)
+
+logic dummy4 : us_rep3
+
+logic model : us_rep1, int -> (int,us_rep3) farray
+
+logic position : us_rep1, int -> int
+
+function oeq(param__left: us_rep2, param__right: us_rep2) : bool =
+  andb(bool_eq(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+logic is_add : us_rep2, int, us_rep2 -> bool
+
+type index_type
+
+logic index_typeqtint : index_type -> int
+
+axiom index_typeqtaxiom :
+  (forall i:index_type. ((1 <= index_typeqtint(i)) and
+  (index_typeqtint(i) <= 100)))
+
+predicate in_range4(x: int) = ((1 <= x) and (x <= 100))
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic component__size1 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+predicate dynamic_invariant1(temp___expr_403: (int,us_rep3) farray,
+  temp___is_init_399: bool, temp___skip_constant_400: bool,
+  temp___do_toplevel_401: bool, temp___do_typ_inv_402: bool) =
+  (forall temp___404:int. (((1 <= temp___404) and (temp___404 <= 100)) ->
+  (length((((temp___expr_403[temp___404])).us_split_fields5).rec__tree_model__path_type__a) <  100)))
+
+logic f : us_rep1
+
+logic root : int
+
+logic i : int
+
+logic j : int
+
+function ole(param__left: us_rep2, param__right: us_rep2) : bool =
+  andb(bool_le(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+logic m : (int,us_rep3) farray
+
+logic tree_structure : us_rep1 -> bool
+
+predicate dynamic_invariant2(temp___expr_274: us_rep1,
+  temp___is_init_270: bool, temp___skip_constant_271: bool,
+  temp___do_toplevel_272: bool, temp___do_typ_inv_273: bool) =
+  ((temp___do_typ_inv_273 = true) ->
+  (tree_structure(temp___expr_274) = true))
+
+type tcount_typeB
+
+logic tcount_typeBqtint : tcount_typeB -> int
+
+axiom tcount_typeBqtaxiom :
+  (forall i1:tcount_typeB. (((- 2147483648) <= tcount_typeBqtint(i1)) and
+  (tcount_typeBqtint(i1) <= 2147483647)))
+
+function olt(param__left: us_rep2, param__right: us_rep2) : bool =
+  andb(bool_lt(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+axiom size__post_axiom :
+  (forall param__f:us_rep1 [size(param__f)]. (dynamic_invariant2(param__f,
+  true, false, true, true) -> in_range(size(param__f))))
+
+axiom valid_root__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [valid_root(param__f, param__i)].
+  ((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) -> ((size(param__f) <  param__i) ->
+  (not (valid_root(param__f, param__i) = true))))))
+
+axiom parent__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [parent(param__f, param__i)].
+  ((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) -> (let result = parent(param__f, param__i) : int in
+  ((((valid_root(param__f, param__i) = true) -> (result = 0)) and
+  ((size(param__f) = 0) -> (result = 0))) and in_range(result))))))
+
+axiom position__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__i:int [position(param__f, param__i)].
+  (((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__i)) and (not (parent(param__f, param__i) = 0))) ->
+  in_range3(position(param__f, param__i)))))
+
+axiom last__post_axiom :
+  (forall param__container:us_rep2 [last(param__container)].
+  in_range2(last(param__container)))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep2.
+  (forall param__position:int [get(param__container, param__position)].
+  ((in_range2(param__position) and ((1 <= param__position) and
+  (param__position <= last(param__container)))) ->
+  in_range3(get(param__container, param__position)))))
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall param__s1:us_rep2. forall param__s2:us_rep2.
+  (forall param__d:int [is_add(param__s1, param__d, param__s2)].
+  ((is_add(param__s1, param__d, param__s2) = true) <->
+  ((((length(param__s2) - 1) = length(param__s1)) and (olt(param__s1,
+  param__s2) = true)) and (get(param__s2, last(param__s2)) = param__d)))))
+
+axiom model__post_axiom :
+  (forall param__f:us_rep1.
+  (forall param__root:int [model(param__f, param__root)].
+  (((dynamic_invariant2(param__f, true, false, true, true) and
+  in_range4(param__root)) and (valid_root(param__f, param__root) = true)) ->
+  (let result = model(param__f, param__root) : (int,us_rep3) farray in
+  (((((((((result[param__root])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (last((((result[param__root])).us_split_fields5).rec__tree_model__path_type__a) = 0)) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  ((not (i1 = param__root)) -> (if ((not (parent(param__f, i1) = 0)) and
+  ((((result[parent(param__f,
+  i1)])).us_split_fields5).rec__tree_model__path_type__k = true)) then ((((result[i1])).us_split_fields5).rec__tree_model__path_type__k = true) else (not ((((result[i1])).us_split_fields5).rec__tree_model__path_type__k = true))))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (if (((((result[i1])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (not (i1 = param__root))) then (is_add((((result[parent(param__f,
+  i1)])).us_split_fields5).rec__tree_model__path_type__a, position(param__f,
+  i1),
+  (((result[i1])).us_split_fields5).rec__tree_model__path_type__a) = true) else (last((((result[i1])).us_split_fields5).rec__tree_model__path_type__a) = 0))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((((result[i1])).us_split_fields5).rec__tree_model__path_type__k = true) ->
+  (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
+  ((((((result[j1])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (oeq((((result[i1])).us_split_fields5).rec__tree_model__path_type__a,
+  (((result[j1])).us_split_fields5).rec__tree_model__path_type__a) = true)) ->
+  (j1 = i1)))))))) and dynamic_invariant1(result, true, false, true,
+  true))))))
+
+axiom tree_structure__post_axiom : true
+
+ (* "search_trees.adb", line 104, characters 0-0 *)
+goal defqtvc : (dynamic_invariant2(f, true, false, true, true) ->
+  (in_range4(root) -> (in_range4(i) -> (in_range4(j) -> ((((valid_root(f,
+  root) = true) and ((((model(f,
+  root)[i])).us_split_fields5).rec__tree_model__path_type__k = true)) and
+  ((((model(f,
+  root)[j])).us_split_fields5).rec__tree_model__path_type__k = true)) ->
+  (let o = root : int in (let o1 = f : us_rep1 in
+  (let search_trees__find_root__m__assume = model(o1, o)
+  : (int,us_rep3) farray in
+  ((dynamic_invariant1(search_trees__find_root__m__assume, true, false, true,
+  true) and
+  ((((((((search_trees__find_root__m__assume[o])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (last((((search_trees__find_root__m__assume[o])).us_split_fields5).rec__tree_model__path_type__a) = 0)) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) -> ((not (i1 = o)) ->
+  (if ((not (parent(o1, i1) = 0)) and
+  ((((search_trees__find_root__m__assume[parent(o1,
+  i1)])).us_split_fields5).rec__tree_model__path_type__k = true)) then ((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__k = true) else (not ((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__k = true))))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (if (((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (not (i1 = o))) then (is_add((((search_trees__find_root__m__assume[parent(o1,
+  i1)])).us_split_fields5).rec__tree_model__path_type__a, position(o1, i1),
+  (((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__a) = true) else (last((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__a) = 0))))) and
+  (forall i1:int. (((1 <= i1) and (i1 <= 100)) ->
+  (((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__k = true) ->
+  (forall j1:int. (((1 <= j1) and (j1 <= 100)) ->
+  ((((((search_trees__find_root__m__assume[j1])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (oeq((((search_trees__find_root__m__assume[i1])).us_split_fields5).rec__tree_model__path_type__a,
+  (((search_trees__find_root__m__assume[j1])).us_split_fields5).rec__tree_model__path_type__a) = true)) ->
+  (j1 = i1))))))))) -> ((search_trees__find_root__m__assume = m) ->
+  (dynamic_invariant1(m, true, false, true, true) ->
+  (forall ki:int. ((ki = i) -> (in_range4(ki) ->
+  (forall kj:int. ((kj = j) -> (in_range4(kj) ->
+  (forall ki1:int.
+  ((if (not (ki = kj)) then ((((((m[ki])).us_split_fields5).rec__tree_model__path_type__k = true) ->
+  (let o2 = (((m[i])).us_split_fields5).rec__tree_model__path_type__a
+  : us_rep2 in (let o3 =
+  (((m[ki])).us_split_fields5).rec__tree_model__path_type__a : us_rep2 in
+  ((ole(o3, o2) = true) <-> ((length(o3) <= length(o2)) and
+  (forall n:int. (((1 <= n) and (n <= last(o3))) -> (get(o3, n) = get(o2,
+  n))))))))) and
+  (exists ki2:int. exists kj1:int.
+  (((((((m[ki2])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (ole((((m[ki2])).us_split_fields5).rec__tree_model__path_type__a,
+  (((m[i])).us_split_fields5).rec__tree_model__path_type__a) = true)) and
+  ((((((m[kj1])).us_split_fields5).rec__tree_model__path_type__k = true) and
+  (ole((((m[kj1])).us_split_fields5).rec__tree_model__path_type__a,
+  (((m[j])).us_split_fields5).rec__tree_model__path_type__a) = true)) and
+  (((length((((m[kj1])).us_split_fields5).rec__tree_model__path_type__a) <  length((((m[ki2])).us_split_fields5).rec__tree_model__path_type__a)) ->
+  (kj1 = j)) and
+  ((length((((m[ki2])).us_split_fields5).rec__tree_model__path_type__a) <  length((((m[kj1])).us_split_fields5).rec__tree_model__path_type__a)) ->
+  (ki2 = i))))) and ((andb((if (in_range4(ki2) and
+  in_range4(kj1)) then true else false),
+  (if (not (ki2 = kj1)) then true else false)) = true) and
+  (exists kj2:int. ((let o2 =
+  (((m[kj1])).us_split_fields5).rec__tree_model__path_type__a : us_rep2 in
+  (let o3 = length(o2) : int in ((dynamic_invariant(o3, true, false, true,
+  true) and (o3 = ((last(o2) + 1) - 1))) and (let o4 =
+  (((m[ki2])).us_split_fields5).rec__tree_model__path_type__a : us_rep2 in
+  (let o5 = length(o4) : int in ((dynamic_invariant(o5, true, false, true,
+  true) and (o5 = ((last(o4) + 1) - 1))) and
+  (exists spark__branch:bool.
+  ((spark__branch = (if (o3 <  o5) then true else false)) and
+  (if (spark__branch = true) then ((let o6 = f : us_rep1 in (let o7 =
+  parent(o6, ki2) : int in ((in_range(o7) and (((valid_root(o6,
+  ki2) = true) -> (o7 = 0)) and ((size(o6) = 0) -> (o7 = 0)))) and
+  (in_range4(o7) and (ki1 = o7))))) and (kj2 = kj1)) else (let o6 =
+  (((m[ki2])).us_split_fields5).rec__tree_model__path_type__a : us_rep2 in
+  (let o7 = length(o6) : int in ((dynamic_invariant(o7, true, false, true,
+  true) and (o7 = ((last(o6) + 1) - 1))) and (let o8 =
+  (((m[kj1])).us_split_fields5).rec__tree_model__path_type__a : us_rep2 in
+  (let o9 = length(o8) : int in ((dynamic_invariant(o9, true, false, true,
+  true) and (o9 = ((last(o8) + 1) - 1))) and
+  (exists spark__branch1:bool.
+  ((spark__branch1 = (if (o7 <  o9) then true else false)) and
+  (if (spark__branch1 = true) then ((let o10 = f : us_rep1 in (let o11 =
+  parent(o10, kj1) : int in ((in_range(o11) and (((valid_root(o10,
+  kj1) = true) -> (o11 = 0)) and ((size(o10) = 0) -> (o11 = 0)))) and
+  (in_range4(o11) and (kj2 = o11))))) and (ki1 = ki2)) else (let o10 = f
+  : us_rep1 in (let o11 = parent(o10, ki2) : int in ((in_range(o11) and
+  (((valid_root(o10, ki2) = true) -> (o11 = 0)) and ((size(o10) = 0) ->
+  (o11 = 0)))) and (in_range4(o11) and ((ki1 = o11) and (let o12 = f
+  : us_rep1 in (let o13 = parent(o12, kj1) : int in ((in_range(o13) and
+  (((valid_root(o12, kj1) = true) -> (o13 = 0)) and ((size(o12) = 0) ->
+  (o13 = 0)))) and (in_range4(o13) and (kj2 = o13)))))))))))))))))))))))))))) and
+  (ki1 = kj2))))))) else (ki1 = ki)) ->
+  (forall search_trees__find_root__result:int.
+  ((search_trees__find_root__result = ki1) -> (ole((((model(f,
+  root)[search_trees__find_root__result])).us_split_fields5).rec__tree_model__path_type__a,
+  (((model(f,
+  root)[j])).us_split_fields5).rec__tree_model__path_type__a) = true))))))))))))))))))))))

@@ -1,0 +1,968 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic oeq : us_rep, us_rep -> bool
+
+logic has_key : us_rep, int -> bool
+
+logic get : us_rep, int -> int
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy1 : us_rep
+
+logic is_merge : us_rep, us_rep, us_rep -> bool
+
+logic keys_included : us_rep, us_rep -> bool
+
+logic is_add : us_rep, int, us_rep -> bool
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((1 <= indexqtint(i)) and (indexqtint(i) <= 2147483646)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483646))
+
+logic slide : (int,integer) farray, int, int -> (int,integer) farray
+
+axiom slide_eq :
+  (forall a:(int,integer) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,integer) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+function bool_eq(a: (int,integer) farray, a__first: int, a__last: int,
+  b: (int,integer) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,integer) farray. forall b:(int,integer) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_168:int. (((a__first <= temp___idx_168) and
+  (temp___idx_168 <= a__last)) ->
+  (to_rep((a[temp___idx_168])) = to_rep((b[((b__first - a__first) + temp___idx_168)])))))))))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range3(low) and in_range3(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function of_array(a: (int,integer) farray, f: int, l: int) : us_t = { elts =
+  a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic occurrences : us_t, int, int -> us_rep
+
+logic occurrences__function_guard : us_rep, us_t, int, int -> prop
+
+logic bool_lt : int, int -> bool
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic dummy2 : int
+
+logic length : us_rep -> int
+
+logic is_empty : us_rep -> bool
+
+function is_sorted(param__a: us_t) : bool =
+  (if (forall i:int. (((first(param__a) <= i) and (i <= last(param__a))) ->
+      (forall j:int. (((first(param__a) <= j) and (j <= last(param__a))) ->
+      ((i <= j) ->
+      (to_rep((to_array(param__a)[i])) <= to_rep((to_array(param__a)[j])))))))) then true else false)
+
+logic a__first : integer
+
+logic a__last : integer
+
+logic l : int
+
+logic m : int
+
+logic r : int
+
+logic n1 : int
+
+logic n2 : int
+
+logic a_copy : us_t
+
+logic a_iterm__first : integer
+
+logic a_iterm__last : integer
+
+predicate dynamic_invariant(temp___expr_228: us_t, temp___is_init_224: bool,
+  temp___skip_constant_225: bool, temp___do_toplevel_226: bool,
+  temp___do_typ_inv_227: bool) = ((not (temp___skip_constant_225 = true)) ->
+  dynamic_property(1, 2147483646, first(temp___expr_228),
+  last(temp___expr_228)))
+
+predicate dynamic_invariant1(temp___expr_531: us_t, temp___is_init_527: bool,
+  temp___skip_constant_528: bool, temp___do_toplevel_529: bool,
+  temp___do_typ_inv_530: bool) = ((not (temp___skip_constant_528 = true)) ->
+  ((dynamic_property(to_rep(a__first), to_rep(a__last),
+  first(temp___expr_531), last(temp___expr_531)) and
+  (first(temp___expr_531) = to_rep(a__first))) and
+  (last(temp___expr_531) = to_rep(a__last))))
+
+predicate default_initial_assumption(temp___expr_537: us_t,
+  temp___skip_top_level_538: bool) =
+  ((first(temp___expr_537) = to_rep(a__first)) and
+  (last(temp___expr_537) = to_rep(a__last)))
+
+logic ole : us_rep, us_rep -> bool
+
+function same_keys(param__left: us_rep, param__right: us_rep) : bool =
+  andb(keys_included(param__left, param__right), keys_included(param__right,
+  param__left))
+
+logic keys_included_except : us_rep, us_rep, int -> bool
+
+logic elements_equal_except : us_rep, us_rep, int -> bool
+
+predicate dynamic_invariant2(temp___expr_266: int, temp___is_init_262: bool,
+  temp___skip_constant_263: bool, temp___do_toplevel_264: bool,
+  temp___do_typ_inv_265: bool) = ((temp___is_init_262 = true) ->
+  ((temp___do_toplevel_264 = true) -> (0 <= temp___expr_266)))
+
+axiom has_key__post_axiom : true
+
+axiom lemma_has_key_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int. ((in_range(param__key) and ((of_int(1) = true) and
+  (not (has_key(param__container, param__key) = true)))) ->
+  (forall k:int. ((in_range(k) and (has_key(param__container, k) = true)) ->
+  (not (param__key = k)))))))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key:int [get(param__container, param__key)].
+  ((in_range(param__key) and (has_key(param__container,
+  param__key) = true)) -> in_range2(get(param__container, param__key)))))
+
+axiom lemma_get_equivalent__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__key_1:int. forall param__key_2:int.
+  (((in_range(param__key_1) and in_range(param__key_2)) and
+  (((of_int(1) = true) and (param__key_1 = param__key_2)) and
+  ((has_key(param__container, param__key_1) = true) or
+  (has_key(param__container, param__key_2) = true)))) ->
+  (get(param__container, param__key_1) = get(param__container,
+  param__key_2)))))
+
+axiom length__post_axiom :
+  (forall param__container:us_rep [length(param__container)].
+  dynamic_invariant2(length(param__container), true, false, true, true))
+
+axiom is_empty__post_axiom :
+  (forall param__container:us_rep [is_empty(param__container)]. (let result =
+  is_empty(param__container) : bool in (((result = true) <->
+  (forall key:int. (not (in_range(key) and (has_key(param__container,
+  key) = true))))) and ((result = true) <->
+  (length(param__container) = 0)))))
+
+axiom ole__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep [ole(param__left,
+  param__right)]. ((ole(param__left, param__right) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((has_key(param__right, key) = true) and (get(param__right,
+  key) = get(param__left, key)))))))
+
+axiom oeq__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep [oeq(param__left,
+  param__right)]. ((oeq(param__left, param__right) = true) <->
+  ((forall key:int. ((in_range(key) and (has_key(param__left,
+   key) = true)) -> ((has_key(param__right, key) = true) and
+   (get(param__right, key) = get(param__left, key))))) and
+  (forall key:int. ((in_range(key) and (has_key(param__right,
+  key) = true)) -> (has_key(param__left, key) = true))))))
+
+axiom keys_included__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep
+  [keys_included(param__left, param__right)]. ((keys_included(param__left,
+  param__right) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  (has_key(param__right, key) = true)))))
+
+axiom keys_included_except__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep.
+  (forall param__new_key:int [keys_included_except(param__left, param__right,
+  param__new_key)]. (in_range(param__new_key) ->
+  ((keys_included_except(param__left, param__right,
+  param__new_key) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((not (key = param__new_key)) -> (has_key(param__right, key) = true))))))))
+
+axiom elements_equal_except__post_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep.
+  (forall param__new_key:int [elements_equal_except(param__left,
+  param__right, param__new_key)]. (in_range(param__new_key) ->
+  ((elements_equal_except(param__left, param__right,
+  param__new_key) = true) <->
+  (forall key:int. ((in_range(key) and (has_key(param__left, key) = true)) ->
+  ((not (key = param__new_key)) -> ((has_key(param__right, key) = true) and
+  (get(param__left, key) = get(param__right, key))))))))))
+
+axiom is_add__post_axiom : true
+
+axiom is_add__def_axiom :
+  (forall param__occ:us_rep. forall param__res:us_rep.
+  (forall param__k:int [is_add(param__occ, param__k, param__res)].
+  ((is_add(param__occ, param__k, param__res) = true) <->
+  (if (has_key(param__occ, param__k) = true) then (((same_keys(param__res,
+  param__occ) = true) and ((get(param__res, param__k) - 1) = get(param__occ,
+  param__k))) and (elements_equal_except(param__res, param__occ,
+  param__k) = true)) else ((((has_key(param__res, param__k) = true) and
+  (get(param__res, param__k) = 1)) and (ole(param__occ,
+  param__res) = true)) and (keys_included_except(param__res, param__occ,
+  param__k) = true))))))
+
+axiom is_merge__post_axiom : true
+
+axiom is_merge__def_axiom :
+  (forall param__left:us_rep. forall param__right:us_rep.
+  forall param__result__:us_rep [is_merge(param__left, param__right,
+  param__result__)]. ((is_merge(param__left, param__right,
+  param__result__) = true) <-> (((keys_included(param__left,
+  param__result__) = true) and (keys_included(param__right,
+  param__result__) = true)) and
+  (forall k:int. ((in_range(k) and (has_key(param__result__, k) = true)) ->
+  (if ((has_key(param__left, k) = true) and (has_key(param__right,
+  k) = true)) then ((get(param__result__, k) - get(param__right,
+  k)) = get(param__left, k)) else (if (has_key(param__left,
+  k) = true) then (get(param__result__, k) = get(param__left,
+  k)) else ((has_key(param__right, k) = true) and (get(param__result__,
+  k) = get(param__right, k))))))))))
+
+axiom occurrences__post_axiom :
+  (forall param__a:us_t.
+  (forall param__i:int. forall param__j:int [occurrences(param__a, param__i,
+  param__j)]. ((((dynamic_invariant(param__a, true, false, true, true) and
+  in_range2(param__i)) and in_range1(param__j)) and
+  ((param__j <  param__i) or (((first(param__a) <= param__i) and
+  (param__i <= last(param__a))) and ((first(param__a) <= param__j) and
+  (param__j <= last(param__a)))))) -> (let result = occurrences(param__a,
+  param__i, param__j) : us_rep in (occurrences__function_guard(result,
+  param__a, param__i, param__j) -> (((param__j <  param__i) or
+  ((length(result) <= ((param__j - param__i) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(result, k) = true)) ->
+  (get(result, k) <= ((param__j - param__i) + 1)))))) and
+  ((forall temp___336:int. occurrences__function_guard(occurrences(param__a,
+   param__i, temp___336), param__a, param__i, temp___336)) and
+  (if (param__j <  param__i) then ((is_empty(result) = true) and
+  (length(result) = 0)) else (is_add((let temp___336 = (param__j - 1)
+  : int in occurrences(param__a, param__i, temp___336)),
+  to_rep((to_array(param__a)[param__j])), result) = true)))))))))
+
+ (* "recursive_mergesort.ads", line 92, characters 0-0 *)
+goal defqtvc :
+  (forall a:(int,integer) farray. forall a_iterm:(int,integer) farray.
+  (dynamic_property(1, 2147483646, to_rep(a__first), to_rep(a__last)) ->
+  (in_range2(l) -> (in_range2(m) -> (in_range2(r) ->
+  ((((((((to_rep(a__first) <= l) and (l <= to_rep(a__last))) and
+  ((to_rep(a__first) <= r) and (r <= to_rep(a__last)))) and (l <= r)) and
+  ((l <= m) and (m <= r))) and (is_sorted((let temp___812qtunused =
+  of_array(a, l, m) : us_t in of_array(a, l, m))) = true)) and
+  (is_sorted((let temp___816qtunused = (let temp___815 = (m + 1) : int in
+  of_array(a, temp___815, r)) : us_t in (let temp___815 = (m + 1) : int in
+  of_array(a, temp___815, r)))) = true)) ->
+  (forall o:int. ((to_rep(a__last) = o) ->
+  (forall o1:int. ((to_rep(a__first) = o1) ->
+  (forall o2:int. ((to_rep(a__last) = o2) ->
+  (forall o3:int. ((to_rep(a__first) = o3) ->
+  (forall o4:int. ((to_rep(a__last) = o4) ->
+  (forall o5:int. ((to_rep(a__first) = o5) ->
+  (forall lii:int. ((lii = 0) -> (in_range1(lii) ->
+  (forall rii:int. ((rii = 0) -> (in_range1(rii) ->
+  (forall aii:int. ((aii = 0) -> (in_range1(aii) -> (let o6 = ((m - l) + 1)
+  : int in (in_range(o6) -> (in_range2(o6) -> ((o6 = n1) -> (in_range2(n1) ->
+  (let o7 = (r - m) : int in (in_range1(o7) -> ((o7 = n2) ->
+  (in_range1(n2) ->
+  (forall o8:int. ((to_rep(a__last) = o8) ->
+  (forall o9:int. ((to_rep(a__first) = o9) -> ((of_array(a, o9,
+  o8) = a_copy) -> (dynamic_invariant(a_copy, true, false, true, true) ->
+  (default_initial_assumption(of_array(a_iterm, to_rep(a_iterm__first),
+  to_rep(a_iterm__last)), false) -> (dynamic_invariant1(of_array(a_iterm,
+  to_rep(a_iterm__first), to_rep(a_iterm__last)), false, false, true,
+  true) -> ((orb((if (lii <  n1) then true else false),
+  (if (rii <  n2) then true else false)) = true) ->
+  (forall o10:int. ((to_rep(a_iterm__last) = o10) ->
+  (forall o11:int. ((to_rep(a_iterm__first) = o11) ->
+  (forall o12:int. ((to_rep(a__last) = o12) ->
+  (forall o13:int. ((to_rep(a__first) = o13) ->
+  (forall spark__branch:bool. forall a1:(int,integer) farray.
+  forall lii1:int. forall rii1:int. forall a_iterm1:(int,integer) farray.
+  ((forall o14:int. forall o15:int. forall o16:us_t.
+   occurrences__function_guard(occurrences(o16, o15, o14), o16, o15, o14)) ->
+  ((forall o14:int. forall o15:int. forall o16:us_t.
+   occurrences__function_guard(occurrences(o16, o15, o14), o16, o15, o14)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:int. forall o16:us_t.
+   occurrences__function_guard(occurrences(o16, o15, o14), o16, o15, o14)) ->
+  ((forall o14:int. forall o15:int. forall o16:us_t.
+   occurrences__function_guard(occurrences(o16, o15, o14), o16, o15, o14)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((forall o14:int. forall o15:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o15, o14, temp___330), o15, o14,
+   temp___330)) ->
+  ((exists o14:bool.
+   ((if (rii = n2) then (o14 = true) else (if (lii <  n1) then (let o15 =
+   (m + 1) : int in (in_range(o15) and (let o16 = (o15 + rii) : int in
+   (in_range(o16) and (((first(a_copy) <= o16) and (o16 <= last(a_copy))) and
+   (exists o17:int. ((to_rep((to_array(a_copy)[o16])) = o17) and (let o18 =
+   (l + lii) : int in (in_range(o18) and (((first(a_copy) <= o18) and
+   (o18 <= last(a_copy))) and
+   (exists o19:int. ((to_rep((to_array(a_copy)[o18])) = o19) and
+   (o14 = (if (o19 <= o17) then true else false)))))))))))))) else (o14 = false))) and
+   ((spark__branch = o14) and
+   (if (spark__branch = true) then ((exists o15:int.
+                                    ((to_rep(a__last) = o15) and
+                                    (exists o16:int.
+                                    ((to_rep(a__first) = o16) and
+                                    (exists o17:int.
+                                    ((to_rep(a__first) = o17) and
+                                    ((if (o16 <= o15) then ((to_rep(a__first) <= to_rep(a__last)) and
+                                    ((o15 - o16) = (to_rep(a__last) - to_rep(a__first)))) else (to_rep(a__last) <  to_rep(a__first))) and
+                                    (exists o18:int.
+                                    ((to_rep(a__last) = o18) and
+                                    (exists o19:int.
+                                    ((to_rep(a__first) = o19) and
+                                    (exists o20:int.
+                                    ((to_rep(a_iterm__last) = o20) and
+                                    (exists o21:int.
+                                    ((to_rep(a_iterm__first) = o21) and
+                                    ((if (o19 <= o18) then ((o21 <= o20) and
+                                    ((o18 - o19) = (o20 - o21))) else (o20 <  o21)) and
+                                    ((a_iterm1 = slide(a, o16, o17)) and
+                                    (exists o22:int.
+                                    ((to_rep(a__last) = o22) and
+                                    (exists o23:int.
+                                    ((to_rep(a__first) = o23) and (let o24 =
+                                    (l + lii) : int in (in_range(o24) and
+                                    (((first(a_copy) <= o24) and
+                                    (o24 <= last(a_copy))) and
+                                    (exists o25:int.
+                                    ((to_rep((to_array(a_copy)[o24])) = o25) and
+                                    (exists o26:integer.
+                                    ((to_rep(o26) = o25) and (let o27 =
+                                    (l + aii) : int in (in_range(o27) and
+                                    (((o23 <= o27) and (o27 <= o22)) and
+                                    ((a1 = to_array({ elts = (a[o27 <- o26]);
+                                    rt = (of_array(a, o23, o22)).rt })) and
+                                    (let o28 = (l + aii) : int in
+                                    (in_range(o28) and (let o29 = (l + aii)
+                                    : int in (in_range(o29) and
+                                    (exists o30:int.
+                                    ((to_rep(a_iterm__last) = o30) and
+                                    (exists o31:int.
+                                    ((to_rep(a_iterm__first) = o31) and
+                                    (exists o32:int.
+                                    ((to_rep(a__last) = o32) and
+                                    (exists o33:int.
+                                    ((to_rep(a__first) = o33) and
+                                    ((oeq(occurrences(of_array(a1, o33, o32),
+                                    l, (o29 - 1)),
+                                    occurrences(of_array(a_iterm1, o31, o30),
+                                    l, (o28 - 1))) = true) and (let o34 =
+                                    (l + lii) : int in (in_range(o34) and
+                                    (((first(a_copy) <= o34) and
+                                    (o34 <= last(a_copy))) and
+                                    (exists o35:int.
+                                    ((to_rep((to_array(a_copy)[o34])) = o35) and
+                                    (let o36 = (l + aii) : int in
+                                    (in_range(o36) and (let o37 = l : int in
+                                    (exists o38:int.
+                                    ((to_rep(a__last) = o38) and
+                                    (exists o39:int.
+                                    ((to_rep(a__first) = o39) and (let o40 =
+                                    of_array(a1, o39, o38) : us_t in
+                                    (let o41 = occurrences(o40, o37, o36)
+                                    : us_rep in
+                                    ((occurrences__function_guard(o41, o40,
+                                    o37, o36) and (((o36 <  o37) or
+                                    ((length(o41) <= ((o36 - o37) + 1)) and
+                                    (forall k:int. ((in_range(k) and
+                                    (has_key(o41, k) = true)) -> (get(o41,
+                                    k) <= ((o36 - o37) + 1)))))) and
+                                    (if (bool_lt(o36,
+                                    o37) = true) then ((is_empty(o41) = true) and
+                                    (length(o41) = 0)) else (is_add((let temp___330 =
+                                    (o36 - 1) : int in occurrences(o40, o37,
+                                    temp___330)), to_rep((a1[o36])),
+                                    o41) = true)))) and (let o42 = (l + aii)
+                                    : int in (in_range(o42) and (let o43 =
+                                    (o42 - 1) : int in (let o44 = l : int in
+                                    (exists o45:int.
+                                    ((to_rep(a__last) = o45) and
+                                    (exists o46:int.
+                                    ((to_rep(a__first) = o46) and (let o47 =
+                                    of_array(a1, o46, o45) : us_t in
+                                    (let o48 = occurrences(o47, o44, o43)
+                                    : us_rep in
+                                    ((occurrences__function_guard(o48, o47,
+                                    o44, o43) and (((o43 <  o44) or
+                                    ((length(o48) <= ((o43 - o44) + 1)) and
+                                    (forall k:int. ((in_range(k) and
+                                    (has_key(o48, k) = true)) -> (get(o48,
+                                    k) <= ((o43 - o44) + 1)))))) and
+                                    (if (bool_lt(o43,
+                                    o44) = true) then ((is_empty(o48) = true) and
+                                    (length(o48) = 0)) else (is_add((let temp___330 =
+                                    (o43 - 1) : int in occurrences(o47, o44,
+                                    temp___330)), to_rep((a1[o43])),
+                                    o48) = true)))) and (let o49 = (m + 1)
+                                    : int in (in_range(o49) and (let o50 =
+                                    (o49 + rii) : int in (in_range(o50) and
+                                    (let o51 = (o50 - 1) : int in (let o52 =
+                                    (m + 1) : int in (in_range(o52) and
+                                    (let o53 = a_copy : us_t in (let o54 =
+                                    occurrences(o53, o52, o51) : us_rep in
+                                    ((occurrences__function_guard(o54, o53,
+                                    o52, o51) and (((o51 <  o52) or
+                                    ((length(o54) <= ((o51 - o52) + 1)) and
+                                    (forall k:int. ((in_range(k) and
+                                    (has_key(o54, k) = true)) -> (get(o54,
+                                    k) <= ((o51 - o52) + 1)))))) and
+                                    (if (bool_lt(o51,
+                                    o52) = true) then ((is_empty(o54) = true) and
+                                    (length(o54) = 0)) else (is_add((let temp___330 =
+                                    (o51 - 1) : int in occurrences(o53, o52,
+                                    temp___330)),
+                                    to_rep((to_array(o53)[o51])),
+                                    o54) = true)))) and (let o55 = (l + lii)
+                                    : int in (in_range(o55) and (let o56 = l
+                                    : int in (let o57 = a_copy : us_t in
+                                    (let o58 = occurrences(o57, o56, o55)
+                                    : us_rep in
+                                    ((occurrences__function_guard(o58, o57,
+                                    o56, o55) and (((o55 <  o56) or
+                                    ((length(o58) <= ((o55 - o56) + 1)) and
+                                    (forall k:int. ((in_range(k) and
+                                    (has_key(o58, k) = true)) -> (get(o58,
+                                    k) <= ((o55 - o56) + 1)))))) and
+                                    (if (bool_lt(o55,
+                                    o56) = true) then ((is_empty(o58) = true) and
+                                    (length(o58) = 0)) else (is_add((let temp___330 =
+                                    (o55 - 1) : int in occurrences(o57, o56,
+                                    temp___330)),
+                                    to_rep((to_array(o57)[o55])),
+                                    o58) = true)))) and (let o59 = (l + lii)
+                                    : int in (in_range(o59) and (let o60 =
+                                    (o59 - 1) : int in (let o61 = l : int in
+                                    (let o62 = a_copy : us_t in (let o63 =
+                                    occurrences(o62, o61, o60) : us_rep in
+                                    ((occurrences__function_guard(o63, o62,
+                                    o61, o60) and (((o60 <  o61) or
+                                    ((length(o63) <= ((o60 - o61) + 1)) and
+                                    (forall k:int. ((in_range(k) and
+                                    (has_key(o63, k) = true)) -> (get(o63,
+                                    k) <= ((o60 - o61) + 1)))))) and
+                                    (if (bool_lt(o60,
+                                    o61) = true) then ((is_empty(o63) = true) and
+                                    (length(o63) = 0)) else (is_add((let temp___330 =
+                                    (o60 - 1) : int in occurrences(o62, o61,
+                                    temp___330)),
+                                    to_rep((to_array(o62)[o60])),
+                                    o63) = true)))) and ((is_merge(o58, o54,
+                                    o41) = true) and (let o64 = (lii + 1)
+                                    : int in (in_range(o64) and
+                                    (lii1 = o64)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) and
+   (rii1 = rii)) else ((exists o15:int. ((to_rep(a__last) = o15) and
+                       (exists o16:int. ((to_rep(a__first) = o16) and
+                       (exists o17:int. ((to_rep(a__first) = o17) and
+                       ((if (o16 <= o15) then ((to_rep(a__first) <= to_rep(a__last)) and
+                       ((o15 - o16) = (to_rep(a__last) - to_rep(a__first)))) else (to_rep(a__last) <  to_rep(a__first))) and
+                       (exists o18:int. ((to_rep(a__last) = o18) and
+                       (exists o19:int. ((to_rep(a__first) = o19) and
+                       (exists o20:int. ((to_rep(a_iterm__last) = o20) and
+                       (exists o21:int. ((to_rep(a_iterm__first) = o21) and
+                       ((if (o19 <= o18) then ((o21 <= o20) and
+                       ((o18 - o19) = (o20 - o21))) else (o20 <  o21)) and
+                       ((a_iterm1 = slide(a, o16, o17)) and
+                       (exists o22:int. ((to_rep(a__last) = o22) and
+                       (exists o23:int. ((to_rep(a__first) = o23) and
+                       (let o24 = (m + 1) : int in (in_range(o24) and
+                       (let o25 = (o24 + rii) : int in (in_range(o25) and
+                       (((first(a_copy) <= o25) and
+                       (o25 <= last(a_copy))) and
+                       (exists o26:int.
+                       ((to_rep((to_array(a_copy)[o25])) = o26) and
+                       (exists o27:integer. ((to_rep(o27) = o26) and
+                       (let o28 = (l + aii) : int in (in_range(o28) and
+                       (((o23 <= o28) and (o28 <= o22)) and ((a1 = to_array({
+                       elts = (a[o28 <- o27]); rt = (of_array(a, o23,
+                       o22)).rt })) and (let o29 = (l + aii) : int in
+                       (in_range(o29) and (let o30 = (l + aii) : int in
+                       (in_range(o30) and
+                       (exists o31:int. ((to_rep(a_iterm__last) = o31) and
+                       (exists o32:int. ((to_rep(a_iterm__first) = o32) and
+                       (exists o33:int. ((to_rep(a__last) = o33) and
+                       (exists o34:int. ((to_rep(a__first) = o34) and
+                       ((oeq(occurrences(of_array(a1, o34, o33), l,
+                       (o30 - 1)), occurrences(of_array(a_iterm1, o32, o31),
+                       l, (o29 - 1))) = true) and (let o35 = (m + 1) : int in
+                       (in_range(o35) and (let o36 = (o35 + rii) : int in
+                       (in_range(o36) and (((first(a_copy) <= o36) and
+                       (o36 <= last(a_copy))) and
+                       (exists o37:int.
+                       ((to_rep((to_array(a_copy)[o36])) = o37) and
+                       (let o38 = (l + aii) : int in (in_range(o38) and
+                       (let o39 = l : int in
+                       (exists o40:int. ((to_rep(a__last) = o40) and
+                       (exists o41:int. ((to_rep(a__first) = o41) and
+                       (let o42 = of_array(a1, o41, o40) : us_t in (let o43 =
+                       occurrences(o42, o39, o38) : us_rep in
+                       ((occurrences__function_guard(o43, o42, o39, o38) and
+                       (((o38 <  o39) or
+                       ((length(o43) <= ((o38 - o39) + 1)) and
+                       (forall k:int. ((in_range(k) and (has_key(o43,
+                       k) = true)) -> (get(o43, k) <= ((o38 - o39) + 1)))))) and
+                       (if (bool_lt(o38,
+                       o39) = true) then ((is_empty(o43) = true) and
+                       (length(o43) = 0)) else (is_add((let temp___330 =
+                       (o38 - 1) : int in occurrences(o42, o39, temp___330)),
+                       to_rep((a1[o38])), o43) = true)))) and (let o44 =
+                       (l + aii) : int in (in_range(o44) and (let o45 =
+                       (o44 - 1) : int in (let o46 = l : int in
+                       (exists o47:int. ((to_rep(a__last) = o47) and
+                       (exists o48:int. ((to_rep(a__first) = o48) and
+                       (let o49 = of_array(a1, o48, o47) : us_t in (let o50 =
+                       occurrences(o49, o46, o45) : us_rep in
+                       ((occurrences__function_guard(o50, o49, o46, o45) and
+                       (((o45 <  o46) or
+                       ((length(o50) <= ((o45 - o46) + 1)) and
+                       (forall k:int. ((in_range(k) and (has_key(o50,
+                       k) = true)) -> (get(o50, k) <= ((o45 - o46) + 1)))))) and
+                       (if (bool_lt(o45,
+                       o46) = true) then ((is_empty(o50) = true) and
+                       (length(o50) = 0)) else (is_add((let temp___330 =
+                       (o45 - 1) : int in occurrences(o49, o46, temp___330)),
+                       to_rep((a1[o45])), o50) = true)))) and (let o51 =
+                       (m + 1) : int in (in_range(o51) and (let o52 =
+                       (o51 + rii) : int in (in_range(o52) and (let o53 =
+                       (m + 1) : int in (in_range(o53) and (let o54 = a_copy
+                       : us_t in (let o55 = occurrences(o54, o53, o52)
+                       : us_rep in ((occurrences__function_guard(o55, o54,
+                       o53, o52) and (((o52 <  o53) or
+                       ((length(o55) <= ((o52 - o53) + 1)) and
+                       (forall k:int. ((in_range(k) and (has_key(o55,
+                       k) = true)) -> (get(o55, k) <= ((o52 - o53) + 1)))))) and
+                       (if (bool_lt(o52,
+                       o53) = true) then ((is_empty(o55) = true) and
+                       (length(o55) = 0)) else (is_add((let temp___330 =
+                       (o52 - 1) : int in occurrences(o54, o53, temp___330)),
+                       to_rep((to_array(o54)[o52])), o55) = true)))) and
+                       (let o56 = (m + 1) : int in (in_range(o56) and
+                       (let o57 = (o56 + rii) : int in (in_range(o57) and
+                       (let o58 = (o57 - 1) : int in (let o59 = (m + 1)
+                       : int in (in_range(o59) and (let o60 = a_copy
+                       : us_t in (let o61 = occurrences(o60, o59, o58)
+                       : us_rep in ((occurrences__function_guard(o61, o60,
+                       o59, o58) and (((o58 <  o59) or
+                       ((length(o61) <= ((o58 - o59) + 1)) and
+                       (forall k:int. ((in_range(k) and (has_key(o61,
+                       k) = true)) -> (get(o61, k) <= ((o58 - o59) + 1)))))) and
+                       (if (bool_lt(o58,
+                       o59) = true) then ((is_empty(o61) = true) and
+                       (length(o61) = 0)) else (is_add((let temp___330 =
+                       (o58 - 1) : int in occurrences(o60, o59, temp___330)),
+                       to_rep((to_array(o60)[o58])), o61) = true)))) and
+                       (let o62 = (l + lii) : int in (in_range(o62) and
+                       (let o63 = (o62 - 1) : int in (let o64 = l : int in
+                       (let o65 = a_copy : us_t in (let o66 =
+                       occurrences(o65, o64, o63) : us_rep in
+                       ((occurrences__function_guard(o66, o65, o64, o63) and
+                       (((o63 <  o64) or
+                       ((length(o66) <= ((o63 - o64) + 1)) and
+                       (forall k:int. ((in_range(k) and (has_key(o66,
+                       k) = true)) -> (get(o66, k) <= ((o63 - o64) + 1)))))) and
+                       (if (bool_lt(o63,
+                       o64) = true) then ((is_empty(o66) = true) and
+                       (length(o66) = 0)) else (is_add((let temp___330 =
+                       (o63 - 1) : int in occurrences(o65, o64, temp___330)),
+                       to_rep((to_array(o65)[o63])), o66) = true)))) and
+                       ((is_merge(o66, o55, o43) = true) and (let o67 =
+                       (rii + 1) : int in (in_range(o67) and
+                       (rii1 = o67))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) and
+   (lii1 = lii)))))) ->
+  (let o14 = (aii + 1) : int in (in_range(o14) ->
+  (forall aii1:int. ((aii1 = o14) -> (let o15 = (l + aii1) : int in
+  (in_range(o15) -> (let o16 = (o15 - 1) : int in (let o17 = l : int in
+  (forall o18:int. ((to_rep(a__last) = o18) ->
+  (forall o19:int. ((to_rep(a__first) = o19) -> (let o20 = of_array(a1, o19,
+  o18) : us_t in (let o21 = occurrences(o20, o17, o16) : us_rep in
+  ((forall o22:int. forall o23:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o23, o22, temp___330), o23, o22,
+   temp___330)) ->
+  ((occurrences__function_guard(o21, o20, o17, o16) and (((o16 <  o17) or
+  ((length(o21) <= ((o16 - o17) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o21, k) = true)) -> (get(o21,
+  k) <= ((o16 - o17) + 1)))))) and (if (bool_lt(o16,
+  o17) = true) then ((is_empty(o21) = true) and
+  (length(o21) = 0)) else (is_add((let temp___330 = (o16 - 1) : int in
+  occurrences(o20, o17, temp___330)), to_rep((a1[o16])), o21) = true)))) ->
+  (let o22 = (m + rii1) : int in (in_range(o22) -> (let o23 = (m + 1)
+  : int in (in_range(o23) -> (let o24 = a_copy : us_t in (let o25 =
+  occurrences(o24, o23, o22) : us_rep in
+  ((forall o26:int. forall o27:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o27, o26, temp___330), o27, o26,
+   temp___330)) ->
+  ((occurrences__function_guard(o25, o24, o23, o22) and (((o22 <  o23) or
+  ((length(o25) <= ((o22 - o23) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o25, k) = true)) -> (get(o25,
+  k) <= ((o22 - o23) + 1)))))) and (if (bool_lt(o22,
+  o23) = true) then ((is_empty(o25) = true) and
+  (length(o25) = 0)) else (is_add((let temp___330 = (o22 - 1) : int in
+  occurrences(o24, o23, temp___330)), to_rep((to_array(o24)[o22])),
+  o25) = true)))) -> (let o26 = (l + lii1) : int in (in_range(o26) ->
+  (let o27 = (o26 - 1) : int in (let o28 = l : int in (let o29 = a_copy
+  : us_t in (let o30 = occurrences(o29, o28, o27) : us_rep in
+  ((forall o31:int. forall o32:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o32, o31, temp___330), o32, o31,
+   temp___330)) ->
+  ((occurrences__function_guard(o30, o29, o28, o27) and (((o27 <  o28) or
+  ((length(o30) <= ((o27 - o28) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o30, k) = true)) -> (get(o30,
+  k) <= ((o27 - o28) + 1)))))) and (if (bool_lt(o27,
+  o28) = true) then ((is_empty(o30) = true) and
+  (length(o30) = 0)) else (is_add((let temp___330 = (o27 - 1) : int in
+  occurrences(o29, o28, temp___330)), to_rep((to_array(o29)[o27])),
+  o30) = true)))) -> (((is_merge(o30, o25, o21) = true) <->
+  (((keys_included(o30, o21) = true) and (keys_included(o25,
+  o21) = true)) and
+  (forall k:int. ((in_range(k) and (has_key(o21, k) = true)) ->
+  (if ((has_key(o30, k) = true) and (has_key(o25, k) = true)) then ((get(o21,
+  k) - get(o25, k)) = get(o30, k)) else (if (has_key(o30,
+  k) = true) then (get(o21, k) = get(o30, k)) else ((has_key(o25,
+  k) = true) and (get(o21, k) = get(o25, k))))))))) ->
+  (forall a2:(int,integer) farray. forall lii2:int. forall rii2:int.
+  forall aii2:int. forall a_iterm2:(int,integer) farray.
+  ((forall temp___733:int. occurrences__function_guard(occurrences(a_copy, l,
+   temp___733), a_copy, l, temp___733)) ->
+  ((forall temp___736:int. forall temp___735:int.
+   occurrences__function_guard(occurrences(a_copy, temp___735, temp___736),
+   a_copy, temp___735, temp___736)) ->
+  ((forall temp___741:int. forall temp___740:us_t.
+   occurrences__function_guard(occurrences(temp___740, l, temp___741),
+   temp___740, l, temp___741)) ->
+  (((is_merge((let temp___733 = ((l + lii2) - 1) : int in occurrences(a_copy,
+  l, temp___733)), (let temp___736 = (m + rii2) : int in (let temp___735 =
+  (m + 1) : int in occurrences(a_copy, temp___735, temp___736))),
+  (let temp___741 = ((l + aii2) - 1) : int in (let temp___740 =
+  (let temp___737qtunused = of_array(a2, to_rep(a__first), to_rep(a__last))
+  : us_t in of_array(a2, to_rep(a__first), to_rep(a__last))) : us_t in
+  occurrences(temp___740, l, temp___741)))) = true) and (((let temp___728 =
+  (let temp___724 = (l - 1) : int in (let temp___723 = to_rep(a__first)
+  : int in of_array(to_array(a_copy), temp___723, temp___724))) : us_t in
+  (let temp___726 = (let temp___721 = (l - 1) : int in (let temp___720 =
+  to_rep(a__first) : int in of_array(a2, temp___720, temp___721))) : us_t in
+  bool_eq(to_array(temp___726), first(temp___726), last(temp___726),
+  to_array(temp___728), first(temp___728), last(temp___728)))) = true) and
+  (((let temp___705 = (let temp___701 = to_rep(a__last) : int in
+  (let temp___699 = (r + 1) : int in of_array(to_array(a_copy), temp___699,
+  temp___701))) : us_t in (let temp___703 = (let temp___698 = to_rep(a__last)
+  : int in (let temp___696 = (r + 1) : int in of_array(a2, temp___696,
+  temp___698))) : us_t in bool_eq(to_array(temp___703), first(temp___703),
+  last(temp___703), to_array(temp___705), first(temp___705),
+  last(temp___705)))) = true) and ((is_sorted((let temp___681qtunused =
+  (let temp___680 = ((l + aii2) - 1) : int in of_array(a2, l, temp___680))
+  : us_t in (let temp___680 = ((l + aii2) - 1) : int in of_array(a2, l,
+  temp___680)))) = true) and (((lii2 <  n1) ->
+  (to_rep((a2[((l + aii2) - 1)])) <= to_rep((to_array(a_copy)[(l + lii2)])))) and
+  (((rii2 <  n2) ->
+  (to_rep((a2[((l + aii2) - 1)])) <= to_rep((to_array(a_copy)[((m + 1) + rii2)])))) and
+  ((aii2 = (lii2 + rii2)) and ((lii2 <= n1) and (rii2 <= n2))))))))) ->
+  ((((in_range1(lii2) and in_range1(rii2)) and in_range1(aii2)) and
+  dynamic_invariant1(of_array(a_iterm2, to_rep(a_iterm__first),
+  to_rep(a_iterm__last)), false, true, true, true)) ->
+  ((orb((if (lii2 <  n1) then true else false),
+  (if (rii2 <  n2) then true else false)) = true) ->
+  (forall o31:bool.
+  ((if (rii2 = n2) then (o31 = true) else (if (lii2 <  n1) then (let o32 =
+  (m + 1) : int in (in_range(o32) and (let o33 = (o32 + rii2) : int in
+  (in_range(o33) and (((first(a_copy) <= o33) and (o33 <= last(a_copy))) and
+  (exists o34:int. ((to_rep((to_array(a_copy)[o33])) = o34) and (let o35 =
+  (l + lii2) : int in (in_range(o35) and (((first(a_copy) <= o35) and
+  (o35 <= last(a_copy))) and
+  (exists o36:int. ((to_rep((to_array(a_copy)[o35])) = o36) and
+  (o31 = (if (o36 <= o34) then true else false)))))))))))))) else (o31 = false))) ->
+  (forall spark__branch1:bool. ((spark__branch1 = o31) ->
+  ((spark__branch1 = true) ->
+  (forall o32:int. ((to_rep(a__last) = o32) ->
+  (forall o33:int. ((to_rep(a__first) = o33) ->
+  (forall o34:int. ((to_rep(a__first) = o34) ->
+  ((if (o33 <= o32) then ((to_rep(a__first) <= to_rep(a__last)) and
+  ((o32 - o33) = (to_rep(a__last) - to_rep(a__first)))) else (to_rep(a__last) <  to_rep(a__first))) ->
+  (forall o35:int. ((to_rep(a__last) = o35) ->
+  (forall o36:int. ((to_rep(a__first) = o36) ->
+  (forall o37:int. ((to_rep(a_iterm__last) = o37) ->
+  (forall o38:int. ((to_rep(a_iterm__first) = o38) ->
+  ((if (o36 <= o35) then ((o38 <= o37) and
+  ((o35 - o36) = (o37 - o38))) else (o37 <  o38)) ->
+  (forall a_iterm3:(int,integer) farray. ((a_iterm3 = slide(a2, o33, o34)) ->
+  (forall o39:int. ((to_rep(a__last) = o39) ->
+  (forall o40:int. ((to_rep(a__first) = o40) -> (let o41 = (l + lii2)
+  : int in (in_range(o41) -> (((first(a_copy) <= o41) and
+  (o41 <= last(a_copy))) ->
+  (forall o42:int. ((to_rep((to_array(a_copy)[o41])) = o42) ->
+  (forall o43:integer. ((to_rep(o43) = o42) -> (let o44 = (l + aii2) : int in
+  (in_range(o44) -> (((o40 <= o44) and (o44 <= o39)) ->
+  (forall a3:(int,integer) farray. ((a3 = to_array({ elts = (a2[o44 <- o43]);
+  rt = (of_array(a2, o40, o39)).rt })) -> (let o45 = (l + aii2) : int in
+  (in_range(o45) -> (let o46 = (l + aii2) : int in (in_range(o46) ->
+  (forall o47:int. ((to_rep(a_iterm__last) = o47) ->
+  (forall o48:int. ((to_rep(a_iterm__first) = o48) ->
+  (forall o49:int. ((to_rep(a__last) = o49) ->
+  (forall o50:int. ((to_rep(a__first) = o50) ->
+  ((forall o51:int. forall o52:int. forall o53:us_t.
+   occurrences__function_guard(occurrences(o53, o52, o51), o53, o52, o51)) ->
+  ((forall o51:int. forall o52:int. forall o53:us_t.
+   occurrences__function_guard(occurrences(o53, o52, o51), o53, o52, o51)) ->
+  ((oeq(occurrences(of_array(a3, o50, o49), l, (o46 - 1)),
+  occurrences(of_array(a_iterm3, o48, o47), l, (o45 - 1))) = true) ->
+  (let o51 = (l + lii2) : int in (in_range(o51) ->
+  (((first(a_copy) <= o51) and (o51 <= last(a_copy))) ->
+  (forall o52:int. ((to_rep((to_array(a_copy)[o51])) = o52) -> (let o53 =
+  (l + aii2) : int in (in_range(o53) -> (let o54 = l : int in
+  (forall o55:int. ((to_rep(a__last) = o55) ->
+  (forall o56:int. ((to_rep(a__first) = o56) -> (let o57 = of_array(a3, o56,
+  o55) : us_t in (let o58 = occurrences(o57, o54, o53) : us_rep in
+  ((forall o59:int. forall o60:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o60, o59, temp___330), o60, o59,
+   temp___330)) ->
+  ((occurrences__function_guard(o58, o57, o54, o53) and (((o53 <  o54) or
+  ((length(o58) <= ((o53 - o54) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o58, k) = true)) -> (get(o58,
+  k) <= ((o53 - o54) + 1)))))) and (if (bool_lt(o53,
+  o54) = true) then ((is_empty(o58) = true) and
+  (length(o58) = 0)) else (is_add((let temp___330 = (o53 - 1) : int in
+  occurrences(o57, o54, temp___330)), to_rep((a3[o53])), o58) = true)))) ->
+  (let o59 = (l + aii2) : int in (in_range(o59) -> (let o60 = (o59 - 1)
+  : int in (let o61 = l : int in
+  (forall o62:int. ((to_rep(a__last) = o62) ->
+  (forall o63:int. ((to_rep(a__first) = o63) -> (let o64 = of_array(a3, o63,
+  o62) : us_t in (let o65 = occurrences(o64, o61, o60) : us_rep in
+  ((forall o66:int. forall o67:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o67, o66, temp___330), o67, o66,
+   temp___330)) ->
+  ((occurrences__function_guard(o65, o64, o61, o60) and (((o60 <  o61) or
+  ((length(o65) <= ((o60 - o61) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o65, k) = true)) -> (get(o65,
+  k) <= ((o60 - o61) + 1)))))) and (if (bool_lt(o60,
+  o61) = true) then ((is_empty(o65) = true) and
+  (length(o65) = 0)) else (is_add((let temp___330 = (o60 - 1) : int in
+  occurrences(o64, o61, temp___330)), to_rep((a3[o60])), o65) = true)))) ->
+  (let o66 = (m + 1) : int in (in_range(o66) -> (let o67 = (o66 + rii2)
+  : int in (in_range(o67) -> (let o68 = (o67 - 1) : int in (let o69 = (m + 1)
+  : int in (in_range(o69) -> (let o70 = a_copy : us_t in (let o71 =
+  occurrences(o70, o69, o68) : us_rep in
+  ((forall o72:int. forall o73:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o73, o72, temp___330), o73, o72,
+   temp___330)) ->
+  ((occurrences__function_guard(o71, o70, o69, o68) and (((o68 <  o69) or
+  ((length(o71) <= ((o68 - o69) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o71, k) = true)) -> (get(o71,
+  k) <= ((o68 - o69) + 1)))))) and (if (bool_lt(o68,
+  o69) = true) then ((is_empty(o71) = true) and
+  (length(o71) = 0)) else (is_add((let temp___330 = (o68 - 1) : int in
+  occurrences(o70, o69, temp___330)), to_rep((to_array(o70)[o68])),
+  o71) = true)))) -> (let o72 = (l + lii2) : int in (in_range(o72) ->
+  (let o73 = l : int in (let o74 = a_copy : us_t in (let o75 =
+  occurrences(o74, o73, o72) : us_rep in
+  ((forall o76:int. forall o77:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o77, o76, temp___330), o77, o76,
+   temp___330)) ->
+  ((occurrences__function_guard(o75, o74, o73, o72) and (((o72 <  o73) or
+  ((length(o75) <= ((o72 - o73) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o75, k) = true)) -> (get(o75,
+  k) <= ((o72 - o73) + 1)))))) and (if (bool_lt(o72,
+  o73) = true) then ((is_empty(o75) = true) and
+  (length(o75) = 0)) else (is_add((let temp___330 = (o72 - 1) : int in
+  occurrences(o74, o73, temp___330)), to_rep((to_array(o74)[o72])),
+  o75) = true)))) -> (let o76 = (l + lii2) : int in (in_range(o76) ->
+  (let o77 = (o76 - 1) : int in (let o78 = l : int in (let o79 = a_copy
+  : us_t in (let o80 = occurrences(o79, o78, o77) : us_rep in
+  ((forall o81:int. forall o82:us_t. forall temp___330:int.
+   occurrences__function_guard(occurrences(o82, o81, temp___330), o82, o81,
+   temp___330)) ->
+  ((occurrences__function_guard(o80, o79, o78, o77) and (((o77 <  o78) or
+  ((length(o80) <= ((o77 - o78) + 1)) and
+  (forall k:int. ((in_range(k) and (has_key(o80, k) = true)) -> (get(o80,
+  k) <= ((o77 - o78) + 1)))))) and (if (bool_lt(o77,
+  o78) = true) then ((is_empty(o80) = true) and
+  (length(o80) = 0)) else (is_add((let temp___330 = (o77 - 1) : int in
+  occurrences(o79, o78, temp___330)), to_rep((to_array(o79)[o77])),
+  o80) = true)))) -> ((has_key(o80, o52) = true) -> ((get(o75,
+  o52) - 1) = get(o80, o52))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

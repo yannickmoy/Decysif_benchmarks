@@ -1,0 +1,366 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function to_int(b: bool) : int = (if (b = true) then 1 else 0)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep1(x: positive) : int = positiveqtint(x)
+
+logic of_rep1 : int -> positive
+
+axiom inversion_axiom1 :
+  (forall x:positive [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:positive [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic s : us_t
+
+type t1 = { rec__first1 : integer; rec__last1 : integer
+}
+
+logic mk : int, int -> t1
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first1) = f) and (to_rep((mk(f,
+  l)).rec__last1) = l)))))
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t1 = { elts1 : (int,positive) farray; rt1 : t1
+}
+
+function to_array1(a: us_t1) : (int,positive) farray = (a).elts1
+
+function of_array(a: (int,positive) farray, f: int, l: int) : us_t1 = {
+  elts1 = a; rt1 = mk(f, l) }
+
+function first1(a: us_t1) : int = to_rep(((a).rt1).rec__first1)
+
+function last1(a: us_t1) : int = to_rep(((a).rt1).rec__last1)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic cut__first : integer
+
+logic cut__last : integer
+
+predicate dynamic_invariant(temp___expr_189: us_t, temp___is_init_185: bool,
+  temp___skip_constant_186: bool, temp___do_toplevel_187: bool,
+  temp___do_typ_inv_188: bool) = (((not (temp___skip_constant_186 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_189),
+  last(temp___expr_189))) and ((temp___is_init_185 = true) ->
+  ((temp___do_toplevel_187 = true) -> (first(temp___expr_189) = 1))))
+
+predicate dynamic_invariant1(temp___expr_236: us_t1,
+  temp___is_init_232: bool, temp___skip_constant_233: bool,
+  temp___do_toplevel_234: bool, temp___do_typ_inv_235: bool) =
+  ((not (temp___skip_constant_233 = true)) -> ((dynamic_property1(1,
+  (length(s) + 1), first1(temp___expr_236), last1(temp___expr_236)) and
+  (first1(temp___expr_236) = 1)) and
+  (last1(temp___expr_236) = (length(s) + 1))))
+
+logic ghc_sort__cut__cut__aggregate_def : int, int, int -> us_t1
+
+logic rliteral : positive
+
+axiom rliteral_axiom : (positiveqtint(rliteral) = 1)
+
+ (* "ghc_sort.ads", line 6, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(s, true, false, true, true) ->
+  ((last(s) <  2147483646) -> (let o = (length(s) + 1) : int in
+  (forall temp___455:us_t1. (((((first1(temp___455) = 1) and
+  (last1(temp___455) = o)) and
+  (forall temp___454:int [(to_array1(temp___455)[temp___454])].
+  (((first1(temp___455) <= temp___454) and
+  (temp___454 <= last1(temp___455))) ->
+  ((to_array1(temp___455)[temp___454]) = rliteral)))) and
+  (temp___455 = ghc_sort__cut__cut__aggregate_def(1, 1, o))) ->
+  ((first1(temp___455) = 1) -> ((last1(temp___455) = (length(s) + 1)) ->
+  ((if (first1(temp___455) <= last1(temp___455)) then ((1 <= (length(s) + 1)) and
+  ((last1(temp___455) - first1(temp___455)) = ((length(s) + 1) - 1))) else ((length(s) + 1) <  1)) ->
+  (forall cut1:(int,positive) farray. ((cut1 = to_array1(temp___455)) ->
+  ((to_rep(cut__first) = first1(temp___455)) ->
+  ((to_rep(cut__last) = last1(temp___455)) ->
+  (dynamic_invariant1(of_array(cut1, to_rep(cut__first), to_rep(cut__last)),
+  true, false, true, true) ->
+  (forall top:int. ((top = 1) -> (in_range1(top) -> (let o1 = first(s)
+  : int in (in_range1(o1) ->
+  (forall x:int. ((x = o1) -> (in_range1(x) -> (let o2 = (first(s) + 1)
+  : int in (in_range(o2) -> (in_range1(o2) ->
+  (forall y:int. ((y = o2) -> (in_range1(y) ->
+  (forall cut2:(int,positive) farray. forall top1:int. forall x1:int.
+  ((if (andb((if (first(s) <= y) then true else false),
+  (if (y <= last(s)) then true else false)) = true) then (exists o3:int.
+                                                         ((to_rep(cut__last) = o3) and
+                                                         (exists o4:int.
+                                                         ((to_rep(cut__first) = o4) and
+                                                         (exists cut3:(int,positive) farray.
+                                                         exists top2:int.
+                                                         exists x2:int.
+                                                         exists y1:int.
+                                                         ((((first(s) <= x2) and
+                                                         (x2 <= last(s))) and
+                                                         ((x2 = (y1 - 1)) and
+                                                         (((1 <= top2) and
+                                                         (top2 <= x2)) and
+                                                         ((to_rep1((cut3[1])) = 1) and
+                                                         ((x2 = to_rep1((cut3[top2]))) and
+                                                         ((forall k:int.
+                                                          (((1 <= k) and
+                                                          (k <= top2)) ->
+                                                          (let temp___565 =
+                                                          to_rep1((cut3[k]))
+                                                          : int in
+                                                          ((1 <= temp___565) and
+                                                          (temp___565 <= x2))))) and
+                                                         ((forall k:int.
+                                                          (((1 <= k) and
+                                                          (k <= (top2 - 1))) ->
+                                                          (to_rep1((cut3[k])) <  to_rep1((cut3[(k + 1)]))))) and
+                                                         (forall k:int.
+                                                         (((1 <= k) and
+                                                         (k <= (top2 - 1))) ->
+                                                         (((forall l:int.
+                                                           ((((to_rep1((cut3[k])) + 1) <= l) and
+                                                           (l <= (to_rep1((cut3[(k + 1)])) - 1))) ->
+                                                           (to_rep((to_array(s)[(l - 1)])) <  to_rep((to_array(s)[l]))))) and
+                                                         (to_rep((to_array(s)[to_rep1((cut3[(k + 1)]))])) <= to_rep((to_array(s)[(to_rep1((cut3[(k + 1)])) - 1)])))) or
+                                                         ((forall l:int.
+                                                          ((((to_rep1((cut3[k])) + 1) <= l) and
+                                                          (l <= (to_rep1((cut3[(k + 1)])) - 1))) ->
+                                                          (to_rep((to_array(s)[l])) <= to_rep((to_array(s)[(l - 1)]))))) and
+                                                         (to_rep((to_array(s)[(to_rep1((cut3[(k + 1)])) - 1)])) <  to_rep((to_array(s)[to_rep1((cut3[(k + 1)]))])))))))))))))) and
+                                                         ((andb((if (((in_range1(top2) and
+                                                         in_range1(x2)) and
+                                                         in_range1(y1)) and
+                                                         dynamic_invariant1(of_array(cut3,
+                                                         to_rep(cut__first),
+                                                         to_rep(cut__last)),
+                                                         true, true, true,
+                                                         true)) then true else false),
+                                                         (if ((first(s) <= y1) and
+                                                         (y1 <= last(s))) then true else false)) = true) and
+                                                         (((first(s) <= y1) and
+                                                         (y1 <= last(s))) and
+                                                         (exists o5:int.
+                                                         ((to_rep((to_array(s)[y1])) = o5) and
+                                                         (((first(s) <= x2) and
+                                                         (x2 <= last(s))) and
+                                                         (exists o6:int.
+                                                         ((to_rep((to_array(s)[x2])) = o6) and
+                                                         (exists inc:bool.
+                                                         ((inc = (if (o6 <  o5) then true else false)) and
+                                                         (exists y2:int.
+                                                         ((exists o7:bool.
+                                                          ((if (andb((if (first(s) <= y1) then true else false),
+                                                          (if (y1 <= last(s)) then true else false)) = true) then (((first(s) <= y1) and
+                                                          (y1 <= last(s))) and
+                                                          (exists o8:int.
+                                                          ((to_rep((to_array(s)[y1])) = o8) and
+                                                          (let temp___466 =
+                                                          (y1 - 1) : int in
+                                                          (((first(s) <= temp___466) and
+                                                          (temp___466 <= last(s))) and
+                                                          (exists o9:int.
+                                                          ((to_rep((to_array(s)[temp___466])) = o9) and
+                                                          (o7 = (if (to_int((if (o9 <  o8) then true else false)) = to_int(inc)) then true else false))))))))) else (o7 = false)) and
+                                                          (if (o7 = true) then 
+                                                          (exists y3:int.
+                                                          (((y1 <= y3) and
+                                                          (forall k:int.
+                                                          (((y1 <= k) and
+                                                          (k <= y3)) ->
+                                                          ((to_rep((to_array(s)[(k - 1)])) <  to_rep((to_array(s)[k]))) <->
+                                                          (inc = true))))) and
+                                                          ((andb((if in_range1(y3) then true else false),
+                                                          (if (((first(s) <= y3) and
+                                                          (y3 <= last(s))) and
+                                                          ((to_rep((to_array(s)[(y3 - 1)])) <  to_rep((to_array(s)[y3]))) <->
+                                                          (inc = true))) then true else false)) = true) and
+                                                          (let o8 = (y3 + 1)
+                                                          : int in
+                                                          (in_range(o8) and
+                                                          ((y2 = o8) and
+                                                          (exists o9:bool.
+                                                          ((if (andb((if (first(s) <= y2) then true else false),
+                                                          (if (y2 <= last(s)) then true else false)) = true) then (((first(s) <= y2) and
+                                                          (y2 <= last(s))) and
+                                                          (exists o10:int.
+                                                          ((to_rep((to_array(s)[y2])) = o10) and
+                                                          (let temp___466 =
+                                                          (y2 - 1) : int in
+                                                          (((first(s) <= temp___466) and
+                                                          (temp___466 <= last(s))) and
+                                                          (exists o11:int.
+                                                          ((to_rep((to_array(s)[temp___466])) = o11) and
+                                                          (o9 = (if (to_int((if (o11 <  o10) then true else false)) = to_int(inc)) then true else false))))))))) else (o9 = false)) and
+                                                          (not (o9 = true)))))))))) else (y2 = y1)))) and
+                                                         (let o7 = (top2 + 1)
+                                                         : int in
+                                                         (in_range(o7) and
+                                                         ((top1 = o7) and
+                                                         (exists o8:int.
+                                                         ((to_rep(cut__last) = o8) and
+                                                         (exists o9:int.
+                                                         ((to_rep(cut__first) = o9) and
+                                                         (exists o10:positive.
+                                                         ((to_rep1(o10) = y2) and
+                                                         (((o9 <= top1) and
+                                                         (top1 <= o8)) and
+                                                         ((cut2 = to_array1({
+                                                         elts1 =
+                                                         (cut3[top1 <- o10]);
+                                                         rt1 =
+                                                         (of_array(cut3, o9,
+                                                         o8)).rt1 })) and
+                                                         ((x1 = y2) and
+                                                         (let o11 = (x1 + 1)
+                                                         : int in
+                                                         (in_range(o11) and
+                                                         (exists y3:int.
+                                                         ((y3 = o11) and
+                                                         ((((first(s) <= y3) and
+                                                         (y3 <= last(s))) ->
+                                                         (((forall l:int.
+                                                           ((((to_rep1((cut2[(top1 - 1)])) + 1) <= l) and
+                                                           (l <= (to_rep1((cut2[top1])) - 1))) ->
+                                                           (to_rep((to_array(s)[(l - 1)])) <  to_rep((to_array(s)[l]))))) and
+                                                         (to_rep((to_array(s)[to_rep1((cut2[top1]))])) <= to_rep((to_array(s)[(to_rep1((cut2[top1])) - 1)])))) or
+                                                         ((forall l:int.
+                                                          ((((to_rep1((cut2[(top1 - 1)])) + 1) <= l) and
+                                                          (l <= (to_rep1((cut2[top1])) - 1))) ->
+                                                          (to_rep((to_array(s)[l])) <= to_rep((to_array(s)[(l - 1)]))))) and
+                                                         (to_rep((to_array(s)[(to_rep1((cut2[top1])) - 1)])) <  to_rep((to_array(s)[to_rep1((cut2[top1]))])))))) and
+                                                         (not (andb((if (first(s) <= y3) then true else false),
+                                                         (if (y3 <= last(s)) then true else false)) = true)))))))))))))))))))))))))))))))))))) else (((cut2 = cut1) and
+  (top1 = top)) and (x1 = x))) ->
+  (forall cut3:(int,positive) farray. forall top2:int.
+  ((exists spark__branch:bool.
+   ((spark__branch = (if (x1 <= last(s)) then true else false)) and
+   (if (spark__branch = true) then (let o3 = (top1 + 1) : int in
+   (in_range(o3) and ((top2 = o3) and
+   (exists o4:int. ((to_rep(cut__last) = o4) and
+   (exists o5:int. ((to_rep(cut__first) = o5) and (let o6 = length(s)
+   : int in (in_range(o6) and (let o7 = (o6 + 1) : int in (in_range(o7) and
+   (exists o8:positive. ((to_rep1(o8) = o7) and (((o5 <= top2) and
+   (top2 <= o4)) and (cut3 = to_array1({ elts1 = (cut2[top2 <- o8]); rt1 =
+   (of_array(cut2, o5, o4)).rt1 })))))))))))))))) else ((cut3 = cut2) and
+   (top2 = top1))))) ->
+  (forall o3:int. ((to_rep(cut__last) = o3) ->
+  (forall o4:int. ((to_rep(cut__first) = o4) -> (((1 <= top2) ->
+  (((o4 <= 1) and (1 <= o3)) and ((o4 <= top2) and (top2 <= o3)))) ->
+  (forall ghc_sort__cut__result:us_t1.
+  ((ghc_sort__cut__result = of_array(cut3, 1, top2)) ->
+  (forall k:int. (((1 <= k) and (k <= (last1(ghc_sort__cut__result) - 1))) ->
+  (((forall l:int.
+    ((((to_rep1((to_array1(ghc_sort__cut__result)[k])) + 1) <= l) and
+    (l <= (to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) - 1))) ->
+    (to_rep((to_array(s)[(l - 1)])) <  to_rep((to_array(s)[l]))))) and
+  ((to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) = (length(s) + 1)) or
+  (to_rep((to_array(s)[to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)]))])) <= to_rep((to_array(s)[(to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) - 1)]))))) or
+  ((forall l:int.
+   ((((to_rep1((to_array1(ghc_sort__cut__result)[k])) + 1) <= l) and
+   (l <= (to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) - 1))) ->
+   (to_rep((to_array(s)[l])) <= to_rep((to_array(s)[(l - 1)]))))) and
+  ((to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) = (length(s) + 1)) or
+  (to_rep((to_array(s)[(to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)])) - 1)])) <  to_rep((to_array(s)[to_rep1((to_array1(ghc_sort__cut__result)[(k + 1)]))]))))))))))))))))))))))))))))))))))))))))))))))

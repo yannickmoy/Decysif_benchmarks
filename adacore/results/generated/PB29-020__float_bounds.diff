@@ -1,0 +1,6 @@
+cvc5 proved 3 out of 3 VCs
+z3 proved 0 out of 3 VCs
+  unproved floats.adb_22_16_assert2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved floats.adb_22_16_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved floats.adb_54_16_assert_1.smt2 (proved by ['cvc5', 'altergo'])
+altergo proved 3 out of 3 VCs

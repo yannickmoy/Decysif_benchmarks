@@ -1,0 +1,2872 @@
+{
+  "results": [
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_137_8_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 94379,
+      "time": 0.38
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 45946,
+      "time": 0.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_403_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 87520,
+      "time": 0.48
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 228424,
+      "time": 1.47
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_627_16_precondition11_1.smt2",
+      "status": "unsat",
+      "steps": 321528,
+      "time": 2.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_164_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 35409,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_231_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 29837,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_980_10_precondition2_1.smt2",
+      "status": "timeout",
+      "steps": 856352,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_890_13_search_trees.adb_973_7_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 423254,
+      "time": 2.43
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_600_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 273247,
+      "time": 2.72
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_100_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 40790,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.ads_29_14_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 121641,
+      "time": 0.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1099_16_search_trees.adb_1244_7_assert9_1.smt2",
+      "status": "timeout",
+      "steps": 1217723,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1048_28_search_trees.adb_1239_7_assert_1.smt2",
+      "status": "timeout",
+      "steps": 856944,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_607_31_assert4_1.smt2",
+      "status": "timeout",
+      "steps": 785595,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_863_13_search_trees.adb_968_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 808320,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_489_28_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 515710,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_535_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 237343,
+      "time": 2.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 265889,
+      "time": 2.77
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_157_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 44278,
+      "time": 0.18
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_31_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 18899,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_82_13_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 44477,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_571_16_precondition13_1.smt2",
+      "status": "unsat",
+      "steps": 85676,
+      "time": 0.39
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_94_16_contract_case14_1.smt2",
+      "status": "unsat",
+      "steps": 109991,
+      "time": 0.57
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_555_16_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 419068,
+      "time": 5.41
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition_1.smt2",
+      "status": "timeout",
+      "steps": 929226,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 902852,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_470_42_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 665955,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 444856,
+      "time": 5.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 538747,
+      "time": 3.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1390_11_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 19186,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_67_33_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 18473,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_192_67_index_check3_1.smt2",
+      "status": "unsat",
+      "steps": 35056,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_195_38_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 121276,
+      "time": 0.56
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_901_17_search_trees.adb_973_7_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 163599,
+      "time": 0.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_489_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 589188,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_153_21_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 105302,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_172_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 86525,
+      "time": 0.56
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_667_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 227445,
+      "time": 2.02
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_491_28_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 370288,
+      "time": 3.37
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_468_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 85467,
+      "time": 0.44
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1087_16_search_trees.adb_1244_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 126195,
+      "time": 0.78
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition13_1.smt2",
+      "status": "unsat",
+      "steps": 72168,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1005_19_precondition9_1.smt2",
+      "status": "unsat",
+      "steps": 103334,
+      "time": 0.48
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_546_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 203833,
+      "time": 9.99
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_482_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 292609,
+      "time": 3.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition6_1.smt2",
+      "status": "unsat",
+      "steps": 192658,
+      "time": 1.12
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 235702,
+      "time": 1.5
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition11_1.smt2",
+      "status": "unsat",
+      "steps": 265569,
+      "time": 2.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_367_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 43073,
+      "time": 0.21
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 992932,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition5_1.smt2",
+      "status": "timeout",
+      "steps": 878977,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_818_16_search_trees.adb_963_7_assert8_1.smt2",
+      "status": "timeout",
+      "steps": 1103678,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_842_19_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 700453,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_500_42_assert_1.smt2",
+      "status": "timeout",
+      "steps": 665915,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition14_1.smt2",
+      "status": "unsat",
+      "steps": 46664,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_234_8_postcondition12_1.smt2",
+      "status": "timeout",
+      "steps": 710388,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1499_16_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 83113,
+      "time": 0.45
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_31_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 113583,
+      "time": 0.67
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_607_31_assert3_1.smt2",
+      "status": "timeout",
+      "steps": 850455,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1431_26_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 284251,
+      "time": 2.28
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_348_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 73333,
+      "time": 0.43
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1099_16_search_trees.adb_1244_7_assert12_1.smt2",
+      "status": "timeout",
+      "steps": 656384,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 594190,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_323_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 213590,
+      "time": 1.7
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_850_16_search_trees.adb_968_7_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 831372,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1150_16_search_trees.adb_1249_7_assert10_1.smt2",
+      "status": "timeout",
+      "steps": 1013205,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_669_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 572440,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_172_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 319122,
+      "time": 4.04
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_174_38_index_check3_1.smt2",
+      "status": "unsat",
+      "steps": 35111,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_118_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 31142,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_897_16_search_trees.adb_973_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 664355,
+      "time": 8.18
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1049_28_search_trees.adb_1239_7_assert_1.smt2",
+      "status": "unsat",
+      "steps": 196800,
+      "time": 1.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_preserv4_1.smt2",
+      "status": "timeout",
+      "steps": 584816,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_659_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 684200,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_980_10_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 802275,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition7_1.smt2",
+      "status": "timeout",
+      "steps": 689384,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_306_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 432243,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_82_13_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 61771,
+      "time": 0.38
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_468_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 477852,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1089_11_postcondition4_1.smt2",
+      "status": "timeout",
+      "steps": 331892,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition7_1.smt2",
+      "status": "timeout",
+      "steps": 1014017,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_364_46_range_check4_1.smt2",
+      "status": "unsat",
+      "steps": 41807,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition11_1.smt2",
+      "status": "unsat",
+      "steps": 261957,
+      "time": 2.74
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1172_13_search_trees.adb_1254_7_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 723160,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition14_1.smt2",
+      "status": "timeout",
+      "steps": 793023,
+      "time": 9.74
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1099_16_search_trees.adb_1244_7_assert8_1.smt2",
+      "status": "timeout",
+      "steps": 1004568,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_558_31_assert_1.smt2",
+      "status": "timeout",
+      "steps": 946748,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_339_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 925161,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_521_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 90779,
+      "time": 0.59
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 118854,
+      "time": 0.49
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_491_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 494961,
+      "time": 4.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_306_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 66929,
+      "time": 0.35
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_678_16_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 86872,
+      "time": 0.42
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_455_42_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 668612,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 781238,
+      "time": 9.6
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_891_13_search_trees.adb_973_7_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 807407,
+      "time": 9.75
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_643_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1068220,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_476_11_postcondition8_1.smt2",
+      "status": "unsat",
+      "steps": 481239,
+      "time": 6.49
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition19_1.smt2",
+      "status": "unsat",
+      "steps": 264430,
+      "time": 3.26
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_607_31_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 766417,
+      "time": 7.74
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1059_7_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 57648,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_623_16_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 692077,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition7_1.smt2",
+      "status": "unsat",
+      "steps": 194355,
+      "time": 1.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_137_8_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 109613,
+      "time": 0.49
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_995_47_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 128248,
+      "time": 0.57
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 636612,
+      "time": 8.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_977_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 83934,
+      "time": 0.64
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 712869,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 919039,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_555_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 161469,
+      "time": 1.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 438240,
+      "time": 5.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_667_22_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 227173,
+      "time": 2.26
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1178_16_search_trees.adb_1254_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 688863,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_94_16_contract_case7_1.smt2",
+      "status": "unsat",
+      "steps": 114801,
+      "time": 0.61
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_526_10_assert_1.smt2",
+      "status": "unsat",
+      "steps": 138598,
+      "time": 0.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_667_22_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 227767,
+      "time": 2.31
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1093_13_search_trees.adb_1244_7_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 970047,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1146_16_search_trees.adb_1249_7_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 1051395,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 873209,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_315_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 62148,
+      "time": 0.29
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_121_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 30569,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_549_33_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 51068,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_535_18_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 70668,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_182_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 35143,
+      "time": 0.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_137_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 62701,
+      "time": 0.27
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_831_50_range_check4_1.smt2",
+      "status": "unsat",
+      "steps": 107526,
+      "time": 0.45
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1038_16_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 711219,
+      "time": 9.74
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_139_16_loop_invariant_preserv3_1.smt2",
+      "status": "unsat",
+      "steps": 562499,
+      "time": 4.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_343_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 155629,
+      "time": 0.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 904712,
+      "time": 9.72
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1295_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 565601,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1426_19_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 707602,
+      "time": 9.78
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 661901,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_253_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 48495,
+      "time": 0.21
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_71_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 65476,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_209_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 81549,
+      "time": 0.61
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition7_1.smt2",
+      "status": "unsat",
+      "steps": 182936,
+      "time": 0.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_555_16_loop_invariant_init3_1.smt2",
+      "status": "unsat",
+      "steps": 241188,
+      "time": 2.97
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 295320,
+      "time": 3.66
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_191_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 29637,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_234_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 46366,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition14_1.smt2",
+      "status": "unsat",
+      "steps": 238329,
+      "time": 1.43
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition16_1.smt2",
+      "status": "unsat",
+      "steps": 464013,
+      "time": 5.4
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1446_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 674331,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 657014,
+      "time": 4.59
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1131_16_search_trees.adb_1249_7_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 1113338,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_869_16_search_trees.adb_968_7_assert10_1.smt2",
+      "status": "timeout",
+      "steps": 776063,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_359_31_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 665972,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1095_16_search_trees.adb_1244_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 372115,
+      "time": 1.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_252_31_assert_1.smt2",
+      "status": "unsat",
+      "steps": 32364,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_901_17_search_trees.adb_973_7_assert5_1.smt2",
+      "status": "timeout",
+      "steps": 711505,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 273668,
+      "time": 3.47
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_810_19_precondition13_1.smt2",
+      "status": "timeout",
+      "steps": 613084,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_128_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 39804,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_522_7_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 75953,
+      "time": 0.42
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_482_13_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 72753,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_31_8_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 135466,
+      "time": 0.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_818_16_search_trees.adb_963_7_assert13_1.smt2",
+      "status": "timeout",
+      "steps": 809713,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_306_13_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 67359,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_567_13_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 907638,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1207_13_search_trees.adb_1262_10_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 660512,
+      "time": 8.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_934_16_search_trees.adb_981_10_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 152591,
+      "time": 0.67
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1095_45_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 72698,
+      "time": 1.03
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 438940,
+      "time": 4.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_656_31_assert_1.smt2",
+      "status": "timeout",
+      "steps": 885866,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_710_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 542692,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_259_16_assert_1.smt2",
+      "status": "unsat",
+      "steps": 594396,
+      "time": 9.63
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_562_31_assert_1.smt2",
+      "status": "timeout",
+      "steps": 897926,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_307_39_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 94981,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition10_1.smt2",
+      "status": "unsat",
+      "steps": 104970,
+      "time": 0.58
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_164_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 47057,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_868_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 249089,
+      "time": 1.39
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1184_46_search_trees.adb_1254_7_precondition_1.smt2",
+      "status": "timeout",
+      "steps": 880419,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_818_16_search_trees.adb_963_7_assert9_1.smt2",
+      "status": "timeout",
+      "steps": 1233254,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_670_21_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 86723,
+      "time": 0.43
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition18_1.smt2",
+      "status": "unsat",
+      "steps": 248489,
+      "time": 2.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_56_8_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 80174,
+      "time": 0.47
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_842_19_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 578256,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1266_22_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 845391,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_869_16_search_trees.adb_968_7_assert6_1.smt2",
+      "status": "timeout",
+      "steps": 694479,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_278_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 707316,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1426_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 641562,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_571_16_precondition11_1.smt2",
+      "status": "unsat",
+      "steps": 151416,
+      "time": 1.09
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1206_13_search_trees.adb_1262_10_precondition13_1.smt2",
+      "status": "unsat",
+      "steps": 673275,
+      "time": 8.42
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_476_11_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 143167,
+      "time": 0.66
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_679_7_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 64929,
+      "time": 0.3
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 65526,
+      "time": 0.31
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1408_19_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 738015,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_94_16_contract_case8_1.smt2",
+      "status": "unsat",
+      "steps": 121082,
+      "time": 0.61
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_555_16_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 152032,
+      "time": 1.6
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition9_1.smt2",
+      "status": "timeout",
+      "steps": 779625,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_868_16_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 739960,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_82_13_loop_invariant_preserv5_1.smt2",
+      "status": "unsat",
+      "steps": 65217,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1059_7_precondition9_1.smt2",
+      "status": "unsat",
+      "steps": 64749,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_646_10_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 36590,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_306_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1143197,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_482_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 79136,
+      "time": 0.42
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_865_16_search_trees.adb_968_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 568016,
+      "time": 7.04
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_35_search_trees.adb_1262_10_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 1038050,
+      "time": 7.28
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_117_8_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 35742,
+      "time": 0.15
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 47631,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_991_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 125958,
+      "time": 0.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_985_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 810225,
+      "time": 6.67
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_388_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 73740,
+      "time": 0.38
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_203_17_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 117594,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_663_31_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 767283,
+      "time": 7.65
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition14_1.smt2",
+      "status": "timeout",
+      "steps": 941288,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_767_28_search_trees.adb_958_7_assert_1.smt2",
+      "status": "timeout",
+      "steps": 766574,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_528_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 518009,
+      "time": 9.99
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_525_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 786098,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition13_1.smt2",
+      "status": "timeout",
+      "steps": 832435,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_623_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 733145,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_384_14_postcondition8_1.smt2",
+      "status": "unsat",
+      "steps": 79134,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 144276,
+      "time": 0.63
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_522_7_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 133430,
+      "time": 0.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_327_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 753581,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition10_1.smt2",
+      "status": "timeout",
+      "steps": 731129,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_818_16_search_trees.adb_963_7_assert12_1.smt2",
+      "status": "timeout",
+      "steps": 713832,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_850_16_search_trees.adb_968_7_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 1198197,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1270_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 881595,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 941340,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition11_1.smt2",
+      "status": "timeout",
+      "steps": 807863,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_495_45_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 805001,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 406034,
+      "time": 4.68
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_604_10_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 182886,
+      "time": 1.71
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_600_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 76475,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_868_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 727435,
+      "time": 9.72
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_985_22_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 880121,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_216_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 112164,
+      "time": 0.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1172_13_search_trees.adb_1254_7_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 756941,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 269319,
+      "time": 1.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_561_45_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 18847,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_475_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 87065,
+      "time": 0.48
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_991_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 230693,
+      "time": 2.46
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition6_1.smt2",
+      "status": "unsat",
+      "steps": 194593,
+      "time": 1.04
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_137_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 297114,
+      "time": 2.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_523_22_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 31945,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_519_16_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 312944,
+      "time": 7.55
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_394_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 61116,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_748_16_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 226346,
+      "time": 3.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_332_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 902943,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1093_13_search_trees.adb_1244_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 861457,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_989_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 979932,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_139_16_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 89363,
+      "time": 0.51
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_139_16_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 101210,
+      "time": 0.59
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1206_13_search_trees.adb_1262_10_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 150998,
+      "time": 0.66
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 789534,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 398747,
+      "time": 4.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition13_1.smt2",
+      "status": "timeout",
+      "steps": 905066,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1032_16_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 593873,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_400_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1298976,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_82_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 88294,
+      "time": 0.43
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_385_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 60238,
+      "time": 0.44
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_82_13_loop_invariant_preserv6_1.smt2",
+      "status": "unsat",
+      "steps": 40885,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition5_1.smt2",
+      "status": "unsat",
+      "steps": 444309,
+      "time": 5.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_248_34_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 119140,
+      "time": 0.64
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_615_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 592710,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_842_19_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 734652,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_117_8_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 148791,
+      "time": 1.53
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_323_8_postcondition11_1.smt2",
+      "status": "unsat",
+      "steps": 461917,
+      "time": 7.52
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_265_16_assert_1.smt2",
+      "status": "unsat",
+      "steps": 398080,
+      "time": 4.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_925_13_search_trees.adb_981_10_precondition5_1.smt2",
+      "status": "unsat",
+      "steps": 138997,
+      "time": 0.62
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_500_42_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 603127,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_567_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 992211,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_812_13_search_trees.adb_963_7_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 1019965,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1408_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 587635,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_884_10_invariant_check_1.smt2",
+      "status": "timeout",
+      "steps": 698451,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_604_10_assert3_1.smt2",
+      "status": "unsat",
+      "steps": 109277,
+      "time": 0.51
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 205047,
+      "time": 0.99
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_244_16_assert_1.smt2",
+      "status": "unsat",
+      "steps": 149656,
+      "time": 1.29
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_109_36_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 18041,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_317_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 651087,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition16_1.smt2",
+      "status": "unsat",
+      "steps": 484179,
+      "time": 5.65
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1446_19_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 601101,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_404_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1878908,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_117_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 56297,
+      "time": 0.24
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1182_17_search_trees.adb_1254_7_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 170829,
+      "time": 0.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_160_33_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 27743,
+      "time": 0.11
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1059_7_precondition10_1.smt2",
+      "status": "unsat",
+      "steps": 50401,
+      "time": 0.18
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_543_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 607267,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_init3_1.smt2",
+      "status": "timeout",
+      "steps": 948738,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_806_16_search_trees.adb_963_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 130832,
+      "time": 0.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_174_57_range_check4_1.smt2",
+      "status": "unsat",
+      "steps": 34912,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1038_16_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 662036,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1436_19_assert_1.smt2",
+      "status": "unsat",
+      "steps": 179821,
+      "time": 0.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_56_8_postcondition8_1.smt2",
+      "status": "unsat",
+      "steps": 35982,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_891_13_search_trees.adb_973_7_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 757004,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_297_17_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 116147,
+      "time": 0.67
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1207_13_search_trees.adb_1262_10_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 1216142,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1261_10_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 518204,
+      "time": 3.63
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_245_16_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 151463,
+      "time": 1.12
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1172_13_search_trees.adb_1254_7_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 86304,
+      "time": 0.36
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_365_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 732365,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_504_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 580105,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_984_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 114380,
+      "time": 0.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_31_8_postcondition4_1.smt2",
+      "status": "unsat",
+      "steps": 367777,
+      "time": 2.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_476_11_postcondition7_1.smt2",
+      "status": "unsat",
+      "steps": 483053,
+      "time": 6.32
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_541_33_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 78138,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_409_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1953813,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1150_16_search_trees.adb_1249_7_assert9_1.smt2",
+      "status": "timeout",
+      "steps": 1100233,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_113_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 69549,
+      "time": 0.29
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_696_8_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 597725,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1059_7_invariant_check_2.smt2",
+      "status": "timeout",
+      "steps": 534617,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_137_8_postcondition6_1.smt2",
+      "status": "unsat",
+      "steps": 41174,
+      "time": 0.14
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition4_1.smt2",
+      "status": "timeout",
+      "steps": 886347,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 627210,
+      "time": 7.65
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_844_31_search_trees.adb_968_7_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1018112,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_327_10_assert_1.smt2",
+      "status": "timeout",
+      "steps": 701133,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_155_42_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 118503,
+      "time": 0.55
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_774_16_search_trees.adb_958_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 246460,
+      "time": 1.48
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1080_31_search_trees.adb_1244_7_assert_1.smt2",
+      "status": "unsat",
+      "steps": 254307,
+      "time": 1.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1107_29_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 26990,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_926_13_search_trees.adb_981_10_precondition7_1.smt2",
+      "status": "unsat",
+      "steps": 619591,
+      "time": 7.27
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1150_16_search_trees.adb_1249_7_assert7_1.smt2",
+      "status": "timeout",
+      "steps": 1043673,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_842_19_loop_invariant_preserv4_1.smt2",
+      "status": "timeout",
+      "steps": 647690,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_926_13_search_trees.adb_981_10_precondition5_1.smt2",
+      "status": "unsat",
+      "steps": 241730,
+      "time": 1.45
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1456_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 669397,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_388_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 2025251,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition8_1.smt2",
+      "status": "timeout",
+      "steps": 698271,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_317_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 705019,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_608_19_loop_invariant_preserv4_1.smt2",
+      "status": "timeout",
+      "steps": 686451,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_748_16_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 727861,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_238_16_assert_1.smt2",
+      "status": "unsat",
+      "steps": 159742,
+      "time": 1.03
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_132_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 77562,
+      "time": 0.37
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_163_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 45328,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_35_search_trees.adb_981_10_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 566110,
+      "time": 3.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_234_8_postcondition13_1.smt2",
+      "status": "timeout",
+      "steps": 660041,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_289_37_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 122895,
+      "time": 0.55
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_247_21_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 117196,
+      "time": 0.46
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_383_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 31601,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_850_16_search_trees.adb_968_7_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 1267896,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1415_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 850733,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_482_13_loop_invariant_init3_1.smt2",
+      "status": "unsat",
+      "steps": 70971,
+      "time": 0.32
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_init2_1.smt2",
+      "status": "timeout",
+      "steps": 1027439,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_172_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 220289,
+      "time": 1.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_295_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 74894,
+      "time": 0.33
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 242683,
+      "time": 1.58
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1456_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 850468,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_603_19_assert_1.smt2",
+      "status": "timeout",
+      "steps": 844382,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_476_11_postcondition9_1.smt2",
+      "status": "unsat",
+      "steps": 485076,
+      "time": 6.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_789_16_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 673472,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_562_31_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 1061820,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_335_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 21751,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition18_1.smt2",
+      "status": "timeout",
+      "steps": 759374,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_839_13_search_trees.adb_968_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 58242,
+      "time": 0.23
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_951_11_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 64965,
+      "time": 0.25
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_426_8_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 909684,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1295_13_loop_invariant_preserv2_1.smt2",
+      "status": "unsat",
+      "steps": 261181,
+      "time": 2.52
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_360_16_precondition8_1.smt2",
+      "status": "unsat",
+      "steps": 94179,
+      "time": 0.62
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_523_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 20359,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1150_16_search_trees.adb_1249_7_assert8_1.smt2",
+      "status": "timeout",
+      "steps": 830842,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 619103,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_608_19_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 690686,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1131_16_search_trees.adb_1249_7_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 1172513,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 720685,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_172_13_loop_invariant_preserv4_1.smt2",
+      "status": "unsat",
+      "steps": 24277,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1182_17_search_trees.adb_1254_7_assert3_1.smt2",
+      "status": "timeout",
+      "steps": 856176,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_627_16_precondition13_1.smt2",
+      "status": "unsat",
+      "steps": 85745,
+      "time": 0.41
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1055_16_search_trees.adb_1239_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 801253,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_863_13_search_trees.adb_968_7_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 796479,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_535_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 484385,
+      "time": 5.23
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_891_13_search_trees.adb_973_7_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 88031,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_253_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 45003,
+      "time": 0.2
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_213_22_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 26540,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_850_16_search_trees.adb_968_7_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 77710,
+      "time": 0.31
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_75_13_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 31321,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_709_11_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 207969,
+      "time": 0.97
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1213_13_search_trees.adb_1262_10_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 141614,
+      "time": 0.57
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_814_16_search_trees.adb_963_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 377508,
+      "time": 2.1
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1038_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 710960,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_748_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1038673,
+      "time": 9.97
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_94_16_contract_case16_1.smt2",
+      "status": "timeout",
+      "steps": 687085,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 640492,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_278_13_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 686446,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1120_13_search_trees.adb_1249_7_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 56886,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_869_16_search_trees.adb_968_7_assert9_1.smt2",
+      "status": "timeout",
+      "steps": 910773,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_492_34_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 76758,
+      "time": 0.26
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition13_1.smt2",
+      "status": "timeout",
+      "steps": 779802,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition14_1.smt2",
+      "status": "unsat",
+      "steps": 477925,
+      "time": 6.51
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_249_42_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 126292,
+      "time": 0.57
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_31_8_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 115102,
+      "time": 0.69
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_154_34_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 111820,
+      "time": 0.5
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_901_17_search_trees.adb_973_7_assert3_1.smt2",
+      "status": "timeout",
+      "steps": 740584,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1431_26_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 222535,
+      "time": 1.58
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_812_13_search_trees.adb_963_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 973889,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition4_1.smt2",
+      "status": "unsat",
+      "steps": 238161,
+      "time": 1.61
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 698458,
+      "time": 9.9
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_179_25_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 90689,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_56_8_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 72517,
+      "time": 0.4
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition11_1.smt2",
+      "status": "timeout",
+      "steps": 913031,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition6_1.smt2",
+      "status": "unsat",
+      "steps": 274546,
+      "time": 3.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_234_8_postcondition11_1.smt2",
+      "status": "timeout",
+      "steps": 652312,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_401_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 160702,
+      "time": 1.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 349674,
+      "time": 3.16
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_497_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 589006,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_977_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 81115,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_245_16_assert_1.smt2",
+      "status": "unsat",
+      "steps": 42181,
+      "time": 0.19
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1146_16_search_trees.adb_1249_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 988822,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_604_19_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 666147,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_307_22_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 25777,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.ads_29_14_postcondition5_1.smt2",
+      "status": "unsat",
+      "steps": 121945,
+      "time": 0.58
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_470_42_assert_1.smt2",
+      "status": "timeout",
+      "steps": 708963,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_1032_16_precondition7_1.smt2",
+      "status": "timeout",
+      "steps": 470932,
+      "time": 9.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition5_1.smt2",
+      "status": "unsat",
+      "steps": 440904,
+      "time": 4.11
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_399_28_assert_1.smt2",
+      "status": "unsat",
+      "steps": 286849,
+      "time": 2.04
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_768_28_search_trees.adb_958_7_assert_1.smt2",
+      "status": "unsat",
+      "steps": 219458,
+      "time": 1.13
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_595_16_precondition18_1.smt2",
+      "status": "unsat",
+      "steps": 256802,
+      "time": 2.49
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_56_8_postcondition6_1.smt2",
+      "status": "unsat",
+      "steps": 108965,
+      "time": 0.66
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1436_19_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 147599,
+      "time": 0.72
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_482_13_loop_invariant_init4_1.smt2",
+      "status": "unsat",
+      "steps": 72391,
+      "time": 0.31
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_868_16_loop_invariant_preserv3_1.smt2",
+      "status": "timeout",
+      "steps": 775767,
+      "time": 9.69
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_213_39_precondition2_1.smt2",
+      "status": "unsat",
+      "steps": 96434,
+      "time": 0.39
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_322_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 2560267,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_663_31_assert4_1.smt2",
+      "status": "timeout",
+      "steps": 863230,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.ads_27_14_invariant_check_1.smt2",
+      "status": "timeout",
+      "steps": 598796,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition10_1.smt2",
+      "status": "unsat",
+      "steps": 105768,
+      "time": 0.6
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.ads_323_8_postcondition13_1.smt2",
+      "status": "timeout",
+      "steps": 733141,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_475_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 507230,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_139_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 137386,
+      "time": 0.76
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 629072,
+      "time": 9.91
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1215_16_search_trees.adb_1262_10_assert4_1.smt2",
+      "status": "unsat",
+      "steps": 560631,
+      "time": 5.69
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 615577,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_623_16_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 734033,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1131_16_search_trees.adb_1249_7_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 1130444,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1182_17_search_trees.adb_1254_7_assert5_1.smt2",
+      "status": "timeout",
+      "steps": 844115,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_663_31_assert3_1.smt2",
+      "status": "timeout",
+      "steps": 896373,
+      "time": 9.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 479980,
+      "time": 3.06
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_592_19_precondition18_1.smt2",
+      "status": "unsat",
+      "steps": 553666,
+      "time": 7.74
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_379_13_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 553029,
+      "time": 5.47
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_528_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 507906,
+      "time": 9.27
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition19_1.smt2",
+      "status": "unsat",
+      "steps": 262991,
+      "time": 2.61
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_278_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 945490,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 1003490,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_561_31_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 824671,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1172_13_search_trees.adb_1254_7_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 979776,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_651_16_precondition12_1.smt2",
+      "status": "unsat",
+      "steps": 296752,
+      "time": 2.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1198_13_search_trees.adb_1262_10_precondition_1.smt2",
+      "status": "timeout",
+      "steps": 937614,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1099_16_search_trees.adb_1244_7_assert13_1.smt2",
+      "status": "timeout",
+      "steps": 1008893,
+      "time": 9.86
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_519_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 508676,
+      "time": 5.6
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_495_45_assert_1.smt2",
+      "status": "timeout",
+      "steps": 915084,
+      "time": 9.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_917_13_search_trees.adb_981_10_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 645516,
+      "time": 4.94
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1261_10_precondition3_1.smt2",
+      "status": "timeout",
+      "steps": 817014,
+      "time": 9.87
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_780_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 447623,
+      "time": 5.8
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_608_19_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 712328,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1150_16_search_trees.adb_1249_7_assert6_1.smt2",
+      "status": "timeout",
+      "steps": 948534,
+      "time": 9.76
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_567_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1945372,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_315_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 436234,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1125_31_search_trees.adb_1249_7_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1388471,
+      "time": 9.81
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_838_19_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 706395,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_235_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 810593,
+      "time": 6.78
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_760_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 659539,
+      "time": 7.93
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1146_16_search_trees.adb_1249_7_precondition5_1.smt2",
+      "status": "timeout",
+      "steps": 834521,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_768_16_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1092497,
+      "time": 9.98
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1499_16_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 637052,
+      "time": 5.65
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 604068,
+      "time": 7.07
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 993102,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1415_19_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 742358,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1206_13_search_trees.adb_1262_10_precondition15_1.smt2",
+      "status": "timeout",
+      "steps": 854425,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1206_13_search_trees.adb_1262_10_precondition14_1.smt2",
+      "status": "timeout",
+      "steps": 810647,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_826_19_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 716029,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition11_1.smt2",
+      "status": "timeout",
+      "steps": 937631,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_558_31_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 1124761,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_932_13_search_trees.adb_981_10_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 1098190,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_768_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 1104558,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1144_13_search_trees.adb_1249_7_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 891647,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_227_8_postcondition5_1.smt2",
+      "status": "timeout",
+      "steps": 984717,
+      "time": 9.75
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_498_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1104058,
+      "time": 9.89
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_278_13_loop_invariant_init2_1.smt2",
+      "status": "unsat",
+      "steps": 792307,
+      "time": 8.55
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_468_34_assert_1.smt2",
+      "status": "timeout",
+      "steps": 981249,
+      "time": 9.79
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/binary_trees.adb_519_16_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 499646,
+      "time": 9.99
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_1144_13_search_trees.adb_1249_7_precondition6_1.smt2",
+      "status": "timeout",
+      "steps": 976181,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_321_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 2910322,
+      "time": 9.95
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.ads_133_8_postcondition4_1.smt2",
+      "status": "timeout",
+      "steps": 1021762,
+      "time": 9.78
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_365_16_loop_invariant_init_1.smt2",
+      "status": "timeout",
+      "steps": 844712,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_398_28_assert_1.smt2",
+      "status": "timeout",
+      "steps": 1190539,
+      "time": 9.85
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/search_trees.adb_891_13_search_trees.adb_973_7_precondition16_1.smt2",
+      "status": "timeout",
+      "steps": 1134745,
+      "time": 9.84
+    },
+    {
+      "filename": "generated/red_black_trees/cvc5/red_black_trees.adb_379_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 2183088,
+      "time": 9.93
+    }
+  ]
+}

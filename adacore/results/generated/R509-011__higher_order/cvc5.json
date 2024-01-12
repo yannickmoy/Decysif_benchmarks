@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.adb_25_22_assert_1.smt2",
+      "status": "unknown",
+      "steps": 27187,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.ads_63_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 8585,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.adb_6_27_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 9271,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.adb_16_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 3772475,
+      "time": 9.92
+    },
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.adb_19_28_precondition_1.smt2",
+      "status": "timeout",
+      "steps": 3352461,
+      "time": 9.96
+    },
+    {
+      "filename": "generated/R509-011__higher_order/cvc5/test_higher_order.adb_19_22_assert_1.smt2",
+      "status": "timeout",
+      "steps": 3132298,
+      "time": 9.93
+    }
+  ]
+}

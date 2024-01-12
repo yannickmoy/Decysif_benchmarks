@@ -1,0 +1,249 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type slot
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2))
+
+logic to_rep : slot -> int
+
+logic of_rep : int -> slot
+
+axiom inversion_axiom : (forall x:slot [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:slot [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic num_free_slots : (int,(int,slot) farray) farray -> int
+
+logic num_free_slots__function_guard : int,
+  (int,(int,slot) farray) farray -> prop
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic count_free_slots : int, int, (int,(int,slot) farray) farray -> int
+
+logic count_free_slots__function_guard : int, int, int,
+  (int,(int,slot) farray) farray -> prop
+
+type pos
+
+logic posqtint : pos -> int
+
+axiom posqtaxiom :
+  (forall i:pos. ((1 <= posqtint(i)) and (posqtint(i) <= 3)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 3))
+
+function to_rep1(x: pos) : int = posqtint(x)
+
+logic of_rep1 : int -> pos
+
+axiom inversion_axiom1 :
+  (forall x:pos [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:pos [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields = { rec__tictactoe__position__x : pos;
+rec__tictactoe__position__y : pos }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic tictactoe__position__x__first__bit : int
+
+logic tictactoe__position__x__last__bit : int
+
+logic tictactoe__position__x__position : int
+
+axiom tictactoe__position__x__first__bit_axiom :
+  (0 <= tictactoe__position__x__first__bit)
+
+axiom tictactoe__position__x__last__bit_axiom :
+  (tictactoe__position__x__first__bit <  tictactoe__position__x__last__bit)
+
+axiom tictactoe__position__x__position_axiom :
+  (0 <= tictactoe__position__x__position)
+
+logic tictactoe__position__y__first__bit : int
+
+logic tictactoe__position__y__last__bit : int
+
+logic tictactoe__position__y__position : int
+
+axiom tictactoe__position__y__first__bit_axiom :
+  (0 <= tictactoe__position__y__first__bit)
+
+axiom tictactoe__position__y__last__bit_axiom :
+  (tictactoe__position__y__first__bit <  tictactoe__position__y__last__bit)
+
+axiom tictactoe__position__y__position_axiom :
+  (0 <= tictactoe__position__y__position)
+
+logic dummy : us_rep
+
+logic p : us_rep
+
+logic v : int
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+predicate dynamic_invariant(temp___expr_228: (int,(int,slot) farray) farray,
+  temp___is_init_224: bool, temp___skip_constant_225: bool,
+  temp___do_toplevel_226: bool, temp___do_typ_inv_227: bool) = true
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function one_free_slot(param__x: int, param__y: int,
+  Tictactoe__my_board___my_board___: (int,(int,slot) farray) farray) : int =
+  (if (to_rep((let temp___177 = (Tictactoe__my_board___my_board___[param__x])
+  : (int,slot) farray in (temp___177[param__y]))) = 0) then 1 else 0)
+
+axiom count_free_slots__post_axiom :
+  (forall param__x:int. forall param__y:int.
+  (forall Tictactoe__my_board___my_board___:(int,(int,slot) farray) farray
+  [count_free_slots(param__x, param__y, Tictactoe__my_board___my_board___)].
+  (((in_range2(param__x) and in_range2(param__y)) and
+  dynamic_invariant(Tictactoe__my_board___my_board___, true, false, true,
+  true)) -> (let result = count_free_slots(param__x, param__y,
+  Tictactoe__my_board___my_board___) : int in
+  (count_free_slots__function_guard(result, param__x, param__y,
+  Tictactoe__my_board___my_board___) -> in_range3(result))))))
+
+axiom count_free_slots__def_axiom :
+  (forall param__x:int. forall param__y:int.
+  (forall Tictactoe__my_board___my_board___:(int,(int,slot) farray) farray
+  [count_free_slots(param__x, param__y, Tictactoe__my_board___my_board___)].
+  (count_free_slots(param__x, param__y,
+  Tictactoe__my_board___my_board___) = ((((one_free_slot(1, 1,
+  Tictactoe__my_board___my_board___) + (if (2 <= param__y) then one_free_slot(1,
+  2,
+  Tictactoe__my_board___my_board___) else 0)) + (if (3 <= param__y) then one_free_slot(1,
+  3,
+  Tictactoe__my_board___my_board___) else 0)) + (if (2 <= param__x) then ((one_free_slot(2,
+  1,
+  Tictactoe__my_board___my_board___) + (if (2 <= param__y) then one_free_slot(2,
+  2,
+  Tictactoe__my_board___my_board___) else 0)) + (if (3 <= param__y) then one_free_slot(2,
+  3,
+  Tictactoe__my_board___my_board___) else 0)) else 0)) + (if (3 <= param__x) then ((one_free_slot(3,
+  1,
+  Tictactoe__my_board___my_board___) + (if (2 <= param__y) then one_free_slot(3,
+  2,
+  Tictactoe__my_board___my_board___) else 0)) + (if (3 <= param__y) then one_free_slot(3,
+  3, Tictactoe__my_board___my_board___) else 0)) else 0)))))
+
+axiom num_free_slots__post_axiom :
+  (forall Tictactoe__my_board___my_board___:(int,(int,slot) farray) farray
+  [num_free_slots(Tictactoe__my_board___my_board___)].
+  (dynamic_invariant(Tictactoe__my_board___my_board___, true, false, true,
+  true) -> (let result = num_free_slots(Tictactoe__my_board___my_board___)
+  : int in (num_free_slots__function_guard(result,
+  Tictactoe__my_board___my_board___) -> in_range1(result)))))
+
+axiom num_free_slots__def_axiom :
+  (forall Tictactoe__my_board___my_board___:(int,(int,slot) farray) farray
+  [num_free_slots(Tictactoe__my_board___my_board___)].
+  (count_free_slots__function_guard(count_free_slots(3, 3,
+  Tictactoe__my_board___my_board___), 3, 3,
+  Tictactoe__my_board___my_board___) and
+  (num_free_slots(Tictactoe__my_board___my_board___) = (let temp___249qtunused =
+  3 : int in count_free_slots(3, 3, Tictactoe__my_board___my_board___)))))
+
+ (* "tictactoe.adb", line 11, characters 0-0 *)
+goal defqtvc :
+  (forall my_board:(int,(int,slot) farray) farray. (in_range(v) ->
+  (dynamic_invariant(my_board, true, false, true, true) ->
+  (((to_rep(((my_board[to_rep1(((p).us_split_fields1).rec__tictactoe__position__x)])[to_rep1(((p).us_split_fields1).rec__tictactoe__position__y)])) = 0) and
+  (not (v = 0))) -> (let temp___old_675 = num_free_slots(my_board) : int in
+  (count_free_slots__function_guard(count_free_slots(3, 3, my_board), 3, 3,
+  my_board) -> ((num_free_slots__function_guard(temp___old_675, my_board) and
+  (in_range1(temp___old_675) and (temp___old_675 = count_free_slots(3, 3,
+  my_board)))) ->
+  (forall o:int.
+  ((to_rep1(((p).us_split_fields1).rec__tictactoe__position__x) = o) ->
+  (forall o1:slot. ((to_rep(o1) = v) ->
+  (forall o2:int.
+  ((to_rep1(((p).us_split_fields1).rec__tictactoe__position__y) = o2) ->
+  (forall o3:int.
+  ((to_rep1(((p).us_split_fields1).rec__tictactoe__position__x) = o3) ->
+  (forall my_board1:(int,(int,slot) farray) farray.
+  ((my_board1 = (my_board[o3 <- ((my_board[o])[o2 <- o1])])) ->
+  (num_free_slots__function_guard(num_free_slots(my_board1), my_board1) ->
+  (num_free_slots__function_guard(num_free_slots(my_board), my_board) ->
+  (num_free_slots(my_board1) = (num_free_slots(my_board) - 1)))))))))))))))))))))

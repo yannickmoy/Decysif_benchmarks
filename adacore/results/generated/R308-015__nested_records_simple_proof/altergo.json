@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition5_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_69_16_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition4_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition8_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition3_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_69_16_postcondition4_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_69_16_postcondition5_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_104_16_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_84_16_postcondition2_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/R308-015__nested_records_simple_proof/altergo/p.ads_84_16_postcondition4_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

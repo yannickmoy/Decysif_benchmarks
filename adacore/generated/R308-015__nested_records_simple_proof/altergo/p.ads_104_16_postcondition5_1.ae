@@ -1,0 +1,978 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type type_0
+
+logic type_0qtint : type_0 -> int
+
+axiom type_0qtaxiom :
+  (forall i:type_0. (((- 2147483648) <= type_0qtint(i)) and
+  (type_0qtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: type_0) : int = type_0qtint(x)
+
+logic of_rep : int -> type_0
+
+axiom inversion_axiom :
+  (forall x:type_0 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:type_0 [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_split_fields = { rec__p__type_1__field_0 : type_0;
+rec__p__type_1__field_1 : type_0; rec__p__type_1__field_2 : type_0;
+rec__p__type_1__field_3 : type_0; rec__p__type_1__field_4 : type_0;
+rec__p__type_1__field_5 : type_0; rec__p__type_1__field_6 : type_0;
+rec__p__type_1__field_7 : type_0 }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+function bool_eq(a: us_rep, b: us_rep) : bool =
+  (if ((to_rep(((a).us_split_fields1).rec__p__type_1__field_0) = to_rep(((b).us_split_fields1).rec__p__type_1__field_0)) and
+  ((((to_rep(((a).us_split_fields1).rec__p__type_1__field_1) = to_rep(((b).us_split_fields1).rec__p__type_1__field_1)) and
+  (to_rep(((a).us_split_fields1).rec__p__type_1__field_2) = to_rep(((b).us_split_fields1).rec__p__type_1__field_2))) and
+  ((to_rep(((a).us_split_fields1).rec__p__type_1__field_3) = to_rep(((b).us_split_fields1).rec__p__type_1__field_3)) and
+  (to_rep(((a).us_split_fields1).rec__p__type_1__field_4) = to_rep(((b).us_split_fields1).rec__p__type_1__field_4)))) and
+  (((to_rep(((a).us_split_fields1).rec__p__type_1__field_5) = to_rep(((b).us_split_fields1).rec__p__type_1__field_5)) and
+  (to_rep(((a).us_split_fields1).rec__p__type_1__field_6) = to_rep(((b).us_split_fields1).rec__p__type_1__field_6))) and
+  (to_rep(((a).us_split_fields1).rec__p__type_1__field_7) = to_rep(((b).us_split_fields1).rec__p__type_1__field_7))))) then true else false)
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic p__type_1__field_0__first__bit : int
+
+logic p__type_1__field_0__last__bit : int
+
+logic p__type_1__field_0__position : int
+
+axiom p__type_1__field_0__first__bit_axiom :
+  (0 <= p__type_1__field_0__first__bit)
+
+axiom p__type_1__field_0__last__bit_axiom :
+  (p__type_1__field_0__first__bit <  p__type_1__field_0__last__bit)
+
+axiom p__type_1__field_0__position_axiom :
+  (0 <= p__type_1__field_0__position)
+
+logic p__type_1__field_1__first__bit : int
+
+logic p__type_1__field_1__last__bit : int
+
+logic p__type_1__field_1__position : int
+
+axiom p__type_1__field_1__first__bit_axiom :
+  (0 <= p__type_1__field_1__first__bit)
+
+axiom p__type_1__field_1__last__bit_axiom :
+  (p__type_1__field_1__first__bit <  p__type_1__field_1__last__bit)
+
+axiom p__type_1__field_1__position_axiom :
+  (0 <= p__type_1__field_1__position)
+
+logic p__type_1__field_2__first__bit : int
+
+logic p__type_1__field_2__last__bit : int
+
+logic p__type_1__field_2__position : int
+
+axiom p__type_1__field_2__first__bit_axiom :
+  (0 <= p__type_1__field_2__first__bit)
+
+axiom p__type_1__field_2__last__bit_axiom :
+  (p__type_1__field_2__first__bit <  p__type_1__field_2__last__bit)
+
+axiom p__type_1__field_2__position_axiom :
+  (0 <= p__type_1__field_2__position)
+
+logic p__type_1__field_3__first__bit : int
+
+logic p__type_1__field_3__last__bit : int
+
+logic p__type_1__field_3__position : int
+
+axiom p__type_1__field_3__first__bit_axiom :
+  (0 <= p__type_1__field_3__first__bit)
+
+axiom p__type_1__field_3__last__bit_axiom :
+  (p__type_1__field_3__first__bit <  p__type_1__field_3__last__bit)
+
+axiom p__type_1__field_3__position_axiom :
+  (0 <= p__type_1__field_3__position)
+
+logic p__type_1__field_4__first__bit : int
+
+logic p__type_1__field_4__last__bit : int
+
+logic p__type_1__field_4__position : int
+
+axiom p__type_1__field_4__first__bit_axiom :
+  (0 <= p__type_1__field_4__first__bit)
+
+axiom p__type_1__field_4__last__bit_axiom :
+  (p__type_1__field_4__first__bit <  p__type_1__field_4__last__bit)
+
+axiom p__type_1__field_4__position_axiom :
+  (0 <= p__type_1__field_4__position)
+
+logic p__type_1__field_5__first__bit : int
+
+logic p__type_1__field_5__last__bit : int
+
+logic p__type_1__field_5__position : int
+
+axiom p__type_1__field_5__first__bit_axiom :
+  (0 <= p__type_1__field_5__first__bit)
+
+axiom p__type_1__field_5__last__bit_axiom :
+  (p__type_1__field_5__first__bit <  p__type_1__field_5__last__bit)
+
+axiom p__type_1__field_5__position_axiom :
+  (0 <= p__type_1__field_5__position)
+
+logic p__type_1__field_6__first__bit : int
+
+logic p__type_1__field_6__last__bit : int
+
+logic p__type_1__field_6__position : int
+
+axiom p__type_1__field_6__first__bit_axiom :
+  (0 <= p__type_1__field_6__first__bit)
+
+axiom p__type_1__field_6__last__bit_axiom :
+  (p__type_1__field_6__first__bit <  p__type_1__field_6__last__bit)
+
+axiom p__type_1__field_6__position_axiom :
+  (0 <= p__type_1__field_6__position)
+
+logic p__type_1__field_7__first__bit : int
+
+logic p__type_1__field_7__last__bit : int
+
+logic p__type_1__field_7__position : int
+
+axiom p__type_1__field_7__first__bit_axiom :
+  (0 <= p__type_1__field_7__first__bit)
+
+axiom p__type_1__field_7__last__bit_axiom :
+  (p__type_1__field_7__first__bit <  p__type_1__field_7__last__bit)
+
+axiom p__type_1__field_7__position_axiom :
+  (0 <= p__type_1__field_7__position)
+
+logic dummy : us_rep
+
+logic create_type_1 : unit -> us_rep
+
+logic create_type_1__function_guard : us_rep, unit -> prop
+
+type us_split_fields2 = { rec__p__type_2__field_0 : us_rep;
+rec__p__type_2__field_1 : us_rep; rec__p__type_2__field_2 : us_rep;
+rec__p__type_2__field_3 : us_rep; rec__p__type_2__field_4 : us_rep
+}
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function bool_eq1(a: us_rep1, b: us_rep1) : bool =
+  (if ((bool_eq(((a).us_split_fields3).rec__p__type_2__field_0,
+  ((b).us_split_fields3).rec__p__type_2__field_0) = true) and
+  (((bool_eq(((a).us_split_fields3).rec__p__type_2__field_1,
+  ((b).us_split_fields3).rec__p__type_2__field_1) = true) and
+  (bool_eq(((a).us_split_fields3).rec__p__type_2__field_2,
+  ((b).us_split_fields3).rec__p__type_2__field_2) = true)) and
+  ((bool_eq(((a).us_split_fields3).rec__p__type_2__field_3,
+  ((b).us_split_fields3).rec__p__type_2__field_3) = true) and
+  (bool_eq(((a).us_split_fields3).rec__p__type_2__field_4,
+  ((b).us_split_fields3).rec__p__type_2__field_4) = true)))) then true else false)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic p__type_2__field_0__first__bit : int
+
+logic p__type_2__field_0__last__bit : int
+
+logic p__type_2__field_0__position : int
+
+axiom p__type_2__field_0__first__bit_axiom :
+  (0 <= p__type_2__field_0__first__bit)
+
+axiom p__type_2__field_0__last__bit_axiom :
+  (p__type_2__field_0__first__bit <  p__type_2__field_0__last__bit)
+
+axiom p__type_2__field_0__position_axiom :
+  (0 <= p__type_2__field_0__position)
+
+logic p__type_2__field_1__first__bit : int
+
+logic p__type_2__field_1__last__bit : int
+
+logic p__type_2__field_1__position : int
+
+axiom p__type_2__field_1__first__bit_axiom :
+  (0 <= p__type_2__field_1__first__bit)
+
+axiom p__type_2__field_1__last__bit_axiom :
+  (p__type_2__field_1__first__bit <  p__type_2__field_1__last__bit)
+
+axiom p__type_2__field_1__position_axiom :
+  (0 <= p__type_2__field_1__position)
+
+logic p__type_2__field_2__first__bit : int
+
+logic p__type_2__field_2__last__bit : int
+
+logic p__type_2__field_2__position : int
+
+axiom p__type_2__field_2__first__bit_axiom :
+  (0 <= p__type_2__field_2__first__bit)
+
+axiom p__type_2__field_2__last__bit_axiom :
+  (p__type_2__field_2__first__bit <  p__type_2__field_2__last__bit)
+
+axiom p__type_2__field_2__position_axiom :
+  (0 <= p__type_2__field_2__position)
+
+logic p__type_2__field_3__first__bit : int
+
+logic p__type_2__field_3__last__bit : int
+
+logic p__type_2__field_3__position : int
+
+axiom p__type_2__field_3__first__bit_axiom :
+  (0 <= p__type_2__field_3__first__bit)
+
+axiom p__type_2__field_3__last__bit_axiom :
+  (p__type_2__field_3__first__bit <  p__type_2__field_3__last__bit)
+
+axiom p__type_2__field_3__position_axiom :
+  (0 <= p__type_2__field_3__position)
+
+logic p__type_2__field_4__first__bit : int
+
+logic p__type_2__field_4__last__bit : int
+
+logic p__type_2__field_4__position : int
+
+axiom p__type_2__field_4__first__bit_axiom :
+  (0 <= p__type_2__field_4__first__bit)
+
+axiom p__type_2__field_4__last__bit_axiom :
+  (p__type_2__field_4__first__bit <  p__type_2__field_4__last__bit)
+
+axiom p__type_2__field_4__position_axiom :
+  (0 <= p__type_2__field_4__position)
+
+logic dummy1 : us_rep1
+
+type us_split_fields4 = { rec__p__type_4__field_0 : us_rep;
+rec__p__type_4__field_1 : us_rep; rec__p__type_4__field_2 : us_rep1;
+rec__p__type_4__field_3 : us_rep1 }
+
+type us_rep2 = { us_split_fields5 : us_split_fields4
+}
+
+function bool_eq2(a: us_rep2, b: us_rep2) : bool =
+  (if ((bool_eq(((a).us_split_fields5).rec__p__type_4__field_0,
+  ((b).us_split_fields5).rec__p__type_4__field_0) = true) and
+  (((bool_eq(((a).us_split_fields5).rec__p__type_4__field_1,
+  ((b).us_split_fields5).rec__p__type_4__field_1) = true) and
+  (bool_eq1(((a).us_split_fields5).rec__p__type_4__field_2,
+  ((b).us_split_fields5).rec__p__type_4__field_2) = true)) and
+  (bool_eq1(((a).us_split_fields5).rec__p__type_4__field_3,
+  ((b).us_split_fields5).rec__p__type_4__field_3) = true))) then true else false)
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic p__type_4__field_0__first__bit : int
+
+logic p__type_4__field_0__last__bit : int
+
+logic p__type_4__field_0__position : int
+
+axiom p__type_4__field_0__first__bit_axiom :
+  (0 <= p__type_4__field_0__first__bit)
+
+axiom p__type_4__field_0__last__bit_axiom :
+  (p__type_4__field_0__first__bit <  p__type_4__field_0__last__bit)
+
+axiom p__type_4__field_0__position_axiom :
+  (0 <= p__type_4__field_0__position)
+
+logic p__type_4__field_1__first__bit : int
+
+logic p__type_4__field_1__last__bit : int
+
+logic p__type_4__field_1__position : int
+
+axiom p__type_4__field_1__first__bit_axiom :
+  (0 <= p__type_4__field_1__first__bit)
+
+axiom p__type_4__field_1__last__bit_axiom :
+  (p__type_4__field_1__first__bit <  p__type_4__field_1__last__bit)
+
+axiom p__type_4__field_1__position_axiom :
+  (0 <= p__type_4__field_1__position)
+
+logic p__type_4__field_2__first__bit : int
+
+logic p__type_4__field_2__last__bit : int
+
+logic p__type_4__field_2__position : int
+
+axiom p__type_4__field_2__first__bit_axiom :
+  (0 <= p__type_4__field_2__first__bit)
+
+axiom p__type_4__field_2__last__bit_axiom :
+  (p__type_4__field_2__first__bit <  p__type_4__field_2__last__bit)
+
+axiom p__type_4__field_2__position_axiom :
+  (0 <= p__type_4__field_2__position)
+
+logic p__type_4__field_3__first__bit : int
+
+logic p__type_4__field_3__last__bit : int
+
+logic p__type_4__field_3__position : int
+
+axiom p__type_4__field_3__first__bit_axiom :
+  (0 <= p__type_4__field_3__first__bit)
+
+axiom p__type_4__field_3__last__bit_axiom :
+  (p__type_4__field_3__first__bit <  p__type_4__field_3__last__bit)
+
+axiom p__type_4__field_3__position_axiom :
+  (0 <= p__type_4__field_3__position)
+
+logic dummy2 : us_rep2
+
+logic create_type_4 : unit -> us_rep2
+
+logic create_type_4__function_guard : us_rep2, unit -> prop
+
+logic create_type_2 : unit -> us_rep1
+
+logic create_type_2__function_guard : us_rep1, unit -> prop
+
+type type_3
+
+logic type_3qtint : type_3 -> int
+
+axiom type_3qtaxiom :
+  (forall i:type_3. (((- 2147483648) <= type_3qtint(i)) and
+  (type_3qtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep1(x: type_3) : int = type_3qtint(x)
+
+logic of_rep1 : int -> type_3
+
+axiom inversion_axiom1 :
+  (forall x:type_3 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:type_3 [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_split_fields6 = { rec__p__type_5__field_0 : type_3;
+rec__p__type_5__field_1 : us_rep2; rec__p__type_5__field_2 : us_rep1;
+rec__p__type_5__field_3 : us_rep2; rec__p__type_5__field_4 : us_rep2
+}
+
+type us_rep3 = { us_split_fields7 : us_split_fields6
+}
+
+function bool_eq3(a: us_rep3, b: us_rep3) : bool =
+  (if ((to_rep1(((a).us_split_fields7).rec__p__type_5__field_0) = to_rep1(((b).us_split_fields7).rec__p__type_5__field_0)) and
+  (((bool_eq2(((a).us_split_fields7).rec__p__type_5__field_1,
+  ((b).us_split_fields7).rec__p__type_5__field_1) = true) and
+  (bool_eq1(((a).us_split_fields7).rec__p__type_5__field_2,
+  ((b).us_split_fields7).rec__p__type_5__field_2) = true)) and
+  ((bool_eq2(((a).us_split_fields7).rec__p__type_5__field_3,
+  ((b).us_split_fields7).rec__p__type_5__field_3) = true) and
+  (bool_eq2(((a).us_split_fields7).rec__p__type_5__field_4,
+  ((b).us_split_fields7).rec__p__type_5__field_4) = true)))) then true else false)
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic p__type_5__field_0__first__bit : int
+
+logic p__type_5__field_0__last__bit : int
+
+logic p__type_5__field_0__position : int
+
+axiom p__type_5__field_0__first__bit_axiom :
+  (0 <= p__type_5__field_0__first__bit)
+
+axiom p__type_5__field_0__last__bit_axiom :
+  (p__type_5__field_0__first__bit <  p__type_5__field_0__last__bit)
+
+axiom p__type_5__field_0__position_axiom :
+  (0 <= p__type_5__field_0__position)
+
+logic p__type_5__field_1__first__bit : int
+
+logic p__type_5__field_1__last__bit : int
+
+logic p__type_5__field_1__position : int
+
+axiom p__type_5__field_1__first__bit_axiom :
+  (0 <= p__type_5__field_1__first__bit)
+
+axiom p__type_5__field_1__last__bit_axiom :
+  (p__type_5__field_1__first__bit <  p__type_5__field_1__last__bit)
+
+axiom p__type_5__field_1__position_axiom :
+  (0 <= p__type_5__field_1__position)
+
+logic p__type_5__field_2__first__bit : int
+
+logic p__type_5__field_2__last__bit : int
+
+logic p__type_5__field_2__position : int
+
+axiom p__type_5__field_2__first__bit_axiom :
+  (0 <= p__type_5__field_2__first__bit)
+
+axiom p__type_5__field_2__last__bit_axiom :
+  (p__type_5__field_2__first__bit <  p__type_5__field_2__last__bit)
+
+axiom p__type_5__field_2__position_axiom :
+  (0 <= p__type_5__field_2__position)
+
+logic p__type_5__field_3__first__bit : int
+
+logic p__type_5__field_3__last__bit : int
+
+logic p__type_5__field_3__position : int
+
+axiom p__type_5__field_3__first__bit_axiom :
+  (0 <= p__type_5__field_3__first__bit)
+
+axiom p__type_5__field_3__last__bit_axiom :
+  (p__type_5__field_3__first__bit <  p__type_5__field_3__last__bit)
+
+axiom p__type_5__field_3__position_axiom :
+  (0 <= p__type_5__field_3__position)
+
+logic p__type_5__field_4__first__bit : int
+
+logic p__type_5__field_4__last__bit : int
+
+logic p__type_5__field_4__position : int
+
+axiom p__type_5__field_4__first__bit_axiom :
+  (0 <= p__type_5__field_4__first__bit)
+
+axiom p__type_5__field_4__last__bit_axiom :
+  (p__type_5__field_4__first__bit <  p__type_5__field_4__last__bit)
+
+axiom p__type_5__field_4__position_axiom :
+  (0 <= p__type_5__field_4__position)
+
+logic dummy3 : us_rep3
+
+logic create_type_5 : unit -> us_rep3
+
+logic create_type_5__function_guard : us_rep3, unit -> prop
+
+type us_split_fields8 = { rec__p__type_6__field_0 : us_rep;
+rec__p__type_6__field_1 : us_rep3; rec__p__type_6__field_2 : us_rep1;
+rec__p__type_6__field_3 : us_rep3 }
+
+type us_rep4 = { us_split_fields9 : us_split_fields8
+}
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic p__type_6__field_0__first__bit : int
+
+logic p__type_6__field_0__last__bit : int
+
+logic p__type_6__field_0__position : int
+
+axiom p__type_6__field_0__first__bit_axiom :
+  (0 <= p__type_6__field_0__first__bit)
+
+axiom p__type_6__field_0__last__bit_axiom :
+  (p__type_6__field_0__first__bit <  p__type_6__field_0__last__bit)
+
+axiom p__type_6__field_0__position_axiom :
+  (0 <= p__type_6__field_0__position)
+
+logic p__type_6__field_1__first__bit : int
+
+logic p__type_6__field_1__last__bit : int
+
+logic p__type_6__field_1__position : int
+
+axiom p__type_6__field_1__first__bit_axiom :
+  (0 <= p__type_6__field_1__first__bit)
+
+axiom p__type_6__field_1__last__bit_axiom :
+  (p__type_6__field_1__first__bit <  p__type_6__field_1__last__bit)
+
+axiom p__type_6__field_1__position_axiom :
+  (0 <= p__type_6__field_1__position)
+
+logic p__type_6__field_2__first__bit : int
+
+logic p__type_6__field_2__last__bit : int
+
+logic p__type_6__field_2__position : int
+
+axiom p__type_6__field_2__first__bit_axiom :
+  (0 <= p__type_6__field_2__first__bit)
+
+axiom p__type_6__field_2__last__bit_axiom :
+  (p__type_6__field_2__first__bit <  p__type_6__field_2__last__bit)
+
+axiom p__type_6__field_2__position_axiom :
+  (0 <= p__type_6__field_2__position)
+
+logic p__type_6__field_3__first__bit : int
+
+logic p__type_6__field_3__last__bit : int
+
+logic p__type_6__field_3__position : int
+
+axiom p__type_6__field_3__first__bit_axiom :
+  (0 <= p__type_6__field_3__first__bit)
+
+axiom p__type_6__field_3__last__bit_axiom :
+  (p__type_6__field_3__first__bit <  p__type_6__field_3__last__bit)
+
+axiom p__type_6__field_3__position_axiom :
+  (0 <= p__type_6__field_3__position)
+
+logic dummy4 : us_rep4
+
+logic create_type_6 : unit -> us_rep4
+
+logic create_type_6__function_guard : us_rep4, unit -> prop
+
+type type_7
+
+logic type_7qtint : type_7 -> int
+
+axiom type_7qtaxiom :
+  (forall i:type_7. (((- 2147483648) <= type_7qtint(i)) and
+  (type_7qtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep2(x: type_7) : int = type_7qtint(x)
+
+logic of_rep2 : int -> type_7
+
+axiom inversion_axiom2 :
+  (forall x:type_7 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:type_7 [to_rep2(x)]. in_range2(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type us_split_fields10 = { rec__p__type_8__field_0 : us_rep2;
+rec__p__type_8__field_1 : us_rep3; rec__p__type_8__field_2 : us_rep2;
+rec__p__type_8__field_3 : us_rep4; rec__p__type_8__field_4 : us_rep3;
+rec__p__type_8__field_5 : type_7; rec__p__type_8__field_6 : us_rep;
+rec__p__type_8__field_7 : us_rep3 }
+
+type us_rep5 = { us_split_fields11 : us_split_fields10
+}
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic p__type_8__field_0__first__bit : int
+
+logic p__type_8__field_0__last__bit : int
+
+logic p__type_8__field_0__position : int
+
+axiom p__type_8__field_0__first__bit_axiom :
+  (0 <= p__type_8__field_0__first__bit)
+
+axiom p__type_8__field_0__last__bit_axiom :
+  (p__type_8__field_0__first__bit <  p__type_8__field_0__last__bit)
+
+axiom p__type_8__field_0__position_axiom :
+  (0 <= p__type_8__field_0__position)
+
+logic p__type_8__field_1__first__bit : int
+
+logic p__type_8__field_1__last__bit : int
+
+logic p__type_8__field_1__position : int
+
+axiom p__type_8__field_1__first__bit_axiom :
+  (0 <= p__type_8__field_1__first__bit)
+
+axiom p__type_8__field_1__last__bit_axiom :
+  (p__type_8__field_1__first__bit <  p__type_8__field_1__last__bit)
+
+axiom p__type_8__field_1__position_axiom :
+  (0 <= p__type_8__field_1__position)
+
+logic p__type_8__field_2__first__bit : int
+
+logic p__type_8__field_2__last__bit : int
+
+logic p__type_8__field_2__position : int
+
+axiom p__type_8__field_2__first__bit_axiom :
+  (0 <= p__type_8__field_2__first__bit)
+
+axiom p__type_8__field_2__last__bit_axiom :
+  (p__type_8__field_2__first__bit <  p__type_8__field_2__last__bit)
+
+axiom p__type_8__field_2__position_axiom :
+  (0 <= p__type_8__field_2__position)
+
+logic p__type_8__field_3__first__bit : int
+
+logic p__type_8__field_3__last__bit : int
+
+logic p__type_8__field_3__position : int
+
+axiom p__type_8__field_3__first__bit_axiom :
+  (0 <= p__type_8__field_3__first__bit)
+
+axiom p__type_8__field_3__last__bit_axiom :
+  (p__type_8__field_3__first__bit <  p__type_8__field_3__last__bit)
+
+axiom p__type_8__field_3__position_axiom :
+  (0 <= p__type_8__field_3__position)
+
+logic p__type_8__field_4__first__bit : int
+
+logic p__type_8__field_4__last__bit : int
+
+logic p__type_8__field_4__position : int
+
+axiom p__type_8__field_4__first__bit_axiom :
+  (0 <= p__type_8__field_4__first__bit)
+
+axiom p__type_8__field_4__last__bit_axiom :
+  (p__type_8__field_4__first__bit <  p__type_8__field_4__last__bit)
+
+axiom p__type_8__field_4__position_axiom :
+  (0 <= p__type_8__field_4__position)
+
+logic p__type_8__field_5__first__bit : int
+
+logic p__type_8__field_5__last__bit : int
+
+logic p__type_8__field_5__position : int
+
+axiom p__type_8__field_5__first__bit_axiom :
+  (0 <= p__type_8__field_5__first__bit)
+
+axiom p__type_8__field_5__last__bit_axiom :
+  (p__type_8__field_5__first__bit <  p__type_8__field_5__last__bit)
+
+axiom p__type_8__field_5__position_axiom :
+  (0 <= p__type_8__field_5__position)
+
+logic p__type_8__field_6__first__bit : int
+
+logic p__type_8__field_6__last__bit : int
+
+logic p__type_8__field_6__position : int
+
+axiom p__type_8__field_6__first__bit_axiom :
+  (0 <= p__type_8__field_6__first__bit)
+
+axiom p__type_8__field_6__last__bit_axiom :
+  (p__type_8__field_6__first__bit <  p__type_8__field_6__last__bit)
+
+axiom p__type_8__field_6__position_axiom :
+  (0 <= p__type_8__field_6__position)
+
+logic p__type_8__field_7__first__bit : int
+
+logic p__type_8__field_7__last__bit : int
+
+logic p__type_8__field_7__position : int
+
+axiom p__type_8__field_7__first__bit_axiom :
+  (0 <= p__type_8__field_7__first__bit)
+
+axiom p__type_8__field_7__last__bit_axiom :
+  (p__type_8__field_7__first__bit <  p__type_8__field_7__last__bit)
+
+axiom p__type_8__field_7__position_axiom :
+  (0 <= p__type_8__field_7__position)
+
+logic dummy5 : us_rep5
+
+axiom create_type_1__post_axiom :
+  (forall us_void_param:unit [create_type_1(us_void_param)]. (let result =
+  create_type_1(us_void_param) : us_rep in
+  (create_type_1__function_guard(result, us_void_param) ->
+  ((((((((to_rep(((result).us_split_fields1).rec__p__type_1__field_0) = 0) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_1) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_2) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_3) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_4) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_5) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_6) = 0)) and
+  (to_rep(((result).us_split_fields1).rec__p__type_1__field_7) = 0)))))
+
+axiom create_type_2__post_axiom :
+  (forall us_void_param:unit [create_type_2(us_void_param)]. (let result =
+  create_type_2(us_void_param) : us_rep1 in
+  (create_type_2__function_guard(result, us_void_param) ->
+  (((((create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields3).rec__p__type_2__field_0,
+  create_type_1(void)) = true)) and
+  (create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields3).rec__p__type_2__field_1,
+  create_type_1(void)) = true))) and
+  (create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields3).rec__p__type_2__field_2,
+  create_type_1(void)) = true))) and
+  (create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields3).rec__p__type_2__field_3,
+  create_type_1(void)) = true))) and
+  (create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields3).rec__p__type_2__field_4,
+  create_type_1(void)) = true))))))
+
+axiom create_type_4__post_axiom :
+  (forall us_void_param:unit [create_type_4(us_void_param)]. (let result =
+  create_type_4(us_void_param) : us_rep2 in
+  (create_type_4__function_guard(result, us_void_param) ->
+  ((((create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields5).rec__p__type_4__field_0,
+  create_type_1(void)) = true)) and
+  (create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields5).rec__p__type_4__field_1,
+  create_type_1(void)) = true))) and
+  (create_type_2__function_guard(create_type_2(void), void) and
+  (bool_eq1(((result).us_split_fields5).rec__p__type_4__field_2,
+  create_type_2(void)) = true))) and
+  (create_type_2__function_guard(create_type_2(void), void) and
+  (bool_eq1(((result).us_split_fields5).rec__p__type_4__field_3,
+  create_type_2(void)) = true))))))
+
+axiom create_type_5__post_axiom :
+  (forall us_void_param:unit [create_type_5(us_void_param)]. (let result =
+  create_type_5(us_void_param) : us_rep3 in
+  (create_type_5__function_guard(result, us_void_param) ->
+  (((((to_rep1(((result).us_split_fields7).rec__p__type_5__field_0) = 0) and
+  (create_type_4__function_guard(create_type_4(void), void) and
+  (bool_eq2(((result).us_split_fields7).rec__p__type_5__field_1,
+  create_type_4(void)) = true))) and
+  (create_type_2__function_guard(create_type_2(void), void) and
+  (bool_eq1(((result).us_split_fields7).rec__p__type_5__field_2,
+  create_type_2(void)) = true))) and
+  (create_type_4__function_guard(create_type_4(void), void) and
+  (bool_eq2(((result).us_split_fields7).rec__p__type_5__field_3,
+  create_type_4(void)) = true))) and
+  (create_type_4__function_guard(create_type_4(void), void) and
+  (bool_eq2(((result).us_split_fields7).rec__p__type_5__field_4,
+  create_type_4(void)) = true))))))
+
+axiom create_type_6__post_axiom :
+  (forall us_void_param:unit [create_type_6(us_void_param)]. (let result =
+  create_type_6(us_void_param) : us_rep4 in
+  (create_type_6__function_guard(result, us_void_param) ->
+  ((((create_type_1__function_guard(create_type_1(void), void) and
+  (bool_eq(((result).us_split_fields9).rec__p__type_6__field_0,
+  create_type_1(void)) = true)) and
+  (create_type_5__function_guard(create_type_5(void), void) and
+  (bool_eq3(((result).us_split_fields9).rec__p__type_6__field_1,
+  create_type_5(void)) = true))) and
+  (create_type_2__function_guard(create_type_2(void), void) and
+  (bool_eq1(((result).us_split_fields9).rec__p__type_6__field_2,
+  create_type_2(void)) = true))) and
+  (create_type_5__function_guard(create_type_5(void), void) and
+  (bool_eq3(((result).us_split_fields9).rec__p__type_6__field_3,
+  create_type_5(void)) = true))))))
+
+logic rliteral : type_7
+
+axiom rliteral_axiom : (type_7qtint(rliteral) = 0)
+
+ (* "p.ads", line 102, characters 0-0 *)
+goal defqtvc : (let o = create_type_5(void) : us_rep3 in
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  ((create_type_5__function_guard(o, void) and
+  (((((to_rep1(((o).us_split_fields7).rec__p__type_5__field_0) = 0) and
+  (bool_eq2(((o).us_split_fields7).rec__p__type_5__field_1,
+  create_type_4(void)) = true)) and
+  (bool_eq1(((o).us_split_fields7).rec__p__type_5__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq2(((o).us_split_fields7).rec__p__type_5__field_3,
+  create_type_4(void)) = true)) and
+  (bool_eq2(((o).us_split_fields7).rec__p__type_5__field_4,
+  create_type_4(void)) = true))) -> (let o1 = create_type_1(void) : us_rep in
+  ((create_type_1__function_guard(o1, void) and
+  ((((((((to_rep(((o1).us_split_fields1).rec__p__type_1__field_0) = 0) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_1) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_2) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_3) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_4) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_5) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_6) = 0)) and
+  (to_rep(((o1).us_split_fields1).rec__p__type_1__field_7) = 0))) ->
+  (let o2 = create_type_5(void) : us_rep3 in
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  ((create_type_5__function_guard(o2, void) and
+  (((((to_rep1(((o2).us_split_fields7).rec__p__type_5__field_0) = 0) and
+  (bool_eq2(((o2).us_split_fields7).rec__p__type_5__field_1,
+  create_type_4(void)) = true)) and
+  (bool_eq1(((o2).us_split_fields7).rec__p__type_5__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq2(((o2).us_split_fields7).rec__p__type_5__field_3,
+  create_type_4(void)) = true)) and
+  (bool_eq2(((o2).us_split_fields7).rec__p__type_5__field_4,
+  create_type_4(void)) = true))) -> (let o3 = create_type_6(void)
+  : us_rep4 in (create_type_1__function_guard(create_type_1(void), void) ->
+  (create_type_5__function_guard(create_type_5(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_5__function_guard(create_type_5(void), void) ->
+  ((create_type_6__function_guard(o3, void) and
+  ((((bool_eq(((o3).us_split_fields9).rec__p__type_6__field_0,
+  create_type_1(void)) = true) and
+  (bool_eq3(((o3).us_split_fields9).rec__p__type_6__field_1,
+  create_type_5(void)) = true)) and
+  (bool_eq1(((o3).us_split_fields9).rec__p__type_6__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq3(((o3).us_split_fields9).rec__p__type_6__field_3,
+  create_type_5(void)) = true))) -> (let o4 = create_type_4(void)
+  : us_rep2 in (create_type_1__function_guard(create_type_1(void), void) ->
+  (create_type_1__function_guard(create_type_1(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  ((create_type_4__function_guard(o4, void) and
+  ((((bool_eq(((o4).us_split_fields5).rec__p__type_4__field_0,
+  create_type_1(void)) = true) and
+  (bool_eq(((o4).us_split_fields5).rec__p__type_4__field_1,
+  create_type_1(void)) = true)) and
+  (bool_eq1(((o4).us_split_fields5).rec__p__type_4__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq1(((o4).us_split_fields5).rec__p__type_4__field_3,
+  create_type_2(void)) = true))) -> (let o5 = create_type_5(void)
+  : us_rep3 in (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  (create_type_4__function_guard(create_type_4(void), void) ->
+  ((create_type_5__function_guard(o5, void) and
+  (((((to_rep1(((o5).us_split_fields7).rec__p__type_5__field_0) = 0) and
+  (bool_eq2(((o5).us_split_fields7).rec__p__type_5__field_1,
+  create_type_4(void)) = true)) and
+  (bool_eq1(((o5).us_split_fields7).rec__p__type_5__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq2(((o5).us_split_fields7).rec__p__type_5__field_3,
+  create_type_4(void)) = true)) and
+  (bool_eq2(((o5).us_split_fields7).rec__p__type_5__field_4,
+  create_type_4(void)) = true))) -> (let o6 = create_type_4(void)
+  : us_rep2 in (create_type_1__function_guard(create_type_1(void), void) ->
+  (create_type_1__function_guard(create_type_1(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  (create_type_2__function_guard(create_type_2(void), void) ->
+  ((create_type_4__function_guard(o6, void) and
+  ((((bool_eq(((o6).us_split_fields5).rec__p__type_4__field_0,
+  create_type_1(void)) = true) and
+  (bool_eq(((o6).us_split_fields5).rec__p__type_4__field_1,
+  create_type_1(void)) = true)) and
+  (bool_eq1(((o6).us_split_fields5).rec__p__type_4__field_2,
+  create_type_2(void)) = true)) and
+  (bool_eq1(((o6).us_split_fields5).rec__p__type_4__field_3,
+  create_type_2(void)) = true))) ->
+  (forall p__create_type_8__result:us_split_fields10.
+  ((p__create_type_8__result = { rec__p__type_8__field_0 = o6;
+  rec__p__type_8__field_1 = o5; rec__p__type_8__field_2 = o4;
+  rec__p__type_8__field_3 = o3; rec__p__type_8__field_4 = o2;
+  rec__p__type_8__field_5 = rliteral; rec__p__type_8__field_6 = o1;
+  rec__p__type_8__field_7 = o }) ->
+  (create_type_5__function_guard(create_type_5(void), void) ->
+  (bool_eq3((p__create_type_8__result).rec__p__type_8__field_4,
+  create_type_5(void)) = true))))))))))))))))))))))))))))))))))))))))))

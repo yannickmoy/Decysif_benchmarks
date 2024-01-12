@@ -1,0 +1,9 @@
+cvc5 proved 0 out of 4 VCs
+  unproved search_ter_p.adb_16_28_assert2_1.smt2 (proved by ['altergo'])
+  unproved search_ter_p.adb_16_28_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved search_ter_p.adb_22_33_loop_invariant_preserv_1.smt2 (proved by ['altergo'])
+  unproved search_ter_p.ads_41_28_contract_case2_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 2 out of 4 VCs
+  unproved search_ter_p.adb_16_28_assert2_1.smt2 (proved by ['altergo'])
+  unproved search_ter_p.adb_22_33_loop_invariant_preserv_1.smt2 (proved by ['altergo'])
+altergo proved 4 out of 4 VCs

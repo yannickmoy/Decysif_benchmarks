@@ -1,0 +1,143 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type index
+
+logic indexqtint : index -> int
+
+axiom indexqtaxiom :
+  (forall i:index. ((1 <= indexqtint(i)) and (indexqtint(i) <= 1000000)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 1000000))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,integer) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,integer) farray = (a).elts
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic a : us_t
+
+logic x : int
+
+logic y : int
+
+predicate dynamic_invariant(temp___expr_181: us_t, temp___is_init_177: bool,
+  temp___skip_constant_178: bool, temp___do_toplevel_179: bool,
+  temp___do_typ_inv_180: bool) = ((not (temp___skip_constant_178 = true)) ->
+  dynamic_property(1, 1000000, first(temp___expr_181),
+  last(temp___expr_181)))
+
+ (* "lcp.ads", line 10, characters 0-0 *)
+goal defqtvc :
+  (forall l:int. (dynamic_invariant(a, true, false, true, true) ->
+  (in_range(x) -> (in_range(y) -> ((((first(a) <= x) and (x <= last(a))) and
+  ((first(a) <= y) and (y <= last(a)))) -> (((first(a) <= y) and
+  (y <= last(a))) ->
+  (forall o:int. ((to_rep((to_array(a)[y])) = o) -> (((first(a) <= x) and
+  (x <= last(a))) ->
+  (forall o1:int. ((to_rep((to_array(a)[x])) = o1) -> (in_range1(l) ->
+  (forall l1:int. ((l1 = 0) ->
+  (forall o2:bool.
+  ((exists o3:bool. ((let o4 = (x + l1) : int in (in_range(o4) and
+   (if (o4 <= last(a)) then (let o5 = (y + l1) : int in (in_range(o5) and
+   (o3 = (if (o5 <= last(a)) then true else false)))) else (o3 = false)))) and
+   (if (o3 = true) then (let o4 = (y + l1) : int in (in_range(o4) and
+   (((first(a) <= o4) and (o4 <= last(a))) and
+   (exists o5:int. ((to_rep((to_array(a)[o4])) = o5) and (let o6 = (x + l1)
+   : int in (in_range(o6) and (((first(a) <= o6) and (o6 <= last(a))) and
+   (exists o7:int. ((to_rep((to_array(a)[o6])) = o7) and
+   (o2 = (if (o7 = o5) then true else false)))))))))))) else (o2 = false)))) ->
+  ((o2 = true) ->
+  (forall l2:int.
+  ((forall k:int. (((0 <= k) and (k <= (l2 - 1))) ->
+   (to_rep((to_array(a)[(x + k)])) = to_rep((to_array(a)[(y + k)]))))) ->
+  ((andb((if in_range1(l2) then true else false),
+  (if ((((x + l2) <= last(a)) and ((y + l2) <= last(a))) and
+  (to_rep((to_array(a)[(x + l2)])) = to_rep((to_array(a)[(y + l2)])))) then true else false)) = true) ->
+  (let o3 = (l2 + 1) : int in (in_range(o3) ->
+  (forall l3:int. ((l3 = o3) ->
+  (forall o4:bool.
+  ((exists o5:bool. ((let o6 = (x + l3) : int in (in_range(o6) and
+   (if (o6 <= last(a)) then (let o7 = (y + l3) : int in (in_range(o7) and
+   (o5 = (if (o7 <= last(a)) then true else false)))) else (o5 = false)))) and
+   (if (o5 = true) then (let o6 = (y + l3) : int in (in_range(o6) and
+   (((first(a) <= o6) and (o6 <= last(a))) and
+   (exists o7:int. ((to_rep((to_array(a)[o6])) = o7) and (let o8 = (x + l3)
+   : int in (in_range(o8) and (((first(a) <= o8) and (o8 <= last(a))) and
+   (exists o9:int. ((to_rep((to_array(a)[o8])) = o9) and
+   (o4 = (if (o9 = o7) then true else false)))))))))))) else (o4 = false)))) ->
+  ((o4 = true) -> ((l2 <  l3) ->
+  (forall k:int. (((0 <= k) and (k <= (l3 - 1))) ->
+  (to_rep((to_array(a)[(x + k)])) = to_rep((to_array(a)[(y + k)])))))))))))))))))))))))))))))))))

@@ -1,0 +1,10 @@
+{
+  "results": [
+    {
+      "filename": "generated/natural/z3/natural_set.adb_19_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 9593,
+      "time": 0.02
+    }
+  ]
+}

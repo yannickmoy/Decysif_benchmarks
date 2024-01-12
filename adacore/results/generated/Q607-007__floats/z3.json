@@ -1,0 +1,58 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_9_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 22727,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_76_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 227477,
+      "time": 0.09
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_47_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 823367,
+      "time": 0.44
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_6_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 20240,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_18_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 22727,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_13_17_range_check_1.smt2",
+      "status": "unsat",
+      "steps": 22727,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_105_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 227477,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_15_12_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 1894230,
+      "time": 0.34
+    },
+    {
+      "filename": "generated/Q607-007__floats/z3/normalize.adb_163_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 12508511,
+      "time": 3.96
+    }
+  ]
+}

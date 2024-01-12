@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "filename": "generated/Q607-015__quantifiers/cvc5/search_ter_p.adb_16_28_assert_1.smt2",
+      "status": "unknown",
+      "steps": 7451,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/Q607-015__quantifiers/cvc5/search_ter_p.adb_22_33_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 31992,
+      "time": 0.17
+    },
+    {
+      "filename": "generated/Q607-015__quantifiers/cvc5/search_ter_p.ads_41_28_contract_case2_1.smt2",
+      "status": "timeout",
+      "steps": 354377,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/Q607-015__quantifiers/cvc5/search_ter_p.adb_16_28_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 2321239,
+      "time": 9.91
+    }
+  ]
+}

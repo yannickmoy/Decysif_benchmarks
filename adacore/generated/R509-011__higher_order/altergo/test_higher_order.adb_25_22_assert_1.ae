@@ -1,0 +1,442 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type small_int
+
+logic small_intqtint : small_int -> int
+
+axiom small_intqtaxiom :
+  (forall i:small_int. (((- 100) <= small_intqtint(i)) and
+  (small_intqtint(i) <= 100)))
+
+predicate in_range1(x: int) = (((- 100) <= x) and (x <= 100))
+
+type small_index
+
+logic small_indexqtint : small_index -> int
+
+axiom small_indexqtaxiom :
+  (forall i:small_index. ((1 <= small_indexqtint(i)) and
+  (small_indexqtint(i) <= 100)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 100))
+
+function to_rep1(x: small_int) : int = small_intqtint(x)
+
+logic of_rep1 : int -> small_int
+
+axiom inversion_axiom1 :
+  (forall x:small_int [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:small_int [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type map
+
+logic get : map, int, int -> small_int
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type t1 = { rec__first1 : integer; rec__last1 : integer
+}
+
+logic mk1 : int, int -> t1
+
+axiom mk_def1 :
+  (forall f:int. forall l:int [mk1(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk1(f, l)).rec__first1) = f) and (to_rep((mk1(f,
+  l)).rec__last1) = l)))))
+
+predicate dynamic_property1(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : map; rt : t; rt_2 : t1
+}
+
+function to_array(a: us_t) : map = (a).elts
+
+function of_array(a: map, f: int, l: int, f2: int, l2: int) : us_t = { elts =
+  a; rt = mk(f, l); rt_2 = mk1(f2, l2) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+function first_2(a: us_t) : int = to_rep(((a).rt_2).rec__first1)
+
+function last_2(a: us_t) : int = to_rep(((a).rt_2).rec__last1)
+
+function length_2(a: us_t) : int =
+  (if (first_2(a) <= last_2(a)) then ((last_2(a) - first_2(a)) + 1) else 0)
+
+predicate dynamic_property2(range_first1: int, range_last1: int, f1: int,
+  l1: int, range_first2: int, range_last2: int, f2: int, l2: int) =
+  (dynamic_property(range_first1, range_last1, f1, l1) and
+  dynamic_property1(range_first2, range_last2, f2, l2))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic count : us_t -> int
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic fold : us_t, int -> int
+
+type t11b
+
+logic t11bqtint : t11b -> int
+
+axiom t11bqtaxiom :
+  (forall i:t11b. ((1 <= t11bqtint(i)) and (t11bqtint(i) <= 3)))
+
+type t12b
+
+logic t12bqtint : t12b -> int
+
+axiom t12bqtaxiom :
+  (forall i:t12b. ((1 <= t12bqtint(i)) and (t12bqtint(i) <= 9)))
+
+logic temp_____aggregate_def_1122 : int, int, int, int, int, int, int, int,
+  int, int, int, int, int, int, int, int, int, int, int, int, int, int, int,
+  int, int, int, int -> map
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic bool_le : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+function to_rep2(x: natural) : int = naturalqtint(x)
+
+logic of_rep2 : int -> natural
+
+axiom inversion_axiom2 :
+  (forall x:natural [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:natural [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+logic in_range4 : us_t, int, int, int -> bool
+
+function add_one(param__e: int, param__x: int) : int = (if (bool_ge(param__e,
+  0) = true) then (param__x + 1) else param__x)
+
+function result_in_range(param__a: us_t, param__x: int) : bool =
+  bool_le(param__x, (length(param__a) * length_2(param__a)))
+
+type map1
+
+logic get1 : map1, int, int -> natural
+
+type t2 = { rec__first2 : integer; rec__last2 : integer
+}
+
+predicate dynamic_property3(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type t3 = { rec__first3 : integer; rec__last3 : integer
+}
+
+predicate dynamic_property4(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t1 = { elts1 : map1; rt1 : t2; rt_21 : t3
+}
+
+function to_array1(a: us_t1) : map1 = (a).elts1
+
+function first1(a: us_t1) : int = to_rep(((a).rt1).rec__first2)
+
+function last1(a: us_t1) : int = to_rep(((a).rt1).rec__last2)
+
+function first_21(a: us_t1) : int = to_rep(((a).rt_21).rec__first3)
+
+function last_21(a: us_t1) : int = to_rep(((a).rt_21).rec__last3)
+
+predicate dynamic_property5(range_first1: int, range_last1: int, f1: int,
+  l1: int, range_first2: int, range_last2: int, f2: int, l2: int) =
+  (dynamic_property3(range_first1, range_last1, f1, l1) and
+  dynamic_property4(range_first2, range_last2, f2, l2))
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic fold1 : us_t, int -> us_t1
+
+predicate dynamic_invariant(temp___expr_343: us_t, temp___is_init_339: bool,
+  temp___skip_constant_340: bool, temp___do_toplevel_341: bool,
+  temp___do_typ_inv_342: bool) = ((not (temp___skip_constant_340 = true)) ->
+  dynamic_property2(1, 100, first(temp___expr_343), last(temp___expr_343), 1,
+  100, first_2(temp___expr_343), last_2(temp___expr_343)))
+
+predicate dynamic_invariant1(temp___expr_662: us_t1,
+  temp___is_init_658: bool, temp___skip_constant_659: bool,
+  temp___do_toplevel_660: bool, temp___do_typ_inv_661: bool) =
+  ((not (temp___skip_constant_659 = true)) -> dynamic_property5(1, 100,
+  first1(temp___expr_662), last1(temp___expr_662), 1, 100,
+  first_21(temp___expr_662), last_21(temp___expr_662)))
+
+axiom in_range__post_axiom :
+  (forall param__a:us_t.
+  (forall param__x:int. forall param__i:int. forall param__j:int
+  [in_range4(param__a, param__x, param__i, param__j)].
+  (((((dynamic_invariant(param__a, true, false, true, true) and
+  in_range3(param__x)) and in_range2(param__i)) and in_range2(param__j)) and
+  (((first(param__a) <= param__i) and (param__i <= last(param__a))) and
+  ((first_2(param__a) <= param__j) and (param__j <= last_2(param__a))))) ->
+  ((in_range4(param__a, param__x, param__i, param__j) = true) ->
+  (param__x <  2147483647)))))
+
+axiom in_range__def_axiom :
+  (forall param__a:us_t.
+  (forall param__x:int. forall param__i:int. forall param__j:int
+  [in_range4(param__a, param__x, param__i, param__j)]. ((in_range4(param__a,
+  param__x, param__i, param__j) = true) <->
+  (param__x <= (((param__i - first(param__a)) * length_2(param__a)) + (param__j - first_2(param__a)))))))
+
+axiom fold__post_axiom :
+  (forall param__a:us_t.
+  (forall param__init:int [fold1(param__a, param__init)].
+  (((dynamic_invariant(param__a, true, false, true, true) and
+  in_range3(param__init)) and (((0 <  length(param__a)) and
+  (0 <  length_2(param__a))) and (in_range4(param__a, param__init,
+  first(param__a), first_2(param__a)) = true))) -> (let result =
+  fold1(param__a, param__init) : us_t1 in
+  ((((((((((first1(result) = first(param__a)) and
+  (last1(result) = last(param__a))) and
+  (first_21(result) = first_2(param__a))) and
+  (last_21(result) = last_2(param__a))) and (in_range4(param__a, param__init,
+  first(param__a), first_2(param__a)) = true)) and
+  (to_rep2(get1(to_array1(result), first(param__a),
+  first_2(param__a))) = add_one(to_rep1(get(to_array(param__a),
+  first(param__a), first_2(param__a))), param__init))) and
+  (forall i:int. (((first(param__a) <= i) and (i <= last(param__a))) ->
+  ((first(param__a) <  i) -> ((in_range4(param__a,
+  to_rep2(get1(to_array1(result), (i - 1), last_2(param__a))), i,
+  first_2(param__a)) = true) and (to_rep2(get1(to_array1(result), i,
+  first_2(param__a))) = add_one(to_rep1(get(to_array(param__a), i,
+  first_2(param__a))), to_rep2(get1(to_array1(result), (i - 1),
+  last_2(param__a)))))))))) and
+  (forall i:int. (((first(param__a) <= i) and (i <= last(param__a))) ->
+  (forall j:int. (((first_2(param__a) <= j) and (j <= last_2(param__a))) ->
+  ((first_2(param__a) <  j) -> ((in_range4(param__a,
+  to_rep2(get1(to_array1(result), i, (j - 1))), i, j) = true) and
+  (to_rep2(get1(to_array1(result), i,
+  j)) = add_one(to_rep1(get(to_array(param__a), i, j)),
+  to_rep2(get1(to_array1(result), i, (j - 1)))))))))))) and
+  (result_in_range(param__a, to_rep2(get1(to_array1(result), last(param__a),
+  last_2(param__a)))) = true)) and dynamic_invariant1(result, true, false,
+  true, true))))))
+
+axiom fold__post_axiom1 :
+  (forall param__a:us_t.
+  (forall param__init:int [fold(param__a, param__init)].
+  (((dynamic_invariant(param__a, true, false, true, true) and
+  in_range3(param__init)) and (((length(param__a) = 0) or
+  (length_2(param__a) = 0)) or (in_range4(param__a, param__init,
+  first(param__a), first_2(param__a)) = true))) -> (let result =
+  fold(param__a, param__init) : int in ((if ((length(param__a) = 0) or
+  (length_2(param__a) = 0)) then (result = param__init) else ((result = to_rep2((let temp___708qtunused =
+  fold1(param__a, param__init) : us_t1 in get1(to_array1(fold1(param__a,
+  param__init)), last(param__a), last_2(param__a))))) and
+  (result_in_range(param__a, result) = true))) and in_range3(result))))))
+
+axiom count__post_axiom :
+  (forall param__a:us_t [count(param__a)]. (dynamic_invariant(param__a, true,
+  false, true, true) -> in_range3(count(param__a))))
+
+axiom count__def_axiom :
+  (forall param__a:us_t [count(param__a)]. (count(param__a) = fold(param__a,
+  0)))
+
+logic rliteral : small_int
+
+axiom rliteral_axiom : (small_intqtint(rliteral) = 1)
+
+logic rliteral1 : small_int
+
+axiom rliteral_axiom1 : (small_intqtint(rliteral1) = (- 2))
+
+logic rliteral2 : small_int
+
+axiom rliteral_axiom2 : (small_intqtint(rliteral2) = 3)
+
+logic rliteral3 : small_int
+
+axiom rliteral_axiom3 : (small_intqtint(rliteral3) = (- 4))
+
+logic rliteral4 : small_int
+
+axiom rliteral_axiom4 : (small_intqtint(rliteral4) = (- 5))
+
+logic rliteral5 : small_int
+
+axiom rliteral_axiom5 : (small_intqtint(rliteral5) = 6)
+
+logic rliteral6 : small_int
+
+axiom rliteral_axiom6 : (small_intqtint(rliteral6) = 7)
+
+logic rliteral7 : small_int
+
+axiom rliteral_axiom7 : (small_intqtint(rliteral7) = 13)
+
+logic rliteral8 : small_int
+
+axiom rliteral_axiom8 : (small_intqtint(rliteral8) = 0)
+
+logic rliteral9 : small_int
+
+axiom rliteral_axiom9 : (small_intqtint(rliteral9) = (- 1))
+
+axiom def_axiom :
+  (forall temp___1095:int. forall temp___1096:int. forall temp___1097:int.
+  forall temp___1098:int. forall temp___1099:int. forall temp___1100:int.
+  forall temp___1101:int. forall temp___1102:int. forall temp___1103:int.
+  forall temp___1104:int. forall temp___1105:int. forall temp___1106:int.
+  forall temp___1107:int. forall temp___1108:int. forall temp___1109:int.
+  forall temp___1110:int. forall temp___1111:int. forall temp___1112:int.
+  forall temp___1113:int. forall temp___1114:int. forall temp___1115:int.
+  forall temp___1116:int. forall temp___1117:int. forall temp___1118:int.
+  forall temp___1119:int. forall temp___1120:int. forall temp___1121:int.
+  (let temp___1123 = temp_____aggregate_def_1122(temp___1095, temp___1096,
+  temp___1097, temp___1098, temp___1099, temp___1100, temp___1101,
+  temp___1102, temp___1103, temp___1104, temp___1105, temp___1106,
+  temp___1107, temp___1108, temp___1109, temp___1110, temp___1111,
+  temp___1112, temp___1113, temp___1114, temp___1115, temp___1116,
+  temp___1117, temp___1118, temp___1119, temp___1120, temp___1121) : map in
+  (((get(temp___1123, 1, 1) = rliteral) and (get(temp___1123, 1,
+  2) = rliteral1)) and ((((((get(temp___1123, 1, 3) = rliteral2) and
+  (get(temp___1123, 1, 4) = rliteral3)) and ((get(temp___1123, 1,
+  5) = rliteral4) and (get(temp___1123, 1, 6) = rliteral5))) and
+  (((get(temp___1123, 1, 7) = rliteral6) and (get(temp___1123, 1,
+  8) = rliteral7)) and (get(temp___1123, 1, 9) = rliteral8))) and
+  ((((get(temp___1123, 2, 1) = rliteral) and (get(temp___1123, 2,
+  2) = rliteral1)) and (get(temp___1123, 2, 3) = rliteral2)) and
+  (((get(temp___1123, 2, 4) = rliteral3) and (get(temp___1123, 2,
+  5) = rliteral4)) and (get(temp___1123, 2, 6) = rliteral5)))) and
+  (((((get(temp___1123, 2, 7) = rliteral6) and (get(temp___1123, 2,
+  8) = rliteral7)) and (get(temp___1123, 2, 9) = rliteral8)) and
+  (((get(temp___1123, 3, 1) = rliteral) and (get(temp___1123, 3,
+  2) = rliteral1)) and (get(temp___1123, 3, 3) = rliteral2))) and
+  ((((get(temp___1123, 3, 4) = rliteral3) and (get(temp___1123, 3,
+  5) = rliteral4)) and (get(temp___1123, 3, 6) = rliteral5)) and
+  (((get(temp___1123, 3, 7) = rliteral6) and (get(temp___1123, 3,
+  8) = rliteral7)) and (get(temp___1123, 3, 9) = rliteral9))))))))
+
+ (* "test_higher_order.ads", line 127, characters 0-0 *)
+goal defqtvc : (count(of_array(temp_____aggregate_def_1122(1, (- 2), 3,
+  (- 4), (- 5), 6, 7, 13, 0, 1, (- 2), 3, (- 4), (- 5), 6, 7, 13, 0, 1,
+  (- 2), 3, (- 4), (- 5), 6, 7, 13, (- 1)), 1, 3, 1, 9)) = 17)

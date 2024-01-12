@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "filename": "generated/n_queens/altergo/queen.adb_16_25_assert_1.ae",
+      "status": "unsat",
+      "steps": 35,
+      "time": 0.0124
+    },
+    {
+      "filename": "generated/n_queens/altergo/queen.adb_15_25_assert_1.ae",
+      "status": "unsat",
+      "steps": 260,
+      "time": 0.0285
+    },
+    {
+      "filename": "generated/n_queens/altergo/queen.ads_40_14_postcondition_1.ae",
+      "status": "unsat",
+      "steps": 29,
+      "time": 0.0101
+    },
+    {
+      "filename": "generated/n_queens/altergo/queen.ads_40_14_postcondition2_1.ae",
+      "status": "unsat",
+      "steps": 478,
+      "time": 0.0626
+    },
+    {
+      "filename": "generated/n_queens/altergo/queen.adb_51_13_precondition3_1.ae",
+      "status": "unsat",
+      "steps": 1098,
+      "time": 0.1123
+    },
+    {
+      "filename": "generated/n_queens/altergo/queen.adb_49_13_precondition3_1.ae",
+      "status": "unsat",
+      "steps": 829,
+      "time": 0.0701
+    }
+  ]
+}

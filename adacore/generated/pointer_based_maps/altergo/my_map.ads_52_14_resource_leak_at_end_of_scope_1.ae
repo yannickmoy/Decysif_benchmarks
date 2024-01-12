@@ -1,0 +1,664 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+function to_rep1(x: positive) : int = positiveqtint(x)
+
+logic of_rep1 : int -> positive
+
+axiom inversion_axiom1 :
+  (forall x:positive [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:positive [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type us_main_type
+
+type us_rep = { rec__my_map__map_acc__is_null_pointer : bool;
+rec__my_map__map_acc__is_moved : bool;
+rec__my_map__map_acc__pointer_value_abstr : us_main_type
+}
+
+function bool_eq(a: us_rep, b: us_rep) : bool =
+  (if (((a).rec__my_map__map_acc__is_null_pointer = (b).rec__my_map__map_acc__is_null_pointer) and
+  ((not ((a).rec__my_map__map_acc__is_null_pointer = true)) ->
+  ((a).rec__my_map__map_acc__pointer_value_abstr = (b).rec__my_map__map_acc__pointer_value_abstr))) then true else false)
+
+logic dummy : us_rep
+
+logic dummy1 : us_rep
+
+type us_rep1 = { rec__my_map__nullable_int_acc__is_null_pointer : bool;
+rec__my_map__nullable_int_acc__is_moved : bool;
+rec__my_map__nullable_int_acc__pointer_value : integer
+}
+
+logic us_null_pointer : us_rep1
+
+axiom us_null_pointer__def_axiom :
+  ((us_null_pointer).rec__my_map__nullable_int_acc__is_null_pointer = true)
+
+logic dummy2 : us_rep1
+
+type us_split_fields = { rec__my_map__map__key : positive;
+rec__my_map__map__value : us_rep1; rec__my_map__map__next : us_rep
+}
+
+type us_rep2 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic my_map__map__key__first__bit : int
+
+logic my_map__map__key__last__bit : int
+
+logic my_map__map__key__position : int
+
+axiom my_map__map__key__first__bit_axiom :
+  (0 <= my_map__map__key__first__bit)
+
+axiom my_map__map__key__last__bit_axiom :
+  (my_map__map__key__first__bit <  my_map__map__key__last__bit)
+
+axiom my_map__map__key__position_axiom : (0 <= my_map__map__key__position)
+
+logic my_map__map__value__first__bit : int
+
+logic my_map__map__value__last__bit : int
+
+logic my_map__map__value__position : int
+
+axiom my_map__map__value__first__bit_axiom :
+  (0 <= my_map__map__value__first__bit)
+
+axiom my_map__map__value__last__bit_axiom :
+  (my_map__map__value__first__bit <  my_map__map__value__last__bit)
+
+axiom my_map__map__value__position_axiom :
+  (0 <= my_map__map__value__position)
+
+logic my_map__map__next__first__bit : int
+
+logic my_map__map__next__last__bit : int
+
+logic my_map__map__next__position : int
+
+axiom my_map__map__next__first__bit_axiom :
+  (0 <= my_map__map__next__first__bit)
+
+axiom my_map__map__next__last__bit_axiom :
+  (my_map__map__next__first__bit <  my_map__map__next__last__bit)
+
+axiom my_map__map__next__position_axiom : (0 <= my_map__map__next__position)
+
+logic dummy3 : us_rep2
+
+logic model_contains : us_rep, int -> bool
+
+logic has_element : us_rep2, int -> bool
+
+logic us_open : us_main_type -> us_rep2
+
+logic us_close : us_rep2 -> us_main_type
+
+axiom close_open :
+  (forall x:us_main_type [us_open(x)]. (us_close(us_open(x)) = x))
+
+axiom open_close :
+  (forall x:us_rep2 [us_close(x)]. (us_open(us_close(x)) = x))
+
+function rec__my_map__map_acc__pointer_value(a: us_rep) : us_rep2 =
+  us_open((a).rec__my_map__map_acc__pointer_value_abstr)
+
+logic us_null_pointer1 : us_rep
+
+axiom us_null_pointer__def_axiom1 :
+  ((us_null_pointer1).rec__my_map__map_acc__is_null_pointer = true)
+
+logic dummy4 : us_rep
+
+logic model_value : us_rep, int -> int
+
+logic dummy5 : us_rep
+
+logic m__is_null_pointer : bool
+
+logic k : int
+
+logic v : int
+
+logic dummy6 : us_rep
+
+logic deep_copy : us_rep -> us_rep
+
+logic temp___dynamic_invariant_201 : us_rep, bool, bool, bool, bool -> prop
+
+predicate dynamic_invariant(temp___expr_200: us_rep,
+  temp___is_init_196: bool, temp___skip_constant_197: bool,
+  temp___do_toplevel_198: bool, temp___do_typ_inv_199: bool) =
+  ((not ((temp___expr_200).rec__my_map__map_acc__is_null_pointer = true)) ->
+  ((not ((((rec__my_map__map_acc__pointer_value(temp___expr_200)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__is_null_pointer = true)) and
+  temp___dynamic_invariant_201(((rec__my_map__map_acc__pointer_value(temp___expr_200)).us_split_fields1).rec__my_map__map__next,
+  true, false, true, temp___do_typ_inv_199)))
+
+axiom my_map__map_acc__def_axiom :
+  (forall temp___expr_206:us_rep.
+  (forall temp___is_init_202:bool. forall temp___skip_constant_203:bool.
+  forall temp___do_toplevel_204:bool. forall temp___do_typ_inv_205:bool
+  [temp___dynamic_invariant_201(temp___expr_206, temp___is_init_202,
+  temp___skip_constant_203, temp___do_toplevel_204, temp___do_typ_inv_205)].
+  (temp___dynamic_invariant_201(temp___expr_206, temp___is_init_202,
+  temp___skip_constant_203, temp___do_toplevel_204,
+  temp___do_typ_inv_205) <->
+  ((not ((temp___expr_206).rec__my_map__map_acc__is_null_pointer = true)) ->
+  ((not ((((rec__my_map__map_acc__pointer_value(temp___expr_206)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__is_null_pointer = true)) and
+  temp___dynamic_invariant_201(((rec__my_map__map_acc__pointer_value(temp___expr_206)).us_split_fields1).rec__my_map__map__next,
+  true, false, true, temp___do_typ_inv_205))))))
+
+logic dummy7 : us_rep
+
+logic m_copy__is_null_pointer : bool
+
+logic dummy8 : us_rep
+
+logic x__borrowed_at_end : us_rep
+
+predicate default_initial_assumption(temp___expr_207: us_rep,
+  temp___skip_top_level_208: bool) =
+  ((temp___expr_207).rec__my_map__map_acc__is_null_pointer = true)
+
+predicate dynamic_invariant1(temp___expr_213: us_rep2,
+  temp___is_init_209: bool, temp___skip_constant_210: bool,
+  temp___do_toplevel_211: bool, temp___do_typ_inv_212: bool) =
+  (((temp___is_init_209 = true) ->
+  (not ((((temp___expr_213).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__is_null_pointer = true))) and
+  ((not ((((temp___expr_213).us_split_fields1).rec__my_map__map__next).rec__my_map__map_acc__is_null_pointer = true)) ->
+  ((not ((((rec__my_map__map_acc__pointer_value(((temp___expr_213).us_split_fields1).rec__my_map__map__next)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__is_null_pointer = true)) and
+  temp___dynamic_invariant_201(((rec__my_map__map_acc__pointer_value(((temp___expr_213).us_split_fields1).rec__my_map__map__next)).us_split_fields1).rec__my_map__map__next,
+  true, false, true, temp___do_typ_inv_212))))
+
+logic dummy9 : us_rep
+
+axiom has_element__post_axiom : true
+
+axiom has_element__def_axiom :
+  (forall param__m:us_rep2.
+  (forall param__k:int [has_element(param__m, param__k)].
+  ((has_element(param__m, param__k) = true) <-> ((not (param__k = 0)) and
+  ((to_rep1(((param__m).us_split_fields1).rec__my_map__map__key) = param__k) or
+  (model_contains(((param__m).us_split_fields1).rec__my_map__map__next,
+  param__k) = true))))))
+
+axiom model_contains__post_axiom : true
+
+axiom model_contains__def_axiom :
+  (forall param__m:us_rep.
+  (forall param__k:int [model_contains(param__m, param__k)].
+  ((model_contains(param__m, param__k) = true) <-> ((not (bool_eq(param__m,
+  us_null_pointer1) = true)) and
+  (has_element(rec__my_map__map_acc__pointer_value(param__m),
+  param__k) = true)))))
+
+axiom model_value__post_axiom :
+  (forall param__m:us_rep.
+  (forall param__k:int [model_value(param__m, param__k)].
+  (((((not ((param__m).rec__my_map__map_acc__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value(param__m), true,
+  false, true, true)) and in_range2(param__k)) and (model_contains(param__m,
+  param__k) = true)) -> in_range(model_value(param__m, param__k)))))
+
+axiom model_value__def_axiom :
+  (forall param__m:us_rep.
+  (forall param__k:int [model_value(param__m, param__k)].
+  (model_value(param__m,
+  param__k) = (if (to_rep1(((rec__my_map__map_acc__pointer_value(param__m)).us_split_fields1).rec__my_map__map__key) = param__k) then to_rep((((rec__my_map__map_acc__pointer_value(param__m)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__pointer_value) else model_value(((rec__my_map__map_acc__pointer_value(param__m)).us_split_fields1).rec__my_map__map__next,
+  param__k)))))
+
+axiom deep_copy__post_axiom :
+  (forall param__m:us_rep [deep_copy(param__m)].
+  (((not ((param__m).rec__my_map__map_acc__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value(param__m), true,
+  false, true, true)) -> (let result = deep_copy(param__m) : us_rep in
+  ((((bool_eq(result, us_null_pointer1) = true) <-> (bool_eq(param__m,
+  us_null_pointer1) = true)) and ((not (bool_eq(param__m,
+  us_null_pointer1) = true)) ->
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(param__m),
+   k1) = true)) -> (model_contains(result, k1) = true))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value(result), k1) = true)) ->
+  ((model_contains(param__m, k1) = true) and (model_value(param__m,
+  k1) = model_value(result, k1)))))))) and dynamic_invariant(result, true,
+  false, true, true)))))
+
+ (* "my_map.ads", line 42, characters 0-0 *)
+goal defqtvc :
+  (forall m__pointer_value:us_split_fields. forall m__rec__is_moved__:bool.
+  forall r__pointer_value:us_split_fields. forall r__is_null_pointer:bool.
+  forall r__rec__is_moved__:bool. (((not (m__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) }), true, false, true, true)) -> (in_range2(k) ->
+  (in_range(v) -> ((model_contains({ rec__my_map__map_acc__is_null_pointer =
+  m__is_null_pointer; rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) }, k) = true) -> (let o = {
+  rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) } : us_rep in (let temp___old_364 = deep_copy(o)
+  : us_rep in ((dynamic_invariant(temp___old_364, true, false, true,
+  true) and (((bool_eq(temp___old_364, us_null_pointer1) = true) <->
+  (bool_eq(o, us_null_pointer1) = true)) and ((not (bool_eq(o,
+  us_null_pointer1) = true)) ->
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(o), k1) = true)) ->
+   (model_contains(temp___old_364, k1) = true))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value(temp___old_364),
+  k1) = true)) -> ((model_contains(o, k1) = true) and (model_value(o,
+  k1) = model_value(temp___old_364, k1))))))))) -> (let o1 = {
+  rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) } : us_rep in (let temp___old_361 = deep_copy(o1)
+  : us_rep in ((dynamic_invariant(temp___old_361, true, false, true,
+  true) and (((bool_eq(temp___old_361, us_null_pointer1) = true) <->
+  (bool_eq(o1, us_null_pointer1) = true)) and ((not (bool_eq(o1,
+  us_null_pointer1) = true)) ->
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(o1), k1) = true)) ->
+   (model_contains(temp___old_361, k1) = true))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value(temp___old_361),
+  k1) = true)) -> ((model_contains(o1, k1) = true) and (model_value(o1,
+  k1) = model_value(temp___old_361, k1))))))))) -> (let o2 = {
+  rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) } : us_rep in
+  (let my_map__replace_element_ext__m_copy__assume = deep_copy(o2)
+  : us_rep in
+  ((dynamic_invariant(my_map__replace_element_ext__m_copy__assume, true,
+  false, true, true) and
+  (((bool_eq(my_map__replace_element_ext__m_copy__assume,
+  us_null_pointer1) = true) <-> (bool_eq(o2, us_null_pointer1) = true)) and
+  ((not (bool_eq(o2, us_null_pointer1) = true)) ->
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(o2), k1) = true)) ->
+   (model_contains(my_map__replace_element_ext__m_copy__assume, k1) = true))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value(my_map__replace_element_ext__m_copy__assume),
+  k1) = true)) -> ((model_contains(o2, k1) = true) and (model_value(o2,
+  k1) = model_value(my_map__replace_element_ext__m_copy__assume, k1))))))))) ->
+  (forall m_copy__pointer_value:us_split_fields. (({ us_split_fields1 =
+  m_copy__pointer_value
+  } = rec__my_map__map_acc__pointer_value(my_map__replace_element_ext__m_copy__assume)) ->
+  ((m_copy__is_null_pointer = (my_map__replace_element_ext__m_copy__assume).rec__my_map__map_acc__is_null_pointer) ->
+  (forall m_copy__rec__is_moved__:bool.
+  ((m_copy__rec__is_moved__ = (my_map__replace_element_ext__m_copy__assume).rec__my_map__map_acc__is_moved) ->
+  (dynamic_invariant({ rec__my_map__map_acc__is_null_pointer =
+  m_copy__is_null_pointer; rec__my_map__map_acc__is_moved =
+  m_copy__rec__is_moved__; rec__my_map__map_acc__pointer_value_abstr =
+  us_close({ us_split_fields1 = m_copy__pointer_value }) }, true, false,
+  true, true) -> (default_initial_assumption({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value }) }, false) -> (dynamic_invariant({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value }) }, false, false, true, true) ->
+  (forall x__pointer_value:us_split_fields. (({ us_split_fields1 =
+  x__pointer_value } = rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m__pointer_value }) })) ->
+  (forall x__is_null_pointer:bool.
+  ((x__is_null_pointer = m__is_null_pointer) ->
+  (forall x__rec__is_moved__:bool.
+  ((x__rec__is_moved__ = m__rec__is_moved__) ->
+  (forall usf:us_rep.
+  ((((not ((usf).rec__my_map__map_acc__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value(usf), true, false,
+  true, true)) and
+  ((m__is_null_pointer = (usf).rec__my_map__map_acc__is_null_pointer) and
+  (m__rec__is_moved__ = (usf).rec__my_map__map_acc__is_moved))) ->
+  (forall x__brower_at_end:us_rep. ((x__brower_at_end = usf) ->
+  (((((not ((x__borrowed_at_end).rec__my_map__map_acc__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value(x__borrowed_at_end),
+  true, false, true, true)) and (x__borrowed_at_end = x__brower_at_end)) and
+  (((x__borrowed_at_end).rec__my_map__map_acc__is_null_pointer = m__is_null_pointer) and
+  ((x__borrowed_at_end).rec__my_map__map_acc__is_moved = m__rec__is_moved__))) ->
+  (((not (x__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value }) }), true, false, true, true)) -> ((notb(bool_eq({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value }) }, us_null_pointer1)) = true) -> (let o3 = k : int in
+  (let o4 = { rec__my_map__map_acc__is_null_pointer = x__is_null_pointer;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value }) } : us_rep in (((model_contains(o4, o3) = true) <->
+  ((not (bool_eq(o4, us_null_pointer1) = true)) and
+  (has_element(rec__my_map__map_acc__pointer_value(o4), o3) = true))) ->
+  (forall r__pointer_value1:us_split_fields. forall r__is_null_pointer1:bool.
+  forall x__pointer_value1:us_split_fields. forall x__is_null_pointer1:bool.
+  forall x__rec__is_moved__1:bool. forall x__brower_at_end1:us_rep.
+  (((model_contains({ rec__my_map__map_acc__is_null_pointer =
+  x__is_null_pointer1; rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) }, k) = true) and ((not (model_contains({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, k) = true)) and
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(x__brower_at_end1),
+   k1) = true)) -> (model_contains(x__borrowed_at_end, k1) = true))) and
+  (((not (bool_eq({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, us_null_pointer1) = true)) ->
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }), k1) = true)) ->
+  (model_contains(x__borrowed_at_end, k1) = true)))) and
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(x__borrowed_at_end),
+   k1) = true)) -> ((model_contains({ rec__my_map__map_acc__is_null_pointer =
+   r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   r__pointer_value1 }) }, k1) = true) or (model_contains(x__brower_at_end1,
+   k1) = true)))) and
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value(x__borrowed_at_end),
+   k1) = true)) -> (if (model_contains({
+   rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+   rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   r__pointer_value1 }) }, k1) = true) then (model_value(x__borrowed_at_end,
+   k1) = model_value({ rec__my_map__map_acc__is_null_pointer =
+   r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   r__pointer_value1 }) }, k1)) else (model_value(x__borrowed_at_end,
+   k1) = model_value(x__brower_at_end1, k1))))) and
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value({
+   rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+   rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   x__pointer_value1 }) }), k1) = true)) -> (model_contains({
+   rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+   rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   m_copy__pointer_value }) }, k1) = true))) and
+  (((not (bool_eq({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, us_null_pointer1) = true)) ->
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }), k1) = true)) -> (model_contains({
+  rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m_copy__pointer_value }) }, k1) = true)))) and
+  ((forall k1:int. ((in_range1(k1) and
+   (has_element(rec__my_map__map_acc__pointer_value({
+   rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+   rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   m_copy__pointer_value }) }), k1) = true)) -> ((model_contains({
+   rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+   rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   r__pointer_value1 }) }, k1) = true) or (model_contains({
+   rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+   rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   x__pointer_value1 }) }, k1) = true)))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m_copy__pointer_value }) }), k1) = true)) -> (if (model_contains({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, k1) = true) then (model_value({
+  rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m_copy__pointer_value }) }, k1) = model_value({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, k1)) else (model_value({
+  rec__my_map__map_acc__is_null_pointer = m_copy__is_null_pointer;
+  rec__my_map__map_acc__is_moved = m_copy__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  m_copy__pointer_value }) }, k1) = model_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) }, k1)))))))))))))) ->
+  ((andb((if ((dynamic_invariant({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }, false, true, true, true) and
+  ((not (x__is_null_pointer1 = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) }), true, false, true, true))) and
+  (((not ((x__brower_at_end1).rec__my_map__map_acc__is_null_pointer = true)) ->
+  dynamic_invariant1(rec__my_map__map_acc__pointer_value(x__brower_at_end1),
+  true, false, true, true)) and
+  ((x__brower_at_end1).rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1))) then true else false),
+  (if (not (bool_eq({ rec__my_map__map_acc__is_null_pointer =
+  x__is_null_pointer1; rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) },
+  us_null_pointer1) = true)) then true else false)) = true) -> (let o5 = {
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) } : us_rep in
+  (forall r__pointer_value2:us_split_fields. forall r__is_null_pointer2:bool.
+  ((((model_contains({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer2; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) },
+  to_rep1(((rec__my_map__map_acc__pointer_value(o5)).us_split_fields1).rec__my_map__map__key)) = true) and
+  (let old_r = deep_copy({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer1; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value1 }) }) : us_rep in ((((not (bool_eq(old_r,
+  us_null_pointer1) = true)) ->
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value(old_r), k1) = true)) ->
+  ((model_contains({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer2; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) }, k1) = true) and (model_value({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer2;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) }, k1) = model_value(old_r, k1)))))) and
+  (forall k1:int. ((in_range1(k1) and
+  (has_element(rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = r__is_null_pointer2;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) }), k1) = true)) -> ((model_contains(old_r,
+  k1) = true) or
+  (k1 = to_rep1(((rec__my_map__map_acc__pointer_value(o5)).us_split_fields1).rec__my_map__map__key)))))) and
+  ((not (model_contains(old_r,
+  to_rep1(((rec__my_map__map_acc__pointer_value(o5)).us_split_fields1).rec__my_map__map__key)) = true)) ->
+  (model_value({ rec__my_map__map_acc__is_null_pointer = r__is_null_pointer2;
+  rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) },
+  to_rep1(((rec__my_map__map_acc__pointer_value(o5)).us_split_fields1).rec__my_map__map__key)) = to_rep((((rec__my_map__map_acc__pointer_value(o5)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__pointer_value)))))) and
+  dynamic_invariant({ rec__my_map__map_acc__is_null_pointer =
+  r__is_null_pointer2; rec__my_map__map_acc__is_moved = r__rec__is_moved__;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  r__pointer_value2 }) }, true, true, true, true)) ->
+  (forall o6:int. ((to_rep1(((rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) })).us_split_fields1).rec__my_map__map__key) = o6) ->
+  (forall spark__branch:bool.
+  ((spark__branch = (if (o6 = k) then true else false)) ->
+  ((spark__branch = true) -> (let usq_ =
+  (rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) })).us_split_fields1 : us_split_fields in
+  (let temp___306 = ((rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value1 }) })).us_split_fields1).rec__my_map__map__value
+  : us_rep1 in
+  (forall o7:integer. ((to_rep(o7) = v) ->
+  (forall x__pointer_value2:us_split_fields. (({ us_split_fields1 =
+  x__pointer_value2 } = rec__my_map__map_acc__pointer_value({
+  rec__my_map__map_acc__is_null_pointer = x__is_null_pointer1;
+  rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 = {
+  rec__my_map__map__key = (usq_).rec__my_map__map__key;
+  rec__my_map__map__value = {
+  rec__my_map__nullable_int_acc__is_null_pointer =
+  (temp___306).rec__my_map__nullable_int_acc__is_null_pointer;
+  rec__my_map__nullable_int_acc__is_moved =
+  (temp___306).rec__my_map__nullable_int_acc__is_moved;
+  rec__my_map__nullable_int_acc__pointer_value = o7 };
+  rec__my_map__map__next = (usq_).rec__my_map__map__next } }) })) ->
+  ((x__brower_at_end1 = { rec__my_map__map_acc__is_null_pointer =
+  x__is_null_pointer1; rec__my_map__map_acc__is_moved = x__rec__is_moved__1;
+  rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+  x__pointer_value2 }) }) ->
+  (forall m__pointer_value1:us_split_fields. (({ us_split_fields1 =
+  m__pointer_value1
+  } = rec__my_map__map_acc__pointer_value(x__borrowed_at_end)) ->
+  (forall o8:bool.
+  ((exists o9:bool. ((let o10 = k : int in (let o11 = {
+   rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+   rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   m__pointer_value1 }) } : us_rep in (let o12 = model_contains(o11, o10)
+   : bool in (((o12 = true) <-> ((not (bool_eq(o11,
+   us_null_pointer1) = true)) and
+   (has_element(rec__my_map__map_acc__pointer_value(o11), o10) = true))) and
+   (if (o12 = true) then (let o13 = k : int in (let o14 = {
+   rec__my_map__map_acc__is_null_pointer = m__is_null_pointer;
+   rec__my_map__map_acc__is_moved = m__rec__is_moved__;
+   rec__my_map__map_acc__pointer_value_abstr = us_close({ us_split_fields1 =
+   m__pointer_value1 }) } : us_rep in (let o15 = model_value(o14, o13)
+   : int in ((in_range(o15) and
+   (o15 = (if (to_rep1(((rec__my_map__map_acc__pointer_value(o14)).us_split_fields1).rec__my_map__map__key) = o13) then to_rep((((rec__my_map__map_acc__pointer_value(o14)).us_split_fields1).rec__my_map__map__value).rec__my_map__nullable_int_acc__pointer_value) else model_value(((rec__my_map__map_acc__pointer_value(o14)).us_split_fields1).rec__my_map__map__next,
+   o13)))) and
+   (o9 = (if (o15 = v) then true else false)))))) else (o9 = false)))))) and
+   (if (o9 = true) then (o8 = (if (forall k1:int. ((in_range1(k1) and
+                                  (has_element(rec__my_map__map_acc__pointer_value(temp___old_361),
+                                  k1) = true)) -> (model_contains({
+                                  rec__my_map__map_acc__is_null_pointer =
+                                  m__is_null_pointer;
+                                  rec__my_map__map_acc__is_moved =
+                                  m__rec__is_moved__;
+                                  rec__my_map__map_acc__pointer_value_abstr =
+                                  us_close({ us_split_fields1 =
+                                  m__pointer_value1 }) }, k1) = true))) then true else false)) else (o8 = false)))) ->
+  ((o8 = true) ->
+  (((temp___old_364).rec__my_map__map_acc__is_null_pointer = true) or
+  ((temp___old_364).rec__my_map__map_acc__is_moved = true)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

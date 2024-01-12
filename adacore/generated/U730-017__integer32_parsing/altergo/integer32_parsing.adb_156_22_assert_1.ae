@@ -1,0 +1,316 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function bool_eq(a: (int,character) farray, a__first: int, a__last: int,
+  b: (int,character) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))))))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+predicate dynamic_invariant(temp___expr_110: us_t, temp___is_init_106: bool,
+  temp___skip_constant_107: bool, temp___do_toplevel_108: bool,
+  temp___do_typ_inv_109: bool) = ((not (temp___skip_constant_107 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_110),
+  last(temp___expr_110)))
+
+logic bool_eq1 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+logic last32 : (int,character) farray
+
+function is_less_than_max(param__s: us_t, param__is_pos: bool,
+  param__first: int) : bool =
+  orb(bool_lt(to_rep((to_array(param__s)[param__first])), 50),
+  andb(bool_eq1(to_rep((to_array(param__s)[param__first])), 50),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 1)])), 49),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 1)])), 49),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 2)])), 52),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 2)])), 52),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 3)])), 55),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 3)])), 55),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 4)])), 52),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 4)])), 52),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 5)])), 56),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 5)])), 56),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 6)])), 51),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 6)])), 51),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 7)])), 54),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 7)])), 54),
+  orb(bool_lt(to_rep((to_array(param__s)[(param__first + 8)])), 52),
+  andb(bool_eq1(to_rep((to_array(param__s)[(param__first + 8)])), 52),
+  bool_le(to_rep((to_array(param__s)[(param__first + 9)])),
+  (if (param__is_pos = true) then 55 else (to_rep((last32[10])) + 1)))))))))))))))))))))
+
+logic valid_int_32 : us_t -> bool
+
+logic valid_int_32__function_guard : bool, us_t -> prop
+
+logic valid_int : us_t -> bool
+
+logic valid_int__function_guard : bool, us_t -> prop
+
+logic s1 : us_t
+
+logic s2 : us_t
+
+logic is_pos : bool
+
+logic firstz1 : int
+
+logic firstz2 : int
+
+logic first1 : int
+
+logic first2 : int
+
+logic temp___String_Literal_169 : unit -> (int,character) farray
+
+axiom temp___String_Literal_169__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_169(us_void_param)].
+  (((to_rep((temp___String_Literal_169(us_void_param)[1])) = 50) and
+  (to_rep((temp___String_Literal_169(us_void_param)[2])) = 49)) and
+  ((((to_rep((temp___String_Literal_169(us_void_param)[3])) = 52) and
+  (to_rep((temp___String_Literal_169(us_void_param)[4])) = 55)) and
+  ((to_rep((temp___String_Literal_169(us_void_param)[5])) = 52) and
+  (to_rep((temp___String_Literal_169(us_void_param)[6])) = 56))) and
+  (((to_rep((temp___String_Literal_169(us_void_param)[7])) = 51) and
+  (to_rep((temp___String_Literal_169(us_void_param)[8])) = 54)) and
+  ((to_rep((temp___String_Literal_169(us_void_param)[9])) = 52) and
+  (to_rep((temp___String_Literal_169(us_void_param)[10])) = 55))))))
+
+axiom last32__def_axiom : (last32 = (let temp___170qtunused =
+  temp___String_Literal_169(void) : (int,character) farray in
+  temp___String_Literal_169(void)))
+
+axiom valid_int__post_axiom :
+  (forall param__s:us_t [valid_int(param__s)]. ((dynamic_invariant(param__s,
+  true, false, true, true) and (last(param__s) <  2147483647)) ->
+  (let result = valid_int(param__s) : bool in
+  (valid_int__function_guard(result, param__s) -> ((result = true) ->
+  (((0 <  length(param__s)) and (let temp___209 =
+  to_rep((to_array(param__s)[first(param__s)])) : int in
+  ((temp___209 = 45) or ((48 <= temp___209) and (temp___209 <= 57))))) and
+  (forall i:int. ((((first(param__s) + 1) <= i) and (i <= last(param__s))) ->
+  (let temp___212 = to_rep((to_array(param__s)[i])) : int in
+  ((48 <= temp___212) and (temp___212 <= 57)))))))))))
+
+axiom valid_int__def_axiom :
+  (forall param__s:us_t [valid_int(param__s)].
+  ((valid_int(param__s) = true) <-> (let first3 =
+  (if (orb(bool_eq1(length(param__s), 0),
+  bool_ne(to_rep((to_array(param__s)[first(param__s)])),
+  45)) = true) then first(param__s) else (first(param__s) + 1)) : int in
+  ((not (last(param__s) <  first3)) and
+  (forall i:int. (((first3 <= i) and (i <= last(param__s))) ->
+  (let temp___215 = to_rep((to_array(param__s)[i])) : int in
+  ((48 <= temp___215) and (temp___215 <= 57)))))))))
+
+axiom valid_int_32__post_axiom :
+  (forall param__s:us_t [valid_int_32(param__s)].
+  ((dynamic_invariant(param__s, true, false, true, true) and
+  (last(param__s) <  2147483647)) -> (let result = valid_int_32(param__s)
+  : bool in (valid_int_32__function_guard(result, param__s) ->
+  ((result = true) -> (valid_int__function_guard(valid_int(param__s),
+  param__s) and (valid_int(param__s) = true)))))))
+
+axiom valid_int_32__def_axiom :
+  (forall param__s:us_t [valid_int_32(param__s)].
+  ((valid_int_32(param__s) = true) <-> (let is_pos1 =
+  orb(bool_eq1(length(param__s), 0),
+  bool_ne(to_rep((to_array(param__s)[first(param__s)])), 45)) : bool in
+  (let firstz =
+  (if (is_pos1 = true) then first(param__s) else (first(param__s) + 1))
+  : int in (let first3 = (if ((last(param__s) <  firstz) or
+  ((last(param__s) - firstz) <= 9)) then firstz else (last(param__s) - 9))
+  : int in ((not (last(param__s) <  firstz)) and
+  (((forall i:int. (((firstz <= i) and (i <= (first3 - 1))) ->
+    (to_rep((to_array(param__s)[i])) = 48))) and
+  (forall i:int. (((first3 <= i) and (i <= last(param__s))) ->
+  (let temp___232 = to_rep((to_array(param__s)[i])) : int in
+  ((48 <= temp___232) and (temp___232 <= 57)))))) and
+  (((last(param__s) - first3) <  9) or (is_less_than_max(param__s, is_pos1,
+  first3) = true)))))))))
+
+ (* "integer32_parsing.ads", line 31, characters 0-0 *)
+goal defqtvc : (dynamic_invariant(s1, true, false, true, true) ->
+  (dynamic_invariant(s2, true, false, true, true) ->
+  (valid_int_32__function_guard(valid_int_32(s1), s1) ->
+  (((((last(s1) <  2147483647) and (last(s2) <  2147483647)) and
+  (valid_int_32(s1) = true)) and (bool_eq(to_array(s1), first(s1), last(s1),
+  to_array(s2), first(s2), last(s2)) = true)) -> (let temp___475 = first(s1)
+  : int in (((first(s1) <= temp___475) and (temp___475 <= last(s1))) ->
+  (forall o:int. ((to_rep((to_array(s1)[temp___475])) = o) ->
+  (((if (o = 45) then false else true) = is_pos) ->
+  (forall integer32_parsing__lemma_is_valid_extensional__firstz1__assume:int.
+  ((if (is_pos = true) then (integer32_parsing__lemma_is_valid_extensional__firstz1__assume = first(s1)) else (let o1 =
+  (first(s1) + 1) : int in
+  ((integer32_parsing__lemma_is_valid_extensional__firstz1__assume = o1) and
+  in_range(o1)))) ->
+  ((integer32_parsing__lemma_is_valid_extensional__firstz1__assume = firstz1) ->
+  (in_range(firstz1) ->
+  (forall integer32_parsing__lemma_is_valid_extensional__firstz2__assume:int.
+  ((if (is_pos = true) then (integer32_parsing__lemma_is_valid_extensional__firstz2__assume = first(s2)) else (let o1 =
+  (first(s2) + 1) : int in
+  ((integer32_parsing__lemma_is_valid_extensional__firstz2__assume = o1) and
+  in_range(o1)))) ->
+  ((integer32_parsing__lemma_is_valid_extensional__firstz2__assume = firstz2) ->
+  (in_range(firstz2) ->
+  (forall integer32_parsing__lemma_is_valid_extensional__first1__assume:int.
+  ((exists o1:bool.
+   ((if (last(s1) <  firstz1) then (o1 = true) else (let o2 =
+   (last(s1) - firstz1) : int in (in_range(o2) and
+   (o1 = (if (o2 <= 9) then true else false))))) and
+   (if (o1 = true) then (integer32_parsing__lemma_is_valid_extensional__first1__assume = firstz1) else (let o2 =
+   (last(s1) - 9) : int in
+   ((integer32_parsing__lemma_is_valid_extensional__first1__assume = o2) and
+   in_range(o2)))))) ->
+  ((integer32_parsing__lemma_is_valid_extensional__first1__assume = first1) ->
+  (in_range(first1) ->
+  (forall integer32_parsing__lemma_is_valid_extensional__first2__assume:int.
+  ((exists o1:bool.
+   ((if (last(s2) <  firstz2) then (o1 = true) else (let o2 =
+   (last(s2) - firstz2) : int in (in_range(o2) and
+   (o1 = (if (o2 <= 9) then true else false))))) and
+   (if (o1 = true) then (integer32_parsing__lemma_is_valid_extensional__first2__assume = firstz2) else (let o2 =
+   (last(s2) - 9) : int in
+   ((integer32_parsing__lemma_is_valid_extensional__first2__assume = o2) and
+   in_range(o2)))))) ->
+  ((integer32_parsing__lemma_is_valid_extensional__first2__assume = first2) ->
+  (in_range(first2) ->
+  ((exists o1:bool. ((if (firstz1 <= last(s1)) then (let o2 =
+   (last(s1) - first1) : int in (in_range(o2) and
+   (o1 = (if (o2 = 9) then true else false)))) else (o1 = false)) and
+   (exists spark__branch:bool. ((spark__branch = o1) and
+   ((spark__branch = true) -> ((is_less_than_max(s1, is_pos,
+   first1) = true) and (is_less_than_max(s2, is_pos, first2) = true))))))) ->
+  (forall i:int. (((firstz2 <= i) and (i <= (first2 - 1))) ->
+  (to_rep((to_array(s2)[i])) = 48)))))))))))))))))))))))))))))

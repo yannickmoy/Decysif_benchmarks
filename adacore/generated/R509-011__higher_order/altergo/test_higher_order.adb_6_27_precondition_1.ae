@@ -1,0 +1,248 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type small_int
+
+logic small_intqtint : small_int -> int
+
+axiom small_intqtaxiom :
+  (forall i:small_int. (((- 100) <= small_intqtint(i)) and
+  (small_intqtint(i) <= 100)))
+
+predicate in_range1(x: int) = (((- 100) <= x) and (x <= 100))
+
+type small_index
+
+logic small_indexqtint : small_index -> int
+
+axiom small_indexqtaxiom :
+  (forall i:small_index. ((1 <= small_indexqtint(i)) and
+  (small_indexqtint(i) <= 100)))
+
+function to_rep1(x: small_int) : int = small_intqtint(x)
+
+logic of_rep1 : int -> small_int
+
+axiom inversion_axiom1 :
+  (forall x:small_int [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:small_int [to_rep1(x)]. in_range1(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep((mk(f, l)).rec__first) = f) and (to_rep((mk(f,
+  l)).rec__last) = l)))))
+
+type us_t = { elts : (int,small_int) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,small_int) farray = (a).elts
+
+function of_array(a: (int,small_int) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy : int
+
+type t1b
+
+logic t1bqtint : t1b -> int
+
+axiom t1bqtaxiom :
+  (forall i:t1b. ((1 <= t1bqtint(i)) and (t1bqtint(i) <= 9)))
+
+logic temp_____aggregate_def_864 : int, int, int, int, int, int, int, int,
+  int -> (int,small_int) farray
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size1 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic in_range2 : int, int, int -> bool
+
+logic in_range3 : int -> bool
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size2 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic no_overflows : us_t, int, int -> bool
+
+axiom in_range__post_axiom : true
+
+axiom in_range__def_axiom :
+  (forall param__arg:int.
+  (forall param__low:int. forall param__high:int [in_range2(param__arg,
+  param__low, param__high)]. ((in_range2(param__arg, param__low,
+  param__high) = true) <-> ((param__low <= param__arg) and
+  (param__arg <= param__high)))))
+
+axiom in_range__post_axiom1 : true
+
+axiom in_range__def_axiom1 :
+  (forall param__x:int [in_range3(param__x)].
+  ((in_range3(param__x) = true) <-> (in_range2(param__x, (- 2147483648),
+  2147483647) = true)))
+
+axiom no_overflows__post_axiom : true
+
+axiom no_overflows__def_axiom :
+  (forall param__a:us_t.
+  (forall param__x:int. forall param__i:int [no_overflows(param__a, param__x,
+  param__i)]. ((no_overflows(param__a, param__x, param__i) = true) <->
+  ((in_range3((param__x + to_rep1((to_array(param__a)[param__i])))) = true) and
+  ((param__i <  last(param__a)) -> (no_overflows(param__a,
+  (param__x + to_rep1((to_array(param__a)[param__i]))),
+  (param__i + 1)) = true))))))
+
+logic rliteral : small_int
+
+axiom rliteral_axiom : (small_intqtint(rliteral) = 1)
+
+logic rliteral1 : small_int
+
+axiom rliteral_axiom1 : (small_intqtint(rliteral1) = 2)
+
+logic rliteral2 : small_int
+
+axiom rliteral_axiom2 : (small_intqtint(rliteral2) = 3)
+
+logic rliteral3 : small_int
+
+axiom rliteral_axiom3 : (small_intqtint(rliteral3) = 4)
+
+logic rliteral4 : small_int
+
+axiom rliteral_axiom4 : (small_intqtint(rliteral4) = 5)
+
+logic rliteral5 : small_int
+
+axiom rliteral_axiom5 : (small_intqtint(rliteral5) = 6)
+
+logic rliteral6 : small_int
+
+axiom rliteral_axiom6 : (small_intqtint(rliteral6) = 7)
+
+axiom def_axiom :
+  (forall temp___855:int. forall temp___856:int. forall temp___857:int.
+  forall temp___858:int. forall temp___859:int. forall temp___860:int.
+  forall temp___861:int. forall temp___862:int. forall temp___863:int.
+  (let temp___865 = temp_____aggregate_def_864(temp___855, temp___856,
+  temp___857, temp___858, temp___859, temp___860, temp___861, temp___862,
+  temp___863) : (int,small_int) farray in ((((temp___865[1]) = rliteral) and
+  ((temp___865[2]) = rliteral1)) and (((((temp___865[3]) = rliteral2) and
+  ((temp___865[4]) = rliteral3)) and (((temp___865[5]) = rliteral4) and
+  ((temp___865[6]) = rliteral5))) and ((((temp___865[7]) = rliteral6) and
+  ((temp___865[8]) = rliteral)) and ((temp___865[9]) = rliteral))))))
+
+ (* "test_higher_order.ads", line 94, characters 0-0 *)
+goal defqtvc :
+  (forall temp___868:(int,small_int) farray.
+  ((((((temp___868[1]) = rliteral) and ((temp___868[2]) = rliteral1)) and
+  (((((temp___868[3]) = rliteral2) and ((temp___868[4]) = rliteral3)) and
+  (((temp___868[5]) = rliteral4) and ((temp___868[6]) = rliteral5))) and
+  ((((temp___868[7]) = rliteral6) and ((temp___868[8]) = rliteral)) and
+  ((temp___868[9]) = rliteral)))) and
+  (temp___868 = temp_____aggregate_def_864(1, 2, 3, 4, 5, 6, 7, 1, 1))) ->
+  (let o = of_array(temp___868, 1, 9) : us_t in ((0 <  length(o)) ->
+  (no_overflows(o, 0, 1) = true)))))

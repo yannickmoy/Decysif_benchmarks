@@ -1,0 +1,42 @@
+cvc5 proved 1 out of 19 VCs
+  unproved my_map.adb_108_7_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.adb_109_7_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.adb_114_33_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved my_map.adb_121_13_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved my_map.adb_124_13_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_127_13_loop_invariant_preserv2_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_127_13_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_130_60_precondition2_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_137_13_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved my_map.adb_140_13_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_142_13_loop_invariant_preserv2_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_142_13_loop_invariant_preserv_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_144_47_precondition2_1.smt2 (proved by ['z3'])
+  unproved my_map.adb_86_14_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.ads_44_14_postcondition4_1.smt2 (proved by ['z3'])
+  unproved my_map.ads_44_14_postcondition5_1.smt2 (proved by ['z3'])
+  unproved my_map.ads_47_14_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.ads_52_14_resource_leak_at_end_of_scope_1.smt2
+z3 proved 14 out of 19 VCs
+  unproved my_map.adb_108_7_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.adb_109_7_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.adb_86_14_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.ads_47_14_resource_leak_at_end_of_scope_1.smt2
+  unproved my_map.ads_52_14_resource_leak_at_end_of_scope_1.smt2
+altergo proved 3 out of 19 VCs
+  unproved my_map.adb_108_7_resource_leak_at_end_of_scope_1.ae
+  unproved my_map.adb_109_7_resource_leak_at_end_of_scope_1.ae
+  unproved my_map.adb_124_13_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved my_map.adb_127_13_loop_invariant_preserv2_1.ae (proved by ['z3'])
+  unproved my_map.adb_127_13_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved my_map.adb_130_60_precondition2_1.ae (proved by ['z3'])
+  unproved my_map.adb_140_13_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved my_map.adb_142_13_loop_invariant_preserv2_1.ae (proved by ['z3'])
+  unproved my_map.adb_142_13_loop_invariant_preserv_1.ae (proved by ['z3'])
+  unproved my_map.adb_144_47_precondition2_1.ae (proved by ['z3'])
+  unproved my_map.adb_86_14_resource_leak_at_end_of_scope_1.ae
+  unproved my_map.ads_44_14_postcondition3_1.ae (proved by ['cvc5', 'z3'])
+  unproved my_map.ads_44_14_postcondition4_1.ae (proved by ['z3'])
+  unproved my_map.ads_44_14_postcondition5_1.ae (proved by ['z3'])
+  unproved my_map.ads_47_14_resource_leak_at_end_of_scope_1.ae
+  unproved my_map.ads_52_14_resource_leak_at_end_of_scope_1.ae

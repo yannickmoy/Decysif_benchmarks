@@ -1,0 +1,225 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic x : int
+
+logic y : int
+
+logic z : int
+
+type ar_index
+
+logic ar_indexqtint : ar_index -> int
+
+axiom ar_indexqtaxiom :
+  (forall i:ar_index. ((0 <= ar_indexqtint(i)) and
+  (ar_indexqtint(i) <= 9999)))
+
+predicate in_range1(x1: int) = ((0 <= x1) and (x1 <= 9999))
+
+function to_rep(x1: ar_index) : int = ar_indexqtint(x1)
+
+logic of_rep : int -> ar_index
+
+axiom inversion_axiom :
+  (forall x1:ar_index [to_rep(x1)]. (of_rep(to_rep(x1)) = x1))
+
+axiom range_axiom : (forall x1:ar_index [to_rep(x1)]. in_range1(to_rep(x1)))
+
+axiom coerce_axiom :
+  (forall x1:int [to_rep(of_rep(x1))]. (in_range1(x1) ->
+  (to_rep(of_rep(x1)) = x1)))
+
+function to_rep1(x1: integer) : int = integerqtint(x1)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x1:integer [to_rep1(x1)]. (of_rep1(to_rep1(x1)) = x1))
+
+axiom range_axiom1 : (forall x1:integer [to_rep1(x1)]. in_range(to_rep1(x1)))
+
+axiom coerce_axiom1 :
+  (forall x1:int [to_rep1(of_rep1(x1))]. (in_range(x1) ->
+  (to_rep1(of_rep1(x1)) = x1)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type length_type
+
+logic length_typeqtint : length_type -> int
+
+axiom length_typeqtaxiom :
+  (forall i:length_type. ((0 <= length_typeqtint(i)) and
+  (length_typeqtint(i) <= 10000)))
+
+predicate in_range2(x1: int) = ((0 <= x1) and (x1 <= 10000))
+
+function to_rep2(x1: length_type) : int = length_typeqtint(x1)
+
+logic of_rep2 : int -> length_type
+
+axiom inversion_axiom2 :
+  (forall x1:length_type [to_rep2(x1)]. (of_rep2(to_rep2(x1)) = x1))
+
+axiom range_axiom2 :
+  (forall x1:length_type [to_rep2(x1)]. in_range2(to_rep2(x1)))
+
+axiom coerce_axiom2 :
+  (forall x1:int [to_rep2(of_rep2(x1))]. (in_range2(x1) ->
+  (to_rep2(of_rep2(x1)) = x1)))
+
+type us_split_fields = { rec__ring_buf__ring_buffer__data :
+(int,integer) farray; rec__ring_buf__ring_buffer__first : ar_index;
+rec__ring_buf__ring_buffer__length : length_type }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic ring_buf__ring_buffer__data__first__bit : int
+
+logic ring_buf__ring_buffer__data__last__bit : int
+
+logic ring_buf__ring_buffer__data__position : int
+
+axiom ring_buf__ring_buffer__data__first__bit_axiom :
+  (0 <= ring_buf__ring_buffer__data__first__bit)
+
+axiom ring_buf__ring_buffer__data__last__bit_axiom :
+  (ring_buf__ring_buffer__data__first__bit <  ring_buf__ring_buffer__data__last__bit)
+
+axiom ring_buf__ring_buffer__data__position_axiom :
+  (0 <= ring_buf__ring_buffer__data__position)
+
+logic ring_buf__ring_buffer__first__first__bit : int
+
+logic ring_buf__ring_buffer__first__last__bit : int
+
+logic ring_buf__ring_buffer__first__position : int
+
+axiom ring_buf__ring_buffer__first__first__bit_axiom :
+  (0 <= ring_buf__ring_buffer__first__first__bit)
+
+axiom ring_buf__ring_buffer__first__last__bit_axiom :
+  (ring_buf__ring_buffer__first__first__bit <  ring_buf__ring_buffer__first__last__bit)
+
+axiom ring_buf__ring_buffer__first__position_axiom :
+  (0 <= ring_buf__ring_buffer__first__position)
+
+logic ring_buf__ring_buffer__length__first__bit : int
+
+logic ring_buf__ring_buffer__length__last__bit : int
+
+logic ring_buf__ring_buffer__length__position : int
+
+axiom ring_buf__ring_buffer__length__first__bit_axiom :
+  (0 <= ring_buf__ring_buffer__length__first__bit)
+
+axiom ring_buf__ring_buffer__length__last__bit_axiom :
+  (ring_buf__ring_buffer__length__first__bit <  ring_buf__ring_buffer__length__last__bit)
+
+axiom ring_buf__ring_buffer__length__position_axiom :
+  (0 <= ring_buf__ring_buffer__length__position)
+
+logic dummy : us_rep
+
+predicate dynamic_invariant(temp___expr_200: us_rep,
+  temp___is_init_196: bool, temp___skip_constant_197: bool,
+  temp___do_toplevel_198: bool, temp___do_typ_inv_199: bool) = true
+
+logic is_empty : us_rep -> bool
+
+logic head : us_rep -> int
+
+logic head__function_guard : int, us_rep -> prop
+
+axiom is_empty__post_axiom : true
+
+axiom is_empty__def_axiom :
+  (forall param__r:us_rep [is_empty(param__r)].
+  ((is_empty(param__r) = true) <->
+  (to_rep2(((param__r).us_split_fields1).rec__ring_buf__ring_buffer__length) = 0)))
+
+axiom head__post_axiom :
+  (forall param__r:us_rep [head(param__r)]. ((dynamic_invariant(param__r,
+  true, false, true, true) and (not (is_empty(param__r) = true))) ->
+  (let result = head(param__r) : int in (head__function_guard(result,
+  param__r) -> in_range(result)))))
+
+axiom head__def_axiom :
+  (forall param__r:us_rep [head(param__r)].
+  (head(param__r) = to_rep1((let temp___215qtunused =
+  ((param__r).us_split_fields1).rec__ring_buf__ring_buffer__data
+  : (int,integer) farray in
+  (((param__r).us_split_fields1).rec__ring_buf__ring_buffer__data[to_rep(((param__r).us_split_fields1).rec__ring_buf__ring_buffer__first)])))))
+
+ (* "harness.adb", line 3, characters 0-0 *)
+goal defqtvc :
+  (forall r__split_fields:us_split_fields. forall h:int. (in_range(x) ->
+  (in_range(y) -> (in_range(z) -> (dynamic_invariant({ us_split_fields1 =
+  r__split_fields }, false, false, true, true) -> (in_range(h) ->
+  (forall r__split_fields1:us_split_fields. (((is_empty({ us_split_fields1 =
+  r__split_fields1 }) = true) and dynamic_invariant({ us_split_fields1 =
+  r__split_fields1 }, true, true, true, true)) ->
+  (forall r__split_fields2:us_split_fields.
+  (((to_rep2((r__split_fields2).rec__ring_buf__ring_buffer__length) = (to_rep2((r__split_fields1).rec__ring_buf__ring_buffer__length) + 1)) and
+  dynamic_invariant({ us_split_fields1 = r__split_fields2 }, true, true,
+  true, true)) ->
+  (forall r__split_fields3:us_split_fields.
+  (((to_rep2((r__split_fields3).rec__ring_buf__ring_buffer__length) = (to_rep2((r__split_fields2).rec__ring_buf__ring_buffer__length) + 1)) and
+  dynamic_invariant({ us_split_fields1 = r__split_fields3 }, true, true,
+  true, true)) ->
+  (forall r__split_fields4:us_split_fields. forall h1:int.
+  ((forall temp___217:us_rep. head__function_guard(head(temp___217),
+   temp___217)) ->
+  ((((to_rep2((r__split_fields4).rec__ring_buf__ring_buffer__length) = (to_rep2((r__split_fields3).rec__ring_buf__ring_buffer__length) - 1)) and
+  ((let temp___217 = { us_split_fields1 = r__split_fields3 } : us_rep in
+  head(temp___217)) = h1)) and (dynamic_invariant({ us_split_fields1 =
+  r__split_fields4 }, true, true, true, true) and in_range(h1))) ->
+  (h1 = x))))))))))))))))

@@ -1,0 +1,27 @@
+cvc5 proved 4 out of 15 VCs
+  unproved math_euclid.adb_17_14_postcondition_1.smt2
+  unproved math_euclid.adb_27_14_postcondition_1.smt2
+  unproved math_euclid.adb_7_14_postcondition_1.smt2
+  unproved math_simple.adb_10_33_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved math_simple_abstract.adb_30_14_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+  unproved math_simple_abstract.adb_47_33_loop_invariant_preserv2_1.smt2 (proved by ['altergo'])
+  unproved math_simple_half.adb_31_36_loop_invariant_init_1.smt2 (proved by ['z3', 'altergo'])
+  unproved math_simple_half.adb_31_36_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved math_simple_half.ads_6_14_postcondition2_1.smt2 (proved by ['z3'])
+  unproved math_simple_half.ads_6_14_postcondition3_1.smt2 (proved by ['z3', 'altergo'])
+  unproved math_simple_half.ads_6_14_postcondition_1.smt2 (proved by ['z3'])
+z3 proved 8 out of 15 VCs
+  unproved math_euclid.adb_17_14_postcondition_1.smt2
+  unproved math_euclid.adb_27_14_postcondition_1.smt2
+  unproved math_euclid.adb_7_14_postcondition_1.smt2
+  unproved math_simple_abstract.adb_16_14_postcondition_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved math_simple_abstract.adb_47_33_loop_invariant_init2_1.smt2 (proved by ['cvc5', 'altergo'])
+  unproved math_simple_abstract.adb_47_33_loop_invariant_preserv2_1.smt2 (proved by ['altergo'])
+  unproved math_simple_abstract.ads_8_14_postcondition3_1.smt2 (proved by ['cvc5', 'altergo'])
+altergo proved 9 out of 15 VCs
+  unproved math_euclid.adb_17_14_postcondition_1.ae
+  unproved math_euclid.adb_27_14_postcondition_1.ae
+  unproved math_euclid.adb_7_14_postcondition_1.ae
+  unproved math_simple_half.adb_7_14_postcondition_1.ae (proved by ['cvc5', 'z3'])
+  unproved math_simple_half.ads_6_14_postcondition2_1.ae (proved by ['z3'])
+  unproved math_simple_half.ads_6_14_postcondition_1.ae (proved by ['z3'])

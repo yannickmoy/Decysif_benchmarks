@@ -1,0 +1,14 @@
+cvc5 proved 0 out of 5 VCs
+  unproved evoting.adb_135_41_precondition_1.smt2
+  unproved evoting.adb_135_41_range_check2_1.smt2
+  unproved evoting.adb_135_41_range_check_1.smt2
+  unproved evoting.adb_61_13_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved evoting.ads_57_17_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 2 out of 5 VCs
+  unproved evoting.adb_135_41_precondition_1.smt2
+  unproved evoting.adb_135_41_range_check2_1.smt2
+  unproved evoting.adb_135_41_range_check_1.smt2
+altergo proved 2 out of 5 VCs
+  unproved evoting.adb_135_41_precondition_1.ae
+  unproved evoting.adb_135_41_range_check2_1.ae
+  unproved evoting.adb_135_41_range_check_1.ae

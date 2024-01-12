@@ -1,0 +1,11 @@
+cvc5 proved 1 out of 5 VCs
+  unproved random.adb_167_28_assert2_1.smt2 (proved by ['altergo'])
+  unproved random.adb_170_47_range_check2_1.smt2 (proved by ['altergo'])
+  unproved random.adb_170_47_range_check_1.smt2 (proved by ['z3', 'altergo'])
+  unproved random.ads_56_17_postcondition2_1.smt2 (proved by ['altergo'])
+z3 proved 2 out of 5 VCs
+  unproved random.adb_167_28_assert2_1.smt2 (proved by ['altergo'])
+  unproved random.adb_170_47_range_check2_1.smt2 (proved by ['altergo'])
+  unproved random.ads_56_17_postcondition2_1.smt2 (proved by ['altergo'])
+altergo proved 4 out of 5 VCs
+  unproved random.adb_131_39_index_check2_1.ae (proved by ['cvc5', 'z3'])

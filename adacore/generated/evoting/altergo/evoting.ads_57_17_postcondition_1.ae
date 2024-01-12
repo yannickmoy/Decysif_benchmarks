@@ -1,0 +1,484 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+type character__init_wrapper = { rec__value : character; us_attr__init : bool
+}
+
+logic dummy : character__init_wrapper
+
+axiom dummy__def : ((dummy).us_attr__init = false)
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic slide : (int,character__init_wrapper) farray, int,
+  int -> (int,character__init_wrapper) farray
+
+axiom slide_eq :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic convert : (int,character__init_wrapper) farray -> (int,character) farray
+
+axiom convert__def :
+  (forall a:(int,character__init_wrapper) farray.
+  (forall temp___106:int.
+  (to_rep(of_rep(to_rep(((a[temp___106])).rec__value))) = to_rep((convert(a)[temp___106])))))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic no_vote_entry : (int,character) farray
+
+logic program_phase : int
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic candidates_filename : (int,character) farray
+
+type us_rep
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic dummy1 : us_rep
+
+logic is_open : us_rep -> bool
+
+logic mode : us_rep -> int
+
+logic end_of_file : us_rep, us_private, us_private, us_private, us_private,
+  us_private, us_private, us_private -> bool
+
+function length(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+type tcandidate_name_tP1
+
+logic tcandidate_name_tP1qtint : tcandidate_name_tP1 -> int
+
+axiom tcandidate_name_tP1qtaxiom :
+  (forall i:tcandidate_name_tP1. ((1 <= tcandidate_name_tP1qtint(i)) and
+  (tcandidate_name_tP1qtint(i) <= 70)))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size3 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+type tTno_vote_entrySP1
+
+logic tTno_vote_entrySP1qtint : tTno_vote_entrySP1 -> int
+
+axiom tTno_vote_entrySP1qtaxiom :
+  (forall i:tTno_vote_entrySP1. ((1 <= tTno_vote_entrySP1qtint(i)) and
+  (tTno_vote_entrySP1qtint(i) <= 7)))
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size4 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom4 : (0 <= component__size4)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic temp___String_Literal_174 : unit -> (int,character) farray
+
+axiom temp___String_Literal_174__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_174(us_void_param)].
+  (((to_rep((temp___String_Literal_174(us_void_param)[1])) = 78) and
+  (to_rep((temp___String_Literal_174(us_void_param)[2])) = 111)) and
+  ((((to_rep((temp___String_Literal_174(us_void_param)[3])) = 32) and
+  (to_rep((temp___String_Literal_174(us_void_param)[4])) = 118)) and
+  (to_rep((temp___String_Literal_174(us_void_param)[5])) = 111)) and
+  ((to_rep((temp___String_Literal_174(us_void_param)[6])) = 116) and
+  (to_rep((temp___String_Literal_174(us_void_param)[7])) = 101)))))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2))
+
+type candidate_number_t
+
+logic candidate_number_tqtint : candidate_number_t -> int
+
+axiom candidate_number_tqtaxiom :
+  (forall i:candidate_number_t. ((0 <= candidate_number_tqtint(i)) and
+  (candidate_number_tqtint(i) <= 20)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 20))
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic component__size5 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom component__size_axiom5 : (0 <= component__size5)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+predicate dynamic_invariant(temp___expr_257: (int,(int,character) farray) farray,
+  temp___is_init_253: bool, temp___skip_constant_254: bool,
+  temp___do_toplevel_255: bool, temp___do_typ_inv_256: bool) = true
+
+type tTcandidates_filenameSP1
+
+logic tTcandidates_filenameSP1qtint : tTcandidates_filenameSP1 -> int
+
+axiom tTcandidates_filenameSP1qtaxiom :
+  (forall i:tTcandidates_filenameSP1.
+  ((1 <= tTcandidates_filenameSP1qtint(i)) and
+  (tTcandidates_filenameSP1qtint(i) <= 14)))
+
+logic value__size7 : int
+
+logic object__size7 : int
+
+logic component__size6 : int
+
+logic alignment7 : int
+
+axiom value__size_axiom7 : (0 <= value__size7)
+
+axiom object__size_axiom7 : (0 <= object__size7)
+
+axiom component__size_axiom6 : (0 <= component__size6)
+
+axiom alignment_axiom7 : (0 <= alignment7)
+
+logic temp___String_Literal_189 : unit -> (int,character) farray
+
+axiom temp___String_Literal_189__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_189(us_void_param)].
+  (((to_rep((temp___String_Literal_189(us_void_param)[1])) = 99) and
+  (to_rep((temp___String_Literal_189(us_void_param)[2])) = 97)) and
+  (((((to_rep((temp___String_Literal_189(us_void_param)[3])) = 110) and
+  (to_rep((temp___String_Literal_189(us_void_param)[4])) = 100)) and
+  (to_rep((temp___String_Literal_189(us_void_param)[5])) = 105)) and
+  (((to_rep((temp___String_Literal_189(us_void_param)[6])) = 100) and
+  (to_rep((temp___String_Literal_189(us_void_param)[7])) = 97)) and
+  (to_rep((temp___String_Literal_189(us_void_param)[8])) = 116))) and
+  ((((to_rep((temp___String_Literal_189(us_void_param)[9])) = 101) and
+  (to_rep((temp___String_Literal_189(us_void_param)[10])) = 115)) and
+  (to_rep((temp___String_Literal_189(us_void_param)[11])) = 46)) and
+  (((to_rep((temp___String_Literal_189(us_void_param)[12])) = 116) and
+  (to_rep((temp___String_Literal_189(us_void_param)[13])) = 120)) and
+  (to_rep((temp___String_Literal_189(us_void_param)[14])) = 116))))))
+
+predicate default_initial_assumption(temp___expr_331: us_rep,
+  temp___skip_top_level_332: bool) =
+  ((not (temp___skip_top_level_332 = true)) ->
+  (not (is_open(temp___expr_331) = true)))
+
+type t4b
+
+logic t4bqtint : t4b -> int
+
+axiom t4bqtaxiom :
+  (forall i:t4b. ((0 <= t4bqtint(i)) and (t4bqtint(i) <= 20)))
+
+logic value__size8 : int
+
+logic object__size8 : int
+
+logic component__size7 : int
+
+logic alignment8 : int
+
+axiom value__size_axiom8 : (0 <= value__size8)
+
+axiom object__size_axiom8 : (0 <= object__size8)
+
+axiom component__size_axiom7 : (0 <= component__size7)
+
+axiom alignment_axiom8 : (0 <= alignment8)
+
+logic temp_____aggregate_def_404 : (int,character) farray -> (int,(int,character) farray) farray
+
+type t2b
+
+logic t2bqtint : t2b -> int
+
+axiom t2bqtaxiom :
+  (forall i:t2b. ((1 <= t2bqtint(i)) and (t2bqtint(i) <= 70)))
+
+logic value__size9 : int
+
+logic object__size9 : int
+
+logic component__size8 : int
+
+logic alignment9 : int
+
+axiom value__size_axiom9 : (0 <= value__size9)
+
+axiom object__size_axiom9 : (0 <= object__size9)
+
+axiom component__size_axiom8 : (0 <= component__size8)
+
+axiom alignment_axiom9 : (0 <= alignment9)
+
+logic temp_____aggregate_def_409 : int -> (int,character) farray
+
+axiom no_vote_entry__def_axiom : (no_vote_entry = (let temp___175qtunused =
+  temp___String_Literal_174(void) : (int,character) farray in
+  temp___String_Literal_174(void)))
+
+type count
+
+logic countqtint : count -> int
+
+axiom countqtaxiom :
+  (forall i:count. ((0 <= countqtint(i)) and (countqtint(i) <= 2147483647)))
+
+axiom candidates_filename__def_axiom :
+  (candidates_filename = (let temp___190qtunused =
+  temp___String_Literal_189(void) : (int,character) farray in
+  temp___String_Literal_189(void)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2))
+
+axiom is_open__post_axiom : true
+
+axiom mode__post_axiom :
+  (forall param__file:us_rep [mode(param__file)].
+  ((is_open(param__file) = true) -> in_range5(mode(param__file))))
+
+ (* "evoting.ads", line 51, characters 0-0 *)
+goal defqtvc :
+  (forall candidates:(int,(int,character) farray) farray.
+  forall last_candidate:int. forall file:us_rep. forall last:int.
+  ((temp___String_Literal_189(void) = candidates_filename) ->
+  ((temp___String_Literal_174(void) = no_vote_entry) ->
+  (in_range3(program_phase) -> (dynamic_invariant(candidates, false, false,
+  true, true) -> (in_range4(last_candidate) -> ((program_phase = 0) ->
+  (default_initial_assumption(file, false) ->
+  (forall current_candidate:int. ((current_candidate = 0) ->
+  (in_range4(current_candidate) -> (in_range1(last) ->
+  (forall temp___413:(int,character) farray.
+  (((forall temp___412:int [(temp___413[temp___412])].
+    (((1 <= temp___412) and (temp___412 <= 70)) -> (in_range2(32) ->
+    (to_rep((temp___413[temp___412])) = 32)))) and
+  (temp___413 = temp_____aggregate_def_409(32))) ->
+  (forall temp___415:(int,(int,character) farray) farray.
+  (((forall temp___407:int [(temp___415[temp___407])].
+    (((0 <= temp___407) and (temp___407 <= 20)) ->
+    ((temp___415[temp___407]) = temp___413))) and
+  (temp___415 = temp_____aggregate_def_404(temp___413))) ->
+  (forall candidates1:(int,(int,character) farray) farray.
+  ((candidates1 = temp___415) ->
+  (forall usf:(int,character) farray.
+  ((forall temp___422:int. (if ((1 <= temp___422) and
+   (temp___422 <= 7)) then ((usf[temp___422]) = (no_vote_entry[temp___422])) else ((usf[temp___422]) = ((candidates1[0])[temp___422])))) ->
+  (forall candidates2:(int,(int,character) farray) farray.
+  ((candidates2 = (candidates1[0 <- usf])) ->
+  (forall file_system:us_private. forall standard_in:us_private.
+  forall standard_out:us_private. forall standard_err:us_private.
+  forall current_in:us_private. forall current_out:us_private.
+  forall current_err:us_private. forall param__file:us_rep.
+  (((is_open(param__file) = true) and (mode(param__file) = 0)) ->
+  (forall file1:us_rep. ((file1 = param__file) ->
+  (forall candidates3:(int,(int,character) farray) farray.
+  forall current_candidate1:int. ((if (andb((if (end_of_file(file1,
+  file_system, standard_in, standard_out, standard_err, current_in,
+  current_out, current_err) = true) then false else true),
+  (if (current_candidate <  20) then true else false)) = true) then (let o =
+  (current_candidate + 1) : int in (in_range4(o) and
+  (exists current_candidate2:int. ((current_candidate2 = o) and
+  (exists candidates4:(int,(int,character) farray) farray. exists last1:int.
+  ((forall i:int. (((current_candidate1 <= i) and (i <= 20)) ->
+   (forall j:int. (((1 <= j) and (j <= 70)) ->
+   (to_rep(((candidates4[i])[j])) = 32))))) and
+  ((((in_range4(current_candidate1) and in_range1(last1)) and
+  dynamic_invariant(candidates4, false, true, true, true)) and
+  (forall temp___471:int. (((0 <= temp___471) and (temp___471 <= 20)) ->
+  (forall temp___472:int. (((1 <= temp___472) and (temp___472 <= 70)) ->
+  ((temp___472 <  1) ->
+  (((candidates4[temp___471])[temp___472]) = ((candidates2[temp___471])[temp___472])))))))) and
+  (exists o1:integer. ((to_rep1(o1) = 70) and
+  (exists o2:integer. ((to_rep1(o2) = 1) and
+  (exists file_system1:us_private. exists standard_in1:us_private.
+  exists standard_out1:us_private. exists standard_err1:us_private.
+  exists current_in1:us_private. exists current_out1:us_private.
+  exists current_err1:us_private.
+  exists param__item:(int,character__init_wrapper) farray.
+  exists param__last:int. ((((if (0 <  length(to_rep1(o2),
+  to_rep1(o1))) then (((to_rep1(o2) - 1) <= param__last) and
+  (param__last <= to_rep1(o1))) else (param__last = (to_rep1(o2) - 1))) and
+  (forall i:int. (((to_rep1(o2) <= i) and (i <= param__last)) ->
+  (((param__item[i])).us_attr__init = true)))) and
+  in_range1(param__last)) and
+  (exists item:(int,character__init_wrapper) farray.
+  ((item = slide(param__item, 1, 1)) and
+  (exists last2:int. ((last2 = param__last) and (((1 <= last2) ->
+  (((1 <= 1) and (1 <= 70)) and ((1 <= last2) and (last2 <= 70)))) and
+  ((forall temp___449:int. (((1 <= temp___449) and (temp___449 <= last2)) ->
+   (((item[temp___449])).us_attr__init = true))) and
+  ((if (1 <= last2) then (1 <= last2) else (last2 <  1)) and
+  (((1 <= last2) -> (((1 <= 1) and (1 <= 70)) and ((1 <= last2) and
+  (last2 <= 70)))) and
+  ((if (1 <= last2) then (1 <= last2) else (last2 <  1)) and
+  (exists usf1:(int,character) farray.
+  ((forall temp___462:int. (if ((1 <= temp___462) and
+   (temp___462 <= last2)) then ((usf1[temp___462]) = (convert(item)[temp___462])) else ((usf1[temp___462]) = ((candidates4[current_candidate1])[temp___462])))) and
+  ((candidates3 = (candidates4[current_candidate1 <- usf1])) and
+  (not (andb((if (end_of_file(file1, file_system1, standard_in1,
+  standard_out1, standard_err1, current_in1, current_out1,
+  current_err1) = true) then false else true),
+  (if (current_candidate1 <  20) then true else false)) = true))))))))))))))))))))))))))) else ((candidates3 = candidates2) and
+  (current_candidate1 = current_candidate))) ->
+  (forall file2:us_rep. ((not (is_open(file2) = true)) ->
+  (forall last_candidate1:int. ((last_candidate1 = current_candidate1) ->
+  (forall i:int. ((((last_candidate1 + 1) <= i) and (i <= 20)) ->
+  (forall j:int. (((1 <= j) and (j <= 70)) ->
+  (to_rep(((candidates3[i])[j])) = 32)))))))))))))))))))))))))))))))))))))

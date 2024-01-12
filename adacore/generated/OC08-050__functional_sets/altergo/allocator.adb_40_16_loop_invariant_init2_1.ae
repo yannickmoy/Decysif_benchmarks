@@ -1,0 +1,230 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type status
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 1))
+
+logic to_rep : status -> int
+
+logic of_rep : int -> status
+
+axiom inversion_axiom :
+  (forall x:status [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:status [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic mem : us_rep, int -> bool
+
+logic mem__function_guard : bool, us_rep, int -> prop
+
+logic is_add : us_rep, int, us_rep -> bool
+
+logic is_add__function_guard : bool, us_rep, int, us_rep -> prop
+
+logic add : us_rep, int -> us_rep
+
+logic add__function_guard : us_rep, us_rep, int -> prop
+
+type us_split_fields = { rec__allocator__m__t__available : us_rep;
+rec__allocator__m__t__allocated : us_rep }
+
+type us_rep1 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic allocator__m__t__available__first__bit : int
+
+logic allocator__m__t__available__last__bit : int
+
+logic allocator__m__t__available__position : int
+
+axiom allocator__m__t__available__first__bit_axiom :
+  (0 <= allocator__m__t__available__first__bit)
+
+axiom allocator__m__t__available__last__bit_axiom :
+  (allocator__m__t__available__first__bit <  allocator__m__t__available__last__bit)
+
+axiom allocator__m__t__available__position_axiom :
+  (0 <= allocator__m__t__available__position)
+
+logic allocator__m__t__allocated__first__bit : int
+
+logic allocator__m__t__allocated__last__bit : int
+
+logic allocator__m__t__allocated__position : int
+
+axiom allocator__m__t__allocated__first__bit_axiom :
+  (0 <= allocator__m__t__allocated__first__bit)
+
+axiom allocator__m__t__allocated__last__bit_axiom :
+  (allocator__m__t__allocated__first__bit <  allocator__m__t__allocated__last__bit)
+
+axiom allocator__m__t__allocated__position_axiom :
+  (0 <= allocator__m__t__allocated__position)
+
+logic dummy1 : us_rep1
+
+type resource
+
+logic resourceqtint : resource -> int
+
+axiom resourceqtaxiom :
+  (forall i:resource. ((0 <= resourceqtint(i)) and (resourceqtint(i) <= 3)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 3))
+
+type valid_resource
+
+logic valid_resourceqtint : valid_resource -> int
+
+axiom valid_resourceqtaxiom :
+  (forall i:valid_resource. ((1 <= valid_resourceqtint(i)) and
+  (valid_resourceqtint(i) <= 3)))
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic component__size : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic is_empty : us_rep -> bool
+
+logic is_empty__function_guard : bool, us_rep -> prop
+
+logic temp___result_230 : us_rep -> bool
+
+axiom temp___result_230qtdef :
+  (forall temp___231:us_rep.
+  ((temp___result_230(temp___231) = is_empty(temp___231)) and
+  is_empty__function_guard(temp___result_230(temp___231), temp___231)))
+
+predicate default_initial_assumption(temp___expr_227: us_rep,
+  temp___skip_top_level_228: bool) =
+  ((not (temp___skip_top_level_228 = true)) -> ((let temp___231 =
+  temp___expr_227 : us_rep in temp___result_230(temp___231)) = true))
+
+axiom mem__post_axiom :
+  (forall param__s:us_rep.
+  (forall param__e:int [mem(param__s, param__e)]. (in_range1(param__e) ->
+  (let result = mem(param__s, param__e) : bool in
+  (mem__function_guard(result, param__s, param__e) -> ((param__e = 0) ->
+  (not (result = true))))))))
+
+axiom is_empty__post_axiom :
+  (forall param__s:us_rep [is_empty(param__s)]. (let result =
+  is_empty(param__s) : bool in (is_empty__function_guard(result, param__s) ->
+  ((forall e:int. mem__function_guard(mem(param__s, e), param__s, e)) and
+  ((result = true) <->
+  (forall e:int. (not (in_range1(e) and (mem(param__s, e) = true)))))))))
+
+axiom is_add__post_axiom :
+  (forall param__s:us_rep. forall param__result__:us_rep.
+  (forall param__e:int [is_add(param__s, param__e, param__result__)].
+  (in_range1(param__e) -> (let result = is_add(param__s, param__e,
+  param__result__) : bool in (is_add__function_guard(result, param__s,
+  param__e, param__result__) -> (mem__function_guard(mem(param__result__,
+  param__e), param__result__, param__e) and
+  (mem__function_guard(mem(param__s, param__e), param__s, param__e) and
+  ((forall f:int. mem__function_guard(mem(param__result__, f),
+   param__result__, f)) and
+  ((forall f:int. mem__function_guard(mem(param__s, f), param__s, f)) and
+  ((forall e:int. mem__function_guard(mem(param__s, e), param__s, e)) and
+  ((forall e:int. mem__function_guard(mem(param__result__, e),
+   param__result__, e)) and
+  ((result = true) <-> (((((not (param__e = 0)) and
+  ((let temp___284qtunused = param__result__ : us_rep in mem(param__result__,
+  param__e)) = true)) and (not ((let temp___286qtunused = param__s
+  : us_rep in mem(param__s, param__e)) = true))) and
+  (forall f:int. ((in_range1(f) and (mem(param__result__, f) = true)) ->
+  (((let temp___291qtunused = param__s : us_rep in mem(param__s,
+  f)) = true) or (f = param__e))))) and
+  (forall e:int. ((in_range1(e) and (mem(param__s, e) = true)) ->
+  ((let temp___296qtunused = param__result__ : us_rep in mem(param__result__,
+  e)) = true))))))))))))))))
+
+ (* "allocator.ads", line 41, characters 0-0 *)
+goal defqtvc :
+  (forall data:(int,status) farray. forall avail:us_rep. forall alloc:us_rep.
+  (default_initial_assumption(avail, false) ->
+  (default_initial_assumption(alloc, false) ->
+  (forall r:int. ((r = 1) -> ((andb((if (1 <= r) then true else false),
+  (if (r <= 3) then true else false)) = true) ->
+  (forall spark__branch:bool. forall avail1:us_rep. forall alloc1:us_rep.
+  ((forall o:us_rep. is_add__function_guard(is_add(avail, r, o), avail, r,
+   o)) ->
+  ((forall o:us_rep. is_add__function_guard(is_add(alloc, r, o), alloc, r,
+   o)) ->
+  ((exists temp___543:int. ((to_rep((data[r])) = temp___543) and
+   ((spark__branch = (if (temp___543 = 0) then true else false)) and
+   (if (spark__branch = true) then ((let o = add(avail, r) : us_rep in
+   ((add__function_guard(o, avail, r) and (is_add(avail, r, o) = true)) and
+   (avail1 = o))) and (alloc1 = alloc)) else ((let o = add(alloc, r)
+   : us_rep in ((add__function_guard(o, alloc, r) and (is_add(alloc, r,
+   o) = true)) and (alloc1 = o))) and (avail1 = avail)))))) ->
+  ((forall e:int. mem__function_guard(mem(avail1, e), avail1, e)) ->
+  ((forall e:int. mem__function_guard(mem(alloc1, e), alloc1, e)) ->
+  ((forall e:int. mem__function_guard(mem(alloc1, e), alloc1, e)) ->
+  ((exists o:bool.
+   ((exists usf:int. mem__function_guard(mem(avail1, usf), avail1, usf)) and
+   (if (forall e:int. ((in_range1(e) and (mem(avail1, e) = true)) ->
+       ((1 <= e) and (e <= r)))) then ((exists usf:int.
+                                       mem__function_guard(mem(alloc1, usf),
+                                       alloc1, usf)) and
+   (o = (if (forall e:int. ((in_range1(e) and (mem(alloc1, e) = true)) ->
+            ((1 <= e) and (e <= r)))) then true else false))) else (o = false)))) ->
+  (forall e:int. (mem__function_guard(mem(avail1, e), avail1, e) ->
+  ((in_range1(e) and (mem(avail1, e) = true)) -> (e <= r))))))))))))))))))

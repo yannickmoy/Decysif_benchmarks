@@ -1,0 +1,223 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type set_length
+
+logic set_lengthqtint : set_length -> int
+
+axiom set_lengthqtaxiom :
+  (forall i:set_length. ((0 <= set_lengthqtint(i)) and
+  (set_lengthqtint(i) <= 10)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 10))
+
+function to_rep(x: set_length) : int = set_lengthqtint(x)
+
+logic of_rep : int -> set_length
+
+axiom inversion_axiom :
+  (forall x:set_length [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:set_length [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type element_t
+
+logic element_tqtint : element_t -> int
+
+axiom element_tqtaxiom :
+  (forall i:element_t. (((- 1) <= element_tqtint(i)) and
+  (element_tqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = (((- 1) <= x) and (x <= 2147483647))
+
+function to_rep1(x: element_t) : int = element_tqtint(x)
+
+logic of_rep1 : int -> element_t
+
+axiom inversion_axiom1 :
+  (forall x:element_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:element_t [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_split_fields = { rec__natural_set__t__len : set_length;
+rec__natural_set__t__m : (int,element_t) farray }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic natural_set__t__len__first__bit : int
+
+logic natural_set__t__len__last__bit : int
+
+logic natural_set__t__len__position : int
+
+axiom natural_set__t__len__first__bit_axiom :
+  (0 <= natural_set__t__len__first__bit)
+
+axiom natural_set__t__len__last__bit_axiom :
+  (natural_set__t__len__first__bit <  natural_set__t__len__last__bit)
+
+axiom natural_set__t__len__position_axiom :
+  (0 <= natural_set__t__len__position)
+
+logic natural_set__t__m__first__bit : int
+
+logic natural_set__t__m__last__bit : int
+
+logic natural_set__t__m__position : int
+
+axiom natural_set__t__m__first__bit_axiom :
+  (0 <= natural_set__t__m__first__bit)
+
+axiom natural_set__t__m__last__bit_axiom :
+  (natural_set__t__m__first__bit <  natural_set__t__m__last__bit)
+
+axiom natural_set__t__m__position_axiom : (0 <= natural_set__t__m__position)
+
+logic dummy : us_rep
+
+function valid(param__s: us_rep) : bool =
+  andb((if (forall i:int. (((1 <= i) and
+           (i <= to_rep(((param__s).us_split_fields1).rec__natural_set__t__len))) ->
+           in_range(to_rep1((let temp___170 =
+           ((param__s).us_split_fields1).rec__natural_set__t__m
+           : (int,element_t) farray in (temp___170[i])))))) then true else false),
+  (if (forall i:int.
+      ((((to_rep(((param__s).us_split_fields1).rec__natural_set__t__len) + 1) <= i) and
+      (i <= 10)) -> (to_rep1((let temp___172 =
+      ((param__s).us_split_fields1).rec__natural_set__t__m
+      : (int,element_t) farray in (temp___172[i]))) = (- 1)))) then true else false))
+
+logic full : us_rep -> bool
+
+logic members : us_rep -> int
+
+logic members__function_guard : int, us_rep -> prop
+
+predicate dynamic_invariant(temp___expr_212: us_rep,
+  temp___is_init_208: bool, temp___skip_constant_209: bool,
+  temp___do_toplevel_210: bool, temp___do_typ_inv_211: bool) = true
+
+function contains(param__s: us_rep, param__value: int) : bool =
+  (if (exists i:int. (((1 <= i) and
+      (i <= to_rep(((param__s).us_split_fields1).rec__natural_set__t__len))) and
+      (to_rep1((let temp___176 =
+      ((param__s).us_split_fields1).rec__natural_set__t__m
+      : (int,element_t) farray in (temp___176[i]))) = param__value))) then true else false)
+
+logic value : int
+
+type set_index
+
+logic set_indexqtint : set_index -> int
+
+axiom set_indexqtaxiom :
+  (forall i:set_index. ((1 <= set_indexqtint(i)) and
+  (set_indexqtint(i) <= 10)))
+
+axiom members__post_axiom :
+  (forall param__s:us_rep [members(param__s)]. (dynamic_invariant(param__s,
+  true, false, true, true) -> (let result = members(param__s) : int in
+  (members__function_guard(result, param__s) -> (((0 <= result) and
+  (result <= 10)) and in_range(result))))))
+
+axiom members__def_axiom :
+  (forall param__s:us_rep [members(param__s)].
+  (members(param__s) = to_rep(((param__s).us_split_fields1).rec__natural_set__t__len)))
+
+axiom full__post_axiom : true
+
+axiom full__def_axiom :
+  (forall param__s:us_rep [full(param__s)].
+  (members__function_guard(members(param__s), param__s) and
+  ((full(param__s) = true) <-> ((let temp___229qtunused = param__s
+  : us_rep in members(param__s)) = 10))))
+
+ (* "natural_set.ads", line 36, characters 0-0 *)
+goal defqtvc :
+  (forall s__split_fields:us_split_fields. (dynamic_invariant({
+  us_split_fields1 = s__split_fields }, true, false, true, true) ->
+  (in_range(value) -> (((valid({ us_split_fields1 = s__split_fields
+  }) = true) and (not (full({ us_split_fields1 = s__split_fields
+  }) = true))) -> (let o = value : int in (let o1 = contains({
+  us_split_fields1 = s__split_fields }, o) : bool in (((o1 = true) <->
+  (exists i:int. (((1 <= i) and
+  (i <= to_rep((s__split_fields).rec__natural_set__t__len))) and
+  (to_rep1(((s__split_fields).rec__natural_set__t__m[i])) = o)))) ->
+  (forall spark__branch:bool.
+  ((spark__branch = (if (o1 = true) then false else true)) ->
+  ((spark__branch = true) ->
+  (forall o2:int.
+  ((to_rep((s__split_fields).rec__natural_set__t__len) = o2) -> (let o3 =
+  (o2 + 1) : int in (in_range1(o3) ->
+  (forall o4:set_length. ((to_rep(o4) = o3) ->
+  (forall s__split_fields1:us_split_fields. ((s__split_fields1 = {
+  rec__natural_set__t__len = o4; rec__natural_set__t__m =
+  (s__split_fields).rec__natural_set__t__m }) ->
+  (forall o5:element_t. ((to_rep1(o5) = value) ->
+  (forall temp___268:int.
+  ((to_rep((s__split_fields1).rec__natural_set__t__len) = temp___268) ->
+  (((1 <= temp___268) and (temp___268 <= 10)) ->
+  (forall s__split_fields2:us_split_fields. ((s__split_fields2 = {
+  rec__natural_set__t__len = (s__split_fields1).rec__natural_set__t__len;
+  rec__natural_set__t__m =
+  ((s__split_fields1).rec__natural_set__t__m[temp___268 <- o5]) }) ->
+  (contains({ us_split_fields1 = s__split_fields2 }, value) = true))))))))))))))))))))))))))

@@ -1,0 +1,8 @@
+cvc5 proved 5 out of 5 VCs
+z3 proved 5 out of 5 VCs
+altergo proved 0 out of 5 VCs
+  unproved ipv4bitspec.ads_20_48_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved ipv4bitspec.ads_21_48_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved ipv4bitspec.ads_22_48_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved ipv4bitspec.ads_23_48_range_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved ipv4bitspec.ads_34_13_postcondition_1.ae (proved by ['cvc5', 'z3'])

@@ -1,0 +1,9 @@
+cvc5 proved 0 out of 6 VCs
+  unproved queen.adb_15_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved queen.adb_16_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+  unproved queen.adb_49_13_precondition3_1.smt2 (proved by ['z3', 'altergo'])
+  unproved queen.adb_51_13_precondition3_1.smt2 (proved by ['z3', 'altergo'])
+  unproved queen.ads_40_14_postcondition2_1.smt2 (proved by ['z3', 'altergo'])
+  unproved queen.ads_40_14_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 6 out of 6 VCs
+altergo proved 6 out of 6 VCs

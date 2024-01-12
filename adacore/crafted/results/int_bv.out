@@ -1,0 +1,4 @@
+cvc5:{'timeout': 8}
+z3:{'timeout': 5, 'unsat': 3}
+altergo:{'error': 8}
+colibri:{'error': 7, 'unsat': 1}

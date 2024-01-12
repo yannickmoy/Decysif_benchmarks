@@ -1,0 +1,11 @@
+cvc5 proved 7 out of 8 VCs
+  unproved binary_search.ads_23_14_postcondition2_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 8 out of 8 VCs
+altergo proved 1 out of 8 VCs
+  unproved binary_search.adb_32_22_range_check15_1.ae (proved by ['cvc5', 'z3'])
+  unproved binary_search.adb_32_22_range_check16_1.ae (proved by ['cvc5', 'z3'])
+  unproved binary_search.adb_32_22_range_check17_1.ae (proved by ['cvc5', 'z3'])
+  unproved binary_search.adb_32_22_range_check18_1.ae (proved by ['cvc5', 'z3'])
+  unproved binary_search.adb_32_22_range_check19_1.ae (proved by ['cvc5', 'z3'])
+  unproved binary_search.adb_32_22_range_check20_1.ae (proved by ['cvc5', 'z3'])
+  unproved lcp.ads_14_5_postcondition_1.ae (proved by ['cvc5', 'z3'])

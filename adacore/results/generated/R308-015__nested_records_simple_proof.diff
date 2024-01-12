@@ -1,0 +1,14 @@
+cvc5 proved 11 out of 11 VCs
+z3 proved 11 out of 11 VCs
+altergo proved 0 out of 11 VCs
+  unproved p.ads_104_16_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_104_16_postcondition3_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_104_16_postcondition4_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_104_16_postcondition5_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_104_16_postcondition8_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_104_16_postcondition_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_69_16_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_69_16_postcondition4_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_69_16_postcondition5_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_84_16_postcondition2_1.ae (proved by ['cvc5', 'z3'])
+  unproved p.ads_84_16_postcondition4_1.ae (proved by ['cvc5', 'z3'])

@@ -1,0 +1,270 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+logic bool_le : int, int -> bool
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy1 : int
+
+logic last : us_rep -> int
+
+type extended_index
+
+logic extended_indexqtint : extended_index -> int
+
+axiom extended_indexqtaxiom :
+  (forall i:extended_index. ((0 <= extended_indexqtint(i)) and
+  (extended_indexqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
+
+function length(param__container: us_rep) : int =
+  ((last(param__container) + 1) - 1)
+
+predicate dynamic_invariant(temp___expr_316: int, temp___is_init_312: bool,
+  temp___skip_constant_313: bool, temp___do_toplevel_314: bool,
+  temp___do_typ_inv_315: bool) = ((temp___is_init_312 = true) ->
+  ((temp___do_toplevel_314 = true) -> (0 <= temp___expr_316)))
+
+logic get : us_rep, int -> int
+
+type resource
+
+logic resourceqtint : resource -> int
+
+axiom resourceqtaxiom :
+  (forall i:resource. ((0 <= resourceqtint(i)) and
+  (resourceqtint(i) <= 10000)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 10000))
+
+type us_rep1
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic dummy2 : us_rep1
+
+type us_split_fields = { rec__list_allocator__m__t__available : us_rep;
+rec__list_allocator__m__t__allocated : us_rep1 }
+
+type us_rep2 = { us_split_fields1 : us_split_fields
+}
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic list_allocator__m__t__available__first__bit : int
+
+logic list_allocator__m__t__available__last__bit : int
+
+logic list_allocator__m__t__available__position : int
+
+axiom list_allocator__m__t__available__first__bit_axiom :
+  (0 <= list_allocator__m__t__available__first__bit)
+
+axiom list_allocator__m__t__available__last__bit_axiom :
+  (list_allocator__m__t__available__first__bit <  list_allocator__m__t__available__last__bit)
+
+axiom list_allocator__m__t__available__position_axiom :
+  (0 <= list_allocator__m__t__available__position)
+
+logic list_allocator__m__t__allocated__first__bit : int
+
+logic list_allocator__m__t__allocated__last__bit : int
+
+logic list_allocator__m__t__allocated__position : int
+
+axiom list_allocator__m__t__allocated__first__bit_axiom :
+  (0 <= list_allocator__m__t__allocated__first__bit)
+
+axiom list_allocator__m__t__allocated__last__bit_axiom :
+  (list_allocator__m__t__allocated__first__bit <  list_allocator__m__t__allocated__last__bit)
+
+axiom list_allocator__m__t__allocated__position_axiom :
+  (0 <= list_allocator__m__t__allocated__position)
+
+logic dummy3 : us_rep2
+
+logic is_empty : us_rep1 -> bool
+
+predicate default_initial_assumption(temp___expr_353: us_rep2,
+  temp___skip_top_level_354: bool) =
+  ((length(((temp___expr_353).us_split_fields1).rec__list_allocator__m__t__available) = 0) and
+  (is_empty(((temp___expr_353).us_split_fields1).rec__list_allocator__m__t__allocated) = true))
+
+logic length1 : us_rep1 -> int
+
+logic contains : us_rep, int -> bool
+
+logic contains1 : us_rep1, int -> bool
+
+function equal_prefix(param__left: us_rep, param__right: us_rep) : bool =
+  andb(bool_le(length(param__left), length(param__right)),
+  (if (forall n:int. (((1 <= n) and (n <= last(param__left))) ->
+      (get(param__left, n) = get(param__right, n)))) then true else false))
+
+logic add : us_rep, int -> us_rep
+
+logic enable_handling_of_equivalence : bool
+
+axiom last__post_axiom :
+  (forall param__container:us_rep [last(param__container)].
+  in_range(last(param__container)))
+
+axiom get__post_axiom :
+  (forall param__container:us_rep.
+  (forall param__position:int [get(param__container, param__position)].
+  ((in_range(param__position) and ((1 <= param__position) and
+  (param__position <= last(param__container)))) ->
+  in_range1(get(param__container, param__position)))))
+
+axiom contains__post_axiom : true
+
+axiom length__post_axiom :
+  (forall param__container:us_rep1 [length1(param__container)].
+  dynamic_invariant(length1(param__container), true, false, true, true))
+
+axiom contains__def_axiom :
+  (forall param__s:us_rep.
+  (forall param__e:int [contains(param__s, param__e)]. ((contains(param__s,
+  param__e) = true) <->
+  (exists i:int. (((1 <= i) and (i <= last(param__s))) and (get(param__s,
+  i) = param__e))))))
+
+axiom is_empty__post_axiom :
+  (forall param__container:us_rep1 [is_empty(param__container)].
+  (let result = is_empty(param__container) : bool in (((result = true) <->
+  (forall item:int. (not (in_range1(item) and (contains1(param__container,
+  item) = true))))) and ((result = true) <->
+  (length1(param__container) = 0)))))
+
+axiom lemma_contains_equivalent__post_axiom :
+  (forall param__container:us_rep1.
+  (forall param__item:int. ((in_range1(param__item) and
+  ((of_int(1) = true) and (not (contains1(param__container,
+  param__item) = true)))) ->
+  (forall e:int. ((in_range1(e) and (contains1(param__container,
+  e) = true)) -> (not (param__item = e)))))))
+
+ (* "list_allocator.ads", line 28, characters 0-0 *)
+goal defqtvc :
+  (forall model__split_fields:us_split_fields.
+  ((of_int(1) = enable_handling_of_equivalence) ->
+  (default_initial_assumption({ us_split_fields1 = model__split_fields },
+  false) ->
+  ((length((model__split_fields).rec__list_allocator__m__t__available) = 0) ->
+  (forall r:int. ((r = 1) -> ((andb((if (1 <= r) then true else false),
+  (if (r <= 10000) then true else false)) = true) -> (let o =
+  (model__split_fields).rec__list_allocator__m__t__available : us_rep in
+  (let o1 = add(o, r) : us_rep in ((((last(o1) = (last(o) + 1)) and (get(o1,
+  last(o1)) = r)) and (equal_prefix(o, o1) = true)) ->
+  (forall model__split_fields1:us_split_fields. ((model__split_fields1 = {
+  rec__list_allocator__m__t__available = o1;
+  rec__list_allocator__m__t__allocated =
+  (model__split_fields).rec__list_allocator__m__t__allocated }) -> (let o2 =
+  (model__split_fields1).rec__list_allocator__m__t__allocated : us_rep1 in
+  (let temp___inv_590 = is_empty(o2) : bool in ((((temp___inv_590 = true) <->
+  (forall item:int. (not (in_range1(item) and (contains1(o2, item) = true))))) and
+  ((temp___inv_590 = true) <-> (length1(o2) = 0))) ->
+  (forall model__split_fields2:us_split_fields. forall r1:int.
+  (((is_empty((model__split_fields2).rec__list_allocator__m__t__allocated) = true) and
+  ((length1((model__split_fields2).rec__list_allocator__m__t__allocated) = 0) and
+  ((last((model__split_fields2).rec__list_allocator__m__t__available) = r1) and
+  ((get((model__split_fields2).rec__list_allocator__m__t__available,
+  1) = 1) and
+  ((forall rr:int. (((1 <= rr) and (rr <= r1)) ->
+   (get((model__split_fields2).rec__list_allocator__m__t__available,
+   rr) = rr))) and
+  (forall rr:int. (((1 <= rr) and (rr <= r1)) ->
+  (contains((model__split_fields2).rec__list_allocator__m__t__available,
+  rr) = true)))))))) ->
+  ((andb((if ((model__split_fields2).rec__list_allocator__m__t__allocated = (model__split_fields).rec__list_allocator__m__t__allocated) then true else false),
+  (if ((1 <= r1) and (r1 <= 10000)) then true else false)) = true) ->
+  ((not (r1 = 10000)) ->
+  (forall r2:int. ((r2 = (r1 + 1)) -> (let o3 =
+  (model__split_fields2).rec__list_allocator__m__t__available : us_rep in
+  (let o4 = add(o3, r2) : us_rep in ((((last(o4) = (last(o3) + 1)) and
+  (get(o4, last(o4)) = r2)) and (equal_prefix(o3, o4) = true)) ->
+  (forall model__split_fields3:us_split_fields. ((model__split_fields3 = {
+  rec__list_allocator__m__t__available = o4;
+  rec__list_allocator__m__t__allocated =
+  (model__split_fields2).rec__list_allocator__m__t__allocated }) -> (let o5 =
+  (model__split_fields3).rec__list_allocator__m__t__allocated : us_rep1 in
+  (let temp___inv_5901 = is_empty(o5) : bool in
+  ((((temp___inv_5901 = true) <->
+  (forall item:int. (not (in_range1(item) and (contains1(o5, item) = true))))) and
+  ((temp___inv_5901 = true) <-> (length1(o5) = 0))) ->
+  ((is_empty((model__split_fields3).rec__list_allocator__m__t__allocated) = true) ->
+  ((length1((model__split_fields3).rec__list_allocator__m__t__allocated) = 0) ->
+  ((last((model__split_fields3).rec__list_allocator__m__t__available) = r2) ->
+  ((get((model__split_fields3).rec__list_allocator__m__t__available,
+  1) = 1) ->
+  ((forall rr:int. (((1 <= rr) and (rr <= r2)) ->
+   (get((model__split_fields3).rec__list_allocator__m__t__available,
+   rr) = rr))) ->
+  (forall rr:int. (((1 <= rr) and (rr <= r2)) ->
+  (contains((model__split_fields3).rec__list_allocator__m__t__available,
+  rr) = true)))))))))))))))))))))))))))))))))))))

@@ -1,0 +1,12 @@
+cvc5 proved 2 out of 5 VCs
+  unproved test.adb_228_14_precondition_1.smt2 (proved by ['z3'])
+  unproved test.adb_335_16_precondition4_1.smt2 (proved by ['z3'])
+  unproved test.ads_85_15_postcondition_1.smt2
+z3 proved 4 out of 5 VCs
+  unproved test.ads_85_15_postcondition_1.smt2
+altergo proved 0 out of 5 VCs
+  unproved test.adb_228_14_precondition_1.ae (proved by ['z3'])
+  unproved test.adb_288_15_postcondition_1.ae (proved by ['cvc5', 'z3'])
+  unproved test.adb_288_314_index_check2_1.ae (proved by ['cvc5', 'z3'])
+  unproved test.adb_335_16_precondition4_1.ae (proved by ['z3'])
+  unproved test.ads_85_15_postcondition_1.ae

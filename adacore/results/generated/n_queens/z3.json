@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "filename": "generated/n_queens/z3/queen.adb_15_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 14730,
+      "time": 0.01
+    },
+    {
+      "filename": "generated/n_queens/z3/queen.adb_16_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 108882,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/n_queens/z3/queen.ads_40_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 29727,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/n_queens/z3/queen.adb_51_13_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 20854,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/n_queens/z3/queen.adb_49_13_precondition3_1.smt2",
+      "status": "unsat",
+      "steps": 18504,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/n_queens/z3/queen.ads_40_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 5185,
+      "time": 0.01
+    }
+  ]
+}

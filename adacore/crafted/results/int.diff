@@ -1,0 +1,96 @@
+cvc5 proved 38 out of 51 VCs
+  unproved computer_division_mod_mult.smt2
+  unproved computer_division_mod_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved euclidean_division_div_mult.smt2 (proved by ['z3'])
+  unproved euclidean_division_div_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved euclidean_division_mod_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved gnat_runtime_abs_div_commutation.smt2 (proved by ['z3', 'colibri'])
+  unproved gnat_runtime_abs_rem_commutation.smt2 (proved by ['colibri'])
+  unproved spark_divisor_mod.smt2
+  unproved spark_divisor_mod_inverse.smt2
+  unproved spark_divisor_transitive.smt2 (proved by ['colibri'])
+  unproved spark_lemmas_mod_symmetry.smt2 (proved by ['colibri'])
+  unproved spark_mult_mod.smt2
+  unproved spark_mult_rem.smt2
+z3 proved 43 out of 51 VCs
+  unproved computer_division_mod_mult.smt2
+  unproved gnat_runtime_abs_rem_commutation.smt2 (proved by ['colibri'])
+  unproved spark_divisor_mod.smt2
+  unproved spark_divisor_mod_inverse.smt2
+  unproved spark_divisor_transitive.smt2 (proved by ['colibri'])
+  unproved spark_lemmas_mod_symmetry.smt2 (proved by ['colibri'])
+  unproved spark_mult_mod.smt2
+  unproved spark_mult_rem.smt2
+altergo proved 8 out of 51 VCs
+  unproved computer_division_div_bound.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_mod.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_mult.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_neg.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved computer_division_mod_bound.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved computer_division_mod_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_mod_mult.smt2
+  unproved computer_division_mod_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved computer_division_mod_sign_neg.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved computer_division_mod_sign_pos.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved computer_division_rounds_towards_zero.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_bound.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_inf_neg.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_minus_1_left.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved euclidean_division_div_mod.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved euclidean_division_div_mult.smt2 (proved by ['z3'])
+  unproved euclidean_division_div_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved euclidean_division_div_unique.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_0.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved euclidean_division_mod_1_left.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_bound.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved euclidean_division_mod_minus_1_left.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_mult.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_neg.smt2 (proved by ['z3', 'colibri'])
+  unproved gnat_runtime_abs_div_commutation.smt2 (proved by ['z3', 'colibri'])
+  unproved gnat_runtime_abs_rem_commutation.smt2 (proved by ['colibri'])
+  unproved gnat_runtime_mult_div.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_divisor_mod.smt2
+  unproved spark_divisor_mod_inverse.smt2
+  unproved spark_divisor_transitive.smt2 (proved by ['colibri'])
+  unproved spark_double_mod.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_double_rem.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_div_is_monotonic.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_div_right_is_monotonic.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_mod_symmetry.smt2 (proved by ['colibri'])
+  unproved spark_lemmas_mult_is_monotonic.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved spark_lemmas_mult_is_strictly_monotonic.smt2 (proved by ['cvc5', 'z3', 'colibri'])
+  unproved spark_lemmas_mult_protect.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_mult_scale.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_mult_mod.smt2
+  unproved spark_mult_rem.smt2
+colibri proved 23 out of 51 VCs
+  unproved computer_division_div_bound.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_mod.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_div_mult.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_mod_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved computer_division_mod_mult.smt2
+  unproved computer_division_rounds_towards_zero.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_1_left.smt2 (proved by ['cvc5', 'z3', 'altergo'])
+  unproved euclidean_division_div_bound.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_inf.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_inf_neg.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_div_mult.smt2 (proved by ['z3'])
+  unproved euclidean_division_div_unique.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_1_left.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_minus_1_left.smt2 (proved by ['cvc5', 'z3'])
+  unproved euclidean_division_mod_mult.smt2 (proved by ['cvc5', 'z3'])
+  unproved gnat_runtime_mult_distribution.smt2 (proved by ['cvc5', 'z3', 'altergo'])
+  unproved gnat_runtime_mult_div.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_divisor_mod.smt2
+  unproved spark_divisor_mod_inverse.smt2
+  unproved spark_double_mod.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_double_rem.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_div_is_monotonic.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_div_right_is_monotonic.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_mult_protect.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_lemmas_mult_scale.smt2 (proved by ['cvc5', 'z3'])
+  unproved spark_mult_mod.smt2
+  unproved spark_mult_rem.smt2

@@ -1,0 +1,542 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+function bool_eq(a: (int,character) farray, a__first: int, a__last: int,
+  b: (int,character) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))))))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic from_string : us_t -> us_image
+
+predicate dynamic_invariant(temp___expr_110: us_t, temp___is_init_106: bool,
+  temp___skip_constant_107: bool, temp___do_toplevel_108: bool,
+  temp___do_typ_inv_109: bool) = ((not (temp___skip_constant_107 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_110),
+  last(temp___expr_110)))
+
+type messagelengtht
+
+logic messagelengthtqtint : messagelengtht -> int
+
+axiom messagelengthtqtaxiom :
+  (forall i:messagelengtht. ((0 <= messagelengthtqtint(i)) and
+  (messagelengthtqtint(i) <= 4096)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 4096))
+
+function to_rep2(x: messagelengtht) : int = messagelengthtqtint(x)
+
+logic of_rep2 : int -> messagelengtht
+
+axiom inversion_axiom2 :
+  (forall x:messagelengtht [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:messagelengtht [to_rep2(x)]. in_range3(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic component__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+type us_split_fields = { rec__tcpip__messaget__data : (int,character) farray;
+rec__tcpip__messaget__length : messagelengtht }
+
+type us_rep = { us_split_fields1 : us_split_fields
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic tcpip__messaget__data__first__bit : int
+
+logic tcpip__messaget__data__last__bit : int
+
+logic tcpip__messaget__data__position : int
+
+axiom tcpip__messaget__data__first__bit_axiom :
+  (0 <= tcpip__messaget__data__first__bit)
+
+axiom tcpip__messaget__data__last__bit_axiom :
+  (tcpip__messaget__data__first__bit <  tcpip__messaget__data__last__bit)
+
+axiom tcpip__messaget__data__position_axiom :
+  (0 <= tcpip__messaget__data__position)
+
+logic tcpip__messaget__length__first__bit : int
+
+logic tcpip__messaget__length__last__bit : int
+
+logic tcpip__messaget__length__position : int
+
+axiom tcpip__messaget__length__first__bit_axiom :
+  (0 <= tcpip__messaget__length__first__bit)
+
+axiom tcpip__messaget__length__last__bit_axiom :
+  (tcpip__messaget__length__first__bit <  tcpip__messaget__length__last__bit)
+
+axiom tcpip__messaget__length__position_axiom :
+  (0 <= tcpip__messaget__length__position)
+
+logic dummy : us_rep
+
+predicate dynamic_invariant1(temp___expr_213: us_rep,
+  temp___is_init_209: bool, temp___skip_constant_210: bool,
+  temp___do_toplevel_211: bool, temp___do_typ_inv_212: bool) = true
+
+logic temp_____aggregate_def_218 : int -> (int,character) farray
+
+predicate default_initial_assumption(temp___expr_215: us_rep,
+  temp___skip_top_level_216: bool) =
+  ((((temp___expr_215).us_split_fields1).rec__tcpip__messaget__data = (let temp___222 =
+  temp_____aggregate_def_218(0) : (int,character) farray in (let temp___223 =
+  temp___222 : (int,character) farray in temp___223))) and
+  (to_rep2(((temp___expr_215).us_split_fields1).rec__tcpip__messaget__length) = 0))
+
+function min(x: int, y: int) : int = (if (x <= y) then x else y)
+
+function max(x: int, y: int) : int = (if (x <= y) then y else x)
+
+axiom Min_r : (forall x:int. forall y:int. ((y <= x) -> (min(x, y) = y)))
+
+axiom Max_l : (forall x:int. forall y:int. ((y <= x) -> (max(x, y) = x)))
+
+axiom Min_comm : (forall x:int. forall y:int. (min(x, y) = min(y, x)))
+
+axiom Max_comm : (forall x:int. forall y:int. (max(x, y) = max(y, x)))
+
+axiom Min_assoc :
+  (forall x:int. forall y:int. forall z:int. (min(min(x, y), z) = min(x,
+  min(y, z))))
+
+axiom Max_assoc :
+  (forall x:int. forall y:int. forall z:int. (max(max(x, y), z) = max(x,
+  max(y, z))))
+
+logic overwrite : us_t, int, us_t -> us_t
+
+logic nullmsg : us_rep
+
+logic outmsg : us_rep
+
+logic getresponsefrommsg : us_rep -> us_t
+
+logic msg__first : integer
+
+logic msg__last : integer
+
+logic getdictionary : us_t, int -> us_t
+
+predicate dynamic_invariant2(temp___expr_280: us_t, temp___is_init_276: bool,
+  temp___skip_constant_277: bool, temp___do_toplevel_278: bool,
+  temp___do_typ_inv_279: bool) = ((not (temp___skip_constant_277 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_280),
+  last(temp___expr_280)))
+
+logic statedict__first : integer
+
+logic statedict__last : integer
+
+logic getstringbykey : us_t, us_t -> us_t
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2))
+
+type messageindext
+
+logic messageindextqtint : messageindext -> int
+
+axiom messageindextqtaxiom :
+  (forall i:messageindext. ((1 <= messageindextqtint(i)) and
+  (messageindextqtint(i) <= 4096)))
+
+type t5s
+
+logic t5sqtint : t5s -> int
+
+axiom t5sqtaxiom :
+  (forall i:t5s. ((1 <= t5sqtint(i)) and (t5sqtint(i) <= 4096)))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size2 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+logic temp_____aggregate_def_172 : int -> (int,character) farray
+
+logic temp___String_Literal_180 : unit -> (int,character) farray
+
+axiom temp___String_Literal_180__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_180(us_void_param)].
+  (((to_rep((temp___String_Literal_180(us_void_param)[1])) = 100) and
+  (to_rep((temp___String_Literal_180(us_void_param)[2])) = 111)) and
+  (((((to_rep((temp___String_Literal_180(us_void_param)[3])) = 111) and
+  (to_rep((temp___String_Literal_180(us_void_param)[4])) = 114)) and
+  ((to_rep((temp___String_Literal_180(us_void_param)[5])) = 46) and
+  (to_rep((temp___String_Literal_180(us_void_param)[6])) = 103))) and
+  (((to_rep((temp___String_Literal_180(us_void_param)[7])) = 101) and
+  (to_rep((temp___String_Literal_180(us_void_param)[8])) = 116)) and
+  (to_rep((temp___String_Literal_180(us_void_param)[9])) = 83))) and
+  ((((to_rep((temp___String_Literal_180(us_void_param)[10])) = 116) and
+  (to_rep((temp___String_Literal_180(us_void_param)[11])) = 97)) and
+  (to_rep((temp___String_Literal_180(us_void_param)[12])) = 116)) and
+  (((to_rep((temp___String_Literal_180(us_void_param)[13])) = 101) and
+  (to_rep((temp___String_Literal_180(us_void_param)[14])) = 40)) and
+  (to_rep((temp___String_Literal_180(us_void_param)[15])) = 41))))))
+
+type t3s
+
+logic t3sqtint : t3s -> int
+
+axiom t3sqtaxiom :
+  (forall i:t3s. ((1 <= t3sqtint(i)) and (t3sqtint(i) <= 4096)))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size3 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+logic temp___String_Literal_302 : unit -> (int,character) farray
+
+axiom temp___String_Literal_302__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_302(us_void_param)].
+  (((to_rep((temp___String_Literal_302(us_void_param)[1])) = 111) and
+  (to_rep((temp___String_Literal_302(us_void_param)[2])) = 112)) and
+  (((((to_rep((temp___String_Literal_302(us_void_param)[3])) = 101) and
+  (to_rep((temp___String_Literal_302(us_void_param)[4])) = 114)) and
+  (to_rep((temp___String_Literal_302(us_void_param)[5])) = 97)) and
+  ((to_rep((temp___String_Literal_302(us_void_param)[6])) = 116) and
+  (to_rep((temp___String_Literal_302(us_void_param)[7])) = 105))) and
+  ((((to_rep((temp___String_Literal_302(us_void_param)[8])) = 111) and
+  (to_rep((temp___String_Literal_302(us_void_param)[9])) = 110)) and
+  (to_rep((temp___String_Literal_302(us_void_param)[10])) = 97)) and
+  ((to_rep((temp___String_Literal_302(us_void_param)[11])) = 108) and
+  (to_rep((temp___String_Literal_302(us_void_param)[12])) = 63))))))
+
+logic rliteral : messagelengtht
+
+axiom rliteral_axiom : (messagelengthtqtint(rliteral) = 0)
+
+axiom nullmsg__def_axiom : (nullmsg = { us_split_fields1 = {
+  rec__tcpip__messaget__data = (let temp___176qtunused =
+  temp_____aggregate_def_172(0) : (int,character) farray in
+  temp_____aggregate_def_172(0)); rec__tcpip__messaget__length = rliteral }
+  })
+
+axiom def_axiom :
+  (forall temp___171:int. (let temp___173 =
+  temp_____aggregate_def_172(temp___171) : (int,character) farray in
+  (forall temp___174:int [(temp___173[temp___174])]. (((1 <= temp___174) and
+  (temp___174 <= 4096)) -> (in_range2(temp___171) ->
+  (to_rep((temp___173[temp___174])) = temp___171))))))
+
+axiom def_axiom1 :
+  (forall temp___217:int. (let temp___219 =
+  temp_____aggregate_def_218(temp___217) : (int,character) farray in
+  (forall temp___220:int [(temp___219[temp___220])]. (((1 <= temp___220) and
+  (temp___220 <= 4096)) -> (in_range2(temp___217) ->
+  (to_rep((temp___219[temp___220])) = temp___217))))))
+
+axiom overwrite__post_axiom :
+  (forall param__source:us_t. forall param__new_item:us_t.
+  (forall param__position:int [overwrite(param__source, param__position,
+  param__new_item)]. ((((dynamic_invariant(param__source, true, false, true,
+  true) and in_range1(param__position)) and
+  dynamic_invariant(param__new_item, true, false, true, true)) and
+  ((let temp___248 = (param__position - 1) : int in
+  (((first(param__source) - 1) <= temp___248) and
+  (temp___248 <= last(param__source)))) and
+  (((length(param__source) - length(param__new_item)) <= (param__position - first(param__source))) ->
+  ((param__position - first(param__source)) <= (2147483647 - length(param__new_item)))))) ->
+  (let result = overwrite(param__source, param__position, param__new_item)
+  : us_t in ((((((first(result) = 1) and
+  (length(result) = max(length(param__source),
+  ((param__position - first(param__source)) + length(param__new_item))))) and
+  ((let temp___256 = (let temp___252 = (param__position - 1) : int in
+  (let temp___251 = first(param__source) : int in
+  of_array(to_array(param__source), temp___251, temp___252))) : us_t in
+  (let temp___254 = (let temp___250 =
+  (param__position - first(param__source)) : int in
+  of_array(to_array(result), 1, temp___250)) : us_t in
+  bool_eq(to_array(temp___254), first(temp___254), last(temp___254),
+  to_array(temp___256), first(temp___256), last(temp___256)))) = true)) and
+  ((let temp___260 = (let temp___258 =
+  ((param__position - first(param__source)) + length(param__new_item))
+  : int in (let temp___257 = ((param__position - first(param__source)) + 1)
+  : int in of_array(to_array(result), temp___257, temp___258))) : us_t in
+  bool_eq(to_array(temp___260), first(temp___260), last(temp___260),
+  to_array(param__new_item), first(param__new_item),
+  last(param__new_item))) = true)) and
+  ((param__position <= (last(param__source) - length(param__new_item))) ->
+  ((let temp___268 = (let temp___264 = last(param__source) : int in
+  (let temp___263 = (param__position + length(param__new_item)) : int in
+  of_array(to_array(param__source), temp___263, temp___264))) : us_t in
+  (let temp___266 = (let temp___262 = last(result) : int in (let temp___261 =
+  (((param__position - first(param__source)) + length(param__new_item)) + 1)
+  : int in of_array(to_array(result), temp___261, temp___262))) : us_t in
+  bool_eq(to_array(temp___266), first(temp___266), last(temp___266),
+  to_array(temp___268), first(temp___268), last(temp___268)))) = true))) and
+  dynamic_invariant(result, true, false, true, true))))))
+
+logic rliteral1 : messagelengtht
+
+axiom rliteral_axiom1 : (messagelengthtqtint(rliteral1) = 15)
+
+ (* "doorapi.adb", line 25, characters 0-0 *)
+goal defqtvc :
+  (forall inmsg__split_fields:us_split_fields. (dynamic_invariant1(nullmsg,
+  true, false, true, true) ->
+  (forall temp___312:(int,character) farray.
+  (((forall temp___175:int [(temp___312[temp___175])].
+    (((1 <= temp___175) and (temp___175 <= 4096)) -> (in_range2(0) ->
+    (to_rep((temp___312[temp___175])) = 0)))) and
+  (temp___312 = temp_____aggregate_def_172(0))) -> (({ us_split_fields1 = {
+  rec__tcpip__messaget__data = temp___312; rec__tcpip__messaget__length =
+  rliteral } } = nullmsg) -> (default_initial_assumption({ us_split_fields1 =
+  inmsg__split_fields }, false) -> (dynamic_invariant1({ us_split_fields1 =
+  inmsg__split_fields }, false, false, true, true) -> (let temp___295 =
+  temp___String_Literal_180(void) : (int,character) farray in (let o =
+  of_array(temp___295, 1, 15) : us_t in (let temp___293 =
+  ((nullmsg).us_split_fields1).rec__tcpip__messaget__data
+  : (int,character) farray in (let o1 = of_array(temp___293, 1, 4096)
+  : us_t in (let temp___297 = overwrite(o1, 1, o) : us_t in
+  ((dynamic_invariant(temp___297, true, false, true, true) and
+  (((((first(temp___297) = 1) and (length(temp___297) = max(length(o1),
+  ((1 - 1) + length(o))))) and ((let temp___233 = (let temp___229 = (1 - 1)
+  : int in (let temp___228 = 1 : int in of_array(temp___293, temp___228,
+  temp___229))) : us_t in (let temp___231 = (let temp___227 = (1 - 1)
+  : int in of_array(to_array(temp___297), 1, temp___227)) : us_t in
+  bool_eq(to_array(temp___231), first(temp___231), last(temp___231),
+  to_array(temp___233), first(temp___233), last(temp___233)))) = true)) and
+  ((let temp___237 = (let temp___235 = ((1 - 1) + length(o)) : int in
+  (let temp___234 = ((1 - 1) + 1) : int in of_array(to_array(temp___297),
+  temp___234, temp___235))) : us_t in bool_eq(to_array(temp___237),
+  first(temp___237), last(temp___237), temp___295, 1, 15)) = true)) and
+  ((1 <= (4096 - length(o))) -> ((let temp___245 = (let temp___241 = 4096
+  : int in (let temp___240 = (1 + length(o)) : int in of_array(temp___293,
+  temp___240, temp___241))) : us_t in (let temp___243 = (let temp___239 =
+  last(temp___297) : int in (let temp___238 = (((1 - 1) + length(o)) + 1)
+  : int in of_array(to_array(temp___297), temp___238, temp___239))) : us_t in
+  bool_eq(to_array(temp___243), first(temp___243), last(temp___243),
+  to_array(temp___245), first(temp___245), last(temp___245)))) = true)))) ->
+  ((if (first(temp___297) <= last(temp___297)) then ((1 <= 4096) and
+  ((last(temp___297) - first(temp___297)) = (4096 - 1))) else (4096 <  1)) ->
+  (({ us_split_fields1 = { rec__tcpip__messaget__data =
+  slide(to_array(temp___297), first(temp___297), 1);
+  rec__tcpip__messaget__length = rliteral1 } } = outmsg) ->
+  (dynamic_invariant1(outmsg, true, false, true, true) ->
+  (forall doorstate:int. ((doorstate = 0) -> (in_range4(doorstate) ->
+  (forall inmsg__split_fields1:us_split_fields. forall commsisok:bool.
+  (dynamic_invariant1({ us_split_fields1 = inmsg__split_fields1 }, true,
+  true, true, true) ->
+  (forall spark__branch:bool. ((spark__branch = commsisok) ->
+  ((spark__branch = true) ->
+  (let doorapi__getdoorstateraw__B_1__msg__assume = getresponsefrommsg({
+  us_split_fields1 = inmsg__split_fields1 }) : us_t in
+  (dynamic_invariant(doorapi__getdoorstateraw__B_1__msg__assume, true, false,
+  true, true) ->
+  (forall msg:(int,character) farray.
+  ((msg = to_array(doorapi__getdoorstateraw__B_1__msg__assume)) ->
+  ((to_rep1(msg__first) = first(doorapi__getdoorstateraw__B_1__msg__assume)) ->
+  ((to_rep1(msg__last) = last(doorapi__getdoorstateraw__B_1__msg__assume)) ->
+  (dynamic_invariant(of_array(msg, to_rep1(msg__first), to_rep1(msg__last)),
+  true, false, true, true) ->
+  (forall o2:int. ((to_rep1(msg__last) = o2) ->
+  (forall o3:int. ((to_rep1(msg__first) = o3) ->
+  (let doorapi__getdoorstateraw__B_1__statedict__assume =
+  getdictionary(of_array(msg, o3, o2), 1) : us_t in
+  (dynamic_invariant2(doorapi__getdoorstateraw__B_1__statedict__assume, true,
+  false, true, true) ->
+  (forall statedict:(int,character) farray.
+  ((statedict = to_array(doorapi__getdoorstateraw__B_1__statedict__assume)) ->
+  ((to_rep1(statedict__first) = first(doorapi__getdoorstateraw__B_1__statedict__assume)) ->
+  ((to_rep1(statedict__last) = last(doorapi__getdoorstateraw__B_1__statedict__assume)) ->
+  (dynamic_invariant2(of_array(statedict, to_rep1(statedict__first),
+  to_rep1(statedict__last)), true, false, true, true) ->
+  (forall o4:int. ((to_rep1(statedict__last) = o4) ->
+  (forall o5:int. ((to_rep1(statedict__first) = o5) -> (let o6 =
+  getstringbykey(of_array(statedict, o5, o4),
+  of_array(temp___String_Literal_302(void), 1, 12)) : us_t in
+  (dynamic_invariant(o6, true, false, true, true) ->
+  attr__ATTRIBUTE_VALUE__pre_check(from_string(o6))))))))))))))))))))))))))))))))))))))))))))))))))

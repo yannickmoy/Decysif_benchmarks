@@ -1,0 +1,3 @@
+cvc5:{'unknown': 6}
+z3:{'unsat': 6}
+altergo:{'unsat': 6}

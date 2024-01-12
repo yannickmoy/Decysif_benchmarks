@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "filename": "generated/tictactoe/cvc5/tictactoe.adb_127_10_precondition_1.smt2",
+      "status": "unsat",
+      "steps": 306129,
+      "time": 1.63
+    },
+    {
+      "filename": "generated/tictactoe/cvc5/tictactoe.adb_13_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 296952,
+      "time": 2.82
+    }
+  ]
+}

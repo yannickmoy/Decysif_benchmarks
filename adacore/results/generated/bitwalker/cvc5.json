@@ -1,0 +1,184 @@
+{
+  "results": [
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_226_22_assert_1.smt2",
+      "status": "unknown",
+      "steps": 92015,
+      "time": 0.13
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_70_10_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 23593,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_61_16_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 6333,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_232_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 217823,
+      "time": 1.62
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_129_16_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 284040,
+      "time": 1.92
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_225_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 18008,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_81_10_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 14008,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_102_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 12361,
+      "time": 0.1
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_102_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 6698,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_70_10_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 23661,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_44_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 115435,
+      "time": 1.87
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_12_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 4501,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_231_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 17973,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_99_22_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 7009,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_12_14_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 4487,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_99_22_assert_1.smt2",
+      "status": "unsat",
+      "steps": 7010,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_123_16_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 122525,
+      "time": 0.22
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_44_25_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 14297,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_34_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 16275,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_61_16_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 6232,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_73_16_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 2353,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_81_10_postcondition2_1.smt2",
+      "status": "unsat",
+      "steps": 14222,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_238_17_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 408681,
+      "time": 9.26
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_29_16_postcondition_1.smt2",
+      "status": "timeout",
+      "steps": 476527,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.ads_47_46_contract_case3_1.smt2",
+      "status": "unsat",
+      "steps": 117274,
+      "time": 1.64
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_247_33_loop_invariant_init_1.smt2",
+      "status": "unknown",
+      "steps": 8596,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_34_25_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 16270,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_135_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 309894,
+      "time": 9.88
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bvext.ads_33_8_precondition4_1.smt2",
+      "status": "timeout",
+      "steps": 663617,
+      "time": 9.83
+    },
+    {
+      "filename": "generated/bitwalker/cvc5/bitwalker.adb_135_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 379949,
+      "time": 9.82
+    }
+  ]
+}

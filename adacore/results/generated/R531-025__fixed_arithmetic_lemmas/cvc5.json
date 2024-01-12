@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/test_fixed_points.ads_28_18_overflow_check_1.smt2",
+      "status": "unsat",
+      "steps": 7300,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_71_20_test_fixed_points.adb_6_4_overflow_check2_1.smt2",
+      "status": "unknown",
+      "steps": 13175,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/test_fixed_points.ads_28_18_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 8210,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_52_34_test_fixed_points.adb_6_4_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 7977,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_52_18_test_fixed_points.adb_6_4_overflow_check_1.smt2",
+      "status": "unsat",
+      "steps": 7120,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/test_fixed_points.ads_28_34_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 8392,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_52_18_test_fixed_points.adb_6_4_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 7970,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/test_fixed_points.ads_36_20_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 15504,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/test_fixed_points.ads_28_34_overflow_check_1.smt2",
+      "status": "unsat",
+      "steps": 14002,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_32_19_test_fixed_points.adb_6_4_overflow_check2_1.smt2",
+      "status": "unsat",
+      "steps": 9305,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_32_14_test_fixed_points.adb_6_4_postcondition_1.smt2",
+      "status": "unknown",
+      "steps": 128419,
+      "time": 1.41
+    },
+    {
+      "filename": "generated/R531-025__fixed_arithmetic_lemmas/cvc5/spark-lemmas-fixed_point_arithmetic.ads_52_14_test_fixed_points.adb_6_4_postcondition_1.smt2",
+      "status": "unknown",
+      "steps": 843033,
+      "time": 6.72
+    }
+  ]
+}

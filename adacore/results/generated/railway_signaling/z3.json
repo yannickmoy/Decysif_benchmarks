@@ -1,0 +1,88 @@
+{
+  "results": [
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_160_22_loop_invariant_preserv_1.smt2",
+      "status": "unsat",
+      "steps": 74775,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_85_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 57821,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_113_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 84896,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.ads_228_14_postcondition_1.smt2",
+      "status": "unsat",
+      "steps": 239714,
+      "time": 0.07
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_132_19_assert_1.smt2",
+      "status": "unsat",
+      "steps": 145735,
+      "time": 0.08
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_59_13_assert_1.smt2",
+      "status": "unsat",
+      "steps": 47420,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_160_22_loop_invariant_init_1.smt2",
+      "status": "unsat",
+      "steps": 245359,
+      "time": 0.12
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_84_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 1375308,
+      "time": 0.33
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_168_31_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 2090465,
+      "time": 0.67
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_65_13_assert_1.smt2",
+      "status": "unsat",
+      "steps": 5846883,
+      "time": 1.63
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_77_25_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 14098989,
+      "time": 2.56
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_77_25_assert_1.smt2",
+      "status": "unsat",
+      "steps": 16110749,
+      "time": 4.83
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_113_25_assert2_1.smt2",
+      "status": "unsat",
+      "steps": 20792248,
+      "time": 6.18
+    },
+    {
+      "filename": "generated/railway_signaling/z3/trains.adb_85_25_assert2_1.smt2",
+      "status": "timeout",
+      "steps": 35368104,
+      "time": 9.95
+    }
+  ]
+}

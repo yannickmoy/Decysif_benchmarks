@@ -1,0 +1,208 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range1(low) and in_range1(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy : us_rep
+
+logic is_open : us_rep -> bool
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2))
+
+logic mode : us_rep -> int
+
+logic is_readable : us_rep -> bool
+
+logic is_writable : us_rep -> bool
+
+logic is_standard_input : us_rep -> bool
+
+logic is_standard_output : us_rep -> bool
+
+logic is_standard_error : us_rep -> bool
+
+logic is_standard_file : us_rep -> bool
+
+predicate dynamic_invariant(temp___expr_110: us_t, temp___is_init_106: bool,
+  temp___skip_constant_107: bool, temp___do_toplevel_108: bool,
+  temp___do_typ_inv_109: bool) = ((not (temp___skip_constant_107 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_110),
+  last(temp___expr_110)))
+
+logic name : us_rep -> us_t
+
+logic form : us_rep -> us_t
+
+logic line_length : us_rep -> int
+
+type count
+
+logic countqtint : count -> int
+
+axiom countqtaxiom :
+  (forall i:count. ((0 <= countqtint(i)) and (countqtint(i) <= 2147483647)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic page_length : us_rep -> int
+
+logic end_of_file : us_rep -> bool
+
+logic to__ : int
+
+type positive_count
+
+logic positive_countqtint : positive_count -> int
+
+axiom positive_countqtaxiom :
+  (forall i:positive_count. ((1 <= positive_countqtint(i)) and
+  (positive_countqtint(i) <= 2147483647)))
+
+predicate in_range5(x: int) = ((1 <= x) and (x <= 2147483647))
+
+axiom is_open__post_axiom : true
+
+axiom mode__post_axiom :
+  (forall param__file:us_rep [mode(param__file)].
+  ((is_open(param__file) = true) -> in_range3(mode(param__file))))
+
+axiom is_readable__post_axiom : true
+
+axiom is_readable__def_axiom :
+  (forall param__file:us_rep [is_readable(param__file)].
+  ((is_readable(param__file) = true) <-> ((is_open(param__file) = true) and
+  (mode(param__file) = 0))))
+
+axiom is_writable__post_axiom : true
+
+axiom is_writable__def_axiom :
+  (forall param__file:us_rep [is_writable(param__file)].
+  ((is_writable(param__file) = true) <-> ((is_open(param__file) = true) and
+  ((mode(param__file) = 1) or (mode(param__file) = 2)))))
+
+axiom is_standard_input__post_axiom : true
+
+axiom is_standard_output__post_axiom : true
+
+axiom is_standard_error__post_axiom : true
+
+axiom line_length__post_axiom :
+  (forall param__file:us_rep [line_length(param__file)].
+  ((is_writable(param__file) = true) -> in_range4(line_length(param__file))))
+
+axiom end_of_file__post_axiom : true
+
+ (* "spark-text_io.ads", line 420, characters 0-0 *)
+goal defqtvc :
+  (forall file:us_rep. (in_range5(to__) ->
+  ((if ((is_writable(file) = true) and
+  (0 <  line_length(file))) then (to__ <= line_length(file)) else ((is_readable(file) = true) ->
+  (not (end_of_file(file) = true)))) -> (((is_standard_file(file) = true) <->
+  (((is_standard_input(file) = true) or (is_standard_output(file) = true)) or
+  (is_standard_error(file) = true))) -> (in_range4(page_length(file)) ->
+  (in_range4(line_length(file)) -> (dynamic_invariant(form(file), true,
+  false, true, true) -> (dynamic_invariant(name(file), true, false, true,
+  true) -> (((is_readable(file) = true) <-> ((is_open(file) = true) and
+  (mode(file) = 0))) -> (is_open(file) = true))))))))))

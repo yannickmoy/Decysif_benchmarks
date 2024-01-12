@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "filename": "generated/tictactoe/altergo/tictactoe.adb_13_14_postcondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    },
+    {
+      "filename": "generated/tictactoe/altergo/tictactoe.adb_127_10_precondition_1.ae",
+      "status": "timeout",
+      "steps": 0,
+      "time": 0
+    }
+  ]
+}

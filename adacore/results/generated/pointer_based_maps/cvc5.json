@@ -1,0 +1,118 @@
+{
+  "results": [
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.ads_44_14_postcondition3_1.smt2",
+      "status": "unsat",
+      "steps": 491264,
+      "time": 2.62
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_140_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1327374,
+      "time": 9.74
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_144_47_precondition2_1.smt2",
+      "status": "timeout",
+      "steps": 1340852,
+      "time": 9.72
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_130_60_precondition2_1.smt2",
+      "status": "timeout",
+      "steps": 1421234,
+      "time": 9.74
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_109_7_resource_leak_at_end_of_scope_1.smt2",
+      "status": "timeout",
+      "steps": 1168655,
+      "time": 9.75
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_142_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 1438415,
+      "time": 9.75
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_137_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1448363,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_86_14_resource_leak_at_end_of_scope_1.smt2",
+      "status": "timeout",
+      "steps": 1013538,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.ads_44_14_postcondition4_1.smt2",
+      "status": "timeout",
+      "steps": 1409450,
+      "time": 9.6
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_114_33_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1454372,
+      "time": 9.73
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.ads_47_14_resource_leak_at_end_of_scope_1.smt2",
+      "status": "timeout",
+      "steps": 1175071,
+      "time": 9.77
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_108_7_resource_leak_at_end_of_scope_1.smt2",
+      "status": "timeout",
+      "steps": 1105434,
+      "time": 9.75
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.ads_44_14_postcondition5_1.smt2",
+      "status": "timeout",
+      "steps": 1283496,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_127_13_loop_invariant_preserv2_1.smt2",
+      "status": "timeout",
+      "steps": 1331499,
+      "time": 9.7
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_124_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1244302,
+      "time": 9.71
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.ads_52_14_resource_leak_at_end_of_scope_1.smt2",
+      "status": "timeout",
+      "steps": 1173784,
+      "time": 9.82
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_121_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1381955,
+      "time": 9.69
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_142_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1366573,
+      "time": 9.74
+    },
+    {
+      "filename": "generated/pointer_based_maps/cvc5/my_map.adb_127_13_loop_invariant_preserv_1.smt2",
+      "status": "timeout",
+      "steps": 1365070,
+      "time": 9.7
+    }
+  ]
+}

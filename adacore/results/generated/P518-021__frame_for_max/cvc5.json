@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_23_13_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 12585,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.ads_25_14_postcondition2_1.smt2",
+      "status": "unknown",
+      "steps": 18417,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.ads_18_14_postcondition2_1.smt2",
+      "status": "unknown",
+      "steps": 6348,
+      "time": 0.02
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_91_20_frame_condition.adb_122_10_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 16138,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.ads_11_14_postcondition2_1.smt2",
+      "status": "unknown",
+      "steps": 13867,
+      "time": 0.04
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_91_20_frame_condition.adb_150_10_loop_invariant_preserv2_1.smt2",
+      "status": "unknown",
+      "steps": 16901,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.ads_18_14_postcondition3_1.smt2",
+      "status": "unknown",
+      "steps": 6445,
+      "time": 0.03
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_210_16_frame_condition.adb_233_7_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 18150,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.ads_25_14_postcondition3_1.smt2",
+      "status": "unknown",
+      "steps": 19512,
+      "time": 0.05
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_42_13_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 18929,
+      "time": 0.06
+    },
+    {
+      "filename": "generated/P518-021__frame_for_max/cvc5/frame_condition.adb_215_16_frame_condition.adb_234_7_loop_invariant_preserv_1.smt2",
+      "status": "unknown",
+      "steps": 52533,
+      "time": 0.31
+    }
+  ]
+}

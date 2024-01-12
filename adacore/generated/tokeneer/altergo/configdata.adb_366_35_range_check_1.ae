@@ -1,0 +1,77 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 255))
+
+type us_rep
+
+logic value__size : int
+
+logic object__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+logic dummy : us_rep
+
+type tdurationtB
+
+logic tdurationtBqtint : tdurationtB -> int
+
+axiom tdurationtBqtaxiom :
+  (forall i:tdurationtB. (((- 2147483648) <= tdurationtBqtint(i)) and
+  (tdurationtBqtint(i) <= 2147483647)))
+
+type durationt
+
+logic durationtqtint : durationt -> int
+
+axiom durationtqtaxiom :
+  (forall i:durationt. ((0 <= durationtqtint(i)) and
+  (durationtqtint(i) <= 864000)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 864000))
+
+ (* "configdata.adb", line 342, characters 0-0 *)
+goal defqtvc :
+  (forall theduration:int. forall rawhours:int. forall rawminutes:int.
+  forall char:int. (in_range2(theduration) -> (in_range(rawhours) ->
+  (in_range(rawminutes) -> (in_range1(char) ->
+  (forall success:bool. forall rawhours1:int. (in_range(rawhours1) ->
+  (forall spark__branch:bool. ((spark__branch = andb(andb(success,
+  (if (0 <= rawhours1) then true else false)),
+  (if (rawhours1 <= 23) then true else false))) -> ((spark__branch = true) ->
+  (forall char1:int. (in_range1(char1) ->
+  (forall success1:bool. forall rawminutes1:int. (in_range(rawminutes1) ->
+  (forall spark__branch1:bool. ((spark__branch1 = andb(andb(andb(success1,
+  (if (char1 = 58) then true else false)),
+  (if (0 <= rawminutes1) then true else false)),
+  (if (rawminutes1 <= 59) then true else false))) ->
+  ((spark__branch1 = true) -> (in_range2(rawminutes1) -> (0 <= rawhours1)))))))))))))))))))

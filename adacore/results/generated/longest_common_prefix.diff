@@ -1,0 +1,5 @@
+cvc5 proved 0 out of 2 VCs
+  unproved lcp.adb_21_30_loop_invariant_preserv_1.smt2 (proved by ['z3', 'altergo'])
+  unproved lcp.ads_14_5_postcondition_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 2 out of 2 VCs
+altergo proved 2 out of 2 VCs

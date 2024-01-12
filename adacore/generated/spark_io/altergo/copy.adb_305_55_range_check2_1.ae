@@ -1,0 +1,1013 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+function andb(x: bool, y: bool) : bool = match_bool(x, y, false)
+
+function orb(x: bool, y: bool) : bool = match_bool(x, true, y)
+
+function notb(x: bool) : bool = match_bool(x, false, true)
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+function length(x: int, y: int) : int =
+  (if (x <= y) then ((y - x) + 1) else 0)
+
+function of_int(i: int) : bool = (if (i = 0) then false else true)
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
+
+type character
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic to_rep : character -> int
+
+logic of_rep : int -> character
+
+axiom inversion_axiom :
+  (forall x:character [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:character [to_rep(x)]. in_range3(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic slide : (int,character) farray, int, int -> (int,character) farray
+
+axiom slide_eq :
+  (forall a:(int,character) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,character) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic concat : (int,character) farray, int, int, (int,character) farray, int,
+  int -> (int,character) farray
+
+axiom concat_def :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a_first:int. forall a_last:int. forall b_first:int.
+  forall b_last:int.
+  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
+  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
+  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
+  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
+
+function bool_eq(a: (int,character) farray, a__first: int, a__last: int,
+  b: (int,character) farray, b__first: int, b__last: int) : bool =
+  (if ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))) then true else false)
+
+axiom bool_eq_rev :
+  (forall a:(int,character) farray. forall b:(int,character) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq(b, b__first, b__last, a, a__first,
+  a__last) = true) ->
+  ((if (a__first <= a__last) then ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first))) else (b__last <  b__first)) and
+  (forall temp___idx_105:int. (((a__first <= temp___idx_105) and
+  (temp___idx_105 <= a__last)) ->
+  (to_rep((a[temp___idx_105])) = to_rep((b[((b__first - a__first) + temp___idx_105)])))))))))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
+
+axiom inversion_axiom1 :
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type t = { rec__first : integer; rec__last : integer
+}
+
+logic mk : int, int -> t
+
+axiom mk_def :
+  (forall f:int. forall l:int [mk(f, l)]. (in_range(f) -> (in_range(l) ->
+  ((to_rep1((mk(f, l)).rec__first) = f) and (to_rep1((mk(f,
+  l)).rec__last) = l)))))
+
+predicate dynamic_property(range_first: int, range_last: int, low: int,
+  high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (int,character) farray; rt : t
+}
+
+function to_array(a: us_t) : (int,character) farray = (a).elts
+
+function of_array(a: (int,character) farray, f: int, l: int) : us_t = {
+  elts = a; rt = mk(f, l) }
+
+function first(a: us_t) : int = to_rep1(((a).rt).rec__first)
+
+function last(a: us_t) : int = to_rep1(((a).rt).rec__last)
+
+function length1(a: us_t) : int =
+  (if (first(a) <= last(a)) then ((last(a) - first(a)) + 1) else 0)
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+type us_rep
+
+logic value__size1 : int
+
+logic object__size1 : int
+
+logic alignment1 : int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 : (0 <= object__size1)
+
+axiom alignment_axiom1 : (0 <= alignment1)
+
+logic dummy : us_rep
+
+logic is_open : us_rep -> bool
+
+logic is_readable : us_rep -> bool
+
+logic mode : us_rep -> int
+
+logic is_writable : us_rep -> bool
+
+logic status : us_rep -> int
+
+type file_status
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 10))
+
+logic yes : (int,character) farray
+
+logic no : (int,character) farray
+
+logic to_rep2 : file_status -> int
+
+logic of_rep2 : int -> file_status
+
+axiom inversion_axiom2 :
+  (forall x:file_status [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 :
+  (forall x:file_status [to_rep2(x)]. in_range4(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+type us_split_discrs = { rec__ada___spark__text_io__character_result__status
+: file_status }
+
+type us_split_fields = { rec__ada___spark__text_io__character_result__item :
+character }
+
+type us_rep1 = { us_split_discrs1 : us_split_discrs; us_split_fields1 :
+us_split_fields
+}
+
+logic value__size2 : int
+
+logic object__size2 : int
+
+logic alignment2 : int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 : (0 <= object__size2)
+
+axiom alignment_axiom2 : (0 <= alignment2)
+
+logic ada___spark__text_io__character_result__status__first__bit : int
+
+logic ada___spark__text_io__character_result__status__last__bit : int
+
+logic ada___spark__text_io__character_result__status__position : int
+
+axiom ada___spark__text_io__character_result__status__first__bit_axiom :
+  (0 <= ada___spark__text_io__character_result__status__first__bit)
+
+axiom ada___spark__text_io__character_result__status__last__bit_axiom :
+  (ada___spark__text_io__character_result__status__first__bit <  ada___spark__text_io__character_result__status__last__bit)
+
+axiom ada___spark__text_io__character_result__status__position_axiom :
+  (0 <= ada___spark__text_io__character_result__status__position)
+
+logic ada___spark__text_io__character_result__item__first__bit : int
+
+logic ada___spark__text_io__character_result__item__last__bit : int
+
+logic ada___spark__text_io__character_result__item__position : int
+
+axiom ada___spark__text_io__character_result__item__first__bit_axiom :
+  (0 <= ada___spark__text_io__character_result__item__first__bit)
+
+axiom ada___spark__text_io__character_result__item__last__bit_axiom :
+  (ada___spark__text_io__character_result__item__first__bit <  ada___spark__text_io__character_result__item__last__bit)
+
+axiom ada___spark__text_io__character_result__item__position_axiom :
+  (0 <= ada___spark__text_io__character_result__item__position)
+
+logic dummy1 : us_rep1
+
+logic c__attr__constrained : bool
+
+predicate default_initial_assumption(temp___expr_307: us_rep1,
+  temp___skip_top_level_308: bool) =
+  (to_rep2(((temp___expr_307).us_split_discrs1).rec__ada___spark__text_io__character_result__status) = 3)
+
+predicate dynamic_invariant(temp___expr_110: us_t, temp___is_init_106: bool,
+  temp___skip_constant_107: bool, temp___do_toplevel_108: bool,
+  temp___do_typ_inv_109: bool) = ((not (temp___skip_constant_107 = true)) ->
+  dynamic_property(1, 2147483647, first(temp___expr_110),
+  last(temp___expr_110)))
+
+logic name : us_rep -> us_t
+
+logic form : us_rep -> us_t
+
+logic line_length : us_rep -> int
+
+logic page_length : us_rep -> int
+
+logic is_standard_output : us_rep -> bool
+
+logic is_standard_file : us_rep -> bool
+
+logic is_standard_input : us_rep -> bool
+
+logic is_standard_error : us_rep -> bool
+
+logic clast : int
+
+logic clast1 : int
+
+logic length_of_yes_no : int
+
+logic to_upper : int -> int
+
+logic to_upper1 : us_t -> us_t
+
+logic end_of_file : us_rep -> bool
+
+type tcount_rangeB
+
+logic tcount_rangeBqtint : tcount_rangeB -> int
+
+axiom tcount_rangeBqtaxiom :
+  (forall i:tcount_rangeB. (((- 2147483648) <= tcount_rangeBqtint(i)) and
+  (tcount_rangeBqtint(i) <= 2147483647)))
+
+type count_range
+
+logic count_rangeqtint : count_range -> int
+
+axiom count_rangeqtaxiom :
+  (forall i:count_range. ((0 <= count_rangeqtint(i)) and
+  (count_rangeqtint(i) <= 2147483647)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
+
+type tTresponseSP1
+
+logic tTresponseSP1qtint : tTresponseSP1 -> int
+
+axiom tTresponseSP1qtaxiom :
+  (forall i:tTresponseSP1. ((1 <= tTresponseSP1qtint(i)) and
+  (tTresponseSP1qtint(i) <= 512)))
+
+logic value__size3 : int
+
+logic object__size3 : int
+
+logic component__size1 : int
+
+logic alignment3 : int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 : (0 <= object__size3)
+
+axiom component__size_axiom1 : (0 <= component__size1)
+
+axiom alignment_axiom3 : (0 <= alignment3)
+
+type tTyes_noSP1
+
+logic tTyes_noSP1qtint : tTyes_noSP1 -> int
+
+axiom tTyes_noSP1qtaxiom :
+  (forall i:tTyes_noSP1. ((1 <= tTyes_noSP1qtint(i)) and
+  (tTyes_noSP1qtint(i) <= 4)))
+
+logic value__size4 : int
+
+logic object__size4 : int
+
+logic component__size2 : int
+
+logic alignment4 : int
+
+axiom value__size_axiom4 : (0 <= value__size4)
+
+axiom object__size_axiom4 : (0 <= object__size4)
+
+axiom component__size_axiom2 : (0 <= component__size2)
+
+axiom alignment_axiom4 : (0 <= alignment4)
+
+type tTyesSP1
+
+logic tTyesSP1qtint : tTyesSP1 -> int
+
+axiom tTyesSP1qtaxiom :
+  (forall i:tTyesSP1. ((1 <= tTyesSP1qtint(i)) and (tTyesSP1qtint(i) <= 3)))
+
+logic value__size5 : int
+
+logic object__size5 : int
+
+logic component__size3 : int
+
+logic alignment5 : int
+
+axiom value__size_axiom5 : (0 <= value__size5)
+
+axiom object__size_axiom5 : (0 <= object__size5)
+
+axiom component__size_axiom3 : (0 <= component__size3)
+
+axiom alignment_axiom5 : (0 <= alignment5)
+
+logic temp___String_Literal_173 : unit -> (int,character) farray
+
+axiom temp___String_Literal_173__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_173(us_void_param)].
+  (((to_rep((temp___String_Literal_173(us_void_param)[1])) = 89) and
+  (to_rep((temp___String_Literal_173(us_void_param)[2])) = 69)) and
+  (to_rep((temp___String_Literal_173(us_void_param)[3])) = 83)))
+
+type tTnoSP1
+
+logic tTnoSP1qtint : tTnoSP1 -> int
+
+axiom tTnoSP1qtaxiom :
+  (forall i:tTnoSP1. ((1 <= tTnoSP1qtint(i)) and (tTnoSP1qtint(i) <= 2)))
+
+logic value__size6 : int
+
+logic object__size6 : int
+
+logic component__size4 : int
+
+logic alignment6 : int
+
+axiom value__size_axiom6 : (0 <= value__size6)
+
+axiom object__size_axiom6 : (0 <= object__size6)
+
+axiom component__size_axiom4 : (0 <= component__size4)
+
+axiom alignment_axiom6 : (0 <= alignment6)
+
+logic temp___String_Literal_176 : unit -> (int,character) farray
+
+axiom temp___String_Literal_176__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_176(us_void_param)].
+  ((to_rep((temp___String_Literal_176(us_void_param)[1])) = 78) and
+  (to_rep((temp___String_Literal_176(us_void_param)[2])) = 79)))
+
+logic temp___String_Literal_441 : unit -> (int,character) farray
+
+axiom temp___String_Literal_441__def_axiom : true
+
+logic temp___String_Literal_507 : unit -> (int,character) farray
+
+axiom temp___String_Literal_507__def_axiom : true
+
+logic temp___String_Literal_529 : unit -> (int,character) farray
+
+axiom temp___String_Literal_529__def_axiom :
+  (forall us_void_param:unit [temp___String_Literal_529(us_void_param)].
+  (((to_rep((temp___String_Literal_529(us_void_param)[1])) = 84) and
+  (to_rep((temp___String_Literal_529(us_void_param)[2])) = 104)) and
+  ((((to_rep((temp___String_Literal_529(us_void_param)[3])) = 101) and
+  (to_rep((temp___String_Literal_529(us_void_param)[4])) = 32)) and
+  ((to_rep((temp___String_Literal_529(us_void_param)[5])) = 102) and
+  (to_rep((temp___String_Literal_529(us_void_param)[6])) = 105))) and
+  (((to_rep((temp___String_Literal_529(us_void_param)[7])) = 108) and
+  (to_rep((temp___String_Literal_529(us_void_param)[8])) = 101)) and
+  (to_rep((temp___String_Literal_529(us_void_param)[9])) = 32)))))
+
+logic temp___String_Literal_560 : unit -> (int,character) farray
+
+axiom temp___String_Literal_560__def_axiom : true
+
+logic is_lower : int -> bool
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 2))
+
+type count
+
+logic countqtint : count -> int
+
+axiom countqtaxiom :
+  (forall i:count. ((0 <= countqtint(i)) and (countqtint(i) <= 2147483647)))
+
+predicate in_range7(x: int) = ((0 <= x) and (x <= 2147483647))
+
+axiom is_open__post_axiom : true
+
+axiom mode__post_axiom :
+  (forall param__file:us_rep [mode(param__file)].
+  ((is_open(param__file) = true) -> in_range6(mode(param__file))))
+
+axiom is_readable__post_axiom : true
+
+axiom is_readable__def_axiom :
+  (forall param__file:us_rep [is_readable(param__file)].
+  ((is_readable(param__file) = true) <-> ((is_open(param__file) = true) and
+  (mode(param__file) = 0))))
+
+axiom is_writable__post_axiom : true
+
+axiom is_writable__def_axiom :
+  (forall param__file:us_rep [is_writable(param__file)].
+  ((is_writable(param__file) = true) <-> ((is_open(param__file) = true) and
+  ((mode(param__file) = 1) or (mode(param__file) = 2)))))
+
+axiom status__post_axiom :
+  (forall param__file:us_rep [status(param__file)].
+  in_range4(status(param__file)))
+
+axiom name__post_axiom :
+  (forall param__file:us_rep [name(param__file)].
+  ((is_open(param__file) = true) -> dynamic_invariant(name(param__file),
+  true, false, true, true)))
+
+axiom form__post_axiom :
+  (forall param__file:us_rep [form(param__file)].
+  ((is_open(param__file) = true) -> dynamic_invariant(form(param__file),
+  true, false, true, true)))
+
+axiom line_length__post_axiom :
+  (forall param__file:us_rep [line_length(param__file)].
+  ((is_writable(param__file) = true) -> in_range7(line_length(param__file))))
+
+axiom page_length__post_axiom :
+  (forall param__file:us_rep [page_length(param__file)].
+  ((is_writable(param__file) = true) -> in_range7(page_length(param__file))))
+
+axiom is_standard_output__post_axiom : true
+
+axiom is_standard_input__post_axiom : true
+
+axiom is_standard_error__post_axiom : true
+
+axiom is_standard_file__post_axiom : true
+
+axiom is_standard_file__def_axiom :
+  (forall param__file:us_rep [is_standard_file(param__file)].
+  ((is_standard_file(param__file) = true) <->
+  (((is_standard_input(param__file) = true) or
+  (is_standard_output(param__file) = true)) or
+  (is_standard_error(param__file) = true))))
+
+axiom is_lower__post_axiom :
+  (forall param__item:int [is_lower(param__item)]. (in_range3(param__item) ->
+  ((is_lower(param__item) = true) <-> (((97 <= param__item) and
+  (param__item <= 122)) or (((223 <= param__item) and
+  (param__item <= 246)) or ((248 <= param__item) and
+  (param__item <= 255)))))))
+
+axiom to_upper__post_axiom :
+  (forall param__item:int [to_upper(param__item)]. (in_range3(param__item) ->
+  (let result = to_upper(param__item) : int in
+  ((result = (if ((is_lower(param__item) = true) and
+  (notb(orb((if (param__item = 223) then true else false),
+  (if (param__item = 255) then true else false))) = true)) then (param__item + (if ((65 <= param__item) and
+  (param__item <= 90)) then (- 32) else (- 32))) else param__item)) and
+  in_range3(result)))))
+
+axiom end_of_file__post_axiom : true
+
+ (* "copy.adb", line 32, characters 0-0 *)
+goal defqtvc :
+  (forall standard_error:us_rep. forall source:us_rep.
+  forall destination:us_rep. forall count1:int. forall last1:int.
+  forall last_of_yes_no:int. forall c__split_fields:character.
+  forall c__split_discrs:file_status. (((((status(standard_error) = 1) and
+  (is_writable(standard_error) = true)) and
+  (not (is_open(source) = true))) and (not (is_open(destination) = true))) ->
+  (in_range5(count1) -> ((temp___String_Literal_173(void) = yes) ->
+  ((temp___String_Literal_176(void) = no) -> (in_range1(last1) ->
+  (in_range1(last_of_yes_no) -> ((c__attr__constrained = false) ->
+  (default_initial_assumption({ us_split_discrs1 = {
+  rec__ada___spark__text_io__character_result__status = c__split_discrs };
+  us_split_fields1 = { rec__ada___spark__text_io__character_result__item =
+  c__split_fields } }, false) ->
+  (forall count2:int. ((count2 = 0) ->
+  (forall count_limit_reached:bool. ((count_limit_reached = of_int(0)) ->
+  (forall spark__branch:bool. forall standard_input:us_rep.
+  forall standard_output:us_rep. forall standard_error1:us_rep.
+  forall source1:us_rep. forall response:(int,character) farray.
+  forall last2:int. ((((is_writable(standard_error) = true) <->
+  ((is_open(standard_error) = true) and ((mode(standard_error) = 1) or
+  (mode(standard_error) = 2)))) and (in_range4(status(standard_error)) and
+  (exists standard_input1:us_rep. exists standard_output1:us_rep.
+  exists source2:us_rep. exists last3:int.
+  ((((status(standard_error1) = 1) and
+  (is_writable(standard_error1) = true)) and
+  (not (is_open(source2) = true))) and
+  (((standard_error1 = standard_error) and in_range1(last3)) and (let o =
+  status(standard_output1) : int in (in_range4(o) and
+  (exists spark__branch1:bool.
+  ((spark__branch1 = (if (o = 1) then true else false)) and
+  ((spark__branch1 = true) and
+  (exists standard_output2:us_rep.
+  ((((((((is_open(standard_output2) = true) and
+  (mode(standard_output2) = 1)) and ((let temp___332 = name(standard_output1)
+  : us_t in (let temp___330 = name(standard_output2) : us_t in
+  bool_eq(to_array(temp___330), first(temp___330), last(temp___330),
+  to_array(temp___332), first(temp___332), last(temp___332)))) = true)) and
+  ((let temp___336 = form(standard_output1) : us_t in (let temp___334 =
+  form(standard_output2) : us_t in bool_eq(to_array(temp___334),
+  first(temp___334), last(temp___334), to_array(temp___336),
+  first(temp___336), last(temp___336)))) = true)) and
+  (line_length(standard_output2) = line_length(standard_output1))) and
+  (page_length(standard_output2) = page_length(standard_output1))) and
+  (is_standard_output(standard_output2) = true)) and
+  (exists o1:integer. ((to_rep1(o1) = 512) and
+  (exists o2:integer. ((to_rep1(o2) = 1) and
+  (exists param__item:(int,character) farray.
+  (((((((is_readable(standard_input) = true) and ((let temp___348 =
+  name(standard_input1) : us_t in (let temp___346 = name(standard_input)
+  : us_t in bool_eq(to_array(temp___346), first(temp___346),
+  last(temp___346), to_array(temp___348), first(temp___348),
+  last(temp___348)))) = true)) and ((let temp___352 = form(standard_input1)
+  : us_t in (let temp___350 = form(standard_input) : us_t in
+  bool_eq(to_array(temp___350), first(temp___350), last(temp___350),
+  to_array(temp___352), first(temp___352), last(temp___352)))) = true)) and
+  (is_standard_input(standard_input) = true)) and
+  (if (status(standard_input) = 1) then (((to_rep1(o2) - 1) <= last2) and
+  (last2 <= to_rep1(o1))) else (last2 = 0))) and
+  (dynamic_invariant(of_array(param__item, to_rep1(o2), to_rep1(o1)), true,
+  true, true, true) and in_range1(last2))) and
+  ((response = slide(param__item, 1, 1)) and ((let o3 =
+  status(standard_input) : int in (in_range4(o3) and
+  (exists spark__branch2:bool.
+  ((spark__branch2 = andb(andb((if (o3 = 1) then true else false),
+  (if (1 <= last2) then true else false)),
+  (if (last2 <= 512) then true else false))) and ((spark__branch2 = true) and
+  ((last2 = clast) and (in_range1(clast) and (((1 <= clast) -> (((1 <= 1) and
+  (1 <= 512)) and ((1 <= clast) and (clast <= 512)))) and
+  ((if (status(source1) = 1) then (((((((mode(source1) = 0) and
+  ((let temp___357 = name(source1) : us_t in bool_eq(to_array(temp___357),
+  first(temp___357), last(temp___357), response, 1, clast)) = true)) and
+  ((let temp___359 = form(source1) : us_t in bool_eq(to_array(temp___359),
+  first(temp___359), last(temp___359), temp___String_Literal_441(void), 1,
+  0)) = true)) and (is_open(source1) = true)) and
+  (line_length(source1) = 0)) and (page_length(source1) = 0)) and
+  (not (is_standard_file(source1) = true))) else (not (is_open(source1) = true))) and
+  (let temp___444 = status(source1) : int in (in_range4(temp___444) and
+  ((spark__branch = (if (temp___444 = 1) then true else false)) and
+  (spark__branch = true))))))))))))) and
+  (standard_output = standard_output2))))))))))))))))))))) ->
+  (forall spark__branch1:bool. forall standard_output1:us_rep.
+  forall standard_error2:us_rep. forall source2:us_rep.
+  forall destination1:us_rep. ((((is_readable(source1) = true) <->
+  ((is_open(source1) = true) and (mode(source1) = 0))) and
+  (((is_standard_file(source1) = true) <->
+  (((is_standard_input(source1) = true) or
+  (is_standard_output(source1) = true)) or
+  (is_standard_error(source1) = true))) and
+  (((is_writable(standard_error1) = true) <->
+  ((is_open(standard_error1) = true) and ((mode(standard_error1) = 1) or
+  (mode(standard_error1) = 2)))) and (in_range4(status(standard_error1)) and
+  (exists standard_input1:us_rep. exists standard_output2:us_rep.
+  exists standard_error3:us_rep. exists destination2:us_rep.
+  exists last3:int. exists last_of_yes_no1:int.
+  (((((((status(standard_error3) = 1) and
+  (is_writable(standard_error3) = true)) and
+  (not (is_open(destination2) = true))) and (is_open(source2) = true)) and
+  (not (is_standard_file(source2) = true))) and
+  (is_readable(source2) = true)) and
+  (((((standard_error3 = standard_error1) and in_range1(last3)) and
+  in_range1(last_of_yes_no1)) and (source2 = source1)) and (let o =
+  status(standard_output2) : int in (in_range4(o) and
+  (exists spark__branch2:bool.
+  ((spark__branch2 = (if (o = 1) then true else false)) and
+  ((spark__branch2 = true) and
+  (exists standard_output3:us_rep.
+  ((((((((is_open(standard_output3) = true) and
+  (mode(standard_output3) = 1)) and ((let temp___332 = name(standard_output2)
+  : us_t in (let temp___330 = name(standard_output3) : us_t in
+  bool_eq(to_array(temp___330), first(temp___330), last(temp___330),
+  to_array(temp___332), first(temp___332), last(temp___332)))) = true)) and
+  ((let temp___336 = form(standard_output2) : us_t in (let temp___334 =
+  form(standard_output3) : us_t in bool_eq(to_array(temp___334),
+  first(temp___334), last(temp___334), to_array(temp___336),
+  first(temp___336), last(temp___336)))) = true)) and
+  (line_length(standard_output3) = line_length(standard_output2))) and
+  (page_length(standard_output3) = page_length(standard_output2))) and
+  (is_standard_output(standard_output3) = true)) and
+  (exists o1:integer. ((to_rep1(o1) = 512) and
+  (exists o2:integer. ((to_rep1(o2) = 1) and
+  (exists standard_input2:us_rep. exists last4:int.
+  exists param__item:(int,character) farray.
+  (((((((is_readable(standard_input2) = true) and ((let temp___348 =
+  name(standard_input1) : us_t in (let temp___346 = name(standard_input2)
+  : us_t in bool_eq(to_array(temp___346), first(temp___346),
+  last(temp___346), to_array(temp___348), first(temp___348),
+  last(temp___348)))) = true)) and ((let temp___352 = form(standard_input1)
+  : us_t in (let temp___350 = form(standard_input2) : us_t in
+  bool_eq(to_array(temp___350), first(temp___350), last(temp___350),
+  to_array(temp___352), first(temp___352), last(temp___352)))) = true)) and
+  (is_standard_input(standard_input2) = true)) and
+  (if (status(standard_input2) = 1) then (((to_rep1(o2) - 1) <= last4) and
+  (last4 <= to_rep1(o1))) else (last4 = 0))) and
+  (dynamic_invariant(of_array(param__item, to_rep1(o2), to_rep1(o1)), true,
+  true, true, true) and in_range1(last4))) and
+  (exists response1:(int,character) farray. ((response1 = slide(param__item,
+  1, 1)) and (let o3 = status(standard_input2) : int in (in_range4(o3) and
+  (exists spark__branch3:bool.
+  ((spark__branch3 = andb(andb((if (o3 = 1) then true else false),
+  (if (1 <= last4) then true else false)),
+  (if (last4 <= 512) then true else false))) and ((spark__branch3 = true) and
+  ((last4 = clast1) and (in_range1(clast1) and (((1 <= clast1) ->
+  (((1 <= 1) and (1 <= 512)) and ((1 <= clast1) and (clast1 <= 512)))) and
+  (exists destination3:us_rep.
+  ((if (status(destination3) = 1) then (((((((mode(destination3) = 1) and
+  ((let temp___369 = name(destination3) : us_t in
+  bool_eq(to_array(temp___369), first(temp___369), last(temp___369),
+  response1, 1, clast1)) = true)) and ((let temp___371 = form(destination3)
+  : us_t in bool_eq(to_array(temp___371), first(temp___371),
+  last(temp___371), temp___String_Literal_507(void), 1, 0)) = true)) and
+  (is_open(destination3) = true)) and (line_length(destination3) = 0)) and
+  (page_length(destination3) = 0)) and
+  (not (is_standard_file(destination3) = true))) else (not (is_open(destination3) = true))) and
+  (let temp___510 = status(destination3) : int in (in_range4(temp___510) and
+  (exists spark__branch4:bool.
+  ((spark__branch4 = (if (temp___510 = 1) then true else false)) and
+  (if (spark__branch4 = true) then ((((spark__branch1 = spark__branch4) and
+  (standard_output1 = standard_output3)) and
+  (standard_error2 = standard_error3)) and
+  (destination1 = destination3)) else (exists spark__branch5:bool.
+                                      ((spark__branch5 = (if (temp___510 = 5) then true else false)) and
+                                      ((not (spark__branch5 = true)) and
+                                      (exists spark__branch6:bool.
+                                      ((spark__branch6 = (if (temp___510 = 6) then true else false)) and
+                                      ((spark__branch6 = true) and (let o4 =
+                                      status(standard_output3) : int in
+                                      (in_range4(o4) and
+                                      (exists spark__branch7:bool.
+                                      ((spark__branch7 = (if (o4 = 1) then true else false)) and
+                                      ((spark__branch7 = true) and
+                                      (((1 <= clast1) -> (((1 <= 1) and
+                                      (1 <= 512)) and ((1 <= clast1) and
+                                      (clast1 <= 512)))) and
+                                      (in_range2(((1 + (length(1,
+                                      24) + length(1, clast1))) - 1)) and
+                                      (exists standard_output4:us_rep.
+                                      ((((((((is_open(standard_output4) = true) and
+                                      (mode(standard_output4) = 1)) and
+                                      ((let temp___363 =
+                                      name(standard_output3) : us_t in
+                                      (let temp___361 =
+                                      name(standard_output4) : us_t in
+                                      bool_eq(to_array(temp___361),
+                                      first(temp___361), last(temp___361),
+                                      to_array(temp___363),
+                                      first(temp___363),
+                                      last(temp___363)))) = true)) and
+                                      ((let temp___367 =
+                                      form(standard_output3) : us_t in
+                                      (let temp___365 =
+                                      form(standard_output4) : us_t in
+                                      bool_eq(to_array(temp___365),
+                                      first(temp___365), last(temp___365),
+                                      to_array(temp___367),
+                                      first(temp___367),
+                                      last(temp___367)))) = true)) and
+                                      (line_length(standard_output4) = line_length(standard_output3))) and
+                                      (page_length(standard_output4) = page_length(standard_output3))) and
+                                      (is_standard_output(standard_output4) = true)) and
+                                      (exists spark__branch8:bool.
+                                      exists standard_output5:us_rep.
+                                      ((let o5 = status(standard_output4)
+                                      : int in (in_range4(o5) and
+                                      ((spark__branch8 = (if (o5 = 1) then true else false)) and
+                                      (if (spark__branch8 = true) then ((((1 <= clast1) ->
+                                      (((1 <= 1) and (1 <= 512)) and
+                                      ((1 <= clast1) and
+                                      (clast1 <= 512)))) and (let o6 =
+                                      ((1 + (length(1, 9) + length(1,
+                                      clast1))) - 1) : int in
+                                      (in_range2(o6) and
+                                      ((not (length1(of_array(concat(temp___String_Literal_529(void),
+                                      1, 9, response1, 1, clast1), 1,
+                                      o6)) = 0)) ->
+                                      in_range2(((1 + (length(1,
+                                      o6) + length(1, 16))) - 1)))))) and
+                                      (((((((is_open(standard_output5) = true) and
+                                      (mode(standard_output5) = 1)) and
+                                      ((let temp___363 =
+                                      name(standard_output4) : us_t in
+                                      (let temp___361 =
+                                      name(standard_output5) : us_t in
+                                      bool_eq(to_array(temp___361),
+                                      first(temp___361), last(temp___361),
+                                      to_array(temp___363),
+                                      first(temp___363),
+                                      last(temp___363)))) = true)) and
+                                      ((let temp___367 =
+                                      form(standard_output4) : us_t in
+                                      (let temp___365 =
+                                      form(standard_output5) : us_t in
+                                      bool_eq(to_array(temp___365),
+                                      first(temp___365), last(temp___365),
+                                      to_array(temp___367),
+                                      first(temp___367),
+                                      last(temp___367)))) = true)) and
+                                      (line_length(standard_output5) = line_length(standard_output4))) and
+                                      (page_length(standard_output5) = page_length(standard_output4))) and
+                                      (is_standard_output(standard_output5) = true))) else (standard_output5 = standard_output4))))) and
+                                      (let o5 = status(standard_output5)
+                                      : int in (in_range4(o5) and
+                                      (exists spark__branch9:bool.
+                                      ((spark__branch9 = (if (o5 = 1) then true else false)) and
+                                      ((spark__branch9 = true) and
+                                      (exists standard_output6:us_rep.
+                                      ((((((((is_open(standard_output6) = true) and
+                                      (mode(standard_output6) = 1)) and
+                                      ((let temp___363 =
+                                      name(standard_output5) : us_t in
+                                      (let temp___361 =
+                                      name(standard_output6) : us_t in
+                                      bool_eq(to_array(temp___361),
+                                      first(temp___361), last(temp___361),
+                                      to_array(temp___363),
+                                      first(temp___363),
+                                      last(temp___363)))) = true)) and
+                                      ((let temp___367 =
+                                      form(standard_output5) : us_t in
+                                      (let temp___365 =
+                                      form(standard_output6) : us_t in
+                                      bool_eq(to_array(temp___365),
+                                      first(temp___365), last(temp___365),
+                                      to_array(temp___367),
+                                      first(temp___367),
+                                      last(temp___367)))) = true)) and
+                                      (line_length(standard_output6) = line_length(standard_output5))) and
+                                      (page_length(standard_output6) = page_length(standard_output5))) and
+                                      (is_standard_output(standard_output6) = true)) and
+                                      (((is_writable(standard_error3) = true) <->
+                                      ((is_open(standard_error3) = true) and
+                                      ((mode(standard_error3) = 1) or
+                                      (mode(standard_error3) = 2)))) and
+                                      (in_range4(status(standard_error3)) and
+                                      (exists standard_input3:us_rep.
+                                      exists destination4:us_rep.
+                                      exists last_of_yes_no2:int.
+                                      ((((not (is_open(destination4) = true)) and
+                                      (status(standard_error2) = 1)) and
+                                      (is_writable(standard_error2) = true)) and
+                                      ((((standard_error2 = standard_error3) and
+                                      in_range1(last_of_yes_no2)) and
+                                      (destination4 = destination3)) and
+                                      (exists o6:integer.
+                                      ((to_rep1(o6) = 4) and
+                                      (exists o7:integer.
+                                      ((to_rep1(o7) = 1) and
+                                      (exists standard_input4:us_rep.
+                                      exists last_of_yes_no3:int.
+                                      exists param__item1:(int,character) farray.
+                                      (((((((is_readable(standard_input4) = true) and
+                                      ((let temp___348 =
+                                      name(standard_input3) : us_t in
+                                      (let temp___346 = name(standard_input4)
+                                      : us_t in bool_eq(to_array(temp___346),
+                                      first(temp___346), last(temp___346),
+                                      to_array(temp___348),
+                                      first(temp___348),
+                                      last(temp___348)))) = true)) and
+                                      ((let temp___352 =
+                                      form(standard_input3) : us_t in
+                                      (let temp___350 = form(standard_input4)
+                                      : us_t in bool_eq(to_array(temp___350),
+                                      first(temp___350), last(temp___350),
+                                      to_array(temp___352),
+                                      first(temp___352),
+                                      last(temp___352)))) = true)) and
+                                      (is_standard_input(standard_input4) = true)) and
+                                      (if (status(standard_input4) = 1) then (((to_rep1(o7) - 1) <= last_of_yes_no3) and
+                                      (last_of_yes_no3 <= to_rep1(o6))) else (last_of_yes_no3 = 0))) and
+                                      (dynamic_invariant(of_array(param__item1,
+                                      to_rep1(o7), to_rep1(o6)), true, true,
+                                      true, true) and
+                                      in_range1(last_of_yes_no3))) and
+                                      (exists yes_no:(int,character) farray.
+                                      ((yes_no = slide(param__item1, 1,
+                                      1)) and (let o8 =
+                                      status(standard_input4) : int in
+                                      (in_range4(o8) and
+                                      (exists spark__branch10:bool.
+                                      ((spark__branch10 = (if (o8 = 1) then true else false)) and
+                                      ((spark__branch10 = true) and (let o9 =
+                                      ((last_of_yes_no3 - 1) + 1) : int in
+                                      (in_range(o9) and (in_range1(o9) and
+                                      ((o9 = length_of_yes_no) and
+                                      (in_range1(length_of_yes_no) and
+                                      (exists spark__branch11:bool.
+                                      ((spark__branch11 = andb((if (0 <  length_of_yes_no) then true else false),
+                                      (if (length_of_yes_no <= 3) then true else false))) and
+                                      ((spark__branch11 = true) and
+                                      (exists o10:bool.
+                                      ((if (length_of_yes_no <  3) then (((1 <= last_of_yes_no3) ->
+                                      (((1 <= 1) and (1 <= 4)) and
+                                      ((1 <= last_of_yes_no3) and
+                                      (last_of_yes_no3 <= 4)))) and
+                                      (let o11 = of_array(yes_no, 1,
+                                      last_of_yes_no3) : us_t in
+                                      (let temp___578 = to_upper1(o11)
+                                      : us_t in
+                                      ((dynamic_invariant(temp___578, true,
+                                      false, true, true) and
+                                      (((first(temp___578) = 1) and
+                                      (length1(temp___578) = length1(o11))) and
+                                      (forall j:int.
+                                      (((first(temp___578) <= j) and
+                                      (j <= last(temp___578))) ->
+                                      (to_rep((to_array(temp___578)[j])) = to_upper(to_rep((yes_no[(1 + (j - 1))])))))))) and
+                                      (((1 <= length_of_yes_no) ->
+                                      (((1 <= 1) and (1 <= 2)) and
+                                      ((1 <= length_of_yes_no) and
+                                      (length_of_yes_no <= 2)))) and
+                                      (o10 = bool_eq(no, 1, length_of_yes_no,
+                                      to_array(temp___578),
+                                      first(temp___578),
+                                      last(temp___578)))))))) else (o10 = false)) and
+                                      (exists spark__branch12:bool.
+                                      ((spark__branch12 = o10) and
+                                      ((not (spark__branch12 = true)) and
+                                      (((1 <= last_of_yes_no3) ->
+                                      (((1 <= 1) and (1 <= 4)) and
+                                      ((1 <= last_of_yes_no3) and
+                                      (last_of_yes_no3 <= 4)))) and
+                                      (let o11 = of_array(yes_no, 1,
+                                      last_of_yes_no3) : us_t in
+                                      (let temp___555 = to_upper1(o11)
+                                      : us_t in
+                                      ((dynamic_invariant(temp___555, true,
+                                      false, true, true) and
+                                      (((first(temp___555) = 1) and
+                                      (length1(temp___555) = length1(o11))) and
+                                      (forall j:int.
+                                      (((first(temp___555) <= j) and
+                                      (j <= last(temp___555))) ->
+                                      (to_rep((to_array(temp___555)[j])) = to_upper(to_rep((yes_no[(1 + (j - 1))])))))))) and
+                                      (((1 <= length_of_yes_no) ->
+                                      (((1 <= 1) and (1 <= 3)) and
+                                      ((1 <= length_of_yes_no) and
+                                      (length_of_yes_no <= 3)))) and
+                                      (exists spark__branch13:bool.
+                                      ((spark__branch13 = bool_eq(yes, 1,
+                                      length_of_yes_no, to_array(temp___555),
+                                      first(temp___555),
+                                      last(temp___555))) and
+                                      ((spark__branch13 = true) and
+                                      (((1 <= clast1) -> (((1 <= 1) and
+                                      (1 <= 512)) and ((1 <= clast1) and
+                                      (clast1 <= 512)))) and
+                                      ((if (status(destination1) = 1) then (((((((mode(destination1) = 1) and
+                                      ((let temp___357 = name(destination1)
+                                      : us_t in bool_eq(to_array(temp___357),
+                                      first(temp___357), last(temp___357),
+                                      response1, 1, clast1)) = true)) and
+                                      ((let temp___359 = form(destination1)
+                                      : us_t in bool_eq(to_array(temp___359),
+                                      first(temp___359), last(temp___359),
+                                      temp___String_Literal_560(void), 1,
+                                      0)) = true)) and
+                                      (is_open(destination1) = true)) and
+                                      (line_length(destination1) = 0)) and
+                                      (page_length(destination1) = 0)) and
+                                      (not (is_standard_file(destination1) = true))) else (not (is_open(destination1) = true))) and
+                                      (let o12 = status(destination1)
+                                      : int in (in_range4(o12) and
+                                      ((spark__branch1 = (if (o12 = 1) then true else false)) and
+                                      (spark__branch1 = true)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) ->
+  ((not (end_of_file(source2) = true)) ->
+  (((is_standard_file(destination1) = true) <->
+  (((is_standard_input(destination1) = true) or
+  (is_standard_output(destination1) = true)) or
+  (is_standard_error(destination1) = true))) ->
+  (((is_standard_file(source2) = true) <->
+  (((is_standard_input(source2) = true) or
+  (is_standard_output(source2) = true)) or
+  (is_standard_error(source2) = true))) ->
+  (((is_writable(destination1) = true) <->
+  ((is_open(destination1) = true) and ((mode(destination1) = 1) or
+  (mode(destination1) = 2)))) -> (((is_readable(source2) = true) <->
+  ((is_open(source2) = true) and (mode(source2) = 0))) ->
+  (((is_writable(standard_error2) = true) <->
+  ((is_open(standard_error2) = true) and ((mode(standard_error2) = 1) or
+  (mode(standard_error2) = 2)))) -> (in_range4(status(standard_error2)) ->
+  (forall standard_output2:us_rep. forall standard_error3:us_rep.
+  forall source3:us_rep. forall destination2:us_rep. forall count3:int.
+  forall c__split_discrs1:file_status.
+  (((((((((status(standard_error3) = 1) and
+  (is_writable(standard_error3) = true)) and (is_open(source3) = true)) and
+  (is_open(destination2) = true)) and (is_readable(source3) = true)) and
+  (is_writable(destination2) = true)) and
+  (not (is_standard_file(source3) = true))) and
+  (not (is_standard_file(destination2) = true))) ->
+  ((andb((if (((standard_output2 = standard_output1) and
+  (standard_error3 = standard_error2)) and
+  in_range5(count3)) then true else false),
+  (if (not (end_of_file(source3) = true)) then true else false)) = true) ->
+  (forall source4:us_rep. forall c__split_discrs2:file_status.
+  (((((is_readable(source4) = true) and ((let temp___378 = name(source3)
+  : us_t in (let temp___376 = name(source4) : us_t in
+  bool_eq(to_array(temp___376), first(temp___376), last(temp___376),
+  to_array(temp___378), first(temp___378), last(temp___378)))) = true)) and
+  ((let temp___382 = form(source3) : us_t in (let temp___380 = form(source4)
+  : us_t in bool_eq(to_array(temp___380), first(temp___380),
+  last(temp___380), to_array(temp___382), first(temp___382),
+  last(temp___382)))) = true)) and ((is_standard_file(source4) = true) <->
+  (is_standard_file(source3) = true))) -> (((c__attr__constrained = true) ->
+  (c__split_discrs2 = c__split_discrs1)) ->
+  (forall o:int. ((to_rep2(c__split_discrs2) = o) ->
+  (forall spark__branch2:bool.
+  ((spark__branch2 = (if (o = 1) then true else false)) ->
+  ((not (spark__branch2 = true)) -> (let o1 = status(standard_output2)
+  : int in (in_range4(o1) ->
+  (forall spark__branch3:bool.
+  ((spark__branch3 = (if (o1 = 1) then true else false)) ->
+  ((spark__branch3 = true) -> (let temp___636 = name(source4) : us_t in
+  (dynamic_invariant(temp___636, true, false, true, true) ->
+  (((1 + (length(1, 29) + length(first(temp___636),
+  last(temp___636)))) - 1) <= 2147483647)))))))))))))))))))))))))))))))))))))))))))

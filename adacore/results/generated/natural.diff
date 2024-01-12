@@ -1,0 +1,4 @@
+cvc5 proved 0 out of 1 VCs
+  unproved natural_set.adb_19_25_assert_1.smt2 (proved by ['z3', 'altergo'])
+z3 proved 1 out of 1 VCs
+altergo proved 1 out of 1 VCs

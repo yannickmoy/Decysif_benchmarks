@@ -1,0 +1,314 @@
+(* this is a prelude for Alt-Ergo integer arithmetic *)
+logic match_bool : bool, 'a, 'a -> 'a
+
+axiom match_bool_True :
+  (forall z:'a. forall z1:'a. (match_bool(true, z, z1) = z))
+
+axiom match_bool_False :
+  (forall z:'a. forall z1:'a. (match_bool(false, z, z1) = z1))
+
+type us_private
+
+logic us_null_ext__ : us_private
+
+logic div : int, int -> int
+
+logic mod : int, int -> int
+
+axiom Div_mod :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (x = ((y * div(x,
+  y)) + mod(x, y)))))
+
+axiom Div_bound :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> ((0 <= div(x,
+  y)) and (div(x, y) <= x))))
+
+axiom Mod_bound :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (((-abs_int(y)) <  mod(x,
+  y)) and (mod(x, y) <  abs_int(y)))))
+
+axiom Div_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) -> (0 <= div(x, y))))
+
+axiom Mod_sign_pos :
+  (forall x:int. forall y:int. (((0 <= x) and (not (y = 0))) -> (0 <= mod(x,
+  y))))
+
+axiom Mod_sign_neg :
+  (forall x:int. forall y:int. (((x <= 0) and (not (y = 0))) -> (mod(x,
+  y) <= 0)))
+
+axiom Rounds_toward_zero :
+  (forall x:int. forall y:int. ((not (y = 0)) -> (abs_int((div(x,
+  y) * y)) <= abs_int(x))))
+
+axiom Div_1 : (forall x:int. (div(x, 1) = x))
+
+axiom Mod_1 : (forall x:int. (mod(x, 1) = 0))
+
+axiom Div_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (div(x, y) = 0)))
+
+axiom Mod_inf :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> (mod(x, y) = x)))
+
+axiom Div_mult :
+  (forall x:int. forall y:int. forall z:int [div(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (div(((x * y) + z),
+  x) = (y + div(z, x)))))
+
+axiom Mod_mult :
+  (forall x:int. forall y:int. forall z:int [mod(((x * y) + z), x)].
+  (((0 <  x) and ((0 <= y) and (0 <= z))) -> (mod(((x * y) + z), x) = mod(z,
+  x))))
+
+axiom Div_mod1 :
+  (forall x:int. forall y:int. ((not (y = 0)) ->
+  (x = ((y * (x / y)) + (x % y)))))
+
+axiom Mod_bound1 :
+  (forall x:int. forall y:int. ((not (y = 0)) -> ((0 <= (x % y)) and
+  ((x % y) <  abs_int(y)))))
+
+axiom Div_unique :
+  (forall x:int. forall y:int. forall q:int. ((0 <  y) ->
+  ((((q * y) <= x) and (x <  ((q * y) + y))) -> ((x / y) = q))))
+
+axiom Div_bound1 :
+  (forall x:int. forall y:int. (((0 <= x) and (0 <  y)) ->
+  ((0 <= (x / y)) and ((x / y) <= x))))
+
+axiom Mod_11 : (forall x:int. ((x % 1) = 0))
+
+axiom Div_11 : (forall x:int. ((x / 1) = x))
+
+axiom Div_inf1 :
+  (forall x:int. forall y:int. (((0 <= x) and (x <  y)) -> ((x / y) = 0)))
+
+axiom Div_inf_neg :
+  (forall x:int. forall y:int. (((0 <  x) and (x <= y)) ->
+  (((-x) / y) = (- 1))))
+
+axiom Mod_0 : (forall y:int. ((not (y = 0)) -> ((0 % y) = 0)))
+
+axiom Div_1_left : (forall y:int. ((1 <  y) -> ((1 / y) = 0)))
+
+axiom Div_minus1_left : (forall y:int. ((1 <  y) -> (((- 1) / y) = (- 1))))
+
+axiom Mod_1_left : (forall y:int. ((1 <  y) -> ((1 % y) = 1)))
+
+axiom Mod_minus1_left :
+  (forall y:int [((- 1) % y)]. ((1 <  y) -> (((- 1) % y) = (y - 1))))
+
+axiom Div_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) / x)].
+  ((0 <  x) -> ((((x * y) + z) / x) = (y + (z / x)))))
+
+axiom Mod_mult1 :
+  (forall x:int. forall y:int. forall z:int [(((x * y) + z) % x)].
+  ((0 <  x) -> ((((x * y) + z) % x) = (z % x))))
+
+type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic a : (int,integer) farray
+
+logic i : int
+
+type u
+
+logic uqtint : u -> int
+
+axiom uqtaxiom : (forall i1:u. ((1 <= uqtint(i1)) and (uqtint(i1) <= 10)))
+
+predicate in_range1(x: int) = ((1 <= x) and (x <= 10))
+
+logic value__size : int
+
+logic object__size : int
+
+logic component__size : int
+
+logic alignment : int
+
+axiom value__size_axiom : (0 <= value__size)
+
+axiom object__size_axiom : (0 <= object__size)
+
+axiom component__size_axiom : (0 <= component__size)
+
+axiom alignment_axiom : (0 <= alignment)
+
+axiom cmod_cases :
+  (forall n:int. forall d:int [mod(n, d)]. (((0 <= n) -> ((0 <  d) -> (mod(n,
+  d) = (n % d)))) and (((n <= 0) -> ((0 <  d) -> (mod(n,
+  d) = (-((-n) % d))))) and (((0 <= n) -> ((d <  0) -> (mod(n,
+  d) = (n % (-d))))) and ((n <= 0) -> ((d <  0) -> (mod(n,
+  d) = (-((-n) % (-d))))))))))
+
+ (* "binary_search.ads", line 17, characters 0-0 *)
+goal defqtvc :
+  (forall left:int. forall right:int. forall med:int. (in_range(i) ->
+  ((forall i1:int. (((1 <= i1) and (i1 <= 10)) ->
+   (forall i2:int. (((i1 <= i2) and (i2 <= 10)) ->
+   (to_rep((a[i1])) <= to_rep((a[i2]))))))) ->
+  (in_range1(left) -> (in_range1(right) -> (in_range1(med) ->
+  (forall left1:int. ((left1 = 1) ->
+  (forall right1:int. ((right1 = 10) ->
+  (forall o:bool.
+  ((exists o1:int. ((to_rep((a[left1])) = o1) and
+   (if (i <  o1) then (o = true) else (exists o2:int.
+                                      ((to_rep((a[right1])) = o2) and
+                                      (o = (if (o2 <  i) then true else false))))))) ->
+  (forall spark__branch:bool. ((spark__branch = o) ->
+  ((not (spark__branch = true)) -> (let o1 = (left1 + div((right1 - left1),
+  2)) : int in (in_range1(o1) ->
+  (forall med1:int. ((med1 = o1) ->
+  (forall spark__branch1:bool. forall left2:int. forall right2:int.
+  ((exists o2:int. ((to_rep((a[med1])) = o2) and
+   (exists spark__branch2:bool.
+   ((spark__branch2 = (if (o2 <  i) then true else false)) and
+   (if (spark__branch2 = true) then (((let o3 = (med1 + 1) : int in
+   (in_range1(o3) and (left2 = o3))) and
+   (spark__branch1 = spark__branch2)) and
+   (right2 = right1)) else ((exists o3:int. ((to_rep((a[med1])) = o3) and
+                            ((spark__branch1 = (if (i <  o3) then true else false)) and
+                            ((spark__branch1 = true) and (let o4 = (med1 - 1)
+                            : int in (in_range1(o4) and (right2 = o4))))))) and
+   (left2 = left1))))))) ->
+  (let o2 = (left2 + div((right2 - left2), 2)) : int in (in_range1(o2) ->
+  (forall med2:int. ((med2 = o2) ->
+  (forall spark__branch2:bool. forall left3:int. forall right3:int.
+  ((exists o3:int. ((to_rep((a[med2])) = o3) and
+   (exists spark__branch3:bool.
+   ((spark__branch3 = (if (o3 <  i) then true else false)) and
+   (if (spark__branch3 = true) then (((let o4 = (med2 + 1) : int in
+   (in_range1(o4) and (left3 = o4))) and
+   (spark__branch2 = spark__branch3)) and
+   (right3 = right2)) else ((exists o4:int. ((to_rep((a[med2])) = o4) and
+                            ((spark__branch2 = (if (i <  o4) then true else false)) and
+                            ((spark__branch2 = true) and (let o5 = (med2 - 1)
+                            : int in (in_range1(o5) and (right3 = o5))))))) and
+   (left3 = left2))))))) ->
+  (let o3 = (left3 + div((right3 - left3), 2)) : int in (in_range1(o3) ->
+  (forall med3:int. ((med3 = o3) ->
+  (forall spark__branch3:bool. forall left4:int. forall right4:int.
+  ((exists o4:int. ((to_rep((a[med3])) = o4) and
+   (exists spark__branch4:bool.
+   ((spark__branch4 = (if (o4 <  i) then true else false)) and
+   (if (spark__branch4 = true) then (((let o5 = (med3 + 1) : int in
+   (in_range1(o5) and (left4 = o5))) and
+   (spark__branch3 = spark__branch4)) and
+   (right4 = right3)) else ((exists o5:int. ((to_rep((a[med3])) = o5) and
+                            ((spark__branch3 = (if (i <  o5) then true else false)) and
+                            ((spark__branch3 = true) and (let o6 = (med3 - 1)
+                            : int in (in_range1(o6) and (right4 = o6))))))) and
+   (left4 = left3))))))) ->
+  (let o4 = (left4 + div((right4 - left4), 2)) : int in (in_range1(o4) ->
+  (forall med4:int. ((med4 = o4) ->
+  (forall spark__branch4:bool. forall left5:int. forall right5:int.
+  ((exists o5:int. ((to_rep((a[med4])) = o5) and
+   (exists spark__branch5:bool.
+   ((spark__branch5 = (if (o5 <  i) then true else false)) and
+   (if (spark__branch5 = true) then (((let o6 = (med4 + 1) : int in
+   (in_range1(o6) and (left5 = o6))) and
+   (spark__branch4 = spark__branch5)) and
+   (right5 = right4)) else ((exists o6:int. ((to_rep((a[med4])) = o6) and
+                            ((spark__branch4 = (if (i <  o6) then true else false)) and
+                            ((spark__branch4 = true) and (let o7 = (med4 - 1)
+                            : int in (in_range1(o7) and (right5 = o7))))))) and
+   (left5 = left4))))))) ->
+  (let o5 = (left5 + div((right5 - left5), 2)) : int in (in_range1(o5) ->
+  (forall med5:int. ((med5 = o5) ->
+  (forall spark__branch5:bool. forall left6:int. forall right6:int.
+  ((exists o6:int. ((to_rep((a[med5])) = o6) and
+   (exists spark__branch6:bool.
+   ((spark__branch6 = (if (o6 <  i) then true else false)) and
+   (if (spark__branch6 = true) then (((let o7 = (med5 + 1) : int in
+   (in_range1(o7) and (left6 = o7))) and
+   (spark__branch5 = spark__branch6)) and
+   (right6 = right5)) else ((exists o7:int. ((to_rep((a[med5])) = o7) and
+                            ((spark__branch5 = (if (i <  o7) then true else false)) and
+                            ((spark__branch5 = true) and (let o8 = (med5 - 1)
+                            : int in (in_range1(o8) and (right6 = o8))))))) and
+   (left6 = left5))))))) ->
+  (let o6 = (left6 + div((right6 - left6), 2)) : int in (in_range1(o6) ->
+  (forall med6:int. ((med6 = o6) ->
+  (forall spark__branch6:bool. forall left7:int. forall right7:int.
+  ((exists o7:int. ((to_rep((a[med6])) = o7) and
+   (exists spark__branch7:bool.
+   ((spark__branch7 = (if (o7 <  i) then true else false)) and
+   (if (spark__branch7 = true) then (((let o8 = (med6 + 1) : int in
+   (in_range1(o8) and (left7 = o8))) and
+   (spark__branch6 = spark__branch7)) and
+   (right7 = right6)) else ((exists o8:int. ((to_rep((a[med6])) = o8) and
+                            ((spark__branch6 = (if (i <  o8) then true else false)) and
+                            ((spark__branch6 = true) and (let o9 = (med6 - 1)
+                            : int in (in_range1(o9) and (right7 = o9))))))) and
+   (left7 = left6))))))) ->
+  (let o7 = (left7 + div((right7 - left7), 2)) : int in (in_range1(o7) ->
+  (forall med7:int. ((med7 = o7) ->
+  (forall spark__branch7:bool. forall left8:int. forall right8:int.
+  ((exists o8:int. ((to_rep((a[med7])) = o8) and
+   (exists spark__branch8:bool.
+   ((spark__branch8 = (if (o8 <  i) then true else false)) and
+   (if (spark__branch8 = true) then (((let o9 = (med7 + 1) : int in
+   (in_range1(o9) and (left8 = o9))) and
+   (spark__branch7 = spark__branch8)) and
+   (right8 = right7)) else ((exists o9:int. ((to_rep((a[med7])) = o9) and
+                            ((spark__branch7 = (if (i <  o9) then true else false)) and
+                            ((spark__branch7 = true) and (let o10 =
+                            (med7 - 1) : int in (in_range1(o10) and
+                            (right8 = o10))))))) and
+   (left8 = left7))))))) ->
+  (let o8 = (left8 + div((right8 - left8), 2)) : int in (in_range1(o8) ->
+  (forall med8:int. ((med8 = o8) ->
+  (forall spark__branch8:bool. forall left9:int. forall right9:int.
+  ((exists o9:int. ((to_rep((a[med8])) = o9) and
+   (exists spark__branch9:bool.
+   ((spark__branch9 = (if (o9 <  i) then true else false)) and
+   (if (spark__branch9 = true) then (((let o10 = (med8 + 1) : int in
+   (in_range1(o10) and (left9 = o10))) and
+   (spark__branch8 = spark__branch9)) and
+   (right9 = right8)) else ((exists o10:int. ((to_rep((a[med8])) = o10) and
+                            ((spark__branch8 = (if (i <  o10) then true else false)) and
+                            ((spark__branch8 = true) and (let o11 =
+                            (med8 - 1) : int in (in_range1(o11) and
+                            (right9 = o11))))))) and
+   (left9 = left8))))))) ->
+  (let o9 = (left9 + div((right9 - left9), 2)) : int in (in_range1(o9) ->
+  (forall med9:int. ((med9 = o9) ->
+  (forall spark__branch9:bool. forall left10:int. forall right10:int.
+  ((exists o10:int. ((to_rep((a[med9])) = o10) and
+   (exists spark__branch10:bool.
+   ((spark__branch10 = (if (o10 <  i) then true else false)) and
+   (if (spark__branch10 = true) then (((let o11 = (med9 + 1) : int in
+   (in_range1(o11) and (left10 = o11))) and
+   (spark__branch9 = spark__branch10)) and
+   (right10 = right9)) else ((exists o11:int. ((to_rep((a[med9])) = o11) and
+                             ((spark__branch9 = (if (i <  o11) then true else false)) and
+                             ((spark__branch9 = true) and (let o12 =
+                             (med9 - 1) : int in (in_range1(o12) and
+                             (right10 = o12))))))) and
+   (left10 = left9))))))) ->
+  (1 <= (left10 + div((right10 - left10), 2))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
